@@ -131,39 +131,54 @@
 }
 
 @media (max-width: 768px) {
-  /* Header adjustments */
+  /* === Mobile Header === */
   header {
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px;
-  }
-
-  header nav {
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    margin-top: 15px;
+    gap: 10px;
   }
 
   .nav-links {
+    display: none;
     flex-direction: column;
-    gap: 15px;
+    background-color: #000;
+    border: 1px solid #f4e733;
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    margin-top: 10px;
   }
 
-  /* Hero section */
-  .hero {
-    height: 70vh;
-    padding: 20px;
-    background-position: center;
+  .nav-links.show {
+    display: flex;
   }
 
+  .menu-toggle {
+    display: block;
+    font-size: 26px;
+    background: none;
+    border: none;
+    color: #f4e733;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  /* Hero text size */
   .hero .hero-text h1 {
-    font-size: 1.5em;
+    font-size: 20px;
   }
 
   .hero .hero-text p {
-    font-size: 1.2em;
+    font-size: 15px;
   }
+
+  .hero {
+    height: 70vh;
+    padding: 30px 10px;
+    align-items: flex-end;
+  }
+}
+
 
   /* Footer columns stack */
   footer {
@@ -236,11 +251,12 @@
       <div style="font-size: 14px; color: #f4e733;">KALBA SPORTS & CULTURE CLUB</div>
     </div>
   </div>
-  <nav style="display: flex; gap: 70px;">
-    <a href="index.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الرئيسية</a>
-    <a href="news.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الأخبار</a>
-    <a href="media.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الوسائط</a>
-    <a href="contact.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">اتصل بنا</a>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">الرئيسية</a>
+    <a href="news.html">الأخبار</a>
+    <a href="media.html">الوسائط</a>
+    <a href="contact.html">اتصل بنا</a>
   </nav>
 </header>
 
@@ -251,6 +267,11 @@
     </div>
   </section>
 
+<script>
+  function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("show");
+  }
+</script>
 <div class="chatbot">
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
