@@ -129,6 +129,9 @@
 .footer-column form button:hover {
   background-color: #ffe800;
 }
+.mobile-nav {
+  display: none;
+}
 
 @media (max-width: 768px) {
   /* === Mobile Header === */
@@ -136,6 +139,22 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  }
+	
+ .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: block;
+    font-size: 26px;
+    background: none;
+    border: none;
+    color: #f4e733;
+    cursor: pointer;
+    margin-top: 10px;
   }
 
   .nav-links {
@@ -152,17 +171,6 @@
   .nav-links.show {
     display: flex;
   }
-
-  .menu-toggle {
-    display: block;
-    font-size: 18px;
-    background: none;
-    border: none;
-    color: #f4e733;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-
   /* Hero text size */
   .hero .hero-text h1 {
     font-size: 18px;
@@ -249,6 +257,7 @@
       <div style="font-size: 14px; color: #f4e733;">KALBA SPORTS & CULTURE CLUB</div>
     </div>
   </div>
+<div class="mobile-nav">
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <nav class="nav-links" id="navLinks">
     <a href="index.html">الرئيسية</a>
@@ -256,6 +265,7 @@
     <a href="media.html">الوسائط</a>
     <a href="contact.html">اتصل بنا</a>
   </nav>
+</div>
 </header>
 
   <section class="hero">
