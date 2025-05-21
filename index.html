@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <title>نادي كلباء الرياضي الثقافي</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
   <style>
-@font-face {
-  font-family: 'NotoKufiArabic';
-  src: url('NotoKufiArabic-Light.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic-Light.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
     body {
       margin: 0;
@@ -83,165 +82,114 @@
     }
 
     footer {
-  background-color: #000;
-  color: white;
-  padding: 40px 10vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 40px;
-  direction: rtl;
-  border-top: 3px solid #f4e733;
-  text-align: right;
-}
+      background-color: #000;
+      color: white;
+      padding: 40px 10vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+      direction: rtl;
+      border-top: 3px solid #f4e733;
+      text-align: right;
+    }
 
-.footer-column {
-  flex: 1;
-  min-width: 250px;
-}
+    .footer-column {
+      flex: 1;
+      min-width: 250px;
+    }
 
-.footer-bottom {
-  width: 100%;
-  text-align: center;
-  padding-top: 15px;
-  border-top: 1px solid #444;
-  color: #888;
-  font-size: 18px;
-  margin-top: 30px;
-}
+    .footer-bottom {
+      width: 100%;
+      text-align: center;
+      padding-top: 15px;
+      border-top: 1px solid #444;
+      color: #888;
+      font-size: 18px;
+      margin-top: 30px;
+    }
+
     .footer-column a:hover {
       color: #fff;
     }
 
-    .footer-bottom {
-      font-size: 13px;
-      color: #888;
-      border-top: 1px solid #444;
-      padding-top: 15px;
+    .footer-column form textarea {
+      font-family: 'NotoKufiArabic', sans-serif;
+      font-size: 14px;
     }
 
-.footer-column form textarea {
-  font-family: 'NotoKufiArabic', sans-serif;
-  font-size: 14px;
-}
+    .footer-column form button:hover {
+      background-color: #ffe800;
+    }
 
-.footer-column form button:hover {
-  background-color: #ffe800;
-}
-.mobile-nav {
-  display: none;
-}
+    .mobile-nav {
+      display: none;
+    }
 
-@media (max-width: 768px) {
-  /* === Mobile Header === */
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-	
- .mobile-nav {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
 
-  .menu-toggle {
-    display: block;
-    font-size: 26px;
-    background: none;
-    border: none;
-    color: #f4e733;
-    cursor: pointer;
-    margin-top: 10px;
-  }
+      .mobile-nav {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
 
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background-color: #000;
-    border: 1px solid #f4e733;
-    border-radius: 10px;
-    padding: 15px;
-    width: 100%;
-    margin-top: 10px;
-  }
+      .menu-toggle {
+        display: block;
+        font-size: 26px;
+        background: none;
+        border: none;
+        color: #f4e733;
+        cursor: pointer;
+        margin-top: 10px;
+      }
 
-  .nav-links.show {
-    display: flex;
-  }
-  /* Hero text size */
-  .hero .hero-text h1 {
-    font-size: 18px;
-  }
+      .nav-links {
+        display: none !important;
+        flex-direction: column;
+        background-color: #000;
+        border: 1px solid #f4e733;
+        border-radius: 10px;
+        padding: 15px;
+        width: 100%;
+        margin-top: 10px;
+      }
 
-  .hero .hero-text p {
-    font-size: 12px;
-  }
+      .nav-links.show {
+        display: flex !important;
+      }
 
-  .hero {
-    height: 50vh;
-    padding: 15px 07px;
-    align-items: flex-end;
-  }
+      .hero {
+        height: 50vh;
+        padding: 15px 7px;
+        align-items: flex-end;
+      }
 
-  /* Footer columns stack */
-  footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 30px;
-  }
+      .hero .hero-text h1 {
+        font-size: 18px;
+      }
 
-  .footer-column {
-    width: 100%;
-  }
-}
+      .hero .hero-text p {
+        font-size: 12px;
+      }
 
-@media (max-width: 600px) {
-  /* Chat box */
-  #chat-box {
-    width: 75% !important;
-    padding: 25px !important;
-    max-width: 95% !important;
-    min-height: 70vh !important;
-    font-size: 18px !important;
-  }
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+      }
 
-  .content {
-    font-size: 18px !important;
-  }
-
-  .chat-btn {
-    padding: 14px 18px !important;
-    font-size: 17px !important;
-  }
-
-  /* Chat footer (input bar) */
-  .chat-footer {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  .chat-footer input {
-    width: 100%;
-  }
-
-  .chat-footer button {
-    width: 100%;
-    border-radius: 8px;
-  }
-
-  header h1 {
-    font-size: 22px !important;
-  }
-
-  header img {
-    height: 70px !important;
-  }
-}
-
+      .footer-column {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
   </style>
 </head>
 <body>
