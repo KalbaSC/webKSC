@@ -129,38 +129,48 @@
 
     @media (max-width: 768px) {
       header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
       }
 
-      .mobile-nav {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-      }
       .desktop-nav {
         display: none;
       }
-      .menu-toggle {
+
+      .mobile-nav {
         display: block;
+        position: relative;
+      }
+
+      .menu-toggle {
         font-size: 26px;
         background: none;
         border: none;
         color: #f4e733;
         cursor: pointer;
-        margin-top: 10px;
+        z-index: 9999;
       }
 
       .nav-links {
-        display: none !important;
+        display: none;
         flex-direction: column;
-        background-color: #000;
-        border: 1px solid #f4e733;
-        border-radius: 10px;
-        padding: 15px;
-        width: 100%;
-        margin-top: 10px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 75%;
+        height: 100vh;
+        background-color: #111;
+        border-left: 3px solid #f4e733;
+        padding: 20px;
+        box-shadow: -5px 0 10px rgba(0,0,0,0.5);
+        z-index: 9998;
+      }
+
+      .nav-links a {
+        color: #f4e733;
+        font-size: 20px;
+        margin: 15px 0;
       }
 
       .nav-links.show {
@@ -181,15 +191,18 @@
         font-size: 12px;
       }
 
-      footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 30px;
-      }
-
       .footer-column {
         width: 100%;
         margin-bottom: 20px;
+      }
+
+      /* Remove club name in header and reduce logos */
+      header .club-name {
+        display: none;
+      }
+
+      header img {
+        height: 45px !important;
       }
     }
   </style>
@@ -197,45 +210,46 @@
 <body>
 <header>
   <div style="display: flex; align-items: center; gap: 15px;">
-    <div style="display: flex; align-items: center; gap: 15px;">
-  <img src="Picture3.png" alt="شعار الشارقة" style="height: 70px;">
-  <div style="width: 2px; height: 70px; background-color: #f4e733;"></div>
-  <img src="logo.png" alt="شعار نادي كلباء" style="height: 60px;">
-</div>
-    <div style="line-height: 1.8;">
-      <div style="font-weight: bold; font-size: 20px;">نادي كلباء الرياضي الثقافي</div>
-      <div style="font-size: 14px; color: #f4e733;">KALBA SPORTS & CULTURE CLUB</div>
-    </div>
+    <img src="Picture3.png" alt="شعار الشارقة" style="height: 70px;">
+    <div style="width: 2px; height: 70px; background-color: #f4e733;"></div>
+    <img src="logo.png" alt="شعار نادي كلباء" style="height: 60px;">
   </div>
-<nav class="desktop-nav">
-  <a href="index.html">الرئيسية</a>
-  <a href="news.html">الأخبار</a>
-  <a href="media.html">الوسائط</a>
-  <a href="contact.html">اتصل بنا</a>
-</nav>
-<div class="mobile-nav">
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <nav class="nav-links" id="navLinks">
+  <div class="club-name" style="line-height: 1.8;">
+    <div style="font-weight: bold; font-size: 20px;">نادي كلباء الرياضي الثقافي</div>
+    <div style="font-size: 14px; color: #f4e733;">KALBA SPORTS & CULTURE CLUB</div>
+  </div>
+
+  <nav class="desktop-nav">
     <a href="index.html">الرئيسية</a>
     <a href="news.html">الأخبار</a>
     <a href="media.html">الوسائط</a>
     <a href="contact.html">اتصل بنا</a>
   </nav>
-</div>
+
+  <div class="mobile-nav">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">الرئيسية</a>
+      <a href="news.html">الأخبار</a>
+      <a href="media.html">الوسائط</a>
+      <a href="contact.html">اتصل بنا</a>
+    </nav>
+  </div>
 </header>
 
-  <section class="hero">
-    <div class="hero-text">
-      <h1>مرحباً بكم في نادي كلباء الرياضي الثقافي</h1>
-      <p>تأسس عام 1971 ويقع في مدينة كلباء، الشارقة، الإمارات العربية المتحدة</p>
-    </div>
-  </section>
+<section class="hero">
+  <div class="hero-text">
+    <h1>مرحباً بكم في نادي كلباء الرياضي الثقافي</h1>
+    <p>تأسس عام 1971 ويقع في مدينة كلباء، الشارقة، الإمارات العربية المتحدة</p>
+  </div>
+</section>
 
 <script>
   function toggleMenu() {
     document.getElementById("navLinks").classList.toggle("show");
   }
 </script>
+	
 <div class="chatbot">
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
