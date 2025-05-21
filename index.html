@@ -24,21 +24,45 @@ body {
 header {
   background-color: #111;
   padding: 20px 40px;
-  width: 96%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   border-bottom: 3px solid #f4e733;
 }
 
-.logo {
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-right img.logo {
   height: 60px;
+}
+
+.header-right .divider {
+  width: 2px;
+  height: 60px;
+  background-color: #f4e733;
+}
+
+.header-info {
+  text-align: right;
+}
+
+.header-info .arabic-name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.header-info .english-name {
+  font-size: 14px;
+  color: #f4e733;
 }
 
 .nav-links {
   display: flex;
-  gap: 25px;
+  gap: 40px;
 }
 
 .nav-links a {
@@ -53,6 +77,7 @@ header {
   color: white;
 }
 
+/* HERO STYLES */
 .hero {
   position: relative;
   width: 100%;
@@ -132,7 +157,22 @@ footer {
   header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 10px;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #000;
+    border: 1px solid #f4e733;
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .nav-links.show {
+    display: flex;
   }
 
   .mobile-nav {
@@ -151,19 +191,10 @@ footer {
     margin-top: 10px;
   }
 
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background-color: #000;
-    border: 0.5px solid #f4e733;
-    border-radius: 10px;
-    padding: 10px;
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .nav-links.show {
-    display: flex;
+  .hero {
+    height: 50vh;
+    padding: 15px 7px;
+    align-items: flex-end;
   }
 
   .hero .hero-text h1 {
@@ -172,12 +203,6 @@ footer {
 
   .hero .hero-text p {
     font-size: 12px;
-  }
-
-  .hero {
-    height: 50vh;
-    padding: 15px 7px;
-    align-items: flex-end;
   }
 
   footer {
@@ -192,76 +217,32 @@ footer {
 }
 
 @media (max-width: 600px) {
-  #chat-box {
-    width: 75% !important;
-    padding: 25px !important;
-    max-width: 95% !important;
-    min-height: 70vh !important;
-    font-size: 18px !important;
-  }
-
-  .content {
-    font-size: 14px !important;
-  }
-
-  .chat-btn {
-    padding: 14px 18px !important;
-    font-size: 13px !important;
-  }
-
-  .chat-footer {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 07px;
-  }
-
-  .chat-footer input {
-    width: 100%;
-  }
-
-  .chat-footer button {
-    width: 100%;
-    border-radius: 8px;
-  }
-
   header h1 {
-    font-size: 18px !important;
+    font-size: 22px !important;
   }
 
   header img {
-    height: 50px !important;
+    height: 70px !important;
   }
 }
-
   </style>
 </head>
 <body>
 <header>
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
-    <div style="width: 2px; height: 70px; background-color: #f4e733;"></div>
-    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
-    </div>
-    <div style="line-height: 1.8;">
-      <div style="font-weight: bold; font-size: 20px;">نادي كلباء الرياضي الثقافي</div>
-      <div style="font-size: 14px; color: #f4e733;">KALBA SPORTS & CULTURE CLUB</div>
-    </div>
-  </div>
-  <nav class="nav-links">
+  <div class="nav-links">
     <a href="index.html">الرئيسية</a>
     <a href="news.html">الأخبار</a>
     <a href="media.html">الوسائط</a>
     <a href="contact.html">اتصل بنا</a>
-  </nav>
-  <div class="mobile-nav">
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav class="nav-links" id="navLinks">
-      <a href="index.html">الرئيسية</a>
-      <a href="news.html">الأخبار</a>
-      <a href="media.html">الوسائط</a>
-      <a href="contact.html">اتصل بنا</a>
-    </nav>
+  </div>
+  <div class="header-right">
+    <div class="header-info">
+      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+      <div class="english-name">KALBA SPORTS & CULTURE CLUB</div>
+    </div>
+    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
+    <div class="divider"></div>
+    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
   </div>
 </header>
 
@@ -271,7 +252,6 @@ footer {
     <p>تأسس عام 1971 ويقع في مدينة كلباء، الشارقة، الإمارات العربية المتحدة</p>
   </div>
 </section>
-
 <script>
   function toggleMenu() {
     document.getElementById("navLinks").classList.toggle("show");
