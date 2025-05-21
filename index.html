@@ -128,12 +128,6 @@
     }
 
     @media (max-width: 768px) {
-      header {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-
       .desktop-nav {
         display: none;
       }
@@ -196,7 +190,6 @@
         margin-bottom: 20px;
       }
 
-      /* Remove club name in header and reduce logos */
       header .club-name {
         display: none;
       }
@@ -210,16 +203,16 @@
 <body>
 <header>
   <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="Picture3.png" alt="شعار الشارقة" style="height: 70px;">
+    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
     <div style="width: 2px; height: 70px; background-color: #f4e733;"></div>
-    <img src="logo.png" alt="شعار نادي كلباء" style="height: 60px;">
+    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
   </div>
   <div class="club-name" style="line-height: 1.8;">
     <div style="font-weight: bold; font-size: 20px;">نادي كلباء الرياضي الثقافي</div>
     <div style="font-size: 14px; color: #f4e733;">KALBA SPORTS & CULTURE CLUB</div>
   </div>
 
-  <nav class="desktop-nav">
+  <nav class="desktop-nav nav-links">
     <a href="index.html">الرئيسية</a>
     <a href="news.html">الأخبار</a>
     <a href="media.html">الوسائط</a>
