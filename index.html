@@ -25,7 +25,6 @@ header {
   background-color: #111;
   padding: 20px 40px;
   display: flex;
-  width: 100%;
   align-items: center;
   justify-content: space-between;
   border-bottom: 3px solid #f4e733;
@@ -76,6 +75,19 @@ header {
 
 .nav-links a:hover {
   color: white;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: #f4e733;
+  cursor: pointer;
 }
 
 /* HERO STYLES */
@@ -150,46 +162,46 @@ footer {
   background-color: #ffe800;
 }
 
-.mobile-nav {
-  display: none;
-}
-
 @media (max-width: 768px) {
   header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .nav-links {
     display: none;
-    flex-direction: column;
-    background-color: #000;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: #000;
     border: 1px solid #f4e733;
     border-radius: 10px;
     padding: 15px;
-    width: 100%;
-    margin-top: 10px;
+    flex-direction: column;
+    z-index: 999;
+    width: 250px;
   }
 
   .nav-links.show {
     display: flex;
   }
 
+  .header-info {
+    display: none;
+  }
+
+  .header-right {
+    flex: 1;
+    justify-content: center;
+  }
+
   .mobile-nav {
     display: flex;
-    flex-direction: column;
-    width: 100%;
   }
 
   .menu-toggle {
     display: block;
-    font-size: 26px;
-    background: none;
-    border: none;
-    color: #f4e733;
-    cursor: pointer;
-    margin-top: 10px;
   }
 
   .hero {
@@ -230,21 +242,24 @@ footer {
 </head>
 <body>
 <header>
-  <div class="nav-links">
-    <a href="index.html">الرئيسية</a>
-    <a href="news.html">الأخبار</a>
-    <a href="media.html">الوسائط</a>
-    <a href="contact.html">اتصل بنا</a>
+  <div class="mobile-nav">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   </div>
   <div class="header-right">
+    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
+    <div class="divider"></div>
+    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
     <div class="header-info">
       <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
       <div class="english-name">KALBA SPORTS & CULTURE CLUB</div>
     </div>
-    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
-    <div class="divider"></div>
-    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
   </div>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">الرئيسية</a>
+    <a href="news.html">الأخبار</a>
+    <a href="media.html">الوسائط</a>
+    <a href="contact.html">اتصل بنا</a>
+  </nav>
 </header>
 
 <section class="hero">
@@ -253,6 +268,7 @@ footer {
     <p>تأسس عام 1971 ويقع في مدينة كلباء، الشارقة، الإمارات العربية المتحدة</p>
   </div>
 </section>
+
 <script>
   function toggleMenu() {
     document.getElementById("navLinks").classList.toggle("show");
