@@ -139,7 +139,9 @@
         flex-direction: column;
         width: 100%;
       }
-
+      .desktop-nav {
+        display: none;
+      }
       .menu-toggle {
         display: block;
         font-size: 26px;
@@ -205,12 +207,12 @@
       <div style="font-size: 14px; color: #f4e733;">KALBA SPORTS & CULTURE CLUB</div>
     </div>
   </div>
-<nav style="display: flex; gap: 70px;">
-    <a href="index.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الرئيسية</a>
-    <a href="news.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الأخبار</a>
-    <a href="media.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الوسائط</a>
-    <a href="contact.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">اتصل بنا</a>
-  </nav>
+<nav class="desktop-nav">
+  <a href="index.html">الرئيسية</a>
+  <a href="news.html">الأخبار</a>
+  <a href="media.html">الوسائط</a>
+  <a href="contact.html">اتصل بنا</a>
+</nav>
 <div class="mobile-nav">
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <nav class="nav-links" id="navLinks">
