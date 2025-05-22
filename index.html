@@ -16,13 +16,13 @@
 }
 
 .carousel-container {
-  position: relative;
   width: 90%;
-  max-width: 100%;
-  overflow: hidden;
+  max-width: 960px;
   border: 2px solid #f4e733;
-  border-radius: 20px;
+  border-radius: 16px;
   background: #000;
+  position: relative;
+  margin: auto;
 }
 
 .carousel-slide {
@@ -31,7 +31,9 @@
 }
 
 .carousel-slide img {
-  height: 75vh;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
   object-fit: cover;
 }
 
@@ -364,14 +366,19 @@ img.logo {
   <div class="carousel-container">
 <div class="carousel-slide fade" style="position: relative;">
   <img src="photo1.jpg" alt="صورة 1">
-  <div class="caption">الشيخ راشد بن حمدان يستقبل أبطال الطائرة</div>
+  <div class="caption">
+  المباراة القادمة - كأس اتحاد كرة السلة للأشبال 🏀<br>
+  كلباء × العين<br>
+  الثلاثاء، 14 مايو 2025 - الساعة 5:00 مساءً<br>
+  على صالة نادي كلباء الرياضي الثقافي
+</div>
 </div>
 <div class="carousel-slide fade" style="position: relative;">
   <img src="photo2.jpg" alt="صورة 1">
   <div class="caption">الشيخ راشد بن حمدان يستقبل أبطال الطائرة</div>
 </div>
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <a class="prev" onclick="plusSlides(-1)">&#10095;</a>
+    <a class="next" onclick="plusSlides(1)">&#10094;</a>
   </div>
 </section>
 
