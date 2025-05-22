@@ -6,6 +6,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <style>
+	  .hero-carousel {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  padding: 40px 0;
+}
+
+.carousel-container {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  overflow: hidden;
+  border: 2px solid #f4e733;
+  border-radius: 20px;
+  background: #000;
+}
+
+.carousel-slide {
+  display: none;
+  text-align: center;
+}
+
+.carousel-slide img {
+  width: 100%;
+  border-radius: 20px;
+  max-height: 480px;
+  object-fit: cover;
+}
+
+.caption {
+  padding: 10px;
+  color: white;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 45%;
+  padding: 16px;
+  color: white;
+  font-size: 24px;
+  transition: 0.3s;
+  user-select: none;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 10px;
+}
+
+.prev:hover, .next:hover {
+  background-color: #f4e733;
+  color: black;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.fade {
+  animation: fade 1s ease-in-out;
+}
+
+@keyframes fade {
+  from { opacity: 0.4 }
+  to { opacity: 1 }
+}
+
 @font-face {
   font-family: 'NotoKufiArabic';
   src: url('NotoKufiArabic-Light.ttf') format('truetype');
@@ -274,10 +347,19 @@ img.logo {
   </nav>
 </header>
 
-<section class="hero">
-  <div class="hero-text">
-    <h1>مرحباً بكم في نادي كلباء الرياضي الثقافي</h1>
-    <p>تأسس عام 1971 ويقع في مدينة كلباء، الشارقة، الإمارات العربية المتحدة</p>
+<section class="hero-carousel">
+  <div class="carousel-container">
+    <div class="carousel-slide fade">
+      <img src="photo1.jpg" alt="صورة 1">
+      <div class="caption">الشيخ راشد بن حمدان يستقبل أبطال الطائرة</div>
+    </div>
+    <div class="carousel-slide fade">
+      <img src="photo2.jpg" alt="صورة 2">
+      <div class="caption">صورة أخرى للنشاط الرياضي</div>
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
   </div>
 </section>
 
@@ -522,6 +604,33 @@ gap: 10px;
   </style>
 </head>
 <body>
+<script>
+let slideIndex = 0;
+showSlides();
+
+function plusSlides(n) {
+  slideIndex += n;
+  showSlides();
+}
+
+function showSlides() {
+  let slides = document.getElementsByClassName("carousel-slide");
+  if (slideIndex >= slides.length) slideIndex = 0;
+  if (slideIndex < 0) slideIndex = slides.length - 1;
+
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+
+  slides[slideIndex].style.display = "block";
+}
+
+setInterval(() => {
+  slideIndex++;
+  showSlides();
+}, 5000);
+	
+</script>
 
 <div id="chat-box">
   <div class="chat-header">
