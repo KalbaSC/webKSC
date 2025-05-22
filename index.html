@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <style>
-	  .hero-carousel {
+ .hero-carousel {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -18,7 +18,7 @@
 .carousel-container {
   position: relative;
   width: 90%;
-  max-width: 800px;
+  max-width: 100%;
   overflow: hidden;
   border: 2px solid #f4e733;
   border-radius: 20px;
@@ -31,17 +31,22 @@
 }
 
 .carousel-slide img {
-  width: 100%;
-  border-radius: 20px;
-  max-height: 480px;
+  height: 75vh;
   object-fit: cover;
 }
 
 .caption {
-  padding: 10px;
-  color: white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.7);
   font-size: 18px;
-  background: rgba(0, 0, 0, 0.6);
+  text-align: right;
+  color: white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .prev, .next {
@@ -297,6 +302,14 @@ img.logo {
   .menu-toggle {
     display: block;
   }
+.carousel-slide img {
+  height: 50vh;
+}
+
+.caption {
+  font-size: 14px;
+  padding: 10px;
+}
 
   .hero {
     height: 50vh;
@@ -349,15 +362,14 @@ img.logo {
 
 <section class="hero-carousel">
   <div class="carousel-container">
-    <div class="carousel-slide fade">
-      <img src="photo1.jpg" alt="صورة 1">
-      <div class="caption">الشيخ راشد بن حمدان يستقبل أبطال الطائرة</div>
-    </div>
-    <div class="carousel-slide fade">
-      <img src="photo2.jpg" alt="صورة 2">
-      <div class="caption">صورة أخرى للنشاط الرياضي</div>
-    </div>
-
+<div class="carousel-slide fade" style="position: relative;">
+  <img src="photo1.jpg" alt="صورة 1">
+  <div class="caption">الشيخ راشد بن حمدان يستقبل أبطال الطائرة</div>
+</div>
+<div class="carousel-slide fade" style="position: relative;">
+  <img src="photo2.jpg" alt="صورة 1">
+  <div class="caption">الشيخ راشد بن حمدان يستقبل أبطال الطائرة</div>
+</div>
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
   </div>
