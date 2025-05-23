@@ -44,17 +44,18 @@
 }
 
 .caption {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  height: 110px; /* Fixed height for all devices */
+  overflow: hidden;
   padding: 15px 20px;
   background: rgba(0, 0, 0, 0.7);
-  font-size: 18px;
+  font-size: 16px;
   text-align: right;
   color: white;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .prev, .next {
@@ -324,6 +325,7 @@ img.logo {
 }
 	
 .caption {
+  height: 90px;
   font-size: 14px;
   padding: 10px;
 }
