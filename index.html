@@ -618,12 +618,22 @@ gap: 10px;
     }
 
 @media (max-width: 600px) {
+	#chat-tooltip {
+  max-width: 90% !important;
+  font-size: 13px !important;
+  padding: 8px 12px !important;
+  bottom: 100px !important;
+  right: 10px !important;
+  gap: 6px !important;
+  flex-wrap: wrap !important;
+  white-space: normal !important;
+}
   #chat-box {
     width: 90% !important;
     padding: 12px !important;
     min-height: 280px !important;
     max-height: 80vh !important;
-    height: 360px !important; /* ✅ Set a consistent height */
+    height: 460px !important; /* ✅ Set a consistent height */
     font-size: 15px !important;
     overflow: hidden !important;
     display: flex !important;
