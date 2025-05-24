@@ -407,13 +407,11 @@ img.logo {
   const toggleBtn = document.querySelector('.menu-toggle');
   const navLinks = document.getElementById('navLinks');
 
-  // Show/hide when toggle is clicked
   toggleBtn.addEventListener('click', function (e) {
     e.stopPropagation();
     navLinks.classList.toggle('show');
   });
 
-  // Hide when clicking outside the menu
   document.addEventListener('click', function (e) {
     if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
       navLinks.classList.remove('show');
