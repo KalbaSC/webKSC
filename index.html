@@ -617,13 +617,23 @@ gap: 10px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    @media (max-width: 600px) {
-        #chat-box {
+@media (max-width: 600px) {
+  #chat-box {
     width: 90% !important;
     padding: 12px !important;
     min-height: 280px !important;
     max-height: 80vh !important;
+    height: 360px !important; /* ✅ Set a consistent height */
     font-size: 15px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .chat-body {
+    flex: 1;
+    overflow-y: auto !important;
+    padding: 10px !important;
   }
 
   .chat-footer input {
@@ -649,14 +659,16 @@ gap: 10px;
     margin: 6px !important;
     gap: 8px !important;
   }
-      header h1 {
-        font-size: 22px !important;
-      }
 
-      header img {
-        height: 70px !important;
-      }
-    }
+  header h1 {
+    font-size: 18px !important;
+  }
+
+  header img {
+    height: 50px !important;
+  }
+}
+
   </style>
 </head>
 <body>
