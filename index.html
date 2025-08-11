@@ -180,7 +180,6 @@ header {
   cursor: pointer;
 }
 
-/* HERO STYLES */
 .hero {
   position: relative;
   width: 100%;
@@ -378,12 +377,13 @@ img.logo {
       <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
     </div>
   </div>
-  <nav class="nav-links" id="navLinks">
-    <a href="index.html">الرئيسية</a>
-    <a href="news.html">الأخبار</a>
-    <a href="media.html">الوسائط</a>
-    <a href="contact.html">اتصل بنا</a>
-  </nav>
+<nav style="display: flex; gap: 70px;">
+  <a href="index.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الرئيسية</a>
+  <a href="news.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الأخبار</a>
+  <a href="media.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الوسائط</a>
+  <a href="contact.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">اتصل بنا</a>
+  <a href="#register-portal" style="color: #f4e733; text-decoration: none; font-weight: bold;">التسجيل</a>
+</nav>
 </header>
 
 <section class="hero-carousel">
@@ -551,7 +551,6 @@ gap: 10px;
   cursor: pointer;
 }
 
-/* Scrollbar styling */
 #chat-box::-webkit-scrollbar {
   width: 8px;
   border-radius: 12px;
@@ -633,7 +632,7 @@ gap: 10px;
     padding: 12px !important;
     min-height: 280px !important;
     max-height: 80vh !important;
-    height: 460px !important; /* ✅ Set a consistent height */
+    height: 460px !important; 
     font-size: 15px !important;
     overflow: hidden !important;
     display: flex !important;
@@ -716,10 +715,8 @@ setInterval(() => {
   </div>
 
   <div class="chat-body" id="chat-body">
-    <!-- messages will appear here -->
   </div>
 
-  <!-- input bar should stay fixed at the bottom -->
   <div class="chat-footer" id="inner-input-bar" style="display: none;">
     <input id="userMessage" type="text" placeholder="اكتب شيئًا...">
     <button onclick="submitUserMessage()">
@@ -773,7 +770,6 @@ setInterval(() => {
   ">✕</span>
 </div>
 
-  <!-- Chat button with badge -->
   <button id="chat-toggle" onclick="toggleChat()" style="
     position: relative;
     background-color: transparent;
@@ -1209,7 +1205,6 @@ window.addEventListener('DOMContentLoaded', () => {
 </html>
 
 <footer>
-  <!-- Right side -->
   <div class="footer-column">
     <h3 style="color: #f4e733;">تواصل معنا</h3>
     <p><a href="mailto:info@ksc.shj.ae" style="color: white; text-decoration: none;">info@ksc.shj.ae</a></p>
@@ -1233,7 +1228,6 @@ window.addEventListener('DOMContentLoaded', () => {
     </div>
   </div>
 
-  <!-- Left side -->
   <div class="footer-column">
     <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
 <form id="feedbackForm">
@@ -1264,13 +1258,129 @@ window.addEventListener('DOMContentLoaded', () => {
 
   </div>
 
-  <!-- Bottom -->
   <div class="footer-bottom">
     © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
   </div>
+	
+<style>
+  #register-portal { 
+    scroll-margin-top: 100px; 
+    padding: 30px 16px; 
+    background: #0c0c0c; 
+    border-top: 3px solid #f4e733; 
+    border-bottom: 3px solid #f4e733; 
+  }
+  #register-portal .portal-title{
+    color:#f4e733; 
+    font-weight:bold; 
+    font-size:24px; 
+    margin-bottom:16px;
+    text-align:center;
+  }
+  .reg-tabs { 
+    display:flex; 
+    gap:8px; 
+    flex-wrap:wrap; 
+    justify-content:center; 
+    margin-bottom:16px; 
+  }
+  .reg-tab-btn {
+    border:1px solid #f4e733; 
+    background:#111; 
+    color:#f4e733; 
+    padding:10px 14px; 
+    border-radius:10px; 
+    cursor:pointer; 
+    font-weight:bold;
+    transition: transform .12s ease;
+  }
+  .reg-tab-btn:hover { transform: translateY(-1px); }
+  .reg-tab-btn.active { background:#f4e733; color:#111; }
+  .reg-frames-wrap { 
+    width:100%; 
+    max-width:1200px; 
+    margin:0 auto; 
+    background:#111; 
+    border:1px solid #333; 
+    border-radius:14px; 
+    overflow:hidden; 
+    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  }
+  .reg-frame { 
+    display:none; 
+    width:100%; 
+    height: calc(100vh - 260px);
+    min-height: 600px;
+    border:0; 
+    background:#000;
+  }
+  .reg-frame.visible { display:block; }
+  @media (max-width: 640px){
+    #register-portal { padding: 20px 10px; }
+    .reg-tab-btn { padding:8px 10px; font-size:14px; }
+    .reg-frame { min-height: 520px; height: 70vh; }
+  }
+</style>
+
+<section id="register-portal">
+  <div class="portal-title">بوابة التسجيل والحضور والتقييم والتقارير</div>
+
+  <div class="reg-tabs">
+    <button class="reg-tab-btn active" data-target="tab-camp">Registration Form</button>
+    <button class="reg-tab-btn" data-target="tab-scan">QR Attendance</button>
+    <button class="reg-tab-btn" data-target="tab-evaluate">Evaluation</button>
+    <button class="reg-tab-btn" data-target="tab-reports">Reports</button>
+  </div>
+
+  <div class="reg-frames-wrap">
+    <iframe id="tab-camp" class="reg-frame visible" loading="lazy" sandbox="allow-forms allow-scripts"></iframe>
+    <iframe id="tab-scan" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts"></iframe>
+    <iframe id="tab-evaluate" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts"></iframe>
+    <iframe id="tab-reports" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts"></iframe>
+  </div>
+</section>
+
+<script>
+  const PAGES = {
+    "tab-camp": "camp.html",
+    "tab-scan": "AttendanceScan.html",
+    "tab-evaluate": "evaluate.html",
+    "tab-reports": "reports.html",
+  };
+
+  function ensureSrc(frameId){
+    const el = document.getElementById(frameId);
+    if (el && !el.src) {
+      el.src = PAGES[frameId];
+    }
+  }
+
+  function activateTab(targetId){
+    document.querySelectorAll('.reg-tab-btn').forEach(btn=>{
+      const active = btn.dataset.target === targetId;
+      btn.classList.toggle('active', active);
+    });
+    document.querySelectorAll('.reg-frame').forEach(f=>{
+      const show = f.id === targetId;
+      f.classList.toggle('visible', show);
+    });
+    ensureSrc(targetId);
+  }
+
+  document.querySelectorAll('.reg-tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> activateTab(btn.dataset.target));
+  });
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    ensureSrc('tab-camp');
+    if (location.hash === '#register-portal') {
+      document.getElementById('register-portal').scrollIntoView({behavior:'smooth'});
+    }
+  });
+</script>
+
 </footer>
 
-<!-- Font Awesome (in <head> if not already included) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </div>
 
