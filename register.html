@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التسجيل - نادي كلباء الرياضي الثقافي</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+ .hero-carousel {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  padding: 40px 0;
+}
+
+.carousel-container {
+  width: 1170px;
+  max-width: 100%;
+  height: 550px;
+  border: 2px solid #f4e733;
+  border-radius: 16px;
+  background: #000;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 90px;          
+  font-size: 16px;           
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.7);
+  text-align: right;
+  color: white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: hidden;        
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 45%;
+  padding: 16px;
+  color: white;
+  font-size: 24px;
+  transition: 0.3s;
+  user-select: none;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 10px;
+}
+
+.prev:hover, .next:hover {
+  background-color: #f4e733;
+  color: black;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.fade {
+  animation: fade 1s ease-in-out;
+}
+
+@keyframes fade {
+  from { opacity: 0.4 }
+  to { opacity: 1 }
+}
+
+@font-face {
+  font-family: 'NotoKufiArabic';
+  src: url('NotoKufiArabic-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  font-family: 'NotoKufiArabic', sans-serif;
+  background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  direction: rtl;
+}
+
+header {
+  background-color: #111;
+  padding: 20px 42px;
+  width: 94.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid #f4e733;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-right img.logo {
+  height: 70px;
+}
+
+.header-right .divider {
+  width: 1.5px;
+  height: 65px;
+  background-color: #f4e733;
+}
+
+.header-info {
+  text-align: right;
+}
+
+.header-info .arabic-name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.header-info .english-name {
+  font-size: 14px;
+  color: #f4e733;
+}
+
+.nav-links {
+  display: flex;
+  gap: 70px;
+}
+
+.nav-links a {
+  color: #f4e733;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 1.5s;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 8px;
+  background: none;
+  border: none;
+  color: #f4e733;
+  cursor: pointer;
+}
+
+/* HERO STYLES */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url('hero.jpg') center center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero .hero-text {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 15px 30px;
+  border-radius: 16px;
+  border: 1px solid #f4e733;
+  color: #f4e733;
+}
+
+.hero .hero-text h1 {
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+.hero .hero-text p {
+  font-size: 1.5em;
+  color: white;
+}
+
+footer {
+  background-color: #000;
+  color: white;
+  padding: 40px 10vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
+  direction: rtl;
+  border-top: 3px solid #f4e733;
+  text-align: right;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-bottom {
+  width: 100%;
+  text-align: center;
+  padding-top: 15px;
+  border-top: 1px solid #444;
+  color: #888;
+  font-size: 12px;
+  margin-top: 30px;
+}
+
+.footer-column a:hover {
+  color: #fff;
+}
+
+.footer-column form textarea {
+  font-family: 'NotoKufiArabic', sans-serif;
+  font-size: 14px;
+}
+
+.footer-column form button:hover {
+  background-color: #ffe800;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 10px 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 93%;
+  }
+	
+  body {
+    overflow-x: hidden;  
+    background: url('phonebkg.jpg') no-repeat top left fixed;
+    background-size: 250%;
+  }
+	
+img.logo {
+  height: 50px !important;
+  max-height: 50px !important;
+}
+	
+.header-right .divider {
+  height: 45px;
+  width: 1.5px;
+}
+
+.menu-toggle {
+  font-size: 35px;
+  margin-right: 10px;
+}
+
+.nav-links {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 200px;
+  background: #000;
+  border-left: 2px solid #f4e733;
+  padding: 40px 20px;
+  flex-direction: column;
+  z-index: 9999;
+  gap: 20px;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+}
+
+.nav-links.show {
+  display: flex;
+  transform: translateX(0);
+}
+
+  .header-info {
+    display: none;
+  }
+
+  .header-right {
+    flex: 1;
+    justify-content: center;
+  }
+		
+  .mobile-nav {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .carousel-container {
+    width: 95%;
+    height: 400px;
+  }
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%; 
+}
+	
+.caption {
+  height: 90px;
+  font-size: 14px;
+  padding: 10px;
+}
+
+  .hero {
+    height: 50vh;
+    padding: 15px 7px;
+    align-items: flex-end;
+  }
+
+  .hero .hero-text h1 {
+    font-size: 16px;
+  }
+
+  .hero .hero-text p {
+    font-size: 12px;
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .footer-column {
+    width: 100%;
+  }
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="mobile-nav">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="header-right">
+    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
+    <div class="divider"></div>
+    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
+    <div class="header-info">
+      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+      <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
+    </div>
+  </div>
+  <nav class="nav-links" id="navLinks" style="display: flex; gap: 70px;">
+    <a href="index.html">الرئيسية</a>
+    <a href="news.html">الأخبار</a>
+    <a href="media.html">الوسائط</a>
+    <a href="contact.html">اتصل بنا</a>
+    <a href="register.html" style="color: #f4e733;">التسجيل</a>
+  </nav>
+</header>
+
+<main style="padding: 20px; background:#0c0c0c;">
+  <h1 style="color:#f4e733; text-align:center;">بوابة التسجيل والحضور والتقييم والتقارير</h1>
+
+  <div class="reg-tabs" style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:16px;">
+    <button class="reg-tab-btn active" data-target="tab-camp">نموذج التسجيل</button>
+    <button class="reg-tab-btn" data-target="tab-scan">ماسح QR للحضور</button>
+    <button class="reg-tab-btn" data-target="tab-evaluate">التقييم</button>
+    <button class="reg-tab-btn" data-target="tab-reports">التقارير</button>
+  </div>
+
+  <div class="reg-frames-wrap" style="max-width:1200px;margin:0 auto;">
+    <iframe id="tab-camp" class="reg-frame visible"
+      style="width:100%;height:80vh;border:0;display:block;"
+      loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+
+    <iframe id="tab-scan" class="reg-frame"
+      style="width:100%;height:80vh;border:0;display:none;"
+      loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+
+    <iframe id="tab-evaluate" class="reg-frame"
+      style="width:100%;height:80vh;border:0;display:none;"
+      loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+
+    <iframe id="tab-reports" class="reg-frame"
+      style="width:100%;height:80vh;border:0;display:none;"
+      loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+  </div>
+</main>
+
+<footer>
+  <!-- copy your existing footer from index.html -->
+</footer>
+
+<script>
+  const PAGES = {
+    "tab-camp": "camp.html",
+    "tab-scan": "AttendanceScan.html",
+    "tab-evaluate": "evaluate.html",
+    "tab-reports": "reports.html",
+  };
+
+  function ensureSrc(id) {
+    const el = document.getElementById(id);
+    if (el && !el.src) el.src = PAGES[id];
+  }
+
+  function activateTab(id) {
+    document.querySelectorAll('.reg-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.target === id);
+    });
+    document.querySelectorAll('.reg-frame').forEach(frame => {
+      frame.style.display = (frame.id === id) ? 'block' : 'none';
+    });
+    ensureSrc(id);
+  }
+
+  document.querySelectorAll('.reg-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => activateTab(btn.dataset.target));
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    ensureSrc('tab-camp');
+  });
+</script>
+
+</body>
+</html>
