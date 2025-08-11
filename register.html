@@ -180,7 +180,6 @@ header {
   cursor: pointer;
 }
 
-/* HERO STYLES */
 .hero {
   position: relative;
   width: 100%;
@@ -415,10 +414,68 @@ img.logo {
       loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
   </div>
 </main>
-
+	
 <footer>
-  <!-- copy your existing footer from index.html -->
+  <div class="footer-column">
+    <h3 style="color: #f4e733;">تواصل معنا</h3>
+    <p><a href="mailto:info@ksc.shj.ae" style="color: white; text-decoration: none;">info@ksc.shj.ae</a></p>
+    <p><a href="tel:+971092777873" style="color: white; text-decoration: none;">
+                    092777873
+                </a>
+		</p>
+    <h3 style="margin-top: 25px; color: #f4e733;">روابط سريعة</h3>
+    <p><a href="index.html" style="color: #ccc; text-decoration: none;">الرئيسية</a></p>
+    <p><a href="news.html" style="color: #ccc; text-decoration: none;">الأخبار</a></p>
+    <p><a href="media.html" style="color: #ccc; text-decoration: none;">الوسائط</a></p>
+    <p><a href="contact.html" style="color: #ccc; text-decoration: none;">اتصل بنا</a></p>
+
+    <h3 style="margin-top: 25px; color: #f4e733;">تابعنا</h3>
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
+      <a href="https://www.facebook.com/Kalbasc1" target="_blank" style="color: white;"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/kalbasc/" target="_blank" style="color: white;"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com/Kalba_sc?mx=2" target="_blank" style="color: white;"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.youtube.com/@kalbasc" target="_blank" style="color: white;"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.tiktok.com/@kalbasc" target="_blank" style="color: white;"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+
+  <div class="footer-column">
+    <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
+<form id="feedbackForm">
+  <textarea name="feedback" rows="6" placeholder="اكتب رسالتك هنا..." style="width: 100%; background: #222; color: white; border: none; padding: 12px; border-radius: 10px; font-size: 14px; resize: vertical;"></textarea>
+  <button type="submit" style="margin-top: 12px; background: #f4e733; color: black; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">إرسال</button>
+  <p id="responseMessage" style="margin-top: 10px; color: #4caf50; display: none;">✔️ تم الإرسال بنجاح!</p>
+</form>
+
+<script>
+  document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbzi-wTOLYTxam6icurg5QOi1cJak8r7UPiw8Itea6RQmzdVavRGapbxFVesTIVAefCFmQ/exec", {
+      method: "POST",
+      body: formData
+    }).then(() => {
+      document.getElementById("responseMessage").style.display = "block";
+      form.reset();
+    }).catch(() => {
+      document.getElementById("responseMessage").textContent = "❌ Error sending. Try again.";
+      document.getElementById("responseMessage").style.color = "red";
+      document.getElementById("responseMessage").style.display = "block";
+    });
+  });
+</script>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
+  </div>
 </footer>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</div>
 
 <script>
   const PAGES = {
