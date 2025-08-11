@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#000000">
+  <title>تسجيل المخيم الصيفي - نادي كلباء</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="data:,">
+
+  <style>
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic.ttf') format('truetype');
+    }
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'NotoKufiArabic', 'Cairo', sans-serif;
+      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .header-container {
+      width: 100%;
+      background: #111;
+      border-bottom: 3px solid #f4e733;
+    }
+    .header-right {
+      width: 100%;
+      max-width: 1170px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 42px;
+      background-color: #111;
+      color: white;
+      box-sizing: border-box;
+    }
+    .header-right img.logo {
+      height: 70px;
+    }
+    .divider {
+      width: 1.5px;
+      height: 65px;
+      background-color: #f4e733;
+    }
+    .header-info {
+      text-align: center;
+    }
+    .arabic-name {
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .english-name {
+      font-size: 14px;
+      color: #f4e733;
+    }
+
+.container {
+  max-width: 600px;
+  background: #111;
+  border: 3px solid #f4e733;
+  padding: 20px 30px; 
+  margin: 40px auto;
+  border-radius: 15px;
+  color: white;
+  box-sizing: border-box; 
+}
+
+    label {
+      display: block;
+      margin-top: 10px;
+      color: white;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 5px;
+    }
+  h2 {
+      text-align: center;
+      color: #f4e733;
+    }
+    button {
+      margin-top: 15px;
+      background: #f4e733;
+      color: black;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+.card {
+  width: 500px; /* fixed width */
+  height: 280px; /* fixed height */
+  background: #000;
+  color: white;
+  padding: 10px;
+  border-radius: 12px;
+  border: 2px solid #f4e733;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: relative;
+}
+
+    .card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #ccc;
+    }
+
+.card .info p {
+  font-size: 10px; /* or 15px, test what looks best */
+  color: #f4e733;
+  margin: 4px 0;
+}
+
+    footer {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-top: 3px solid #f4e733;
+      font-size: 14px;
+    }
+
+    .social-icons a {
+      color: white;
+      margin: 0 8px;
+      font-size: 20px;
+    }
+    * {
+  box-sizing: border-box;
+}
+#card .arabic-name {
+  font-size: 14px;
+}
+
+#card .english-name {
+  font-size: 10px;
+}
+
+
+    @media (max-width: 768px) {
+ .header-right {
+    padding: 10px 10px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-info {
+    display: block;
+    text-align: center;
+  }
+
+  .header-info .arabic-name {
+    font-size: 16px;
+  }
+
+  .header-info .english-name {
+    font-size: 12px;
+  }
+
+  .header-right .divider {
+    height: 45px;
+    width: 1.5px;
+    background-color: #f4e733;
+  }
+
+  img.logo {
+    height: 50px !important;
+    max-height: 50px !important;
+  }
+
+.container {
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px 20px; 
+  box-sizing: border-box;
+}
+
+  h2 {
+    font-size: 18px;
+  }
+
+input {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+  button {
+    font-size: 14px;
+  }
+      footer {
+  text-align: center;
+  padding: 15px 10px;
+}
+
+footer p {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+  .social-icons a {
+    font-size: 18px;
+  }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+<header class="header-container">
+  <div class="header-right">
+    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
+    <div class="divider"></div>
+    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
+    <div class="header-info">
+      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+      <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
+    </div>
+  </div>
+</header>
+
+    <main>
+<div class="container">
+  <h2>التسجيل في صيف الشارقة الرياضي (عطلتنا غير)</h2>
+  <form id="campForm">
+    <label> الهوية: (الرجاء إدخال رقم الهوية 784xxxxxxxxxxxx)<input type="number" id="idnum" autocomplete="off" required>
+</label>
+    <label>اسم الطفل:   
+  <div style="display: flex; align-items: center; gap: 5px;">
+    <input type="text" id="name" autocomplete="off" required readonly>
+    <span title="هذا الحقل لا يمكن تعديله"></span>
+  </div></label>
+    <label>العمر:   
+  <div style="display: flex; align-items: center; gap: 5px;">
+    <input type="number" id="age" required readonly>
+    <span title="هذا الحقل لا يمكن تعديله"></span>
+  </div></label>
+    <label>اسم ولي الأمر:   
+  <div style="display: flex; align-items: center; gap: 5px;">
+    <input type="text" id="parent" required readonly>
+    <span title="هذا الحقل لا يمكن تعديله"></span>
+  </div></label>
+    <label>رقم الهاتف:   
+  <div style="display: flex; align-items: center; gap: 5px;">
+    <input type="tel" id="phone" autocomplete="off" required readonly>
+    <span title="هذا الحقل لا يمكن تعديله"></span>
+  </div></label>
+    <label>البريد الإلكتروني: <input type="email" id="email" autocomplete="off" ></label>
+    <label>رقم بديل:   
+  <div style="display: flex; align-items: center; gap: 5px;">
+    <input type="tel" id="altPhone" required readonly>
+    <span title="هذا الحقل لا يمكن تعديله"></span>
+  </div></label>
+    <label>الصورة الشخصية: <input type="file" id="photo" accept="image/*" required></label>
+    <label> التعهد (PDF فقط): 
+    <input type="file" id="commitmentFile" accept="application/pdf" >
+    </label>
+    <button type="submit">تسجيل وإنشاء البطاقة</button>
+  </form>
+   <div id="statusMessage" style="display:none; text-align:center; margin: 20px; color: #f4e733; font-weight: bold;"></div>
+</div>
+      </main>
+
+<div id="card" class="card" style="width: 500px; height: 280px; flex-direction: column; align-items: center; position: absolute; top: -9999px; left: -9999px; padding-top: 0px;">
+  <div class="header-right" style="background:#000; max-width:100%; padding:5px 17px; gap:13px; border-bottom: 1px solid #f4e733;">
+<img src="Picture3.png" style="width: 50px; height: 50px; border: none; box-shadow: none; background: transparent;" />
+    <div class="divider" style="height: 43px;"></div>
+  <img src="logo.png" style="width: 50px; height: 50px; border: none; box-shadow: none; background: transparent;" />
+    <div class="header-info">
+      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+      <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
+    </div>
+  </div>
+
+<div style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 15px; padding: 0 20px;">
+  <img id="cardPhoto" style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%; border: 3px solid #f4e733;">
+
+  <div class="info" style="flex: 1; text-align: right; padding: 0 15px;">
+    <p id="cardName"></p>
+    <p id="cardAge"></p>
+    <p id="cardPhone"></p>
+    <p id="cardId"></p>
+  </div>
+
+<div style="background: white; border-radius: 8px;">
+  <div id="qrcode" style="width: 120px; height: 120px;"></div>
+</div>
+</div>
+
+  <div style="font-size: 12px; margin-top: 15px; display: flex; justify-content: center; gap: 24px;">
+  <div style="display: flex; align-items: center; gap: 5px;" dir="ltr">
+    <i class="fas fa-phone"></i> 
+    <span>+971092777873</span>
+  </div>
+  <div style="display: flex; align-items: center; gap: 5px;" dir="ltr">
+    <i class="fas fa-envelope"></i> 
+    <span>info@ksc.shj.ae</span>
+  </div>
+</div>
+
+</div>
+<script>
+let existingNames = [];
+
+fetch("https://docs.google.com/spreadsheets/d/1YGE3uTOpyZOFzWNBAP5eOTeIyEpJy5huAPsYjRGxqb4/gviz/tq?tqx=out:csv")
+  .then(res => res.text())
+  .then(csv => {
+    const rows = csv.split('\n').slice(1);
+    existingNames = rows.map(row => {
+      const cols = row.split(',');
+      const fullName = (cols[1] || "").trim();
+      const parentName = (cols[3] || "").trim();
+      return `${fullName}|${parentName}`;
+    });
+  })
+  .catch(err => console.error("❌ Failed to fetch existing names:", err));
+
+document.getElementById('campForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSMGF6fpsHFjsVTcW_4JymiwU3jkylllEDa0S0mg-3FeiHfNwWuWZ1U6JVtr2aocoTvVyce_vAtmIrD/pub?output=csv";
+  const name = document.getElementById('name').value.trim();
+  const parent = document.getElementById('parent').value.trim();
+
+  try {
+    const res = await fetch(SHEET_URL);
+    const csv = await res.text();
+    const rows = csv.split('\n').slice(1).map(r => r.split(','));
+
+    const alreadyExists = rows.some(row =>
+      row[2].trim() === name && row[4].trim() === parent
+    );
+
+    if (alreadyExists) {
+      const msgBox = document.getElementById('statusMessage');
+      msgBox.style.display = 'block';
+      msgBox.style.color = 'red';
+      msgBox.innerText = "❌ هذا الطفل مسجل بالفعل. لا يمكن التسجيل مرتين.";
+      return;
+    }
+  } catch (err) {
+    console.error("❌ مشكلة في قراءة البيانات:", err);
+  }
+
+  const email = document.getElementById('email').value.trim();
+  const age = document.getElementById('age').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const altPhone = document.getElementById('altPhone').value.trim();
+  const idnum = document.getElementById('idnum').value.trim();
+  const photoFile = document.getElementById('photo').files[0];
+
+  if (!name || !age || !parent || !phone || !email || !altPhone || !idnum || !photoFile) {
+    alert("يرجى تعبئة جميع الحقول وتحميل الملفات المطلوبة.");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function () {
+    const photoURL = reader.result;
+    const uniqueId = Date.now();
+
+    const img = new Image();
+    img.onload = function () {
+      const canvas = document.createElement('canvas');
+      const size = 120;
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+
+      const minSize = Math.min(img.width, img.height);
+      const sx = (img.width - minSize) / 2;
+      const sy = (img.height - minSize) / 2;
+
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(img, sx, sy, minSize, minSize, 0, 0, size, size);
+
+      document.getElementById('cardPhoto').src = canvas.toDataURL();
+    };
+    img.src = photoURL;
+
+    document.getElementById('cardName').innerText = 'اسم اللاعب: ' + name + ' ' + parent;
+    document.getElementById('cardAge').innerText = 'العمر: ' + age;
+    document.getElementById('cardPhone').innerText = 'رقم الهاتف: ' + phone;
+    document.getElementById('cardId').innerText = 'كود اللاعب: KalbaSC-' + uniqueId;
+
+    const qrcodeContainer = document.getElementById("qrcode");
+    qrcodeContainer.innerHTML = '';
+
+    const firstName = (name.trim().split(' ')[0] || 'Unknown').replace(/[^A-Za-zأ-ي0-9]/g, '');
+    const parentFirstName = (parent.trim().split(' ')[0] || 'Guardian').replace(/[^A-Za-zأ-ي0-9]/g, '');
+
+    const qrText = `KalbaSC-${uniqueId}|${encodeURIComponent(firstName)}|${encodeURIComponent(parentFirstName)}`;
+
+    new QRCode(qrcodeContainer, {
+      text: qrText,
+      width: 120,
+      height: 120,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+
+    setTimeout(() => {
+      fetch('https://script.google.com/macros/s/AKfycbxICJXHWR_tF3WvHqKf6scNAsOEb8vSUwe2c45UYEZ_5PWUi2VcxkqL_vkkQcTgCH6XPw/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({
+          id: uniqueId,
+          name,
+          age,
+          parent,
+          phone,
+          email,
+          altPhone
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const commitmentFile = document.getElementById('commitmentFile').files[0];
+      const reader2 = new FileReader();
+
+      reader2.onload = function (e) {
+        const base64Data = e.target.result.split(',')[1];
+
+        fetch('https://script.google.com/macros/s/AKfycbyju28FbRe9WeLRmUcG-UR1aKzm9y9S-lPKyRhGgiqy9St68a9PmFt27CSSbiDKEvt4/exec', {
+          method: 'POST',
+          body: new URLSearchParams({
+            filename: `تعهد_${uniqueId}.pdf`,
+            filedata: base64Data
+          })
+        })
+          .then(() => console.log("✅ Commitment file uploaded."))
+          .catch(err => console.error("❌ Upload error:", err));
+      };
+
+      if (commitmentFile) {
+        reader2.readAsDataURL(commitmentFile);
+      }
+
+      html2canvas(document.getElementById('card'), {
+        scale: 2
+      }).then(canvas => {
+        const fixedCanvas = document.createElement('canvas');
+        fixedCanvas.width = 625;
+        fixedCanvas.height = 350;
+        const ctx = fixedCanvas.getContext('2d');
+        ctx.drawImage(canvas, 0, 0, fixedCanvas.width, fixedCanvas.height);
+
+        const imageData = fixedCanvas.toDataURL('image/png');
+        const firstName = name.split(' ')[0];
+        const parentName = parent.split(' ')[0];
+        const fileName = `${firstName}_${parentName}_KalbaSC-${uniqueId}.png`;
+
+        fetch("https://script.google.com/macros/s/AKfycbyUqG_O5CBidXyw1bJOIg5517vCiME0eSGJUePub4GZx9vz09T_Sg-kM5s1vnYaDDQf/exec", {
+          method: "POST",
+          body: new URLSearchParams({
+            cardImage: imageData,
+            name: name,
+            email: email,
+            parent: parent,
+            filename: fileName
+          })
+        })
+          .then(() => {
+            console.log("✅ Card uploaded to Drive");
+            document.getElementById('statusMessage').style.display = 'block';
+            document.getElementById('statusMessage').style.color = '#f4e733';
+            document.getElementById('statusMessage').innerText = "✅ تم رفع البطاقة بنجاح إلى درايف.";
+            document.getElementById('campForm').style.display = 'none';
+          })
+          .catch(err => {
+            console.error("❌ Upload failed:", err);
+            alert("حدث خطأ أثناء رفع البطاقة، يرجى المحاولة مرة أخرى.");
+          });
+      });
+    }, 600);
+  };
+  reader.readAsDataURL(photoFile);
+});
+
+function downloadCard() {
+  html2canvas(document.getElementById('card')).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'بطاقة_التسجيل.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+}
+
+document.getElementById('idnum').addEventListener('change', function () {
+  const id = this.value;
+  if (!id) return;
+
+  const idPattern = /^784\d{12}$/;
+  if (!idPattern.test(id)) {
+    alert("⚠️ رقم الهوية غير صحيح. يجب أن يبدأ بـ 784 ويتكون من 15 رقمًا.");
+    this.value = '';
+    return;
+  }
+
+  fetch(`https://script.google.com/macros/s/AKfycbwl8RzWIdUzQjaB4hUgheQxMOuC_yvIQ3nUl-rfzBwYiQA58-R8BejMrF7iXuB3WKIq/exec?id=${id}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) {
+        alert("لم يتم العثور على البيانات لهذا الرقم.");
+        return;
+      }
+
+      document.getElementById('name').value = data.name || '';
+      document.getElementById('age').value = String(data.age || '').replace(/[^\d]/g, '');
+      document.getElementById('phone').value = data.phone || '';
+      document.getElementById('altPhone').value = data.parentPhone || '';
+
+      const fullParent = data.parent || '';
+      const trimmedParent = fullParent.trim().split(' ').slice(0, 2).join(' ');
+      document.getElementById('parent').value = trimmedParent;
+    })
+    .catch(err => console.error("Fetch error:", err));
+});
+</script>
+
+<footer>
+  <p>© 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة</p>
+    <p style="font-size: 14px; color: #aaa; margin-top: -10px;">تم التطوير بواسطة روند أحمد الضمور</p>
+  <div class="social-icons">
+    <a href="https://facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://instagram.com/kalbasc" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://x.com/Kalba_sc" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
+  </div>
+</footer>
+  </div>
+
+</body>
+</html>

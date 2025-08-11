@@ -1,0 +1,3181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="mobile-web-app-capable" content="yes"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:,">
+<title>لوحة حضور المخيم الصيفي - نادي كلباء</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<style>
+@font-face {
+    font-family: 'NotoKufiArabic';
+    src: url('https://kalbasc.github.io/reports/NotoKufiArabic.ttf') format('truetype');
+}
+html {
+height: 100%;
+display: flex;
+flex-direction: column;
+}
+body {
+font-family: 'NotoKufiArabic', sans-serif;
+background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+background-size: cover;
+color: white;
+height: 100%;
+margin: 0;
+padding: 0;
+display: flex;
+flex-direction: column;
+}
+body > .footer-container {
+margin-top: auto;
+}
+.container, #mainView, #activityView, #statsView {
+flex: 1 0 auto;
+}
+main {
+flex: 1;
+}
+.header-container {
+width: 100%;
+background: #111;
+border-bottom: 2px solid #f4e733;
+}
+.header-right {
+width: 100%;
+max-width: 1170px;
+margin: auto;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 20px;
+padding: 20px 42px;
+background-color: #111;
+color: white;
+box-sizing: border-box;
+}
+.header-right img.logo {
+height: 70px;
+}
+.divider {
+width: 1.5px;
+height: 65px;
+background-color: #f4e733;
+}
+.header-info {
+text-align: center;
+}
+.arabic-name {
+font-weight: bold;
+font-size: 20px;
+}
+.english-name {
+font-size: 14px;
+color: #f4e733;
+}
+.container {
+display: grid;
+grid-template-columns: 1fr;
+gap: 20px;
+max-width: 1200px;
+margin: auto;
+padding: 20px;
+background: rgba(0, 0, 0, 0.9);
+border-radius: 10px;
+margin-top: 30px;
+}
+.controls {
+display: flex;
+flex-direction: column;
+gap: 12px;
+background: #1e1e1e;
+padding: 15px 20px;
+border-radius: 12px;
+border: 1px solid #f4e733;
+}
+.filter-bar {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+align-items: center;
+justify-content: space-between;
+}
+.search-group input,
+.search-group select,
+button.export,
+button.clear-btn {
+border: 1px solid #f4e733;
+background: #000;
+color: #fff;
+padding: 8px 14px;
+border-radius: 8px;
+font-size: 13px;
+min-width: 140px;
+}
+
+.export-buttons button {
+background: #f4e733;
+color: #000;
+border: none;
+}
+button.clear-btn {
+background: #d9534f;
+color: white;
+}
+table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
+}
+th, td {
+border: 1px solid #f4e733;
+padding: 10px;
+text-align: center;
+}
+th {
+background-color: #333;
+color: #f4e733;
+}
+nav {
+display: flex;
+justify-content: center; 
+align-items: center;
+gap: 10px;
+flex-wrap: wrap;
+width: 100%;
+background-color: #111;
+border-bottom: 3px solid #f4e733;
+border-top: 1px solid #f4e733;
+}
+nav button,
+.dropdown > button {
+font-size: 19px;
+padding: 13px 25px;
+margin: 0 15px;    
+border-radius: 8px;
+background-color: #111;
+color: #f4e733;
+border: none;
+text-align: center;     
+min-width: 100px;     
+cursor: pointer;
+}
+.dropdown {
+position: relative;
+display: inline-block;
+}
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #222;
+min-width: 120px;
+z-index: 1;
+border: 1px solid #f4e733;
+}
+.dropdown-content a {
+color: #f4e733;
+padding: 10px 14px;
+display: block;
+text-align: right;
+cursor: pointer;
+}
+.dropdown:hover .dropdown-content {
+display: block;
+}
+nav button.active {
+background-color: #f4e733;
+color: black !important;
+}
+.download-icon {
+display: inline-block;
+width: 18px;
+height: 18px;
+background: black;
+clip-path: polygon(50% 0%, 100% 50%, 75% 50%, 75% 100%, 25% 100%, 25% 50%, 0% 50%);
+margin-left: 5px;
+vertical-align: middle;
+}
+.hidden {
+display: none;
+}
+.activity-group {
+background-color: #333;
+color: #f4e733;
+font-weight: bold;
+}
+.general-attendance {
+background-color: rgba(76, 175, 80, 0.2);
+}
+.no-activity {
+background-color: rgba(76, 175, 80, 0.2); 
+}
+.general-with-activities {
+background-color: rgba(255, 193, 7, 0.2); 
+}
+footer {
+background-color: #111;
+color: white;
+text-align: center;
+padding: 20px;
+border-top: 3px solid #f4e733;
+font-size: 14px;
+}
+.social-icons a {
+color: white;
+margin: 0 8px;
+font-size: 20px;
+}
+#datePicker {
+  background: #111;
+  color: #f4e733;
+  border: 1px solid #f4e733;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+#datePicker:hover {
+  background: #222;
+  border-color: #ffeb3b;
+}
+
+#datePicker:focus {
+  border-color: #ffeb3b;
+  box-shadow: 0 0 5px #f4e733;
+}
+#tableTitle {
+text-align: center !important;
+width: 100%;
+display: block !important;
+margin-left: auto !important;
+margin-right: auto !important;
+padding: 5px 10px;
+}
+.stats-container {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 20px;
+margin-top: 20px;
+}
+.stat-card {
+background: #222;
+padding: 15px;
+border-radius: 10px;
+border: 1px solid #f4e733;
+}
+#loading {
+display: none;
+text-align: center;
+padding: 20px;
+}
+.chip {
+display: inline-block;
+background-color: #f4e733;
+color: black;
+padding: 5px 10px;
+margin: 3px;
+border-radius: 15px;
+font-size: 13px;
+cursor: default;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.chip span {
+margin-left: 8px;
+color: red;
+font-weight: bold;
+cursor: pointer;
+}
+.chip-container {
+display: flex;
+flex-wrap: wrap;
+gap: 5px;
+margin-top: 10px;
+width: 100%;
+justify-content: flex-start;
+}
+.chip-remove {
+margin-right: 5px;
+cursor: pointer;
+font-weight: bold;
+}
+.chip:hover {
+transform: scale(1.05);
+box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.chip-remove:hover {
+color: darkred;
+}
+.select2-results__options[aria-live] {
+display: none !important;
+}
+.select2-results__options {
+aria-live: off !important;
+}
+.ui-helper-hidden-accessible {
+display: none;
+}    
+@keyframes pop {
+0% { transform: scale(0.9); opacity: 0.2; }
+100% { transform: scale(1); opacity: 1; }
+}
+#topRankingContainer {
+  display: block;
+  padding: 10px;
+  min-height: 100px;
+}    
+.empty-state {
+text-align: center;
+padding: 20px;
+color: #aaa;
+}
+#mainView .hidden-column {
+display: none;
+}
+
+#topParticipantsContainer {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: flex-start;
+gap: 20px;
+}
+
+#mainView.show-hidden-columns .hidden-column {
+display: table-cell;
+}
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+    background-color: #111;
+    border: 1px solid #f4e733;
+    border-radius: 8px;
+    color: white;
+    min-height: 40px;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: white;
+    line-height: 38px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #f4e733;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    margin: 3px 5px 3px 0;
+    padding: 3px 8px;
+    font-size: 13px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: red;
+    margin-right: 5px;
+}
+.select2-dropdown {
+    background-color: #222;
+    border: 1px solid #f4e733;
+    color: white;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    background-color: #111;
+    color: white;
+    border: 1px solid #f4e733;
+}
+.select2-container--default .select2-results__option--highlighted {
+    background-color: #f4e733;
+    color: black;
+}
+@page {
+  size: A4;
+  margin: 10mm;
+}
+.top-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.top-card {
+  width: 180px;
+  background: white;
+  border: 3px solid #ccc;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.rank-badge {
+  font-size: 22px;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: gold;
+  padding: 4px 8px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+}
+
+.player-info {
+  margin-top: 20px;
+}
+
+.player-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.player-activity {
+  font-size: 14px;
+  color: #555;
+}
+
+.player-score {
+  font-size: 15px;
+  margin-top: 6px;
+  color: #333;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+    #showTopAttendanceBtn, 
+#showTopEvaluationBtn {
+  background: #f4e733;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 5px;
+  font-family: 'NotoKufiArabic', sans-serif;
+  transition: all 0.3s ease;
+}
+
+#showTopAttendanceBtn:hover,
+#showTopEvaluationBtn:hover {
+  background: #e6d429;
+  transform: translateY(-2px);
+}
+
+#showTopAttendanceBtn:active,
+#showTopEvaluationBtn:active {
+  transform: translateY(0);
+}
+
+#showTopEvaluationBtn {
+  background: #222;
+  color: #f4e733;
+  border: 1px solid #f4e733;
+}
+
+#showTopEvaluationBtn:hover {
+  background: #333;
+}
+
+@media print {
+  body {
+    direction: rtl;
+  }
+  .staff-column {
+  display: table-cell;
+}
+    }
+
+@media (max-width: 768px) {
+.header-right {
+padding: 10px 10px;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+gap: 10px;
+}
+
+.header-info {
+display: block;
+text-align: center;
+}
+
+.header-info .arabic-name {
+font-size: 16px;
+}
+
+.header-info .english-name {
+font-size: 12px;
+}
+
+.header-right .divider {
+height: 45px;
+width: 1.5px;
+background-color: #f4e733;
+}
+
+img.logo {
+height: 50px !important;
+max-height: 50px !important;
+}
+
+.hidden-column {
+display: none !important;
+}
+
+.container {
+width: 90%;
+margin: 20px auto;
+padding: 20px 20px; 
+box-sizing: border-box;
+font-size: 12px;
+overflow-x: auto;
+-webkit-overflow-scrolling: touch;
+}
+
+nav {
+flex-direction: row;
+flex-wrap: wrap;
+padding: 5px;
+}
+
+nav button, .dropdown > button {
+font-size: 10px;
+padding: 6px 8px;
+margin: 2px;
+min-width: auto;
+flex: 1;
+}
+
+.dropdown-content {
+min-width: 100px;
+right: 0;
+}
+
+.container {
+width: 100%;
+padding: 10px;
+margin: 10px auto;
+overflow-x: auto;
+}
+
+.controls {
+padding: 10px;
+}
+
+.filter-bar {
+flex-direction: column;
+align-items: stretch;
+gap: 12px;
+}
+
+.search-group {
+width: 100%;
+}
+
+.search-group select,
+.search-group input,
+.search-group button.clear-btn,
+#datePicker {
+    font-size: 12px;
+    height: 40px;
+    background: #111;
+    color: #f4e733;
+    border: 1px solid #f4e733;
+}
+
+.filter-type-selector {
+width: 100%;
+}
+
+.export-buttons {
+flex-direction: row !important;
+justify-content: center;
+width: 100%;
+}
+
+.export-buttons button {
+flex: 1;
+padding: 8px;
+font-size: 12px;
+min-width: 120px;
+}
+.select2-container .select2-selection--single,
+.select2-container .select2-selection--multiple {
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  font-size: 9px;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.select2-search__field {
+  font-size: 10px;
+}
+  #datePicker {
+    width: 100%;
+    font-size: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+.filter-type-selector {
+width: 100%;
+margin-bottom: 8px;
+}
+
+.chip {
+font-size: 10px;
+padding: 4px 8px;
+}
+
+th, td {
+padding: 4px 6px;
+font-size: 10px;
+}
+
+.hidden-column {
+display: none !important;
+}      
+#attendanceTable, #activityTable {
+font-size: 10px;
+}
+
+table {
+font-size: 10px;
+}
+
+#activityTable td:nth-child(3), 
+#activityTable th:nth-child(3),
+#activityTable td:nth-child(4), 
+#activityTable th:nth-child(4) {
+display: none;
+}
+
+#activityTable td, #activityTable th {
+font-size: 10px;
+padding: 6px 8px;
+}
+
+.stats-container {
+grid-template-columns: 1fr;
+gap: 10px;
+}
+
+.stat-card {
+padding: 10px;
+}
+
+.title {
+font-size: 18px;
+margin-bottom: 15px;
+}
+
+.summary-box {
+font-size: 12px;
+margin-top: 5px;
+text-align: center;
+width: 100%;
+}
+
+.activity-group td {
+font-size: 10px;
+padding: 3px;
+}
+
+footer {
+padding: 10px;
+font-size: 12px;
+}
+
+.social-icons a {
+font-size: 16px;
+margin: 0 5px;
+}
+      .staff-column {
+    display: none !important;
+  }
+  .export-buttons {
+    display: none !important;
+  }
+
+.pdf-table {
+  width: 100%;
+  border-collapse: collapse;
+  direction: rtl;
+}
+
+.pdf-table th {
+  background-color: #f4e733;
+  color: black;
+  padding: 8px;
+  text-align: right;
+  border: 1px solid #ddd;
+}
+
+.pdf-table td {
+  padding: 8px;
+  text-align: right;
+  border: 1px solid #ddd;
+}
+
+.pdf-table tr:nth-child(even) {
+  background-color: #333;
+}
+#topParticipantsContainer div:hover {
+  transform: scale(1.05);
+}
+  #showTopAttendanceBtn, 
+  #showTopEvaluationBtn {
+    padding: 12px 16px;
+    min-height: 44px;
+    font-size: 14px;
+  }
+}
+</style>
+</head>
+<body>
+<div id="printArea" style="display: none;"></div>
+
+<header class="header-container">
+<div class="header-right">
+<img src="Picture3.png" alt="شعار الشارقة" class="logo">
+<div class="divider"></div>
+<img src="logo.png" alt="شعار نادي كلباء" class="logo">
+<div class="header-info">
+<div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+<div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
+</div>
+</div>
+</header>
+
+<nav>
+<button onclick="showMainView()" class="active">الحضور </button>
+<button onclick="showActivitiesView()">الحضور حسب الأنشطة</button>
+<button onclick="showStatsView()">الإحصائيات</button>
+<button onclick="showTopParticipants()">المنتسبون المميزون</button>
+<div class="dropdown">
+<button>الفترات الزمنية ▼</button>
+<div class="dropdown-content">
+<a onclick="filterByPeriod('today')">اليوم</a>
+<a onclick="filterByPeriod('week')">هذا الأسبوع</a>
+<a onclick="filterByPeriod('month')">هذا الشهر</a>
+<a onclick="filterByPeriod('all')">الكل</a>
+</div>
+</div>
+</nav>
+
+<main style="flex: 1;">
+
+<div class="container" id="mainView">
+<div class="title" style="color: #f4e733; text-align: center; font-weight: bold; font-size: 24px; margin-bottom: 25px;">
+حضور صيف الشارقة الرياضي - عطلتنا غير
+</div>
+
+<div class="controls">
+<div class="filter-bar">
+<div class="search-group">
+<select id="filterType" onchange="showFilterOptions(this.value)">
+<option value="">🔍 بحث حسب...</option>
+<div id="activeFilters" class="chip-container" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;"></div>
+<option value="name">الاسم</option>
+<option value="id">المعرّف</option>
+<option value="staff">الموظف</option>
+<option value="activity">النشاط</option>
+</select>
+
+<div id="activeFilters" class="chip-container"></div>
+<input id="filter-name" class="hidden" placeholder="أدخل الاسم..." onkeyup="filterTable()" autocomplete="off">
+<input id="filter-id" class="hidden" placeholder="أدخل المعرف..." onkeyup="filterTable()">
+<select id="filter-staff" class="hidden" onchange="filterTable()"></select>
+<select id="filter-activity" class="hidden" onchange="filterTable()"></select>
+
+<input type="date" id="datePicker" onchange="filterByDate()">
+<button onclick="clearFilters()" class="clear-btn">مسح الفلاتر</button>
+</div>
+
+<button id="weeklyEmailBtn" class="export" 
+style="display: none; background: #d9534f; color: white;"
+onclick="promptForPassword()">
+<i class="fas fa-paper-plane"></i> إرسال تقارير الأسبوع
+</button>
+
+<div class="export-buttons">
+<button class="export" onclick="exportToExcel()">
+<span class="download-icon"></span> Excel
+</button>
+<button class="export" onclick="exportToPrintableView()">
+  <span class="download-icon"></span> PDF
+</button>
+</div>
+<button id="viewToggle" class="export" style="background: #555; display: none;" onclick="toggleView()">
+<i class="fas fa-exchange-alt"></i> قائمة الأسماء 
+</button>
+    
+<button id="toggleDisplayMode" class="export" onclick="toggleDisplayMode()" style="background: #444;">
+    <i class="fas fa-exchange-alt"></i> عرض الكل
+</button>
+
+<button onclick="toggleHiddenColumns()" class="export" style="background: #555;">
+<i class="fas fa-eye"></i> عرض الأعمدة المخفية
+</button>
+
+</div>
+
+<div class="summary-box">
+<span id="summary">إجمالي الحضور: <span id="totalCount">0</span></span>
+<span id="filteredSummary">| النتائج المصفاة: <span id="filteredCount">0</span></span>
+</div>
+
+<button id="showWeeklyMsgBtn" class="export" style="display:none; background:#f4e733; color:black; margin-top:10px;" onclick="openWeeklyMessage()">عرض ملخص الحضور الأسبوعي</button>
+
+<div id="weeklyMessagePopup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#222; color:white; border:2px solid #f4e733; border-radius:10px; padding:20px; z-index:1000; max-width:80%; max-height:70%; overflow:auto; text-align:right;">
+<h3 style="color:#f4e733;">ملخص الحضور الأسبوعي</h3>
+<div id="weeklyMessageContent"></div>
+
+<div style="position: sticky; bottom: 0; background: #222; padding: 10px 0; text-align: center; border-top: 1px solid #f4e733;">
+<button onclick="promptTestEvaluation()" style="background:#d9534f; color:white; border:none; padding:5px 15px; border-radius:5px; margin:5px;">
+إرسال بريد اختباري
+</button>
+<button onclick="closeWeeklyMessage()" style="background:#f4e733; color:black; border:none; padding:5px 15px; border-radius:5px; margin:5px;">
+إغلاق
+</button>
+</div>
+
+</div>
+
+</div>
+<h3 id="tableTitle" style="text-align:center; color:#f4e733; margin-top: 20px;"></h3>
+<table id="attendanceTable">
+<thead>
+<tr>
+<th>التاريخ والوقت</th>
+<th>الاسم</th>
+<th>المعرف</th>
+<th>الموظف</th>
+<th class="hidden-column">النشاط</th>
+<th class="hidden-column">النوع</th>
+</tr>
+</thead>
+<tbody>
+<tr id="loading">
+<td colspan="6" style="text-align:center">
+<i class="fas fa-spinner fa-spin"></i> جاري تحميل البيانات...
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="container" id="activityView" style="display: none;">
+<h2 style="color:#f4e733; text-align:center">الحضور حسب الأنشطة</h2>
+<div class="export-buttons" style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 15px;">
+    <button class="export" onclick="exportToExcel()">
+      <span class="download-icon"></span> Excel
+    </button>
+<button class="export" onclick="exportToPrintableView()">
+  <span class="download-icon"></span> PDF
+</button>
+  </div>
+<div id="activityControls" class="controls" style="margin-bottom:20px">
+</div>
+    
+<table id="activityTable">
+<thead>
+<tr>
+<th>التاريخ والوقت</th>
+<th>الاسم</th>
+<th>المعرف</th>
+<th>الموظف</th>
+<th>النشاط</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+    
+</div>
+
+<div class="container" id="statsView" style="display: none;">
+<h2 style="color:#f4e733; text-align:center">إحصائيات الحضور</h2>
+<div class="controls" style="margin-bottom:20px">
+  <div class="export-buttons" style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 15px;">
+    <button class="export" onclick="exportToExcel()">
+      <span class="download-icon"></span> Excel
+    </button>
+<button class="export" onclick="exportToPrintableView()">
+  <span class="download-icon"></span> PDF
+</button>
+  </div>
+</div>
+<div class="stats-container">
+<div class="stat-card">
+<h3 style="color:#f4e733;">توزيع الحضور حسب الموظفين</h3>
+<canvas id="pieStaff" height="200"></canvas>
+</div>
+<div class="stat-card">
+<h3 style="color:#f4e733;">حضور بالوقت مقابل متأخر</h3>
+<canvas id="earlyLate" height="200"></canvas>
+</div>
+<div class="stat-card">
+<h3 style="color:#f4e733;">الحضور حسب الأيام</h3>
+<canvas id="attendanceChart" height="200"></canvas>
+</div>
+<div class="stat-card">
+<h3 style="color:#f4e733;">الحضور حسب الأنشطة</h3>
+<canvas id="activityChart" height="200"></canvas>
+</div>    
+<div class="stat-card">
+<h3 style="color:#f4e733;">إحصائيات اليوم</h3>
+<div id="todayStats"></div>
+</div>
+<div class="stat-card">
+  <h3 style="color:#f4e733;">توزيع التقييمات</h3>
+  <canvas id="rankingsChart" height="200"></canvas>
+</div>
+</div>
+</div>
+
+<div class="container" id="topParticipantsView" style="display: none;">
+    <div class="controls" style="margin-bottom:20px">
+  <div class="export-buttons" style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 15px;">
+    <button class="export" onclick="exportToExcel()">
+      <span class="download-icon"></span> Excel
+    </button>
+<button class="export" onclick="exportToPrintableView()">
+  <span class="download-icon"></span> PDF
+</button>
+  </div>
+</div>
+<div style="text-align: center; margin-bottom: 10px;">
+  <button id="showTopAttendanceBtn" class="btn btn-primary">المميزون حسب الحضور</button>
+  <button id="showTopEvaluationBtn" class="btn btn-outline-primary">المميزون حسب التقييم</button>
+</div>
+
+<div id="topAttendanceContainer">
+  <div id="topParticipantsCards" class="top-cards-container">
+  </div>
+</div>
+
+<div id="topRankingContainer" style="display: none;">
+<div id="topThreeContainer" class="top-cards-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;"></div>
+<div id="rankingsContainer" class="top-cards-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;"></div>
+</div>
+
+
+</div>
+<div id="loadingPopup" style="
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #222;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  z-index: 9999;
+  text-align: center;
+  font-family: 'NotoKufiArabic', sans-serif;
+">
+  <div class="spinner" style="
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #f4e733;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  "></div>
+  جاري تحميل البيانات...
+</div>
+<script>
+    //https://script.google.com/macros/s/AKfycbxij6xIH_fypPRhklqQKURq-7xB5RJ3sC5dCBfwj4sJBjqnfXde1ncFrhCpDy04zuZW6g/exec
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzJwZ7Ulx_pfSOsnpQ-fEicYnXPWsGB7b0k_pTrpglnkFXBPQpU-WEXV7VXYyIQkHh2nw/exec';
+let currentPeriod = 'today';
+
+let allData = [];
+let filteredData = [];
+let charts = {};
+let displayAllRecords = false;
+
+function formatDate(isoString) {
+const date = new Date(isoString);
+const options = {
+year: 'numeric', 
+month: '2-digit', 
+day: '2-digit',
+hour: '2-digit', 
+minute: '2-digit',
+hour12: true,
+timeZone: 'Asia/Dubai'
+};
+let formatted = date.toLocaleString('ar-EG', options);
+formatted = formatted.replace("AM", "ص").replace("PM", "م");
+return formatted;
+}
+
+function processRawData(rawData) {
+if (!Array.isArray(rawData)) return [];
+
+const now = new Date();
+
+return rawData
+.filter(item => {
+if (!item || typeof item !== 'object') return false;
+if (!item.ID || !item.Timestamp) return false;
+
+const timestamp = new Date(item.Timestamp);
+if (isNaN(timestamp.getTime())) return false;
+
+return timestamp <= now;
+})
+.map(item => {
+const isGeneral = item.General === "✔️ حضر" || item.General === "حضر";
+return {
+...item,
+isGeneral: isGeneral,
+dateKey: new Date(item.Timestamp).toISOString().split('T')[0],
+isDuplicate: false
+};
+});
+}
+
+function formatDisplayDate(dateString) {
+const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
+const options = { 
+year: 'numeric', 
+month: '2-digit', 
+day: '2-digit',
+timeZone: 'Asia/Dubai'
+};
+
+let formatted = date.toLocaleDateString('ar-EG', options);
+
+formatted = formatted.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+.replace(/\s+/g, ' ')
+.trim();
+
+return formatted;
+}
+
+function getActivityRecords(rawData) {
+  if (!Array.isArray(rawData)) return [];
+
+  const uniqueRecords = [];
+  const seen = new Set();
+
+  rawData.forEach(item => {
+    if (
+        item &&
+        item.ID &&
+        item.Timestamp &&
+        item.Activity &&
+        item.Activity.trim() !== "" &&
+        item.Activity !== "عام"
+    ) {
+      const key = `${item.ID}_${new Date(item.Timestamp).toISOString().split('T')[0]}_${item.Activity}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        uniqueRecords.push(item);
+      }
+    }
+  });
+
+  return uniqueRecords;
+}
+
+function updateTodayStats(data = filteredData) {
+const today = new Date().toDateString();
+const todayData = data.filter(row => 
+new Date(row.Timestamp).toDateString() === today
+);
+
+const staffToday = {};
+let early = 0, late = 0;
+
+todayData.forEach(row => {
+const name = row["Scanned By"] || "غير معروف";
+staffToday[name] = (staffToday[name] || 0) + 1;
+
+const time = new Date(row.Timestamp);
+const totalMinutes = time.getHours() * 60 + time.getMinutes();
+(totalMinutes < (17 * 60 + 11)) ? early++ : late++;
+});
+
+const staffList = Object.entries(staffToday)
+.map(([name, count]) => `${name}: ${count}`)
+.join("<br>");
+
+document.getElementById("todayStats").innerHTML = `
+      <p><strong>حسب الموظف:</strong><br>${staffList || "لا يوجد بيانات"}</p>
+      <p><strong>حسب الوقت:</strong><br>بالوقت: ${early} | متأخر: ${late}</p>
+      <p><strong>إجمالي اليوم:</strong> ${todayData.length}</p>
+    `;
+}
+
+function populateDropdowns(data = allData) {
+  const activities = new Set(['عام']);
+  const staff = new Set();
+    
+  data.forEach(row => {
+    if (row.Activity && row.Activity.trim() !== "") activities.add(row.Activity);
+    if (row["Scanned By"]) staff.add(row["Scanned By"]);
+  });
+    
+  populateDropdown('filter-activity', activities, 'اختر النشاط');
+  populateDropdown('filter-staff', staff, 'اختر الموظف');
+
+  $('#filter-staff, #filter-activity').select2({
+    placeholder: "اختر متعدد",
+    allowClear: true
+  });
+}
+
+function populateDropdown(id, values, defaultText) {
+const select = document.getElementById(id);
+select.innerHTML = `<option value="">${defaultText}</option>`;
+Array.from(values).sort().forEach(value => {
+const opt = document.createElement("option");
+opt.value = value;
+opt.textContent = value;
+select.appendChild(opt);
+});
+}
+
+async function fetchData() {
+  try {
+    const loadingElement = document.getElementById("loading");
+    if (loadingElement) {
+      loadingElement.style.display = "block";
+    }
+
+    const res = await fetch(scriptURL);
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
+    const rawData = await res.json();
+    if (!Array.isArray(rawData)) throw new Error("Invalid data format received");
+
+    allData = processRawData(rawData);
+
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById("datePicker").value = today;
+    filteredData = allData.filter(row => row.dateKey === today);
+
+    renderMainTable();
+    updateSummary();
+    populateDropdowns(filteredData);
+    updateTodayStats();
+
+    console.log("Data loaded successfully:", allData.length, "records");
+
+  } catch (error) {
+    console.error("Error loading data:", error);
+    const tbody = document.querySelector("#attendanceTable tbody");
+    if (tbody) {
+      tbody.innerHTML = `<tr><td colspan="6" class="empty-state">حدث خطأ في تحميل البيانات</td></tr>`;
+    }
+
+  } finally {
+    const loadingElement = document.getElementById("loading");
+    if (loadingElement) {
+      loadingElement.style.display = "none";
+    }
+  }
+}
+
+function showMainView() {
+setActiveNavButton(0);
+document.getElementById("mainView").style.display = "block";
+document.getElementById("activityView").style.display = "none";
+document.getElementById("statsView").style.display = "none";
+document.getElementById("topParticipantsView").style.display = "none";
+}
+
+function showActivitiesView() {
+setActiveNavButton(1);
+document.getElementById("mainView").style.display = "none";
+document.getElementById("activityView").style.display = "block";
+document.getElementById("statsView").style.display = "none";
+document.getElementById("topParticipantsView").style.display = "none";
+renderActivityTable();
+}
+
+function toggleDisplayMode() {
+    displayAllRecords = !displayAllRecords;
+    const btn = document.getElementById('toggleDisplayMode');
+btn.innerHTML = displayAllRecords 
+    ? '<i class="fas fa-exchange-alt"></i> عرض الفريد يومياً'
+    : '<i class="fas fa-exchange-alt"></i> عرض الفريد';
+
+    renderMainTable();
+    updateSummary();
+}
+
+function showStatsView() {
+setActiveNavButton(2);
+document.getElementById("mainView").style.display = "none";
+document.getElementById("activityView").style.display = "none";
+document.getElementById("statsView").style.display = "block";
+document.getElementById("topParticipantsView").style.display = "none";
+renderCharts();
+}
+
+function showTopParticipants() {
+setActiveNavButton(3);
+document.getElementById("mainView").style.display = "none";
+document.getElementById("activityView").style.display = "none";
+document.getElementById("statsView").style.display = "none";
+document.getElementById("topParticipantsView").style.display = "block";
+renderTopParticipants();
+}
+
+function setActiveNavButton(index) {
+document.querySelectorAll('nav button').forEach((btn, i) => {
+btn.classList.toggle('active', i === index);
+});
+}
+
+function filterByPeriod(period) {
+currentPeriod = period; 
+
+if (period === 'today') {
+filterByDate();
+hideWeeklyControls();
+return;
+}
+
+if (period === 'week') {
+showWeekRangePicker();
+return;
+}
+
+filteredData = getFilteredDataByPeriod(period);
+populateDropdowns();  
+updatePeriodSummary(period);
+
+if (document.getElementById("mainView").style.display !== "none") {
+renderMainTable();
+}
+if (document.getElementById("activityView").style.display !== "none") {
+renderActivityTable();
+}
+if (document.getElementById("statsView").style.display !== "none") {
+renderCharts();
+}
+if (document.getElementById("topParticipantsView").style.display !== "none") {
+renderTopParticipants();
+}
+
+updateTodayStats();
+updateTitleAndControls(period);
+}
+
+function showWeeklyControls() {
+document.getElementById('viewToggle').style.display = 'inline-block';
+document.getElementById('showWeeklyMsgBtn').style.display = 'inline-block';
+}
+
+function hideWeeklyControls() {
+document.getElementById('viewToggle').style.display = 'none';
+document.getElementById('showWeeklyMsgBtn').style.display = 'none';
+closeWeeklyMessage();
+}
+
+function showWeekRangePicker() {
+let rangePicker = document.getElementById('weekRangePicker');
+
+if (!rangePicker) {
+rangePicker = document.createElement('div');
+rangePicker.id = 'weekRangePicker';
+rangePicker.style.position = 'fixed';
+rangePicker.style.top = '50%';
+rangePicker.style.left = '50%';
+rangePicker.style.transform = 'translate(-50%, -50%)';
+rangePicker.style.backgroundColor = '#222';
+rangePicker.style.padding = '20px';
+rangePicker.style.border = '2px solid #f4e733';
+rangePicker.style.borderRadius = '10px';
+rangePicker.style.zIndex = '1000';
+
+rangePicker.innerHTML = `
+    <h3 style="color:#f4e733; text-align:center; margin-top:0">اختر أسبوع (إثنين-خميس)</h3>
+    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+      <input type="date" id="weekStartDate" style="flex:1; padding:8px; border-radius:5px;">
+      <span style="color:white; align-self:center">إلى</span>
+      <input type="date" id="weekEndDate" style="flex:1; padding:8px; border-radius:5px;">
+    </div>
+    <div style="display: flex; justify-content: center; gap: 10px;">
+      <button onclick="applyWeekFilter()" style="background:#f4e733; color:black; border:none; padding:8px 15px; border-radius:5px; cursor:pointer">تطبيق</button>
+      <button onclick="closeWeekRangePicker()" style="background:#555; color:white; border:none; padding:8px 15px; border-radius:5px; cursor:pointer">إلغاء</button>
+    </div>
+  `;
+
+document.body.appendChild(rangePicker);
+
+setCurrentWeekDates();
+} else {
+rangePicker.style.display = 'block';
+setCurrentWeekDates();
+}
+}
+
+function setCurrentWeekDates() {
+const today = new Date();
+const dayOfWeek = today.getDay(); 
+const diffToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1; 
+
+const monday = new Date(today);
+monday.setDate(today.getDate() - diffToMonday);
+
+const thursday = new Date(monday);
+thursday.setDate(monday.getDate() + 3); 
+
+document.getElementById('weekStartDate').value = monday.toISOString().split('T')[0];
+document.getElementById('weekEndDate').value = thursday.toISOString().split('T')[0];
+}
+
+function renderWeeklySummaryTable() {
+document.getElementById('tableTitle').textContent = 'الحضور الأسبوعي ';
+const tbody = document.querySelector("#attendanceTable tbody");
+tbody.innerHTML = "";
+
+if (filteredData.length === 0) {
+tbody.innerHTML = `<tr><td colspan="6" class="empty-state">لا يوجد بيانات</td></tr>`;
+return;
+}
+
+const uniquePerDay = {};
+filteredData.forEach(row => {
+const key = `${row.ID}_${row.dateKey}`;
+if (!uniquePerDay[key]) {
+uniquePerDay[key] = row;
+}
+});
+
+const summaryData = Object.values(uniquePerDay);
+summaryData.sort((a, b) => {
+const dateA = new Date(a.Timestamp);
+const dateB = new Date(b.Timestamp);
+return dateA - dateB;
+});
+
+summaryData.forEach(row => {
+const tr = document.createElement("tr");
+if (row.isGeneral) tr.classList.add("general-attendance");
+
+tr.innerHTML = `
+    <td>${formatDate(row.Timestamp)}</td>
+    <td>${row["Child Name"] || ""} ${row.Parent || ""}</td>
+    <td>${row.ID || ""}</td>
+    <td>${row["Scanned By"] || ""}</td>
+    <td class="hidden-column">${row.isGeneral ? "عام" : (row.Activity || "")}</td>
+    <td class="hidden-column">${row.isGeneral ? "عام" : "نشاط"}</td>
+  `;
+tbody.appendChild(tr);
+});
+
+const thead = document.querySelector("#attendanceTable thead");
+thead.innerHTML = `
+  <tr>
+    <th>التاريخ والوقت</th>
+    <th>الاسم</th>
+    <th>المعرف</th>
+    <th>الموظف</th>
+    <th class="hidden-column">النشاط</th>
+    <th class="hidden-column">النوع</th>
+  </tr>
+`;
+}
+
+function updateSummary(isWeek = false) {
+  if (isWeek) return;
+
+  const total = displayAllRecords 
+      ? filteredData.length 
+      : new Set(filteredData.map(r => r.ID)).size;
+
+  const summaryElement = document.querySelector('.summary-box');
+  if (summaryElement) {
+    summaryElement.innerHTML = `
+      <span id="summary">إجمالي الحضور: <span id="totalCount">${total}</span></span>
+      <span id="filteredSummary">| النتائج المصفاة: <span id="filteredCount">${total}</span></span>
+    `;
+  }
+}
+
+function clearWeekFilter() {
+currentPeriod = 'today';
+showWeeklySummary = false;
+
+document.getElementById("filter-name").value = "";
+document.getElementById("filter-id").value = "";
+document.getElementById("filter-staff").value = "";
+document.getElementById("filter-activity").value = "";
+
+$('#filter-staff').val(null).trigger('change');
+$('#filter-activity').val(null).trigger('change');
+
+$('#activeFilters').empty();
+
+const today = new Date().toISOString().split('T')[0];
+document.getElementById("datePicker").value = today;
+document.getElementById('datePicker').style.display = 'inline-block';
+
+filteredData = allData.filter(row => row.dateKey === today);
+
+hideWeeklyControls();
+document.getElementById('tableTitle').textContent = 'الحضور اليومي';
+
+  updateFilteredView();
+  populateDropdowns(filteredData);
+  filterTable();
+updateSummary();
+updateTodayStats();
+}
+
+function closeWeekRangePicker() {
+const rangePicker = document.getElementById('weekRangePicker');
+if (rangePicker) {
+rangePicker.style.display = 'none';
+}
+}
+
+function filterByDate() {
+const selectedDate = document.getElementById("datePicker").value;
+if (!selectedDate) return;
+
+filteredData = allData.filter(row => row.dateKey === selectedDate);
+updateFilteredView();
+updateTitleAndControls('today');
+}
+
+function filterTable() {
+$('#filter-name').attr('autocomplete', 'off');
+const name = $('#filter-name').val().toLowerCase().replace(/\s+/g, ' ').trim();
+const id = $('#filter-id').val().toLowerCase();
+const staffValues = $('#filter-staff').val() ? [].concat($('#filter-staff').val()) : [];
+const activityValues = $('#filter-activity').val() ? [].concat($('#filter-activity').val()) : [];
+
+let dataset = [];
+
+if (currentPeriod === 'today') {
+const selectedDate = document.getElementById("datePicker").value;
+dataset = allData.filter(row => row.dateKey === selectedDate);
+} else {
+dataset = getFilteredDataByPeriod(currentPeriod);
+}
+
+filteredData = dataset.filter(row => {
+const rowName = `${row["Child Name"] || ""} ${row.Parent || ""}`.toLowerCase().replace(/\s+/g, ' ').trim();
+const rowId = (row.ID || "").toLowerCase();
+const staff = row["Scanned By"] || "";
+const activity = row.isGeneral ? "عام" : (row.Activity || "");
+
+return (!name || rowName.includes(name)) &&
+(!id || rowId.includes(id)) &&
+(staffValues.length === 0 || staffValues.includes(staff)) &&
+(activityValues.length === 0 || activityValues.includes(activity));
+});
+
+updateFilteredView();
+updateFilterChips();
+}
+
+function updateFilterChips() {
+const container = $('#activeFilters');
+container.empty();
+$('#filter-name').attr('autocomplete', 'off');
+if ($('#filter-name').val()) {
+container.append(`
+    <div class="chip">
+      <span class="chip-remove" onclick="$('#filter-name').val(''); filterTable()">×</span>
+      اسم: ${$('#filter-name').val()}
+    </div>
+  `);
+}
+
+if ($('#filter-id').val()) {
+container.append(`
+    <div class="chip">
+      <span class="chip-remove" onclick="$('#filter-id').val(''); filterTable()">×</span>
+      المعرف: ${$('#filter-id').val()}
+    </div>
+  `);
+}
+
+const staffValues = $('#filter-staff').val() ? [].concat($('#filter-staff').val()) : [];
+staffValues.forEach(val => {
+container.append(`
+    <div class="chip">
+      <span class="chip-remove" onclick="removeFilterValue('filter-staff', '${val.replace(/'/g, "\\'")}')">×</span>
+      الموظف: ${val}
+    </div>
+  `);
+});
+
+const activityValues = $('#filter-activity').val() ? [].concat($('#filter-activity').val()) : [];
+activityValues.forEach(val => {
+container.append(`
+    <div class="chip">
+      <span class="chip-remove" onclick="removeFilterValue('filter-activity', '${val.replace(/'/g, "\\'")}')">×</span>
+      النشاط: ${val}
+    </div>
+  `);
+});
+}
+
+function removeFilterValue(filterId, value) {
+const currentValues = $(`#${filterId}`).val() || [];
+const updatedValues = currentValues.filter(v => v !== value);
+$(`#${filterId}`).val(updatedValues).trigger('change');
+filterTable();
+}
+
+function clearFilters() {
+currentPeriod = 'today'; 
+showWeeklySummary = false;
+
+document.getElementById("filter-name").value = "";
+document.getElementById("filter-id").value = "";
+document.getElementById("filter-staff").value = "";
+document.getElementById("filter-activity").value = "";
+document.getElementById("filterType").value = "";
+
+$('#filter-staff').val(null).trigger('change');
+$('#filter-activity').val(null).trigger('change');
+
+const today = new Date().toISOString().split('T')[0];
+document.getElementById("datePicker").value = today;
+document.getElementById('datePicker').style.display = 'inline-block';
+
+filteredData = allData.filter(row => row.dateKey === today);
+
+document.getElementById('viewToggle').style.display = 'none';
+hideWeeklyControls();
+
+$('#activeFilters').empty();
+
+  renderMainTable();
+  populateDropdowns(filteredData);
+  filterTable();
+updateSummary();
+updateTodayStats();
+
+if (document.getElementById("activityView").style.display !== "none") {
+renderActivityTable();
+}
+if (document.getElementById("statsView").style.display !== "none") {
+renderCharts();
+}
+if (document.getElementById("topParticipantsView").style.display !== "none") {
+renderTopParticipants();
+}
+
+document.getElementById('tableTitle').textContent = 'الحضور اليومي';
+}
+
+function renderDailyStats() {
+  const dailyCounts = {};
+  const uniqueDailyAttendances = new Set();
+
+  filteredData.forEach(row => {
+    if (!row.ID || !row.dateKey) return;
+    const uniqueKey = `${row.ID}_${row.dateKey}`;
+
+    if (!uniqueDailyAttendances.has(uniqueKey)) {
+      uniqueDailyAttendances.add(uniqueKey);
+      if (!dailyCounts[row.dateKey]) {
+        dailyCounts[row.dateKey] = 0;
+      }
+      dailyCounts[row.dateKey]++;
+    }
+  });
+
+  const labels = Object.keys(dailyCounts).sort();
+  const dataCounts = labels.map(date => dailyCounts[date]);
+
+  if (charts.daily) charts.daily.destroy();
+
+  const ctx = document.getElementById('attendanceChart').getContext('2d');
+  charts.daily = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'عدد الحضور',
+        data: dataCounts,
+        backgroundColor: '#f4e733'
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+    
+function showFilterOptions(value) {
+document.getElementById("filter-name").classList.add("hidden");
+document.getElementById("filter-id").classList.add("hidden");
+document.getElementById("filter-staff").classList.add("hidden");
+document.getElementById("filter-activity").classList.add("hidden");
+
+if (value === "name") document.getElementById("filter-name").classList.remove("hidden");
+else if (value === "id") document.getElementById("filter-id").classList.remove("hidden");
+else if (value === "staff") document.getElementById("filter-staff").classList.remove("hidden");
+else if (value === "activity") document.getElementById("filter-activity").classList.remove("hidden");
+}
+
+function updateFilteredView() {
+renderMainTable();
+updateSummary();
+updateTodayStats();
+
+if (document.getElementById("activityView").style.display !== "none") {
+renderActivityTable();
+}
+
+if (document.getElementById("statsView").style.display !== "none") {
+renderCharts();
+}
+
+if (document.getElementById("topParticipantsView").style.display !== "none") {
+renderTopParticipants();
+}
+}
+
+function renderMainTable() {
+    const tbody = document.querySelector("#attendanceTable tbody");
+    if (filteredData.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="empty-state">لا يوجد بيانات</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = "";
+
+    let recordsToRender = [];
+
+    if (displayAllRecords) {
+        const uniquePerDay = {};
+
+        filteredData.forEach(row => {
+            const key = `${row.ID}_${row.dateKey}`;
+            if (!uniquePerDay[key]) {
+                uniquePerDay[key] = row;
+            } else {
+                if (!uniquePerDay[key].isGeneral && row.isGeneral) {
+                    uniquePerDay[key] = row;
+                } else if (uniquePerDay[key].isGeneral === row.isGeneral) {
+                    if (new Date(row.Timestamp) < new Date(uniquePerDay[key].Timestamp)) {
+                        uniquePerDay[key] = row;
+                    }
+                }
+            }
+        });
+
+        recordsToRender = Object.values(uniquePerDay);
+
+    } else {
+        const players = {};
+        filteredData.forEach(row => {
+            if (!row.ID) return;
+            if (!players[row.ID]) players[row.ID] = [];
+            players[row.ID].push(row);
+        });
+
+        recordsToRender = Object.values(players).map(playerRows => {
+            playerRows.sort((a, b) => new Date(a.Timestamp) - new Date(b.Timestamp));
+            const generalRecord = playerRows.find(row => row.isGeneral);
+            return generalRecord || playerRows[0];
+        });
+    }
+
+    recordsToRender.sort((a, b) => new Date(a.Timestamp) - new Date(b.Timestamp));
+
+    recordsToRender.forEach(row => {
+        const tr = document.createElement("tr");
+        if (row.isGeneral) tr.classList.add("general-attendance");
+
+        tr.innerHTML = `
+            <td>${formatDate(row.Timestamp)}</td>
+            <td>${row["Child Name"] || ""} ${row.Parent || ""}</td>
+            <td>${row.ID || ""}</td>
+            <td>${row["Scanned By"] || ""}</td>
+            <td class="hidden-column">${row.isGeneral ? "عام" : (row.Activity || "")}</td>
+            <td class="hidden-column">${row.isGeneral ? "عام" : "نشاط"}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function renderActivityTable() {
+  const tbody = document.querySelector("#activityTable tbody");
+  const controls = document.getElementById("activityControls");
+  tbody.innerHTML = "";
+
+  const selectedDate = document.getElementById("datePicker").value || new Date().toISOString().split('T')[0];
+  let dataset = [];
+
+  if (currentPeriod === 'all') {
+    dataset = allData;
+  } else if (currentPeriod === 'week' && showWeeklySummary) {
+    dataset = filteredData;
+  } else if (currentPeriod === 'week' || currentPeriod === 'month') {
+    dataset = getFilteredDataByPeriod(currentPeriod);
+  } else {
+    dataset = allData.filter(row => row.dateKey === selectedDate);
+  }
+
+  if (dataset.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" class="empty-state">لا يوجد حضور في هذا التاريخ</td></tr>`;
+    return;
+  }
+
+  dataset.forEach(row => {
+    if (!row.dateKey && row.Timestamp) {
+      row.dateKey = new Date(row.Timestamp).toISOString().split('T')[0];
+    }
+  });
+
+const activityRecords = getActivityRecords(dataset);
+const allPlayers = new Set(dataset.map(r => r.ID));
+const activityPlayers = new Set(activityRecords.map(r => r.ID));
+
+const generalOnlyIDs = new Set();
+const activityIDs = new Set();
+
+dataset.forEach(row => {
+  const id = row.ID?.trim();
+  if (!id) return;
+
+  const isGeneral = row.General === "✔️ حضر" || row.General === "حضر";
+  const isActivity = row.Activity && row.Activity.trim() !== "" && row.Activity !== "عام";
+
+  if (isGeneral) generalOnlyIDs.add(id);
+  if (isActivity) activityIDs.add(id);
+});
+
+activityIDs.forEach(id => generalOnlyIDs.delete(id));
+
+const activitySummaryHTML = `
+  <div class="search-group">
+    <select id="activityFilter" onchange="filterActivityTable()">
+      <option value="">جميع الأنشطة</option>
+      ${Object.entries(getActivityGroups(activityRecords))
+        .map(([activity, data]) => `<option value="${activity}">${activity} (${data.players.size})</option>`)
+        .join('')}
+    </select>
+    <span class="summary-box">
+      <span>إجمالي اللاعبين: ${allPlayers.size}</span>
+      <span>| أنشطة: ${activityPlayers.size} (${((activityPlayers.size / allPlayers.size) * 100).toFixed(0)}%)</span>
+      <span>| عام فقط: ${generalOnlyIDs.size} (${((generalOnlyIDs.size / allPlayers.size) * 100).toFixed(0)}%)</span>
+      <div style="background:#444; height:18px; border-radius:10px; overflow:hidden; margin-top:8px; width:100%; max-width:400px;">
+        <div style="height:100%; width:${(activityPlayers.size / allPlayers.size) * 100}%; background:#f4e733;"></div>
+      </div>
+    </span>
+  </div>
+`;
+controls.innerHTML = activitySummaryHTML;
+  
+  if (generalOnlyIDs.size > 0) {
+    const headerRow = document.createElement("tr");
+    headerRow.className = "no-activity";
+    headerRow.innerHTML = `<td colspan="5">لاعبون حضروا فقط عام (${generalOnlyIDs.size} لاعب)</td>`;
+    tbody.appendChild(headerRow);
+
+    generalOnlyIDs.forEach(playerId => {
+      const playerRecords = dataset.filter(r => r.ID === playerId && (r.General === "✔️ حضر" || r.General === "حضر"));
+      const latestRecord = playerRecords.reduce((latest, current) =>
+        new Date(current.Timestamp) > new Date(latest.Timestamp) ? current : latest
+      );
+
+      const row = document.createElement("tr");
+      row.className = "no-activity";
+      row.innerHTML = `
+        <td>${formatDate(latestRecord.Timestamp)}</td>
+        <td>${latestRecord["Child Name"] || ""} ${latestRecord.Parent || ""}</td>
+        <td>${latestRecord.ID || ""}</td>
+        <td>${latestRecord["Scanned By"] || ""}</td>
+        <td>عام</td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  if (activityPlayers.size > 0) {
+    const headerRow = document.createElement("tr");
+    headerRow.className = "general-with-activities";
+    headerRow.innerHTML = `<td colspan="5">لاعبون مع أنشطة (${activityPlayers.size} لاعب)</td>`;
+    tbody.appendChild(headerRow);
+
+    const playersWithActivities = {};
+    activityRecords.forEach(record => {
+      if (!playersWithActivities[record.ID]) {
+        playersWithActivities[record.ID] = {
+          info: record,
+          activities: new Set()
+        };
+      }
+      playersWithActivities[record.ID].activities.add(record.Activity);
+    });
+
+    Object.values(playersWithActivities).forEach(player => {
+      const row = document.createElement("tr");
+      row.className = "general-with-activities";
+      row.innerHTML = `
+        <td>${formatDate(player.info.Timestamp)}</td>
+        <td>${player.info["Child Name"] || ""} ${player.info.Parent || ""}</td>
+        <td>${player.info.ID || ""}</td>
+        <td>${player.info["Scanned By"] || ""}</td>
+        <td>${Array.from(player.activities).join("، ")}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  const activityGroups = getActivityGroups(activityRecords);
+  Object.entries(activityGroups)
+    .sort((a, b) => b[1].players.size - a[1].players.size)
+    .forEach(([activity, data]) => {
+      const headerRow = document.createElement("tr");
+      headerRow.className = "activity-group";
+      headerRow.innerHTML = `<td colspan="5">${activity} (${data.players.size} لاعب)</td>`;
+      tbody.appendChild(headerRow);
+
+      data.items.forEach(entry => {
+        const isMobile = window.innerWidth <= 768;
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${formatDate(entry.Timestamp)}</td>
+          <td>${entry["Child Name"] || ""} ${entry.Parent || ""}</td>
+          <td>${entry.ID || ""}</td>
+          <td class="staff-column">${entry["Scanned By"] || ""}</td>
+          <td>${entry.Activity || ""}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    });
+}
+
+function getActivityGroups(activityRecords) {
+  const activities = {};
+  activityRecords.forEach(item => {
+    const activity = item.Activity || "غير محدد";
+    if (!activities[activity]) {
+      activities[activity] = {
+        count: 0,
+        players: new Set(),
+        items: []
+      };
+    }
+    activities[activity].count++;
+    activities[activity].players.add(item.ID);
+    activities[activity].items.push(item);
+  });
+  return activities;
+}
+
+function filterActivityTable() {
+const activity = document.getElementById("activityFilter").value;
+const selectedDate = document.getElementById("datePicker").value || new Date().toISOString().split('T')[0];
+const tbody = document.querySelector("#activityTable tbody");
+tbody.innerHTML = "";
+
+let dataset = [];
+if (currentPeriod === 'all') {
+dataset = allData;
+} else if (currentPeriod === 'week') {
+dataset = showWeeklySummary ? filteredData : getFilteredDataByPeriod('week');
+} else if (currentPeriod === 'month') {
+dataset = getFilteredDataByPeriod('month');
+} else {
+dataset = allData.filter(row => row.dateKey === selectedDate);
+}
+
+const activityRecords = getActivityRecords(dataset);
+
+if (!activity) {
+renderActivityTable();
+return;
+}
+
+const filtered = [];
+const seenKeys = new Set();
+
+activityRecords
+.filter(row => row.Activity === activity)
+.forEach(item => {
+const key = `${item.ID}_${item.dateKey}_${item.Activity}`;
+if (!seenKeys.has(key)) {
+seenKeys.add(key);
+filtered.push(item);
+}
+});
+dataset.forEach(row => {
+  if (!row.dateKey && row.Timestamp) {
+    row.dateKey = new Date(row.Timestamp).toISOString().split('T')[0];
+  }
+});
+
+if (filtered.length === 0) {
+tbody.innerHTML = `<tr><td colspan="5" class="empty-state">لا يوجد حضور لنشاط ${activity}</td></tr>`;
+return;
+}
+
+const headerRow = document.createElement("tr");
+headerRow.className = "activity-group";
+headerRow.innerHTML = `<td colspan="5">${activity} (${filtered.length} لاعب)</td>`;
+tbody.appendChild(headerRow);
+
+filtered.forEach(entry => {
+const row = document.createElement("tr");
+row.innerHTML = `
+    <td>${formatDate(entry.Timestamp)}</td>
+    <td>${entry["Child Name"] || ""} ${entry.Parent || ""}</td>
+    <td>${entry.ID || ""}</td>
+    <td>${entry["Scanned By"] || ""}</td>
+    <td>${entry.Activity || ""}</td>
+  `;
+tbody.appendChild(row);
+});
+}
+
+function renderCharts() {
+renderStaffChart();
+renderTimingChart();
+renderActivityChart();    
+renderDailyStats();
+renderTopRankings();
+}
+
+function renderStaffChart() {
+const staffCounts = {};
+filteredData.forEach(row => {
+const name = row["Scanned By"] || "غير معروف";
+staffCounts[name] = (staffCounts[name] || 0) + 1;
+});
+
+if (charts.staff) charts.staff.destroy();
+
+const ctx = document.getElementById('pieStaff').getContext('2d');
+charts.staff = new Chart(ctx, {
+type: 'pie',
+data: {
+labels: Object.keys(staffCounts),
+datasets: [{
+data: Object.values(staffCounts),
+backgroundColor: [
+'#f4e733', '#ffbb00', '#ffaa00', '#ccaa00', '#999900'
+]
+}]
+},
+options: {
+plugins: {
+legend: {
+position: 'bottom',
+rtl: true
+}
+}
+}
+});
+}
+
+function toggleHiddenColumns() {
+const mainView = document.getElementById("mainView");
+mainView.classList.toggle("show-hidden-columns");
+
+const btn = document.querySelector('button[onclick="toggleHiddenColumns()"]');
+if (btn) {
+const isShowing = mainView.classList.contains("show-hidden-columns");
+btn.innerHTML = `<i class="fas fa-eye"></i> ${isShowing ? 'إخفاء' : 'عرض'} الأعمدة`;
+}
+}
+
+function renderTimingChart() {
+    let early = 0, late = 0;
+    const uniqueAttendance = {};
+
+    filteredData.forEach(row => {
+        if (!row.ID) return;
+        const key = `${row.ID}_${row.dateKey}`;
+        
+        if (!uniqueAttendance[key]) {
+            uniqueAttendance[key] = row;
+        } else {
+            const existing = uniqueAttendance[key];
+
+            if (!existing.isGeneral && row.isGeneral) {
+                uniqueAttendance[key] = row;
+            } else if (existing.isGeneral === row.isGeneral) {
+                if (new Date(row.Timestamp) < new Date(existing.Timestamp)) {
+                    uniqueAttendance[key] = row;
+                }
+            }
+        }
+    });
+
+    Object.values(uniqueAttendance).forEach(row => {
+        const time = new Date(row.Timestamp);
+        const totalMinutes = time.getHours() * 60 + time.getMinutes();
+        (totalMinutes < (17 * 60 + 11)) ? early++ : late++;
+    });
+
+    if (charts.timing) charts.timing.destroy();
+
+    const ctx = document.getElementById('earlyLate').getContext('2d');
+    charts.timing = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['حضور بالوقت', 'حضور متأخر'],
+            datasets: [{
+                data: [early, late],
+                backgroundColor: ['#66cc66', '#cc3333']
+            }]
+        },
+        options: {
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+}
+
+function renderActivityChart() {
+  const activityCounts = {};
+  const seen = {};
+
+  filteredData.forEach(row => {
+    const activity = row.Activity;
+    const id = row.ID;
+    if (!activity || activity === "عام" || !id) return;
+
+    const key = `${activity}_${id}`;
+    if (!seen[key]) {
+      seen[key] = true;
+      activityCounts[activity] = (activityCounts[activity] || 0) + 1;
+    }
+  });
+
+  if (charts.activities) charts.activities.destroy();
+
+  const ctx = document.getElementById('activityChart').getContext('2d');
+  charts.activities = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: Object.keys(activityCounts),
+      datasets: [{
+        data: Object.values(activityCounts),
+        backgroundColor: ['#f4e733','#ff9800','#ffbb00','#4caf50', '#795548', '#d9534f']
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { position: 'bottom', labels: { color: 'white' } },
+        title: {
+          display: true,
+          text: 'مشاركة الحضور حسب الأنشطة',
+          color: 'white',
+          font: { size: 18 }
+        }
+      },
+      cutout: '50%',
+      responsive: true
+    }
+  });
+}
+  
+function updateWeekSummary(startDate, endDate) {
+const uniqueCount = countUniqueWeeklyAttendances(filteredData);
+
+const filteredUniquePlayers = new Set();
+filteredData.forEach(row => filteredUniquePlayers.add(row.ID));
+
+const summaryElement = document.querySelector('.summary-box');
+if (summaryElement) {
+summaryElement.innerHTML = `
+    <span>إجمالي الحضور من ${formatDisplayDate(startDate)} إلى ${formatDisplayDate(endDate)}: 
+    <span id="totalCount">${uniqueCount}</span></span>
+    <span id="filteredSummary">| النتائج المصفاة: <span id="filteredCount">${filteredUniquePlayers.size}</span></span>
+    <button onclick="clearWeekFilter()" style="background: none; border: none; color: #f4e733; cursor: pointer; margin-right: 5px;">
+      <i class="fas fa-times"></i>
+    </button>
+  `;
+}
+}
+
+function countUniqueDailyAttendances(data) {
+const uniqueAttendances = new Set();
+data.forEach(row => {
+if (row.ID) {
+uniqueAttendances.add(`${row.ID}_${row.dateKey}`);
+}
+});
+return uniqueAttendances.size;
+}
+
+function countUniqueWeeklyAttendances(data) {
+const weeklyUniqueAttendees = new Set();
+
+const recordsByDate = {};
+data.forEach(row => {
+if (!row.ID) return;
+const dateKey = row.dateKey;
+if (!recordsByDate[dateKey]) {
+recordsByDate[dateKey] = [];
+}
+recordsByDate[dateKey].push(row);
+});
+
+Object.entries(recordsByDate).forEach(([date, records]) => {
+const uniqueForDay = new Set();
+
+records.forEach(row => {
+uniqueForDay.add(row.ID);
+});
+
+uniqueForDay.forEach(id => {
+weeklyUniqueAttendees.add(`${id}_${date}`); 
+});
+});
+
+return weeklyUniqueAttendees.size;
+}
+
+function getFilteredDataByPeriod(period) {
+const now = new Date();
+return allData.filter(row => {
+const rowDate = new Date(row.Timestamp);
+
+switch(period) {
+case 'week':
+const monday = new Date(now);
+monday.setDate(now.getDate() - (now.getDay() === 0 ? 6 : now.getDay() - 1));
+monday.setHours(0, 0, 0, 0);
+
+const thursday = new Date(monday);
+thursday.setDate(monday.getDate() + 3);
+thursday.setHours(23, 59, 59, 999);
+
+return rowDate >= monday && rowDate <= thursday;
+
+case 'month':
+return rowDate.getMonth() === now.getMonth() && 
+rowDate.getFullYear() === now.getFullYear() &&
+rowDate <= now;
+default:
+return true;
+}
+});
+}
+
+
+function updatePeriodSummary(period) {
+if (period === 'today') {
+updateSummary();
+return;
+}
+
+const periodData = getFilteredDataByPeriod(period);
+let uniqueCount;
+
+if (period === 'week') {
+uniqueCount = countUniqueWeeklyAttendances(periodData);
+} else {
+uniqueCount = countUniqueDailyAttendances(periodData);
+}
+
+document.getElementById("totalCount").textContent = uniqueCount;
+document.getElementById("filteredCount").textContent = uniqueCount;
+
+if (period === 'week') {
+const now = new Date();
+const monday = new Date(now);
+monday.setDate(now.getDate() - (now.getDay() === 0 ? 6 : now.getDay() - 1));
+
+const thursday = new Date(monday);
+thursday.setDate(monday.getDate() + 3);
+
+const summaryElement = document.querySelector('.summary-box');
+summaryElement.innerHTML = `
+    <span>إجمالي الحضور من ${formatDisplayDate(monday)} إلى ${formatDisplayDate(thursday)}: 
+    <span id="totalCount">${uniqueCount}</span></span>
+    <button onclick="clearFilters()" style="background: none; border: none; color: #f4e733; cursor: pointer; margin-right: 5px;">
+      <i class="fas fa-times"></i>
+    </button>
+  `;
+}
+}
+
+
+function renderPeriodTable(period) {
+const tbody = document.querySelector("#attendanceTable tbody");
+tbody.innerHTML = "";
+
+const periodData = getFilteredDataByPeriod(period);
+
+if (periodData.length === 0) {
+tbody.innerHTML = `<tr><td colspan="6" class="empty-state">لا يوجد بيانات</td></tr>`;
+return;
+}
+
+const dailyAttendances = {};
+periodData.forEach(row => {
+if (!row.ID) return;
+const idDateKey = `${row.ID}_${row.dateKey}`;
+
+if (!dailyAttendances[idDateKey]) {
+dailyAttendances[idDateKey] = row;
+} else {
+const existingTime = new Date(dailyAttendances[idDateKey].Timestamp);
+const newTime = new Date(row.Timestamp);
+if (newTime < existingTime) {
+dailyAttendances[idDateKey] = row;
+}
+}
+});
+
+const records = Object.values(dailyAttendances);
+records.sort((a, b) => new Date(a.Timestamp) - new Date(b.Timestamp));
+
+records.forEach(row => {
+const tr = document.createElement("tr");
+if (row.isGeneral) tr.classList.add("general-attendance");
+
+tr.innerHTML = `
+    <td>${formatDate(row.Timestamp)}</td>
+    <td>${row["Child Name"] || ""} ${row.Parent || ""}</td>
+    <td>${row.ID || ""}</td>
+    <td>${row["Scanned By"] || ""}</td>
+    <td class="hidden-column">${row.isGeneral ? "عام" : (row.Activity || "")}</td>
+    <td class="hidden-column">${row.isGeneral ? "عام" : "نشاط"}</td>
+  `;
+tbody.appendChild(tr);
+});
+}
+
+let showWeeklySummary = false;
+
+function toggleView() {
+showWeeklySummary = !showWeeklySummary;
+const toggleBtn = document.getElementById('viewToggle');
+const tableTitle = document.getElementById('tableTitle');
+
+if (showWeeklySummary) {
+toggleBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> الاسماء ';
+tableTitle.textContent = 'الحضور الأسبوعي ';
+renderWeeklySummaryTable();
+} else {
+toggleBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> الحضور الأسبوعي';
+tableTitle.textContent = ' الاسماء';
+renderMainTable();
+}
+}
+
+function renderTopParticipants() {
+  const container = document.getElementById('topParticipantsCards');
+  container.innerHTML = '';
+
+  const selectedDate = document.getElementById("datePicker").value || new Date().toISOString().split('T')[0];
+  let selectedRecords = currentPeriod === 'today'
+    ? allData.filter(r => r.dateKey === selectedDate && !r.isGeneral && r.Activity)
+    : filteredData.filter(r => !r.isGeneral && r.Activity);
+
+  const participationCounts = {};
+
+  selectedRecords.forEach(row => {
+    if (!row.ID) return;
+    const activityKey = `${row.ID}_${row.Activity}`;
+    if (!participationCounts[row.ID]) {
+      participationCounts[row.ID] = {
+        name: `${row["Child Name"] || ""} ${row.Parent || ""}`.trim(),
+        id: row.ID,
+        activities: new Set()
+      };
+    }
+    participationCounts[row.ID].activities.add(activityKey);
+  });
+
+  const sorted = Object.values(participationCounts)
+    .map(p => ({ ...p, count: p.activities.size }))
+    .sort((a, b) => b.count - a.count);
+
+  const limit = currentPeriod === 'week' || currentPeriod === 'month' || currentPeriod === 'all' ? 50 : 5;
+  const topParticipants = sorted.slice(0, limit);
+
+  if (topParticipants.length === 0) {
+    container.innerHTML = `<p>لا يوجد مشاركين في الأنشطة لهذا التاريخ</p>`;
+    return;
+  }
+
+  const top3 = topParticipants.slice(0, 3);
+  const rest = topParticipants.slice(3);
+
+  const displayOrder = [
+    rest[1],         
+    top3[2],         
+    top3[0],          
+    top3[1],       
+    rest[0]           
+  ].filter(Boolean);
+
+  const badges = ['5️⃣', '🥉', '👑', '🥈', '4️⃣'];
+  const borderColors = ['#555', '#b87333', '#f4e733', '#ccc', '#555'];
+  const glows = ['', '', '0 0 20px #f4e733aa', '', ''];
+
+  displayOrder.forEach((participant, i) => {
+    const card = document.createElement('div');
+    const badge = badges[i];
+    const borderColor = borderColors[i];
+    const glow = glows[i];
+
+    card.style = `
+      background: #222;
+      border: 3px solid ${borderColor};
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      width: 150px;
+      box-shadow: ${glow};
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s;
+    `;
+
+    card.innerHTML = `
+      <div style="font-size: 28px; margin-bottom: 5px;">${badge}</div>
+      <img src="user-icon.png" alt="${participant.name}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; border:2px solid ${borderColor};">
+      <h4 style="color:#f4e733; margin:10px 0 5px;">${participant.name}</h4>
+      <p style="color:#ccc; font-size: 13px;">ID: ${participant.id}</p>
+      <p style="color:#aaa; font-size: 13px;">أنشطة: ${participant.count}</p>
+    `;
+
+    container.appendChild(card);
+  });
+
+  const more = rest.slice(2);
+  more.forEach((participant, index) => {
+    const card = document.createElement('div');
+
+    card.style = `
+      background: #222;
+      border: 3px solid #555;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      width: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s;
+    `;
+
+    card.innerHTML = `
+      <div class="player-badge">${index + 6}</div>
+      <img src="user-icon.png" alt="${participant.name}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; border:2px solid #555;">
+      <h4 style="color:#f4e733; margin:10px 0 5px;">${participant.name}</h4>
+      <p style="color:#ccc; font-size: 13px;">ID: ${participant.id}</p>
+      <p style="color:#aaa; font-size: 13px;">أنشطة: ${participant.count}</p>
+    `;
+
+    container.appendChild(card);
+  });
+
+  container.style.display = 'flex';
+  container.style.flexWrap = 'wrap';
+  container.style.justifyContent = 'center';
+  container.style.gap = '20px';
+}
+
+function getActivityIcon(activity) {
+  const icons = {
+    "كرة سلة": "🏀",
+    "كرة يد": "🤾‍♂️",
+    "كرة طائرة": "🏐",
+    "شطرنج": "♟️",
+    "جودو": "🥋",
+    "تايكوندو": "🥋",
+    "سباحة": "🏊‍♂️"
+  };
+  return icons[activity?.trim()] || "🎯";
+}
+    
+async function renderRankingsChart() {
+  const loadingPopup = document.getElementById('loadingPopup');
+  loadingPopup.style.display = 'block';
+
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbz3uCLPvjazvaFRAiZVppFkKMMS2AlOWC4P3Fpy4XluiJ7xGV3BUVuwgmxfww7bMEcR/exec");
+    const data = await response.json();
+
+    const grouped = {};
+
+    data.forEach(entry => {
+      const id = entry["Player ID"];
+      const name = entry["Player Name"];
+      const activity = entry["Activity"] || "غير معروف";
+
+      let raw = parseFloat(entry["Percentage"]);
+      if (isNaN(raw)) raw = 0;
+      const percentage = raw <= 1 ? Math.round(raw * 100) : Math.round(raw);
+
+      if (!id || !name || percentage === 0) return;
+
+      if (!grouped[id]) {
+        grouped[id] = {
+          id,
+          name,
+          activity,
+          total: 0,
+          count: 0
+        };
+      }
+
+      grouped[id].total += percentage;
+      grouped[id].count += 1;
+    });
+
+    const rankings = Object.values(grouped)
+      .map(player => ({
+        ...player,
+        average: Math.round(player.total / player.count)
+      }))
+      .sort((a, b) => b.average - a.average)
+      .slice(0, 50);
+
+    const scoreRanges = {
+      '90-100%': 0,
+      '80-89%': 0,
+      '70-79%': 0,
+      '60-69%': 0,
+      '50-59%': 0,
+      'أقل من %50': 0
+    };
+
+    rankings.forEach(player => {
+      const score = player.average;
+      if (score >= 90) scoreRanges['90-100%']++;
+      else if (score >= 80) scoreRanges['80-89%']++;
+      else if (score >= 70) scoreRanges['70-79%']++;
+      else if (score >= 60) scoreRanges['60-69%']++;
+      else if (score >= 50) scoreRanges['50-59%']++;
+      else scoreRanges['أقل من %50']++;
+    });
+
+    if (charts.rankings) charts.rankings.destroy();
+
+    const ctx = document.getElementById('rankingsChart').getContext('2d');
+    charts.rankings = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(scoreRanges),
+        datasets: [{
+          label: 'عدد اللاعبين',
+          data: Object.values(scoreRanges),
+          backgroundColor: [
+            '#4CAF50', 
+            '#8BC34A', 
+            '#FFC107',
+            '#FF9800', 
+            '#F44336',  
+            '#9E9E9E'  
+          ],
+          borderColor: '#222',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `عدد اللاعبين: ${context.raw}`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'عدد اللاعبين'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'نطاق التقييم'
+            }
+          }
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error("Error loading rankings data:", error);
+    document.getElementById('rankingsChart').innerHTML = 
+      '<p style="color: #f4e733; text-align: center;">حدث خطأ في تحميل بيانات التقييمات</p>';
+  } finally {
+    loadingPopup.style.display = 'none';
+  }
+}
+
+async function renderTopRankings() {
+  console.log("Rendering rankings...");
+  const loadingPopup = document.getElementById('loadingPopup');
+  loadingPopup.style.display = 'block';
+
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbz3uCLPvjazvaFRAiZVppFkKMMS2AlOWC4P3Fpy4XluiJ7xGV3BUVuwgmxfww7bMEcR/exec");
+    const data = await response.json();
+
+const grouped = {};
+
+data.forEach(entry => {
+  const id = entry["Player ID"];
+  const name = entry["Player Name"];
+  const activity = entry["Activity"] || "غير معروف";
+  let raw = parseFloat(entry["Percentage"]);
+  if (isNaN(raw)) raw = 0;
+  const percentage = raw <= 1 ? Math.round(raw * 100) : Math.round(raw);
+
+  if (!id || !name || percentage === 0) return;
+
+  if (!grouped[id]) {
+    grouped[id] = {
+      name,
+      activity,
+      total: 0,
+      count: 0
+    };
+  }
+
+  grouped[id].total += percentage;
+  grouped[id].count += 1;
+});
+
+const rankings = Object.entries(grouped).map(([id, player]) => ({
+  id,
+  name: player.name,
+  activity: player.activity,
+  average: Math.round(player.total / player.count)
+})).sort((a, b) => b.average - a.average);
+      
+     renderRankingsChart(rankings);
+      
+    const topThreeContainer = document.getElementById('topThreeContainer');
+    const container = document.getElementById('rankingsContainer');
+    topThreeContainer.innerHTML = '';
+    container.innerHTML = '';
+
+    const top3 = rankings.slice(0, 3);
+    const others = rankings.slice(3);
+
+    const orderedTop3 = [top3[1], top3[0], top3[2]];
+    const badges = ['🥈', '👑', '🥉'];
+    const colors = ['#ccc', '#f4e733', '#b87333'];
+    const glows = ['', '0 0 20px #f4e733aa', ''];
+
+    orderedTop3.forEach((player, index) => {
+      if (!player) return;
+      const card = document.createElement('div');
+      card.className = 'ranking-card';
+
+      card.style = `
+        background: #222;
+        border: 3px solid ${colors[index]};
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        width: 150px;
+        box-shadow: ${glows[index]};
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s;
+      `;
+
+      card.innerHTML = `
+        <div style="font-size: 28px; margin-bottom: 5px;">${badges[index]}</div>
+        <img src="user-icon.png" alt="${player.name}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; border:2px solid ${colors[index]};">
+        <h4 style="color:#f4e733; margin:10px 0 5px;">${player.name}</h4>
+        <p style="color:#ccc; font-size: 13px;">ID: ${player.id}</p>
+        <div style="
+  background: #f4e733;
+  padding: 4px 10px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+  font-weight: bold;
+  color: #222;
+  font-size: 14px;
+">
+  ${player.activity}
+  <span>${getActivityIcon(player.activity)}</span>
+</div>
+        <p style="color:#0f0; font-size: 13px;">المعدل: ${typeof player.average === 'number' ? player.average.toFixed(0) + '%' : 'غير متوفر'}</p>
+      `;
+
+      topThreeContainer.appendChild(card);
+    });
+
+    others.forEach((player, index) => {
+      const card = document.createElement('div');
+      card.className = 'ranking-card';
+card.style = `
+  background: #222;
+  border: 3px solid #ccc;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  width: 150px;
+  box-shadow: 0 0 8px rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.3s;
+`;
+
+card.innerHTML = `
+  <div class="player-badge">${others.length + 3 - index}</div>
+  <img src="user-icon.png" alt="${player.name}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; border:2px solid #ccc;">
+  <h4 style="color:#f4e733; margin:10px 0 5px;">${player.name}</h4>
+  <p style="color:#ccc; font-size: 13px;">ID: ${player.id}</p>
+  <p style="margin-top: 5px;">
+  <div style="
+    background: #f4e733;
+    padding: 4px 10px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    color: #222;
+    font-size: 14px;
+  ">
+    ${player.activity}
+    <span>${getActivityIcon(player.activity)}</span>
+  </div>
+</p>
+  <p style="color:#0f0; font-size: 13px;">المعدل: ${(player.average).toFixed(0)}%</p>
+`;
+
+      container.appendChild(card);
+    });
+
+    container.style.display = 'flex';
+    container.style.flexWrap = 'wrap';
+    container.style.justifyContent = 'center';
+    container.style.gap = '20px';
+
+  } catch (error) {
+    console.error("Error loading rankings:", error);
+    alert("حدث خطأ أثناء تحميل التقييمات.");
+  } finally {
+    loadingPopup.style.display = 'none';
+  }
+}
+    
+function applyWeekFilter() {
+const startDate = document.getElementById('weekStartDate').value;
+const endDate = document.getElementById('weekEndDate').value;
+
+if (!startDate || !endDate) return;
+
+filteredData = allData.filter(row => row.dateKey >= startDate && row.dateKey <= endDate);
+
+showWeeklySummary = true;
+document.getElementById('viewToggle').style.display = 'inline-block';
+document.getElementById('viewToggle').innerHTML = '<i class="fas fa-exchange-alt"></i> الاسماء';
+
+renderWeeklySummaryTable();
+updateWeekSummary(startDate, endDate);
+showWeeklyControls();
+closeWeekRangePicker();
+document.getElementById('datePicker').style.display = 'none';
+updateTitleAndControls('week');
+
+if (document.getElementById("activityView").style.display !== "none") renderActivityTable();
+if (document.getElementById("statsView").style.display !== "none") renderCharts();
+if (document.getElementById("topParticipantsView").style.display !== "none") renderTopParticipants();
+}
+
+ function exportToPrintableView() {
+  const printArea = document.getElementById('printArea');
+  printArea.innerHTML = generatePrintContent();
+  window.print();
+}
+
+function generatePrintContent() {
+  let html = `<h2 style="text-align:center;">${getCurrentTitle()}</h2>`;
+  html += `<p>تاريخ التصدير: ${new Date().toLocaleDateString('ar-EG')}</p>`;
+
+  html += '<table class="pdf-table"><thead><tr>';
+  html += '<th>التاريخ</th><th>الوقت</th><th>الاسم</th><th>المعرف</th><th>الموظف</th><th>النشاط</th>';
+  html += '</tr></thead><tbody>';
+
+  filteredData.forEach(row => {
+    html += `<tr>
+      <td>${formatDate(row.Timestamp).split(' ')[0]}</td>
+      <td>${formatDate(row.Timestamp).split(' ')[1]}</td>
+      <td>${row["Child Name"] || ""} ${row.Parent || ""}</td>
+      <td>${row.ID || ""}</td>
+      <td>${row["Scanned By"] || ""}</td>
+      <td>${row.isGeneral ? "عام" : (row.Activity || "")}</td>
+    </tr>`;
+  });
+
+  html += '</tbody></table>';
+  return html;
+}
+   
+function exportToExcel() {
+  const wb = XLSX.utils.book_new();
+  
+  const wsMain = XLSX.utils.json_to_sheet(prepareMainExportData());
+  XLSX.utils.book_append_sheet(wb, wsMain, "الحضور العام");
+  
+  if (document.getElementById("activityView").style.display !== "none" || 
+      currentPeriod !== 'today') {
+    const wsActivities = XLSX.utils.json_to_sheet(prepareActivitiesExportData());
+    XLSX.utils.book_append_sheet(wb, wsActivities, "الأنشطة");
+  }
+  
+  if (document.getElementById("statsView").style.display !== "none") {
+    const wsStats = XLSX.utils.json_to_sheet(prepareStatsExportData());
+    XLSX.utils.book_append_sheet(wb, wsStats, "الإحصائيات");
+  }
+  
+  let filename = "إحصائيات راصد - نادي كلباء الرياضي الثقافي";
+  if (currentPeriod === 'week') filename += "_الأسبوع";
+  else if (currentPeriod === 'month') filename += "_الشهر";
+  else if (currentPeriod === 'all') filename += "_الكلي";
+  
+  XLSX.writeFile(wb, `${filename}.xlsx`);
+}
+    
+
+function prepareMainExportData() {
+  const rows = document.querySelectorAll('#attendanceTable tbody tr');
+  const exportData = [];
+  const seenIds = new Set();
+
+  rows.forEach(row => {
+    const cells = row.querySelectorAll('td');
+    if (cells.length < 6) return;
+
+    const id = cells[2].textContent.trim();
+    if (seenIds.has(id)) return; 
+    seenIds.add(id);
+
+    const date = cells[0].textContent.trim().split(' ')[0];
+    const time = cells[0].textContent.trim().split(' ')[1];
+    const fullName = cells[1].textContent.trim(); 
+    const staff = cells[3].textContent.trim();
+    const activity = cells[4].textContent.trim();
+    const type = cells[5].textContent.trim();
+
+    exportData.push({
+      "التاريخ": date,
+      "الوقت": time,
+      "الاسم": fullName,
+      "المعرف": id,
+      "الموظف المسجل": staff,
+      "النشاط": activity,
+      "النوع": type,
+      "الحالة": type === "عام" ? "حضور عام" : "حضور نشاط"
+    });
+  });
+
+  return exportData;
+}
+
+function prepareMainExportData() {
+  const uniqueDaily = {};
+
+  filteredData.forEach(row => {
+    if (!row.ID || !row.dateKey) return;
+
+    const key = `${row.ID}_${row.dateKey}`;
+
+    if (!uniqueDaily[key]) {
+      uniqueDaily[key] = row;
+    } else {
+      const existing = uniqueDaily[key];
+      const currentIsGeneral = row.isGeneral;
+      const existingIsGeneral = existing.isGeneral;
+
+      if (!existingIsGeneral && currentIsGeneral) {
+        uniqueDaily[key] = row;
+      } else if (existingIsGeneral === currentIsGeneral) {
+        if (new Date(row.Timestamp) < new Date(existing.Timestamp)) {
+          uniqueDaily[key] = row;
+        }
+      }
+    }
+  });
+
+  return Object.values(uniqueDaily).map(row => ({
+    "التاريخ": formatDate(row.Timestamp).split(' ')[0],
+    "الوقت": formatDate(row.Timestamp).split(' ')[1],
+    "الاسم الكامل": `${row["Child Name"] || ""} ${row.Parent || ""}`.trim(),
+    "المعرف": row.ID || "",
+    "الموظف": row["Scanned By"] || "",
+    "النشاط": row.isGeneral ? "عام" : (row.Activity || ""),
+    "النوع": row.isGeneral ? "عام" : "نشاط",
+    "الحالة": row.isGeneral ? "حضور عام" : "حضور نشاط"
+  }));
+}
+
+function prepareActivitiesExportData() {
+  const records = getActivityRecords(filteredData.length > 0 ? filteredData : allData);
+  const exportData = [];
+
+  records.forEach(row => {
+    exportData.push({
+      "التاريخ": formatDate(row.Timestamp).split(' ')[0],
+      "الوقت": formatDate(row.Timestamp).split(' ')[1],
+      "الاسم الكامل": `${row["Child Name"] || ""} ${row.Parent || ""}`.trim(),
+      "المعرف": row.ID || "",
+      "الموظف": row["Scanned By"] || "",
+      "النشاط": row.Activity || ""
+    });
+  });
+
+  return exportData;
+}
+    
+function prepareStatsExportData() {
+  const stats = calculateDetailedStats();
+  return [
+    {"الإحصائية": "إجمالي الحضور", "القيمة": stats.total},
+    {"الإحصائية": "حضور بالوقت", "القيمة": stats.early},
+    {"الإحصائية": "حضور متأخر", "القيمة": stats.late},
+    {"الإحصائية": "متوسط الحضور اليومي", "القيمة": stats.avgDaily},
+    ...Object.entries(stats.staffCounts).map(([staff, count]) => ({
+      "الإحصائية": `حضور ${staff}`,
+      "القيمة": count
+    })),
+    ...Object.entries(stats.activityCounts).map(([activity, count]) => ({
+      "الإحصائية": `مشاركة في ${activity}`,
+      "القيمة": count
+    }))
+  ];
+}
+
+function calculateDetailedStats() {
+  const staffCounts = {};
+  let early = 0, late = 0;
+  
+  filteredData.forEach(row => {
+    const staff = row["Scanned By"] || "غير معروف";
+    staffCounts[staff] = (staffCounts[staff] || 0) + 1;
+    
+    const time = new Date(row.Timestamp);
+    const totalMinutes = time.getHours() * 60 + time.getMinutes();
+    (totalMinutes < (17 * 60 + 11)) ? early++ : late++;
+  });
+  
+  const uniqueDays = new Set(filteredData.map(r => r.dateKey)).size;
+  const avgDaily = uniqueDays > 0 ? (filteredData.length / uniqueDays).toFixed(1) : 0;
+  
+  return {
+    total: filteredData.length,
+    early,
+    late,
+    avgDaily,
+    staffCounts,
+    activityCounts: countActivities()
+  };
+}
+
+function countActivities() {
+  const counts = {};
+  getActivityRecords(filteredData.length > 0 ? filteredData : allData).forEach(row => {
+    counts[row.Activity] = (counts[row.Activity] || 0) + 1;
+  });
+  return counts;
+}
+
+function getCurrentTitle() {
+  let title = "راصد - نادي كلباء الرياضي الثقافي";
+  if (document.getElementById("activityView").style.display !== "none") title += " - الأنشطة";
+  else if (document.getElementById("statsView").style.display !== "none") title += " - الإحصائيات";
+  return title;
+}
+
+function showWeeklyPlayerAttendance() {
+const attendanceMap = {};
+
+filteredData.forEach(row => {
+if (!attendanceMap[row.ID]) {
+attendanceMap[row.ID] = {
+name: `${row["Child Name"] || ""} ${row.Parent || ""}`,
+days: new Set()
+};
+}
+attendanceMap[row.ID].days.add(row.dateKey);
+});
+
+let message = '';
+for (const id in attendanceMap) {
+const player = attendanceMap[id];
+const daysCount = player.days.size;
+let evaluation = '';
+
+if (daysCount >= 4) {
+evaluation = 'ممتاز! نشكركم على حرصكم والتزام ابنكم.';
+} else if (daysCount === 3) {
+evaluation = 'جيد! نأمل منكم تشجيع ابنكم على الحضور الكامل.';
+} else if (daysCount === 2) {
+evaluation = 'يرجى تشجيع ابنكم للحضور بشكل أفضل في الأسبوع القادم.';
+} else if (daysCount === 1) {
+evaluation = 'نرجو منكم تحفيز ابنكم على الالتزام بالحضور، فقد حضر يوماً واحداً فقط.';
+} else {
+evaluation = 'لم يحضر ابنكم هذا الأسبوع. نأمل رؤيته قريباً.';
+}
+
+message += `ولي أمر ${player.name} (ID: ${id}): حضر ابنكم ${daysCount} أيام هذا الأسبوع. ${evaluation}<br>`;
+}
+
+document.getElementById('weeklyMessageContent').innerHTML = message || "لا يوجد حضور لهذا الأسبوع.";
+document.getElementById('showWeeklyMsgBtn').style.display = 'inline-block';
+}
+
+function openWeeklyMessage() {
+document.getElementById('weeklyMessagePopup').style.display = 'block';
+}
+
+function closeWeeklyMessage() {
+document.getElementById('weeklyMessagePopup').style.display = 'none';
+}
+
+function promptTestEvaluation() {
+const password = prompt("أدخل كلمة المرور:");
+if (password === "rwnd123") {
+testSendFirstKidEvaluation();
+} else {
+alert("كلمة المرور غير صحيحة.");
+}
+}
+
+function toggleWeeklyEmailButton(show) {
+const btn = document.getElementById('weeklyEmailBtn');
+if (btn) btn.style.display = show ? 'inline-block' : 'none';
+}
+
+function testSendFirstKidEvaluation() {
+try {
+const attendanceMap = {};
+
+if (!filteredData || filteredData.length === 0) {
+alert("لا يوجد بيانات حضور متاحة للاختبار.");
+return;
+}
+
+filteredData.forEach(row => {
+if (!row.ID) return;
+
+if (!attendanceMap[row.ID]) {
+attendanceMap[row.ID] = {
+name: `${row["Child Name"] || ""} ${row.Parent || ""}`.trim(),
+days: new Set()
+};
+}
+if (row.dateKey) {
+attendanceMap[row.ID].days.add(row.dateKey);
+}
+});
+
+const firstId = Object.keys(attendanceMap)[0];
+if (!firstId) {
+alert("لا يوجد بيانات حضور صالحة للاختبار.");
+return;
+}
+
+const player = attendanceMap[firstId];
+const daysCount = player.days.size;
+let evaluation = '';
+
+if (daysCount >= 4) {
+evaluation = 'ممتاز! نشكركم على حرصكم والتزام ابنكم.';
+} else if (daysCount === 3) {
+evaluation = 'جيد! نأمل منكم تشجيع ابنكم على الحضور الكامل.';
+} else if (daysCount === 2) {
+evaluation = 'يرجى تشجيع ابنكم للحضور بشكل أفضل.';
+} else if (daysCount === 1) {
+evaluation = 'نرجو منكم تحفيز ابنكم على الالتزام بالحضور.';
+} else {
+evaluation = 'لم يحضر ابنكم هذا الأسبوع. نأمل رؤيته قريباً.';
+}
+
+const testData = [{
+id: firstId,
+name: player.name,
+email: "rawand@ksc.shj.ae",
+days: daysCount,
+evaluation: evaluation
+}];
+
+const confirmSend = confirm(`هل تريد إرسال بريد اختباري إلى rawand@ksc.shj.ae؟\n\nالبيانات:\nالاسم: ${player.name}\nالأيام: ${daysCount}\nالتقييم: ${evaluation}`);
+if (!confirmSend) return;
+
+fetch('https://script.google.com/macros/s/AKfycbxpVjxcwqyTolCIOJI1mfLoy5Bbb1tQnTOP6348L06_hBMWaZmC5hwd_NQ8hZWc-mzr/exec', {
+method: 'POST',
+mode: 'no-cors',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify(testData)
+});
+
+alert("تم إرسال الطلب، قد لا يظهر تأكيد بسبب وضع no-cors");
+
+} catch (error) {
+console.error("Error in testSendFirstKidEvaluation:", error);
+alert(`حدث خطأ غير متوقع: ${error.message}`);
+}
+}
+
+function checkMobileView() {
+const isMobile = window.innerWidth <= 768;
+const btn = document.querySelector('button[onclick="toggleHiddenColumns()"]');
+if (btn) {
+btn.style.display = isMobile ? 'none' : 'inline-block';
+}
+}
+
+function initialize() {
+const today = new Date().toISOString().split('T')[0];
+document.getElementById("datePicker").value = today;
+
+document.getElementById("filter-name").value = "";
+document.getElementById("filter-id").value = "";
+document.getElementById("filter-staff").value = "";
+document.getElementById("filter-activity").value = "";
+document.getElementById("filterType").value = "";
+
+fetchData().then(() => {
+setupAutocomplete();
+filterByDate();
+});
+
+document.getElementById('tableTitle').textContent = 'السجلات اليومية';
+
+$('#filter-staff, #filter-activity').select2({
+placeholder: "اختر متعدد",
+allowClear: true,
+width: '100%',
+dir: "rtl",
+dropdownAutoWidth: true
+});
+}
+
+function setupAutocomplete() {
+$('#filter-name').autocomplete({
+  source: [...new Set(
+    allData.map(i => `${i["Child Name"] || ""} ${i.Parent || ""} (${i.ID})`.trim())
+    .filter(n => n)
+  )],
+  minLength: 2
+});
+const name = $('#filter-name').val().split(' (')[0].toLowerCase().trim();
+setTimeout(() => {
+$('.ui-autocomplete').removeAttr('aria-live');
+}, 100);
+}
+
+
+function updateTitleAndControls(period) {
+const tableTitle = document.getElementById('tableTitle');
+const datePicker = document.getElementById('datePicker');
+
+if (period === 'week') {
+tableTitle.textContent = 'الحضور الأسبوعي';
+showWeeklyControls();
+datePicker.style.display = 'none';
+} else if (period === 'today') {
+tableTitle.textContent = 'الحضور اليومي';
+hideWeeklyControls();
+datePicker.style.display = 'inline-block';
+} else {
+tableTitle.textContent = 'الحضور';
+hideWeeklyControls();
+datePicker.style.display = 'inline-block';
+}
+}
+window.onload = initialize;
+window.addEventListener('load', checkMobileView);
+window.addEventListener('resize', checkMobileView);
+
+</script>
+</main>
+    
+<script>
+  document.getElementById("showTopAttendanceBtn").addEventListener("click", () => {
+    document.getElementById("topAttendanceContainer").style.display = "block";
+    document.getElementById("topRankingContainer").style.display = "none";
+    toggleRankingButtons(true);
+  });
+
+  document.getElementById("showTopEvaluationBtn").addEventListener("click", () => {
+    document.getElementById("topAttendanceContainer").style.display = "none";
+    document.getElementById("topRankingContainer").style.display = "block";
+    toggleRankingButtons(false);
+    renderTopRankings();
+  });
+
+  function toggleRankingButtons(showAttendance) {
+    document.getElementById("showTopAttendanceBtn").classList.toggle("btn-primary", showAttendance);
+    document.getElementById("showTopAttendanceBtn").classList.toggle("btn-outline-primary", !showAttendance);
+    document.getElementById("showTopEvaluationBtn").classList.toggle("btn-primary", !showAttendance);
+    document.getElementById("showTopEvaluationBtn").classList.toggle("btn-outline-primary", showAttendance);
+  }
+</script>
+    
+<div class="footer-container">
+<footer>
+<p>© 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة</p>
+<p style="font-size: 14px; color: #aaa; margin-top: -10px;">تم التطوير بواسطة روند أحمد الضمور</p>
+<div class="social-icons">
+<a href="https://facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+<a href="https://instagram.com/kalbasc" target="_blank"><i class="fab fa-instagram"></i></a>
+<a href="https://x.com/Kalba_sc" target="_blank"><i class="fab fa-twitter"></i></a>
+<a href="https://youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
+<a href="https://tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+</footer>
+</div>  
+    
+</body>
+</html>

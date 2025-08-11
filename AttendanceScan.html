@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#000000">
+  <title>نادي كلباء الرياضي الثقافي - تسجيل الحضور</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic.ttf') format('truetype');
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'NotoKufiArabic', 'Cairo', sans-serif;
+      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header-container {
+      width: 100%;
+      background: #111;
+      border-bottom: 3px solid #f4e733;
+    }
+
+    .header-right {
+      max-width: 1170px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 17px;
+      padding: 18px 38px;
+      background-color: #111;
+      color: white;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    .divider {
+      width: 1.5px;
+      height: 35px;
+      background-color: #f4e733;
+    }
+
+    .header-info {
+      text-align: center;
+    }
+
+    .arabic-name {
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .english-name {
+      font-size: 10px;
+      color: #f4e733;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+    
+    #reader {
+      width: 320px;
+      border: 3px solid #f4e733;
+      border-radius: 12px;
+      background: white;
+      margin: 20px auto;
+    }
+
+    #login-section, #scanner-section {
+      display: none;
+    }
+
+input {
+  width: 90%;
+  max-width: 300px;
+  margin: 10px auto;
+  display: block;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+}
+    
+button {
+  width: 90%;
+  max-width: 300px;
+  background-color: #f4e733;
+  color: black;
+  cursor: pointer;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  margin: 10px auto;
+  display: block;
+}
+
+    #status {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: black;
+      border-radius: 10px;
+      color: #f4e733;
+    }
+
+    footer {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-top: 3px solid #f4e733;
+      font-size: 12px;
+    }
+
+    .social-icons a {
+      color: white;
+      margin: 0 8px;
+      font-size: 11px;
+    }
+    #scanner-section h3,
+#scanner-section label {
+  color: #f4e733;
+  font-weight: bold;
+}
+        @media (max-width: 768px) {
+ .header-right {
+    padding: 10px 10px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-info {
+    display: block;
+    text-align: center;
+  }
+
+  .header-info .arabic-name {
+    font-size: 16px;
+  }
+
+  .header-info .english-name {
+    font-size: 12px;
+  }
+
+  .header-right .divider {
+    height: 45px;
+    width: 1.5px;
+    background-color: #f4e733;
+  }
+
+  img.logo {
+    height: 50px !important;
+    max-height: 50px !important;
+  }
+  .container {
+    padding: 12px;
+    margin: 10px auto;
+    width: 95%;
+  }
+
+  .title {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 17px;
+    line-height: 1.4;
+  }
+
+  .search-group {
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+}
+  button{
+    width: 80%;
+    font-size: 12px;
+    align-items: center;
+    padding: 10px;
+  }
+          
+  footer {
+  text-align: center;
+  padding: 15px 10px;
+}
+
+footer p {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+  .social-icons a {
+    font-size: 18px;
+  }
+#login-section input,
+#login-section button {
+  width: 90% !important;
+  max-width: 300px;
+  display: block;
+  margin: 10px auto;
+  font-size: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+}
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="header-container">
+      <div class="header-right">
+        <img src="Picture3.png" alt="شعار الشارقة" class="logo">
+        <div class="divider"></div>
+        <img src="logo.png" alt="شعار نادي كلباء" class="logo">
+        <div class="header-info">
+          <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+          <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+<div id="login-section" style="
+  max-width: 400px;
+  margin: 60px auto;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 30px 20px;
+  border-radius: 16px;
+  border: 2px solid #f4e733;
+  text-align: center;
+">
+  <h3 style="color: #f4e733; margin-bottom: 20px;">تسجيل الدخول</h3>
+  <input type="text" id="username" placeholder="اسم المستخدم" style="width: 90%; margin-bottom: 10px;"><br>
+  <input type="password" id="password" placeholder="كلمة المرور" style="width: 90%; margin-bottom: 15px;"><br>
+  <button onclick="login()" style="width: 100%;">دخول</button>
+  <div id="login-error" style="color: red; margin-top: 12px;"></div>
+</div>
+      
+<div class="container" id="mainView">
+
+      <div id="scanner-section">
+        <h3>وجه الكاميرا نحو رمز QR الخاص بالطفل</h3>
+        <button onclick="startScanner()">📷 بدء تشغيل الكاميرا</button>
+        <div id="reader"></div>
+        <div id="status">يرجى توجيه الكاميرا نحو رمز QR الخاص باللاعب</div>
+        
+<label for="activity">اختر النشاط (اختياري):</label>
+<select id="activity" style="width: 100%; padding: 10px; border-radius: 8px; margin-top: 10px;">
+  <option value="عام">📋 الحضور العام</option>
+  <option value="ورش">ورش</option>
+  <option value="زيارات خارجية">زيارات خارجية</option>
+  <option value="شطرنج">شطرنج</option>
+  <option value="كرة قدم">كرة قدم</option>
+  <option value="كرة سلة">كرة سلة</option>
+  <option value="كرة طائرة">كرة طائرة</option>
+  <option value="كرة يد">كرة يد</option>
+  <option value="العاب ثقافية">العاب ثقافية</option>
+  <option value="خماسي حديث">خماسي حديث</option>
+  <option value="لياقة بدنية">لياقة بدنية</option>
+  <option value=" ورش تطبيقية">ورش تطبيقية</option>
+</select>
+        
+        <div style="margin-top: 25px; background: #000; padding: 15px 20px; border-radius: 12px;">
+          <label for="manualId">أدخل رقم الطفل (مثال: 17197482 الرقم فقط):</label>
+          <input type="text" id="manualId" placeholder="مثال: 17197482" style="width: 100%;">
+          <button onclick="submitManual()">تسجيل يدوي</button>
+        </div>
+      </div>
+        </div>
+
+    </main>
+
+    <footer>
+      <p>© 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة</p>
+      <p style="font-size: 12px; color: #aaa; margin-top: -10px;">تم التطوير بواسطة روند أحمد الضمور</p>
+      <div class="social-icons">
+        <a href="https://facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com/kalbasc" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/Kalba_sc" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const USERS = {
+      "rwnd": "rwnd123",
+      "eman": "eman123",
+      "heba": "heba123",
+      "moza": "moza123",
+      "extra": "extra123"
+    };
+
+    let loggedInUser = null;
+
+    document.getElementById("login-section").style.display = "block";
+
+    function login() {
+      const u = document.getElementById("username").value.trim().toLowerCase();
+      const p = document.getElementById("password").value.trim();
+      if (USERS[u] && USERS[u] === p) {
+        loggedInUser = u;
+        document.getElementById("login-section").style.display = "none";
+        document.getElementById("scanner-section").style.display = "block";
+      } else {
+        document.getElementById("login-error").innerText = "اسم المستخدم أو كلمة المرور غير صحيحة.";
+      }
+    }
+
+    function markAttendance(code) {
+      const parts = code.split('|');
+      const id = parts[0] || "UNKNOWN";
+      const encodedName = parts[1] || "UNKNOWN";
+      const encodedParent = parts[2] || "UNKNOWN";
+      const name = decodeURIComponent(encodedName);
+      const parent = decodeURIComponent(encodedParent);
+      const timestamp = new Date().toISOString();
+      const activity = document.getElementById("activity").value.trim();
+      
+      document.getElementById("status").innerHTML = `
+        ✅ تم تسجيل حضور:<br>
+        الاسم: ${name}<br>
+        ولي الأمر: ${parent}<br>
+        معرف: ${id}<br>
+        النشاط: ${activity}<br>
+        بواسطة: ${loggedInUser.toUpperCase()}`;
+
+      const data = new URLSearchParams();
+      data.append("id", id);
+      data.append("name", name);
+      data.append("parent", parent);
+      data.append("timestamp", timestamp);
+      data.append("staff", loggedInUser);
+      data.append("activity", activity); 
+      
+      // https://script.google.com/macros/s/AKfycbx5q8uqZle52sfH-dPuil6JV_rXJaIDBZlWBKkEdn93MZgGhrdPssui4JM2lj5jEGx7jQ/exec
+      //https://script.google.com/macros/s/AKfycbxij6xIH_fypPRhklqQKURq-7xB5RJ3sC5dCBfwj4sJBjqnfXde1ncFrhCpDy04zuZW6g/exec
+      fetch("https://script.google.com/macros/s/AKfycbzJwZ7Ulx_pfSOsnpQ-fEicYnXPWsGB7b0k_pTrpglnkFXBPQpU-WEXV7VXYyIQkHh2nw/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: data
+      });
+
+      setTimeout(() => startScanner(), 4000);
+    }
+
+    const html5QrCode = new Html5Qrcode("reader");
+const config = {
+  fps: 10,
+  qrbox: { width: 250, height: 250 },
+  aspectRatio: 1.0,
+  rememberLastUsedCamera: true,
+  supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+  experimentalFeatures: {
+    useBarCodeDetectorIfSupported: true
+  },
+    videoConstraints: {
+    facingMode: "environment",
+    advanced: [{ focusMode: "continuous" }] 
+  }
+};
+
+    let scannerStarted = false;
+    function startScanner() {
+      if (scannerStarted) return;
+      Html5Qrcode.getCameras().then(devices => {
+        if (devices.length === 0) return alert("❌ لم يتم العثور على كاميرا.");
+        const backCamera = devices.find(device =>
+          device.label.toLowerCase().includes("back") || device.label.toLowerCase().includes("environment")) || devices[0];
+
+        scannerStarted = true;
+        html5QrCode.start(
+          backCamera.id,
+          config,
+          msg => {
+            html5QrCode.stop();
+            scannerStarted = false;
+            markAttendance(msg);
+          },
+          err => {}
+        );
+      }).catch(() => alert("⚠️ لم يتم السماح بالوصول إلى الكاميرا."));
+    }
+
+    function submitManual() {
+      const input = document.getElementById("manualId").value.trim();
+      if (!input) return alert("يرجى إدخال كود الطفل أو الرقم.");
+      const match = input.match(/KalbaSC-(\d+)/) || input.match(/^(\d{6,})$/);
+      if (!match) return alert("⚠️ يرجى إدخال الكود بالشكل الصحيح.");
+      const idOnly = match[1];
+
+      fetch(`https://script.google.com/macros/s/AKfycbysWX_UMRpmi_wv316IUcihXjjDVE-bTNsXagOWCDF2EjM33VaFP5Ru9YZkhcdcyFhIZQ/exec?id=${idOnly}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) return alert("❌ لم يتم العثور على هذا الرقم.");
+          const qr = `KalbaSC-${idOnly}|${encodeURIComponent(data.name)}|${encodeURIComponent(data.parent)}`;
+          markAttendance(qr);
+        })
+        .catch(() => alert("⚠️ تعذر الاتصال بالخادم."));
+    }
+  </script>
+</body>
+</html>

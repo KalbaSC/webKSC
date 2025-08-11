@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="نادي كلباء الرياضي الثقافي">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180x180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167x167.png">
+  <title>نادي كلباء الرياضي الثقافي - لوحة التقييم</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">  <style>
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic.ttf') format('truetype');
+    }
+    body {
+      font-family: 'NotoKufiArabic', sans-serif;
+      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+.header-container {
+  width: 100%;
+  background: #111;
+  border-bottom: 2px solid #f4e733;
+  position: relative;
+  z-index: 100;
+}
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  gap: 8px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0px;
+}
+.header-right {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 42px;
+  background-color: #111;
+  color: white;
+  box-sizing: border-box;
+}
+
+.header-right img.logo {
+  height: 70px;
+  width: auto;
+}
+
+.divider {
+  width: 1.5px;
+  height: 65px;
+  background-color: #f4e733;
+  flex-shrink: 0;
+}
+
+.header-info {
+  text-align: center;
+}
+
+.arabic-name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.english-name {
+  font-size: 14px;
+  color: #f4e733;
+}
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    .login-container {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .login-container h2 {
+      color: #f4e733;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      text-align: right;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #f4e733;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #f4e733;
+      background: #222;
+      color: white;
+    }
+    .btn {
+      background: #f4e733;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 5px;
+    }
+    .btn-block {
+      display: block;
+      width: 100%;
+    }
+      .remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    direction: rtl;
+  }
+
+  .remember-me input[type="checkbox"] {
+    margin: 0;
+    width: auto;
+  }
+
+  .remember-me label {
+    margin: 0;
+    color: white !important;
+  }
+
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #f4e733;
+    }
+    .nav-tabs button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .nav-tabs button.active {
+      background: #f4e733;
+      color: black;
+      border-radius: 5px 5px 0 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #f4e733;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #333;
+      color: #f4e733;
+    }
+  .date-filter-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+#playersListTab {
+  padding: 20px;
+}
+.table-responsive {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.players-table {
+  width: 100%;
+  border-collapse: collapse;
+  direction: rtl;
+  margin: 0 auto;
+}
+
+.players-table th, 
+.players-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #f4e733;
+}
+
+.players-table th {
+  background-color: #333;
+  color: #f4e733;
+  font-weight: bold;
+}
+
+.players-table tr:nth-child(even) {
+  background-color: rgba(244, 231, 51, 0.1);
+}
+    .evaluation-form {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .evaluation-criteria {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .criteria-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .criteria-item label {
+      color: #f4e733;
+    }
+    .criteria-item select {
+      width: 100px;
+      padding: 5px;
+      border-radius: 5px;
+      background: #333;
+      color: white;
+      border: 1px solid #f4e733;
+    }
+    .hidden {
+      display: none;
+    }
+    .player-card {
+      background: #222;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border-left: 4px solid #f4e733;
+    }
+    .player-card h3 {
+      margin-top: 0;
+      color: #f4e733;
+    }
+    .progress-container {
+      margin-top: 20px;
+    }
+    .progress-bar {
+      height: 20px;
+      background: #333;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #f4e733;
+      width: 0%;
+      transition: width 0.5s;
+    }
+    .rankings {
+      margin-top: 30px;
+    }
+    .ranking-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: #222;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    .rank-badge {
+      background: #f4e733;
+      color: black;
+      padding: 5px 10px;
+      border-radius: 50%;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .footer-container {
+      width: 100%;
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      border-top: 3px solid #f4e733;
+    }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .social-icons a {
+      color: white;
+      margin: 0 10px;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover {
+      color: #f4e733;
+    }
+   @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+.top-three-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.ranking-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.ranking-card {
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 220px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.ranking-card:hover {
+  transform: scale(1.05);
+}
+
+.player-badge {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.player-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  background: #f4e733;
+}
+
+.glow {
+  border: 2px solid #f4e733;
+  box-shadow: 0 0 20px #f4e733, 0 0 40px #f4e73388;
+}
+.activity-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #000;
+  background: #f4e733;
+  border-radius: 10px;
+  padding: 6px 12px;
+  display: inline-block;
+  font-size: 14px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+
+ #activityFilter {
+  padding: 10px 16px;
+  font-size: 16px;
+  background-color: #111;
+  color: #f4e733;
+  border: 1px solid #f4e733;
+  border-radius: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg fill='%23f4e733' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  background-size: 16px;
+  padding-left: 40px;
+  cursor: pointer;
+}
+#evaluatedPlayersTab {
+  padding: 20px;
+}
+
+.evaluated-player-card {
+  background: #222;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border-left: 4px solid #4CAF50; /* Green border for completed */
+}
+
+.evaluated-player-card h3 {
+  margin-top: 0;
+  color: #f4e733;
+}
+
+.criteria-scores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0;
+}
+.welcome-banner {
+  text-align: center;
+  padding: 20px;
+  margin: 20px auto;
+  color: #f4e733;
+  font-weight: bold;
+  background-color: #1c1c1c;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #f4e73380;
+  max-width: 600px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.welcome-banner span {
+  color: #fff;
+}
+#playersCount i {
+  display: inline-block;
+  margin-left: 5px;
+  color: #f4e733;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+    #progressChartContainer {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  direction: ltr; 
+}
+#progressChart {
+  width: 100% !important;
+  height: 100% !important;
+}
+    @media (max-width: 768px) {
+   html {
+  -webkit-text-size-adjust: 100%; 
+       }
+
+  .header-container {
+    padding: 0;
+  }
+
+  .header-right {
+    padding: 10px 15px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .header-content {
+    padding: 0;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .header-right img.logo {
+    height: 50px;
+    width: auto;
+  }
+
+  .divider {
+    height: 40px;
+  }
+
+  .arabic-name {
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .english-name {
+    font-size: 12px;
+  }
+  .container {
+    padding: 10px;
+    margin: 15px auto;
+    width: 95%;
+  }
+
+  .nav-tabs {
+    flex-direction: column;
+    border-bottom: none;
+  }
+
+    button, .btn, .nav-tabs button, .criteria-item select {
+    min-height: 44px;
+    padding: 12px 16px !important;
+    touch-action: manipulation;
+  }
+
+  input, select, textarea {
+    font-size: 14px !important; 
+    min-height: 37px !important;
+  }
+
+  textarea {
+    font-size: 14px !important;
+  }
+
+  .players-table {
+    font-size: 14px;
+  }
+
+  .players-table th, 
+  .players-table td {
+    padding: 8px 4px;
+    white-space: nowrap;
+  }
+
+  .ranking-card {
+    width: 100%;
+    margin: 0 0 15px 0;
+  }
+
+  .top-three-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .evaluation-form {
+    padding: 15px;
+  }
+
+  .criteria-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .criteria-item select {
+    width: 100% !important;
+    margin-top: 8px;
+  }
+
+#loadingPopup {
+  background: rgba(0, 0, 0, 0.9) !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid #f4e733;
+  max-width: 300px;
+  width: 80%;
+  text-align: center;
+  padding: 25px !important;
+  border-radius: 15px !important;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+}
+
+#loadingPopup .spinner {
+  width: 50px !important;
+  height: 50px !important;
+  margin: 0 auto 15px !important;
+  border-width: 4px !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  border-top-color: #f4e733 !important;
+}
+
+  .login-container {
+    padding: 20px 15px;
+    margin: 20px auto;
+  }
+
+  .date-filter-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #progressChartContainer {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  canvas {
+    max-width: 100%;
+  }
+    .footer-container {
+    padding: 15px 10px;
+  }
+
+  .footer-content {
+    padding: 0 10px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-container p {
+    font-size: 14px;
+    margin: 5px 0;
+    line-height: 1.4;
+  }
+
+  .social-icons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .social-icons a {
+    margin: 0;
+    font-size: 18px;
+  }    
+}
+
+@media (max-width: 480px) {
+  button, .btn {
+    padding: 14px 16px !important;
+  }
+
+  .header-right {
+    padding: 8px 10px;
+  }
+
+  .header-right img.logo {
+    height: 40px;
+  }
+
+  .arabic-name {
+    font-size: 14px;
+  }
+
+  .english-name {
+    font-size: 11px;
+  }
+
+  .divider {
+    display: none; 
+  }
+  .players-table {
+    font-size: 12px;
+  }
+
+  .login-container {
+    margin: 10px auto;
+    padding: 15px;
+  }
+
+  .form-group input, 
+  .form-group select {
+    padding: 10px 6px !important;
+  }
+    .footer-container {
+    padding: 12px 8px;
+  }
+
+  .footer-container p {
+    font-size: 12px;
+  }
+
+  .social-icons {
+    gap: 10px;
+  }
+
+  .social-icons a {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <header class="header-container">
+    <div class="header-right">
+      <img src="Picture3.png" alt="شعار الشارقة" class="logo">
+      <div class="divider"></div>
+      <img src="logo.png" alt="شعار نادي كلباء" class="logo">
+      <div class="header-info">
+        <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+        <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
+      </div>
+    </div>
+  </header>
+
+  <div id="loginView" class="login-container">
+    <h2>تسجيل دخول المدربين</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">اسم المستخدم</label>
+        <input type="text" id="username" required>
+      </div>  
+      <div class="form-group">
+        <label for="password">كلمة المرور</label>
+        <input type="password" id="password" required>
+      </div>
+      <div class="form-group remember-me">
+        <input type="checkbox" id="rememberMe" checked>
+        <label for="rememberMe">تذكرني</label>
+      </div>
+      <button type="submit" class="btn btn-block">دخول</button>
+    </form>
+  </div>
+
+<div id="loadingPopup" style="
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #222;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  z-index: 9999;
+  text-align: center;
+  font-family: 'NotoKufiArabic', sans-serif;
+">
+  <div class="spinner" style="
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #f4e733;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  "></div>
+  جاري تحميل البيانات...
+</div>
+
+  <div id="coachPortal" class="container hidden">
+    <div id="welcomeMessage" class="welcome-banner"></div>
+    <div class="nav-tabs">
+      <button onclick="showTab('playersList', event)">عرض اللاعبين</button>
+      <button onclick="showTab('evaluation', event)">تقييم اللاعبين</button>
+      <button onclick="showTab('evaluatedPlayers', event)">اللاعبون المقييمون</button>
+      <button onclick="showTab('rankings', event)">التصنيفات</button>
+      <button onclick="showTab('progress', event)">تطور الأداء</button>
+      <button onclick="logout()">خروج</button>
+    </div>
+
+    <div style="position: relative; width: 100%; padding-bottom: 20px;">
+      <div style="position: absolute; right: 0;">
+        <div id="playersCount">
+          <i class="fas fa-users"></i> عدد اللاعبين: 0
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <div class="form-group">
+          <label for="sessionDate">تاريخ الجلسة</label>
+          <input type="date" id="sessionDate">
+        </div>
+        <div class="form-group">
+          <label for="filterDate">تصفية حسب التاريخ</label>
+          <input type="date" id="filterDate" onchange="filterByDate()">
+        </div>
+      </div>
+    </div>
+
+    <div id="playersListTab">
+      <h2 id="playersListHeader" style="color:#f4e733; text-align:center"></h2>
+      <div id="playersTableContainer"></div>
+    </div>
+
+    <div id="evaluationTab" class="hidden">
+      <h2 style="color:#f4e733; text-align:center">تقييم اللاعبين</h2>
+      <div id="playersList"></div>
+    </div>
+
+  <div id="evaluatedPlayersTab" class="hidden">
+  <h2 style="color:#f4e733; text-align:center">اللاعبون المقييمون</h2>
+  <div id="evaluatedPlayersList"></div>
+</div>
+
+    <div id="rankingsTab" class="hidden">
+<h2 style="color:#f4e733; text-align:center">تصنيف اللاعبين</h2>
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px;">
+  <label for="activityFilter" style="color:#fff; font-size:16px;">اختر النشاط:</label>
+  <select id="activityFilter" onchange="updateRankings()">
+    <option value="all">الكل</option>
+    <option value="كرة يد">كرة يد</option>
+    <option value="كرة طائرة">كرة طائرة</option>
+    <option value="كرة سلة">كرة سلة</option>
+    <option value="شطرنج">شطرنج</option>
+  </select>
+</div>
+
+<div id="topThreeContainer" class="top-three-grid"></div>
+<div id="rankingsContainer" class="ranking-grid"></div>
+<button class="btn" onclick="exportRankings()">تصدير التصنيفات</button>
+    </div>
+
+    <div id="progressTab" class="hidden">
+      <h2 style="color:#f4e733; text-align:center">تطور الأداء</h2>
+      <div class="form-group">
+        <label for="playerSelect">اختر اللاعب</label>
+<select id="playerSelect"></select>
+<div id="progressChartContainer">
+  <canvas id="progressChart"></canvas>
+</div>
+    </div>
+  </div>
+  <script>
+const CONFIG = {
+  EVALUATION_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbz3uCLPvjazvaFRAiZVppFkKMMS2AlOWC4P3Fpy4XluiJ7xGV3BUVuwgmxfww7bMEcR/exec',
+  ATTENDANCE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzJwZ7Ulx_pfSOsnpQ-fEicYnXPWsGB7b0k_pTrpglnkFXBPQpU-WEXV7VXYyIQkHh2nw/exec',
+  CORS_PROXY_URL: 'https://corsproxy.io/?',
+  USE_CORS_PROXY: false
+};
+
+const coaches = {
+  "handball1": { password: "pass1", activity: "كرة يد", name: "سالم" },
+  "c.wahed": { password: "wahed123", activity: "كرة طائرة", name: "وحيد" },
+  "Wahed": { password: "pass3", activity: "كرة سلة", name: "محمد" },
+  "c.Jafer": { password: "jafer123", activity: "شطرنج", name: "جعفر" }
+};
+
+const evaluationCriteria = {
+  "كرة يد": [
+    "قوة التصويب",
+    "دقة التمرير",
+    "التمركز الدفاعي",
+    "الانسجام مع الفريق",
+    "اللياقة البدنية"
+  ],
+  "كرة طائرة": [
+    "الصحة البدنية",
+    "الالتزام بالتعليمات",
+    "التركيز",
+    "الحركة في الملعب",
+    "سرعة رد الفعل"
+  ],
+  "كرة سلة": [
+    "التصويب من المسافات المختلفة",
+    "المراوغة بالكرة",
+    "التمرير الحاسم",
+    "التحرك بدون كرة",
+    "القوة البدنية"
+  ],
+  "شطرنج": [
+    "حب التعلم",
+    "الهدوء",
+    "سرعة البديهة",
+    "إدارة الوقت",
+    "التركيز"
+  ]
+};
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  try {
+    if (dateStr.includes('/')) {
+      const [day, month, year] = dateStr.split(' ')[0].split('/');
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+
+    const d = dateStr.includes('T') ? new Date(dateStr) : new Date(dateStr + 'T00:00:00');
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  } catch {
+    return dateStr;
+  }
+}
+
+    let currentCoach = null;
+    let playersData = [];
+    let evaluations = JSON.parse(localStorage.getItem('playerEvaluations')) || [];
+
+    document.addEventListener('DOMContentLoaded', function() {
+      setupMobileSpecificFeatures();
+      const sessionDateInput = document.getElementById('sessionDate');
+      if (sessionDateInput) {
+        sessionDateInput.valueAsDate = new Date();
+      }
+      setupEventListeners();
+      const savedUsername = localStorage.getItem('coachUsername');
+      const savedPassword = localStorage.getItem('coachPassword');
+      if (savedUsername && savedPassword) {
+        document.getElementById('username').value = savedUsername;
+        document.getElementById('password').value = savedPassword;
+      }
+    });
+
+    function setupEventListeners() {
+      const loginForm = document.getElementById('loginForm');
+      if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+      }
+      const sessionDate = document.getElementById('sessionDate');
+      if (sessionDate) {
+        sessionDate.addEventListener('change', handleDateChange);
+      }
+    }    
+
+async function loadPlayersData() {
+  showLoading();
+  try {
+    const url = CONFIG.USE_CORS_PROXY 
+      ? CONFIG.CORS_PROXY_URL + CONFIG.ATTENDANCE_SCRIPT_URL 
+      : CONFIG.ATTENDANCE_SCRIPT_URL;
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Failed to fetch players");
+
+    const data = await response.json();
+
+    playersData = data
+      .filter(p => p.Activity === currentCoach.activity)
+      .map(player => ({
+        id: player.ID,
+        name: player["Child Name"],
+        parent: player.Parent,
+        date: player.Timestamp ? new Date(player.Timestamp).toISOString().split('T')[0] : ""
+      }));
+
+    evaluations = await fetchEvaluationsFromSheet();
+
+    renderPlayersList();
+    updatePlayerSelect();
+    renderEvaluatedPlayersList();
+  } catch (error) {
+    console.error("Error loading players:", error);
+    playersData = []; 
+  } finally {
+    hideLoading();
+  }
+  updatePlayerSelect();
+}
+
+async function fetchEvaluationsFromSheet() {
+  const url = CONFIG.USE_CORS_PROXY 
+    ? CONFIG.CORS_PROXY_URL + CONFIG.EVALUATION_SCRIPT_URL 
+    : CONFIG.EVALUATION_SCRIPT_URL;
+
+  const response = await fetch(url);
+  if (!response.ok) throw new Error("Failed to fetch evaluations");
+
+  const data = await response.json();
+  return data.filter(e => e.Activity === currentCoach.activity);
+}
+    
+function addAlToSecondWord(activity) {
+  const parts = activity.trim().split(" ");
+  if (parts.length === 2) {
+    return `${parts[0]} الـ${parts[1]}`;
+  }
+  return `ال${activity}`; 
+}
+
+async function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (coaches[username] && coaches[username].password === password) {
+        currentCoach = {
+          username: username,
+          activity: coaches[username].activity
+        };
+
+        if (document.getElementById('rememberMe').checked) {
+          localStorage.setItem('coachUsername', username);
+          localStorage.setItem('coachPassword', password);
+        }
+
+        const key = `playerEvaluations_${username}`;
+        evaluations = JSON.parse(localStorage.getItem(key)) || [];
+        playersData = [];
+
+const welcomeMessage = document.getElementById('welcomeMessage');
+if (welcomeMessage) {
+  welcomeMessage.innerHTML = 
+  `👋 <strong>مرحبا كابتن ${coaches[username].name}</strong><br>🏆 قائمة لاعبين <strong>${addAlToSecondWord(currentCoach.activity)}</strong>`;
+}
+
+const playersListHeader = document.getElementById('playersListHeader');
+if (playersListHeader) {
+playersListHeader.innerText = `قائمة لاعبين ${addAlToSecondWord(currentCoach.activity)}`;
+}
+
+        const loginView = document.getElementById('loginView');
+        const coachPortal = document.getElementById('coachPortal');
+        if (loginView && coachPortal) {
+          loginView.classList.add('hidden');
+          coachPortal.classList.remove('hidden');
+        }
+
+        await loadPlayersData();
+        document.getElementById('activityFilter').value = currentCoach.activity;
+
+        const firstTabButton = document.querySelector('.nav-tabs button:first-child');
+        if (firstTabButton) {
+          document.querySelectorAll('.nav-tabs button').forEach(btn => btn.classList.remove('active'));
+          firstTabButton.classList.add('active');
+        }
+        showTab('playersList');
+
+      } else {
+        alert('اسم المستخدم أو كلمة المرور غير صحيحة');
+      }
+    }
+
+function showLoading() {
+  document.getElementById('loadingPopup').style.display = 'block';
+}
+
+function hideLoading() {
+  document.getElementById('loadingPopup').style.display = 'none';
+}
+
+function loadPlayersTable(players = playersData) {
+  const container = document.getElementById('playersTableContainer');
+  const countContainer = document.getElementById('playersCount');
+
+  container.innerHTML = `
+    <div class="table-responsive">
+      <table class="players-table">
+<thead>
+  <tr>
+    <th>تاريخ الحضور</th>
+    <th>اسم اللاعب</th>
+    <th>المعرف</th>
+  </tr>
+</thead>
+<tbody>
+  ${
+    players.length === 0
+      ? `<tr><td colspan="3">لا يوجد لاعبون في هذا التاريخ</td></tr>`
+      : players.map(player => `
+          <tr>
+            <td>${formatDate(player.date) || 'غير محدد'}</td>
+            <td>${player.name} ${player.parent || ''}</td>
+            <td>${player.id}</td>
+          </tr>
+        `).join('')
+  }
+</tbody>
+      </table>
+    </div>
+  `;
+
+   countContainer.textContent = `عدد اللاعبين: ${players.length}`;
+}
+
+function filterByDate() {
+  const selectedDate = document.getElementById('filterDate').value;
+  const filteredPlayers = playersData.filter(player => player.date === selectedDate);
+
+if (filteredPlayers.length === 0) {
+  loadPlayersTable([]);         
+  renderPlayersList([]);      
+} else {
+  loadPlayersTable(filteredPlayers);     
+  renderPlayersList(filteredPlayers);    
+}
+
+}
+    function handleDateChange() {
+      const selectedDate = document.getElementById('sessionDate').value;
+      const filteredPlayers = playersData.filter(player => player.date === selectedDate);
+
+      if (filteredPlayers.length === 0) {
+        alert('لا يوجد لاعبون مسجلون في هذا التاريخ');
+        renderPlayersList(playersData);
+      } else {
+        renderPlayersList(filteredPlayers);
+      }
+    }
+
+function renderPlayersList(players = playersData) {
+  const container = document.getElementById('playersList');
+  container.innerHTML = '';
+
+  const unevaluatedPlayers = players.filter(player => {
+    if (!player.date) return true; 
+
+    const playerDateFormatted = formatDate(player.date);
+    
+    return !evaluations.some(eval => {
+      const evalDateFormatted = formatDate(eval["Date"]);
+      return eval["Player ID"] === player.id && 
+             evalDateFormatted === playerDateFormatted;
+    });
+  });
+
+  if (unevaluatedPlayers.length === 0) {
+    container.innerHTML = '<p>لا يوجد لاعبون متاحون للتقييم</p>';
+    return;
+  }
+
+  unevaluatedPlayers.forEach(player => {
+    const playerCard = document.createElement('div');
+    playerCard.className = 'player-card';
+    playerCard.innerHTML = `
+      <h3>${player.name} <small>(${player.id})</small></h3>
+      <p>ولي الأمر: ${player.parent || "غير معروف"}</p>
+      <p>تاريخ الحضور: ${formatDate(player.date) || "غير محدد"}</p>
+      <div class="evaluation-form">
+        <h4>تقييم الأداء:</h4>
+        <div class="evaluation-criteria" id="criteria-${player.id}"></div>
+        <textarea id="notes-${player.id}" placeholder="ملاحظات إضافية..."></textarea>
+        <button class="btn" onclick="saveEvaluation('${player.id}', '${player.date}')">حفظ التقييم</button>
+      </div>
+    `;
+
+    const criteriaContainer = playerCard.querySelector(`#criteria-${player.id}`);
+    evaluationCriteria[currentCoach.activity].forEach((criteria, index) => {
+      criteriaContainer.innerHTML += `
+        <div class="criteria-item">
+          <label>${criteria}</label>
+          <select id="${player.id}-skill${index + 1}">
+            <option value="5">ممتاز (5)</option>
+            <option value="4">جيد جداً (4)</option>
+            <option value="3">جيد (3)</option>
+            <option value="2">مقبول (2)</option>
+            <option value="1">ضعيف (1)</option>
+          </select>
+        </div>
+      `;
+    });
+
+    container.appendChild(playerCard);
+  });
+
+  document.getElementById('playersCount').textContent = `عدد اللاعبين: ${unevaluatedPlayers.length}`;
+}
+
+async function saveEvaluation(playerId, playerDate) {
+  const player = playersData.find(p => p.id === playerId);
+  if (!player) {
+    showToast('لاعب غير موجود', false);
+    return;
+  }
+
+  const evaluationDate = playerDate;
+  const playerDateFormatted = formatDate(evaluationDate);
+
+  const alreadyEvaluated = evaluations.some(eval => {
+    const evalDateFormatted = formatDate(eval["Date"]);
+
+    console.log("✅ Comparing:", {
+      evalDate: eval["Date"],
+      evalFormatted: evalDateFormatted,
+      currentDate: playerDateFormatted,
+      playerIdEval: eval["Player ID"],
+      playerIdCurrent: playerId
+    });
+
+    return eval["Player ID"] === playerId && 
+           evalDateFormatted === playerDateFormatted;
+  });
+
+  if (alreadyEvaluated) {
+    showToast('تم تقييم هذا اللاعب بالفعل في هذا التاريخ', false);
+    return;
+  }
+
+  const evaluationData = {
+    Timestamp: new Date().toISOString(),
+    Coach: currentCoach.username,
+    Activity: currentCoach.activity,
+    "Player Name": player.name,
+    "Player ID": player.id,
+    "Parent": player.parent || "",
+    "Date": evaluationDate, 
+    "Notes": document.getElementById(`notes-${player.id}`)?.value || "",
+  };
+
+  evaluationCriteria[currentCoach.activity].forEach((criteria, index) => {
+    const score = document.getElementById(`${player.id}-skill${index + 1}`)?.value;
+    evaluationData[criteria] = score ? parseInt(score) : 0;
+  });
+
+  try {
+    showLoading();
+    
+    await sendEvaluation(evaluationData);
+    
+    evaluations.push(evaluationData);
+    
+    const playerCard = document.querySelector(`.player-card:has(#criteria-${playerId})`);
+    if (playerCard) {
+      playerCard.remove();
+    }
+    
+    showToast('✅ تم حفظ التقييم بنجاح', true);
+    
+    renderEvaluatedPlayersList();
+    
+    const remainingPlayers = document.querySelectorAll('.player-card').length;
+    document.getElementById('playersCount').textContent = `عدد اللاعبين: ${remainingPlayers}`;
+    
+  } catch (err) {
+    console.error("Evaluation error:", err);
+    showToast('❌ فشل في إرسال التقييم: ' + (err.message || err), false);
+  } finally {
+    hideLoading();  
+  }
+}
+    
+async function sendEvaluation(evaluationData) {
+  try {
+    const url = CONFIG.USE_CORS_PROXY 
+      ? CONFIG.CORS_PROXY_URL + CONFIG.EVALUATION_SCRIPT_URL 
+      : CONFIG.EVALUATION_SCRIPT_URL;
+
+    const formData = new URLSearchParams();
+    
+    for (const key in evaluationData) {
+      let value = evaluationData[key];
+      
+      if (key in evaluationCriteria[currentCoach.activity]) {
+        const arabicKey = evaluationCriteria[currentCoach.activity].find(c => c === key);
+        formData.append(arabicKey, value);
+      } else {
+        formData.append(key, value);
+      }
+    }
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: formData
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || "Failed to send evaluation");
+    }
+
+    return await response.text();
+  } catch (error) {
+    console.error("Send evaluation error:", error);
+    throw error;
+  }
+}
+
+async function renderEvaluatedPlayersList() {
+  const container = document.getElementById('evaluatedPlayersList');
+  container.innerHTML = '<p>جاري تحميل البيانات...</p>';
+  
+  try {
+    showLoading();
+
+    const url = CONFIG.USE_CORS_PROXY 
+      ? CONFIG.CORS_PROXY_URL + CONFIG.EVALUATION_SCRIPT_URL 
+      : CONFIG.EVALUATION_SCRIPT_URL;
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Failed to fetch evaluations");
+
+    let data = await response.json();
+
+    const processedData = data
+      .filter(eval => eval.Activity === currentCoach.activity)
+      .map(eval => {
+        let total = 0;
+        const criteria = evaluationCriteria[currentCoach.activity] || [];
+
+        criteria.forEach(criterion => {
+          const score = parseInt(eval[criterion]) || 0;
+          total += score;
+        });
+
+        const percentage = Math.round((total / (criteria.length * 5)) * 100) + "%";
+
+        return {
+          ...eval,
+          "Date": formatDate(eval.Date),
+          "Time-stamp": formatDate(eval["Timestamp"]),
+          "Total Score": total,
+          "Percentage": percentage,
+          normalizedPlayerId: String(eval["Player ID"]).trim(),
+          normalizedDate: formatDate(eval.Date)
+        };
+      });
+
+    evaluations = processedData;
+
+    const playersMap = new Map();
+    processedData.forEach(eval => {
+      const playerId = eval.normalizedPlayerId;
+      if (!playersMap.has(playerId)) {
+        playersMap.set(playerId, {
+          id: playerId,
+          name: eval["Player Name"],
+          evaluations: []
+        });
+      }
+      playersMap.get(playerId).evaluations.push(eval);
+    });
+
+    container.innerHTML = '';
+
+    if (playersMap.size === 0) {
+      container.innerHTML = '<p>لا يوجد لاعبون مقييمون بعد</p>';
+      return;
+    }
+
+    const sortedPlayers = Array.from(playersMap.values()).sort((a, b) => {
+      const dateA = new Date(b.evaluations[0]["Time-stamp"]);
+      const dateB = new Date(a.evaluations[0]["Time-stamp"]);
+      return dateA - dateB;
+    });
+
+    sortedPlayers.forEach(player => {
+      const playerCard = document.createElement('div');
+      playerCard.className = 'evaluated-player-card';
+
+      playerCard.innerHTML = `
+        <h3>${player.name || 'غير معروف'} <small>(${player.id || 'غير معروف'})</small></h3>
+        <div class="player-evaluations">
+          ${player.evaluations.map(eval => `
+            <div class="evaluation-session">
+              <p><strong>تاريخ الحضور:</strong> ${eval["Date"] || 'غير محدد'}</p>
+              <p><strong>تاريخ التقييم:</strong> ${eval["Time-stamp"] || 'غير محدد'}</p>
+              <p><strong>المجموع:</strong> ${eval["Total Score"] || 0}/25 (${eval["Percentage"] || '0%'})</p>
+              ${eval["Notes"] ? `<p><strong>ملاحظات:</strong> ${eval["Notes"]}</p>` : ''}
+            </div>
+          `).join('')}
+        </div>
+      `;
+      container.appendChild(playerCard);
+    });
+
+  } catch (error) {
+    console.error("Error loading evaluations:", error);
+    container.innerHTML = '<p>حدث خطأ أثناء تحميل البيانات</p>';
+    showToast('❌ فشل في تحميل التقييمات: ' + error.message, false);
+  } finally {
+    hideLoading();
+  }
+}
+    
+async function updateRankings() {
+  showLoading();
+  try {
+    const url = CONFIG.USE_CORS_PROXY 
+      ? CONFIG.CORS_PROXY_URL + CONFIG.EVALUATION_SCRIPT_URL
+      : CONFIG.EVALUATION_SCRIPT_URL;
+
+    const response = await fetch(url);
+
+    let data;
+    try {
+      const cloned = response.clone(); 
+      data = await cloned.json();
+    } catch (err) {
+      const fallback = await response.text(); 
+      throw new Error("الرد غير صالح كـ JSON:\n" + fallback);
+    }
+
+const selectedActivity = document.getElementById('activityFilter')?.value || 'all';
+
+const filtered = data.filter(e => {
+  const matchesActivity = selectedActivity === 'all' || e.Activity?.trim() === selectedActivity;
+  const matchesCoach = !currentCoach || (
+    e.Activity?.trim() === currentCoach.activity?.trim() &&
+    e.Coach?.trim() === currentCoach.username?.trim()
+  );
+  return matchesActivity && matchesCoach;
+});
+
+    const playerStats = {};
+    filtered.forEach(e => {
+      const playerId = e["Player ID"];
+      if (!playerStats[playerId]) {
+        playerStats[playerId] = {
+         name: e["Player Name"],
+        activity: e.Activity || "غير معروف",
+        total: 0,
+        count: 0
+        };
+      }
+      const percentage = Math.round(parseFloat(e.Percentage) * 100) || 0;
+      playerStats[playerId].total += percentage;
+      playerStats[playerId].count += 1;
+    });
+
+const rankings = Object.entries(playerStats).map(([id, player]) => ({
+  id,
+  name: player.name,
+  activity: player.activity,
+  average: Math.round(player.total / player.count)
+}));
+
+const topThreeContainer = document.getElementById('topThreeContainer');
+const container = document.getElementById('rankingsContainer');
+topThreeContainer.innerHTML = '';
+container.innerHTML = '';
+
+const top3 = rankings.slice(0, 3);
+const others = rankings.slice(3, 50);
+
+const orderedTop3 = [top3[1], top3[0], top3[2]];
+
+orderedTop3.forEach((player, index) => {
+  if (!player) return;
+  const card = document.createElement('div');
+  card.className = 'ranking-card';
+
+  const badges = ['🥈', '👑', '🥉'];
+  card.innerHTML = `
+    <div class="player-badge">${badges[index]}</div>
+    <img src="user-icon.png" class="player-avatar" />
+    <h3>${player.name}</h3>
+<p class="activity-label">${getActivityIcon(player.activity)} ${player.activity}</p>
+<p>ID: ${player.id}</p>
+<p>المعدل: ${player.average}%</p>
+  `;
+  if (index === 1) card.classList.add("glow"); 
+  topThreeContainer.appendChild(card);
+});
+
+others.forEach((player, index) => {
+  const card = document.createElement('div');
+  card.className = 'ranking-card';
+  card.innerHTML = `
+    <div class="player-badge">${index + 4}</div>
+    <img src="user-icon.png" class="player-avatar" />
+    <h3>${player.name}</h3>
+<p class="activity-label">${getActivityIcon(player.activity)} ${player.activity}</p>
+<p>ID: ${player.id}</p>
+<p>المعدل: ${player.average}%</p>
+  `;
+  container.appendChild(card);
+});
+
+  } catch (err) {
+    console.error("Error:", err);
+    showToast('❌ فشل في تحميل التصنيفات:\n' + err.message, false);
+  } finally {
+    hideLoading();
+  }
+}
+
+function getActivityIcon(activity) {
+  const icons = {
+    "كرة سلة": "🏀",
+    "كرة يد": "🤾‍♂️",
+    "كرة طائرة": "🏐",
+    "شطرنج": "♟️"
+  };
+  return icons[activity] || "";
+}
+const playerSelect = document.getElementById('playerSelect');
+
+function updatePlayerSelect() {
+  if (!playerSelect) {
+    console.error("playerSelect element not found!");
+    return;
+  }
+
+  playerSelect.innerHTML = ''; 
+
+  const defaultOption = document.createElement('option');
+  defaultOption.value = '';
+  defaultOption.textContent = '-- اختر لاعب --';
+  defaultOption.disabled = true;
+  defaultOption.selected = true;
+  playerSelect.appendChild(defaultOption);
+
+  playersData.forEach(player => {
+    const option = document.createElement('option');
+    option.value = player.id;
+    option.textContent = `${player.name} (${player.id})`;
+    playerSelect.appendChild(option);
+  });
+}
+
+let progressChart = null;
+
+async function showPlayerProgress() {
+  try {
+    const container = document.getElementById('progressChartContainer');
+    const canvas = document.getElementById('progressChart');
+    const playerSelect = document.getElementById('playerSelect');
+    
+    if (!container || !canvas || !playerSelect) {
+      throw new Error('Missing required DOM elements');
+    }
+
+    if (progressChart) {
+      try {
+        progressChart.destroy();
+      } catch (err) {
+        console.warn('Chart destruction error:', err);
+      }
+    }
+
+    const playerId = playerSelect.value.trim();
+    if (!playerId) {
+      container.innerHTML = '<p style="color:white; text-align:center; padding:20px;">الرجاء اختيار لاعب</p>';
+      return;
+    }
+
+    if (evaluations.length === 0) {
+      evaluations = await fetchEvaluationsFromSheet();
+    }
+
+    const playerEvals = evaluations
+      .filter(e => String(e["Player ID"]).trim() === playerId && 
+                   e.Activity === currentCoach.activity)
+      .sort((a, b) => new Date(a.Date) - new Date(b.Date));
+
+    if (playerEvals.length === 0) {
+      container.innerHTML = '<p style="color:white; text-align:center; padding:20px;">لا توجد بيانات لهذا اللاعب</p>';
+      return;
+    }
+
+    const dates = playerEvals.map(e => formatDate(e.Date));
+    const percentages = playerEvals.map(e => {
+      const criteria = evaluationCriteria[currentCoach.activity] || [];
+      const total = criteria.reduce((sum, crit) => sum + (parseInt(e[crit]) || 0), 0);
+      return Math.round((total / (criteria.length * 5)) * 100);
+    });
+
+container.innerHTML = '<canvas id="progressChart"></canvas>';
+const ctx = document.getElementById('progressChart').getContext('2d');
+
+    progressChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [{
+          label: 'تطور الأداء (%)',
+          data: percentages,
+          borderColor: '#f4e733',
+          backgroundColor: 'rgba(244, 231, 51, 0.2)',
+          borderWidth: 3,
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            rtl: true,
+            labels: {
+              color: '#fff',
+              font: {
+                family: 'NotoKufiArabic',
+                size: 14
+              }
+            }
+          },
+          tooltip: {
+            rtl: true,
+            bodyFont: {
+              family: 'NotoKufiArabic'
+            },
+            callbacks: {
+              label: (context) => `${context.parsed.y}%`
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: { color: '#fff' },
+            grid: { color: 'rgba(255,255,255,0.1)' }
+          },
+          y: {
+            min: 0,
+            max: 100,
+            ticks: {
+              color: '#fff',
+              callback: (val) => `${val}%`
+            },
+            grid: { color: 'rgba(255,255,255,0.1)' }
+          }
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error('Error in showPlayerProgress:', error);
+    showToast('❌ حدث خطأ في عرض التطور', false);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function showToast(message, isSuccess) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '20px';
+    toast.style.right = '20px';
+    toast.style.padding = '12px 24px';
+    toast.style.borderRadius = '5px';
+    toast.style.backgroundColor = isSuccess ? '#4CAF50' : '#F44336';
+    toast.style.color = 'white';
+    toast.style.zIndex = '10000';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+  }
+  
+  async function fetchEvaluationsFromSheet() {
+    try {
+      const url = CONFIG.USE_CORS_PROXY 
+        ? `${CONFIG.CORS_PROXY_URL}${CONFIG.EVALUATION_SCRIPT_URL}`
+        : CONFIG.EVALUATION_SCRIPT_URL;
+
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      
+      const data = await response.json();
+      return Array.isArray(data) ? data : [];
+      
+    } catch (error) {
+      console.error('Failed to fetch evaluations:', error);
+      showToast('❌ فشل تحميل التقييمات', false);
+      return [];
+    }
+  }
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('sessionDate').value = today;
+  document.getElementById('filterDate').value = today;
+});
+
+function exportRankings() {
+  if (!Array.isArray(evaluations) || evaluations.length === 0) {
+    showToast("لا توجد بيانات تصنيف لتصديرها", false);
+    return;
+  }
+
+const selectedActivity = document.getElementById('activityFilter')?.value || 'all';
+const playerStats = {};
+
+evaluations
+  .filter(e => {
+    const matchesActivity = selectedActivity === 'all' || e.Activity?.trim() === selectedActivity;
+    const matchesCoach = !currentCoach || (
+      e.Activity?.trim() === currentCoach.activity?.trim() &&
+      e.Coach?.trim() === currentCoach.username?.trim()
+    );
+    return matchesActivity && matchesCoach;
+  })
+  .forEach(e => {
+    const playerId = e["Player ID"];
+    if (!playerStats[playerId]) {
+      playerStats[playerId] = {
+        name: e["Player Name"],
+        activity: e.Activity || "غير معروف",
+        total: 0,
+        count: 0
+      };
+    }
+    const percentage = Math.round(parseFloat(e.Percentage) * 100) || 0;
+    playerStats[playerId].total += percentage;
+    playerStats[playerId].count++;
+  });
+
+const rankings = Object.entries(playerStats).map(([id, player]) => ({
+  id,
+  name: player.name,
+  activity: player.activity,
+  average: Math.round(player.total / player.count),
+    evaluations: player.count
+  }));
+
+  rankings.sort((a, b) => b.average - a.average);
+
+const wsData = [
+  ['الترتيب', 'اسم اللاعب', 'المعدل', 'عدد التقييمات', 'النشاط'],
+  ...rankings.map((p, i) => [
+    i + 1,
+    p.name,
+    `${p.average}%`,
+    p.evaluations,
+    selectedActivity === 'all' ? 'متعدد' : selectedActivity
+  ])
+];
+
+  const ws = XLSX.utils.aoa_to_sheet(wsData);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "التصنيفات");
+
+  const filename = selectedActivity === 'all' 
+    ? 'تصنيفات_جميع_الأنشطة.xlsx' 
+    : `تصنيفات_${selectedActivity}.xlsx`;
+
+  XLSX.writeFile(wb, filename);
+}
+
+function showTab(tabName, event) {
+  const allTabs = ["playersListTab", "evaluationTab", "evaluatedPlayersTab", "rankingsTab", "progressTab"];
+  allTabs.forEach(tab => document.getElementById(tab).classList.add('hidden'));
+
+  document.querySelectorAll('.nav-tabs button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  if (event) {
+    event.target.classList.add('active');
+  }
+
+  document.getElementById(`${tabName}Tab`).classList.remove('hidden');
+
+  switch(tabName) {
+    case 'evaluatedPlayers':
+      renderEvaluatedPlayersList();
+      break;
+    case 'playersList':
+      loadPlayersTable();
+      break;
+    case 'evaluation':
+      renderPlayersList();
+      break;
+    case 'rankings':
+      updateRankings();
+      break;
+    case 'progress':
+      showPlayerProgress();
+      break;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const today = new Date();
+  const formattedDate = today.toISOString().split('T')[0];
+  document.getElementById('sessionDate').value = formattedDate;
+  document.getElementById('filterDate').value = formattedDate;
+
+  setupEventListeners();
+});
+
+function logout() {
+  const username = currentCoach?.username;
+  currentCoach = null;
+  playersData = [];
+  evaluations = [];
+
+  localStorage.removeItem('coachUsername');
+  localStorage.removeItem('coachPassword');
+
+  document.getElementById('coachPortal').classList.add('hidden');
+  document.getElementById('loginView').classList.remove('hidden');
+  document.getElementById('loginForm').reset();
+
+  document.getElementById('playersList').innerHTML = '';
+  document.getElementById('playersTableContainer').innerHTML = '';
+  document.getElementById('rankingsContainer').innerHTML = '';
+  document.getElementById('playerSelect').innerHTML = '';
+  if (progressChart) {
+    progressChart.destroy();
+    progressChart = null;
+  }
+}
+
+function showToast(message, success = true) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '20px';
+    toast.style.right = '20px';
+    toast.style.padding = '10px 20px';
+    toast.style.borderRadius = '5px';
+    toast.style.backgroundColor = success ? '#4caf50' : '#f44336';
+    toast.style.color = 'white';
+    toast.style.fontSize = '16px';
+    toast.style.zIndex = '9999';
+    toast.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+  }
+
+function setupMobileSpecificFeatures() {
+  document.querySelectorAll('button, .btn, .nav-tabs button').forEach(btn => {
+    btn.style.transition = 'all 0.2s ease';
+
+    btn.addEventListener('touchstart', function() {
+      this.style.transform = 'scale(0.96)';
+      this.style.opacity = '0.9';
+      this.style.backgroundColor = this.classList.contains('btn') ? '#e6d429' : 'rgba(244, 231, 51, 0.8)';
+    });
+
+    btn.addEventListener('touchend', function() {
+      this.style.transform = '';
+      this.style.opacity = '';
+      this.style.backgroundColor = this.classList.contains('btn') ? '#f4e733' : '';
+    });
+  });
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('input, select, textarea').forEach(input => {
+    input.addEventListener('focus', function() {
+      document.querySelector('meta[name="viewport"]').content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+    });
+
+    input.addEventListener('blur', function() {
+      document.querySelector('meta[name="viewport"]').content = 'width=device-width, initial-scale=1.0';
+    });
+  });
+});
+
+  document.querySelectorAll('.table-responsive').forEach(table => {
+    table.style.webkitOverflowScrolling = 'touch';
+    table.style.overflowX = 'auto';
+  });
+
+  document.addEventListener('dblclick', function(e) {
+    e.preventDefault();
+  }, { passive: false });
+
+  document.querySelectorAll('select').forEach(select => {
+    select.style.webkitAppearance = 'none';
+    select.style.paddingRight = '30px';
+    select.style.backgroundImage = 'url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23f4e733\'%3E%3Cpath d=\'M7 10l5 5 5-5z\'/%3E%3C/svg%3E")';
+    select.style.backgroundRepeat = 'no-repeat';
+    select.style.backgroundPosition = 'right 10px center';
+    select.style.backgroundSize = '16px';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  setupMobileSpecificFeatures();
+
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    document.body.classList.add('is-mobile');
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('sessionDate').value = today;
+    document.getElementById('filterDate').value = today;
+
+    document.querySelectorAll('*').forEach(el => {
+      el.style.pointerEvents = 'auto';
+    });
+  }
+});
+    
+function debounce(func, wait = 100) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+    }, wait);
+  };
+}
+
+window.addEventListener('resize', debounce(() => {
+  if (progressChart) {
+    progressChart.resize();
+  }
+}));
+
+document.addEventListener('DOMContentLoaded', function() {
+  const lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+
+  if ('IntersectionObserver' in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target;
+          lazyImage.src = lazyImage.dataset.src;
+          lazyImage.classList.remove('lazy');
+          lazyImageObserver.unobserve(lazyImage);
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage);
+    });
+  }
+});
+
+function setupTableTouchEvents() {
+  document.querySelectorAll('.players-table tr').forEach(row => {
+    row.addEventListener('touchstart', function() {
+      this.style.backgroundColor = 'rgba(244, 231, 51, 0.1)';
+    });
+
+    row.addEventListener('touchend', function() {
+      this.style.backgroundColor = '';
+    });
+  });
+}
+
+function preventScrollOnTouch() {
+  document.querySelectorAll('input, select, textarea, button').forEach(el => {
+    el.addEventListener('touchstart', function(e) {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+        document.body.style.overflow = 'hidden';
+      }
+    });
+
+    el.addEventListener('touchend', function() {
+      document.body.style.overflow = '';
+    }, { passive: true });
+  });
+}
+    
+const isInIframe = window !== window.parent;
+const urlParams = new URLSearchParams(window.location.search);
+const publicRankings = urlParams.get('view') === 'rankings';
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (isInIframe || publicRankings) {
+    const loginView = document.getElementById('loginView');
+    const coachPortal = document.getElementById('coachPortal');
+
+    if (loginView) loginView.classList.add('hidden');
+    if (coachPortal) coachPortal.classList.remove('hidden');
+
+    currentCoach = null; 
+    setTimeout(() => showTab('rankings'), 100);
+  }
+});
+
+    </script>  
+  </body>
+  <div class="footer-container">
+<footer>
+<p>© 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة</p>
+<p style="font-size: 14px; color: #aaa; margin-top: -10px;">تم التطوير بواسطة روند أحمد الضمور</p>
+<div class="social-icons">
+<a href="https://facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+<a href="https://instagram.com/kalbasc" target="_blank"><i class="fab fa-instagram"></i></a>
+<a href="https://x.com/Kalba_sc" target="_blank"><i class="fab fa-twitter"></i></a>
+<a href="https://youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
+<a href="https://tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+</footer>
+</div>
+</html>
