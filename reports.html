@@ -186,19 +186,6 @@ background-color: rgba(76, 175, 80, 0.2);
 .general-with-activities {
 background-color: rgba(255, 193, 7, 0.2); 
 }
-footer {
-background-color: #111;
-color: white;
-text-align: center;
-padding: 20px;
-border-top: 3px solid #f4e733;
-font-size: 14px;
-}
-.social-icons a {
-color: white;
-margin: 0 8px;
-font-size: 20px;
-}
 #datePicker {
   background: #111;
   color: #f4e733;
@@ -211,12 +198,10 @@ font-size: 20px;
   outline: none;
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
-
 #datePicker:hover {
   background: #222;
   border-color: #ffeb3b;
 }
-
 #datePicker:focus {
   border-color: #ffeb3b;
   box-shadow: 0 0 5px #f4e733;
@@ -309,7 +294,6 @@ color: #aaa;
 #mainView .hidden-column {
 display: none;
 }
-
 #topParticipantsContainer {
 display: flex;
 flex-wrap: wrap;
@@ -317,7 +301,6 @@ justify-content: center;
 align-items: flex-start;
 gap: 20px;
 }
-
 #mainView.show-hidden-columns .hidden-column {
 display: table-cell;
 }
@@ -333,7 +316,6 @@ display: table-cell;
     color: white;
     line-height: 38px;
 }
-
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
     background-color: #f4e733;
     color: #000;
@@ -420,7 +402,7 @@ display: table-cell;
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-    #showTopAttendanceBtn, 
+#showTopAttendanceBtn, 
 #showTopEvaluationBtn {
   background: #f4e733;
   color: black;
@@ -433,28 +415,23 @@ display: table-cell;
   font-family: 'NotoKufiArabic', sans-serif;
   transition: all 0.3s ease;
 }
-
 #showTopAttendanceBtn:hover,
 #showTopEvaluationBtn:hover {
   background: #e6d429;
   transform: translateY(-2px);
 }
-
 #showTopAttendanceBtn:active,
 #showTopEvaluationBtn:active {
   transform: translateY(0);
 }
-
 #showTopEvaluationBtn {
   background: #222;
   color: #f4e733;
   border: 1px solid #f4e733;
 }
-
 #showTopEvaluationBtn:hover {
   background: #333;
 }
-
 @media print {
   body {
     direction: rtl;
@@ -463,44 +440,10 @@ display: table-cell;
   display: table-cell;
 }
     }
-
 @media (max-width: 768px) {
-.header-right {
-padding: 10px 10px;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-gap: 10px;
-}
-
-.header-info {
-display: block;
-text-align: center;
-}
-
-.header-info .arabic-name {
-font-size: 16px;
-}
-
-.header-info .english-name {
-font-size: 12px;
-}
-
-.header-right .divider {
-height: 45px;
-width: 1.5px;
-background-color: #f4e733;
-}
-
-img.logo {
-height: 50px !important;
-max-height: 50px !important;
-}
-
 .hidden-column {
 display: none !important;
 }
-
 .container {
 width: 90%;
 margin: 20px auto;
@@ -510,13 +453,11 @@ font-size: 12px;
 overflow-x: auto;
 -webkit-overflow-scrolling: touch;
 }
-
 nav {
 flex-direction: row;
 flex-wrap: wrap;
 padding: 5px;
 }
-
 nav button, .dropdown > button {
 font-size: 10px;
 padding: 6px 8px;
@@ -524,33 +465,27 @@ margin: 2px;
 min-width: auto;
 flex: 1;
 }
-
 .dropdown-content {
 min-width: 100px;
 right: 0;
 }
-
 .container {
 width: 100%;
 padding: 10px;
 margin: 10px auto;
 overflow-x: auto;
 }
-
 .controls {
 padding: 10px;
 }
-
 .filter-bar {
 flex-direction: column;
 align-items: stretch;
 gap: 12px;
 }
-
 .search-group {
 width: 100%;
 }
-
 .search-group select,
 .search-group input,
 .search-group button.clear-btn,
@@ -561,17 +496,14 @@ width: 100%;
     color: #f4e733;
     border: 1px solid #f4e733;
 }
-
 .filter-type-selector {
 width: 100%;
 }
-
 .export-buttons {
 flex-direction: row !important;
 justify-content: center;
 width: 100%;
 }
-
 .export-buttons button {
 flex: 1;
 padding: 8px;
@@ -592,120 +524,95 @@ min-width: 120px;
 .select2-search__field {
   font-size: 10px;
 }
-  #datePicker {
-    width: 100%;
-    font-size: 10px;
-    padding: 8px 12px;
-    border-radius: 8px;
+#datePicker {
+   width: 100%;
+   font-size: 10px;
+   padding: 8px 12px;
+   border-radius: 8px;
   }
 .filter-type-selector {
-width: 100%;
-margin-bottom: 8px;
+   width: 100%;
+   margin-bottom: 8px;
 }
-
 .chip {
-font-size: 10px;
-padding: 4px 8px;
+   font-size: 10px;
+   padding: 4px 8px;
 }
-
 th, td {
-padding: 4px 6px;
-font-size: 10px;
+   padding: 4px 6px;
+   font-size: 10px;
 }
-
 .hidden-column {
-display: none !important;
+   display: none !important;
 }      
 #attendanceTable, #activityTable {
-font-size: 10px;
+   font-size: 10px;
 }
-
 table {
-font-size: 10px;
+   font-size: 10px;
 }
-
 #activityTable td:nth-child(3), 
 #activityTable th:nth-child(3),
 #activityTable td:nth-child(4), 
 #activityTable th:nth-child(4) {
-display: none;
+    display: none;
 }
-
 #activityTable td, #activityTable th {
-font-size: 10px;
-padding: 6px 8px;
+    font-size: 10px;
+    padding: 6px 8px;
 }
-
 .stats-container {
-grid-template-columns: 1fr;
-gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 10px;
 }
-
 .stat-card {
-padding: 10px;
+    padding: 10px;
 }
-
 .title {
-font-size: 18px;
-margin-bottom: 15px;
+    font-size: 18px;
+    margin-bottom: 15px;
 }
-
 .summary-box {
-font-size: 12px;
-margin-top: 5px;
-text-align: center;
-width: 100%;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: center;
+    width: 100%;
 }
-
 .activity-group td {
-font-size: 10px;
-padding: 3px;
+    font-size: 10px;
+    padding: 3px;
 }
-
-footer {
-padding: 10px;
-font-size: 12px;
-}
-
-.social-icons a {
-font-size: 16px;
-margin: 0 5px;
-}
-      .staff-column {
+.staff-column {
     display: none !important;
-  }
-  .export-buttons {
+}
+.export-buttons {
     display: none !important;
-  }
-
+}
 .pdf-table {
-  width: 100%;
-  border-collapse: collapse;
-  direction: rtl;
+    width: 100%;
+    border-collapse: collapse;
+    direction: rtl;
 }
-
 .pdf-table th {
-  background-color: #f4e733;
-  color: black;
-  padding: 8px;
-  text-align: right;
-  border: 1px solid #ddd;
+    background-color: #f4e733;
+    color: black;
+    padding: 8px;
+    text-align: right;
+    border: 1px solid #ddd;
 }
-
 .pdf-table td {
-  padding: 8px;
-  text-align: right;
-  border: 1px solid #ddd;
+    padding: 8px;
+    text-align: right;
+    border: 1px solid #ddd;
 }
-
 .pdf-table tr:nth-child(even) {
-  background-color: #333;
+    background-color: #333;
 }
 #topParticipantsContainer div:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
-  #showTopAttendanceBtn, 
-  #showTopEvaluationBtn {
+#showTopAttendanceBtn, 
+#showTopEvaluationBtn {
     padding: 12px 16px;
     min-height: 44px;
     font-size: 14px;
@@ -713,21 +620,9 @@ margin: 0 5px;
 }
 </style>
 </head>
+    
 <body>
 <div id="printArea" style="display: none;"></div>
-
-<header class="header-container">
-<div class="header-right">
-<img src="Picture3.png" alt="شعار الشارقة" class="logo">
-<div class="divider"></div>
-<img src="logo.png" alt="شعار نادي كلباء" class="logo">
-<div class="header-info">
-<div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
-<div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
-</div>
-</div>
-</header>
-
 <nav>
 <button onclick="showMainView()" class="active">الحضور </button>
 <button onclick="showActivitiesView()">الحضور حسب الأنشطة</button>
@@ -3125,20 +3020,6 @@ window.addEventListener('resize', checkMobileView);
     document.getElementById("showTopEvaluationBtn").classList.toggle("btn-outline-primary", showAttendance);
   }
 </script>
-    
-<div class="footer-container">
-<footer>
-<p>© 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة</p>
-<p style="font-size: 14px; color: #aaa; margin-top: -10px;">تم التطوير بواسطة روند أحمد الضمور</p>
-<div class="social-icons">
-<a href="https://facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
-<a href="https://instagram.com/kalbasc" target="_blank"><i class="fab fa-instagram"></i></a>
-<a href="https://x.com/Kalba_sc" target="_blank"><i class="fab fa-twitter"></i></a>
-<a href="https://youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
-<a href="https://tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
-</div>
-</footer>
-</div>  
     
 </body>
 </html>
