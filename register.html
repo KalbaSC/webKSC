@@ -16,7 +16,7 @@
     body {
       margin: 0;
       font-family: 'NotoKufiArabic', sans-serif;
-      background-color: #000;
+      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
       color: white;
       direction: rtl;
     }
@@ -325,13 +325,11 @@
 </footer>
 
 <script>
-  // Mobile menu toggle function
   function toggleMenu() {
     const navLinks = document.getElementById('navLinks');
     navLinks.classList.toggle('show');
   }
 
-  // Close menu when clicking outside
   document.addEventListener('click', function(e) {
     const navLinks = document.getElementById('navLinks');
     const menuToggle = document.querySelector('.menu-toggle');
