@@ -31,7 +31,7 @@
 
     header {
       background-color: #111;
-      padding: 20px 40px;
+      padding: 20px 30px;
       width: 96%;
       display: flex;
       align-items: center;
@@ -40,34 +40,70 @@
       border-bottom: 3px solid #f4e733;
     }
 
-    .logo {
-      height: 60px;
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-right img.logo {
+      height: 70px;
+    }
+
+    .header-right .divider {
+      width: 1.5px;
+      height: 65px;
+      background-color: #f4e733;
+    }
+
+    .header-info {
+      text-align: right;
+    }
+
+    .header-info .arabic-name {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .header-info .english-name {
+      font-size: 14px;
+      color: #f4e733;
     }
 
     .nav-links {
       display: flex;
-      gap: 25px;
+      gap: 70px;
     }
 
     .nav-links a {
       color: #f4e733;
       text-decoration: none;
       font-weight: bold;
-      font-size: 18px;
-      transition: color 0.3s;
+      font-size: 16px;
+      transition: color 1.5s;
     }
 
     .nav-links a:hover {
       color: white;
     }
 
-    .container {
+    .mobile-nav {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 8px;
+      background: none;
+      border: none;
+      color: #f4e733;
+      cursor: pointer;
+    }
+
+    .content-section {
+      padding: 30px;
       max-width: 1200px;
-      margin: 20px auto;
-      padding: 20px;
-      background: rgba(20, 20, 20, 0.8);
-      border-radius: 10px;
-      border: 1px solid #f4e733;
+      margin: 0 auto;
     }
 
     .controls {
@@ -216,41 +252,6 @@
       font-size: 20px;
     }
 
-    @media (max-width: 768px) {
-      header {
-        padding: 10px 15px;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .nav-links {
-        margin-top: 15px;
-        gap: 15px;
-      }
-
-      .container {
-        padding: 15px;
-        margin: 15px;
-      }
-
-      .filter-bar {
-        flex-direction: column;
-      }
-
-      table {
-        font-size: 14px;
-      }
-
-      th, td {
-        padding: 8px 5px;
-      }
-
-      footer {
-        flex-direction: column;
-        padding: 30px 20px;
-      }
-    }
-
     /* Additional styling for reports specific elements */
     .chip {
       display: inline-block;
@@ -303,16 +304,82 @@
       margin: -25px auto 10px;
       font-weight: bold;
     }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 15px;
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 200px;
+        background: #000;
+        border-left: 2px solid #f4e733;
+        padding: 40px 20px;
+        flex-direction: column;
+        z-index: 9999;
+        gap: 20px;
+        transition: transform 0.3s ease;
+        transform: translateX(100%);
+      }
+
+      .nav-links.show {
+        display: flex;
+        transform: translateX(0);
+      }
+
+      .header-info {
+        display: none;
+      }
+
+      .mobile-nav {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+        font-size: 35px;
+        margin-right: 10px;
+      }
+
+      .filter-bar {
+        flex-direction: column;
+      }
+
+      table {
+        font-size: 14px;
+      }
+
+      th, td {
+        padding: 8px 5px;
+      }
+
+      footer {
+        flex-direction: column;
+        padding: 30px 20px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <div style="display: flex; align-items: center; gap: 15px;">
-      <img src="Picture3.png" alt="شعار الشارقة" style="height: 70px;">
-      <div style="width: 2px; height: 70px; background-color: #f4e733;"></div>
-      <img src="logo.png" alt="شعار نادي كلباء" style="height: 60px;">
+    <div class="mobile-nav">
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     </div>
-    <nav class="nav-links">
+    <div class="header-right">
+      <img src="Picture3.png" alt="شعار الشارقة" class="logo">
+      <div class="divider"></div>
+      <img src="logo.png" alt="شعار نادي كلباء" class="logo">
+      <div class="header-info">
+        <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+        <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
+      </div>
+    </div>
+    <nav class="nav-links" id="navLinks">
       <a href="index.html">الرئيسية</a>
       <a href="news.html">الأخبار</a>
       <a href="media.html">الوسائط</a>
@@ -321,7 +388,7 @@
     </nav>
   </header>
 
-  <div class="container">
+  <div class="content-section">
     <h1 style="color: #f4e733; text-align: center; margin-bottom: 20px;">تقارير الحضور والتقييمات</h1>
     
     <div class="controls">
@@ -434,7 +501,22 @@
   </footer>
 
   <script>
-    
+    // Mobile menu toggle function
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('show');
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const navLinks = document.getElementById('navLinks');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
+      if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+        navLinks.classList.remove('show');
+      }
+    });
+
     document.addEventListener('DOMContentLoaded', function() {
       fetchData();
       
