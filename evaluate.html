@@ -14,11 +14,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">  <style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">  
+  <style>
 @font-face {
   font-family: 'NotoKufiArabic';
   src: url('NotoKufiArabic.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'NotoKufiArabic';
+  src: url('NotoKufiArabic-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: 'NotoKufiArabic', sans-serif;
   background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
@@ -26,57 +35,79 @@ body {
   color: white;
   margin: 0;
   padding: 0;
+  direction: rtl;
 }
-.header-container {
-  width: 100%;
-  background: #111;
-  border-bottom: 2px solid #f4e733;
-  position: relative;
-  z-index: 100;
-}
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 1200px;
-  gap: 8px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 0px;
-}
-.header-right {
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 20px 42px;
+
+header {
   background-color: #111;
-  color: white;
-  box-sizing: border-box;
+  padding: 20px 42px;
+  width: 94.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid #f4e733;
 }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .header-right img.logo {
   height: 70px;
-  width: auto;
 }
-.divider {
+
+.header-right .divider {
   width: 1.5px;
   height: 65px;
   background-color: #f4e733;
-  flex-shrink: 0;
 }
+
 .header-info {
-  text-align: center;
+  text-align: right;
 }
-.arabic-name {
+
+.header-info .arabic-name {
   font-weight: bold;
   font-size: 20px;
 }
-.english-name {
+
+.header-info .english-name {
   font-size: 14px;
   color: #f4e733;
 }
+
+.nav-links {
+  display: flex;
+  gap: 70px;
+}
+
+.nav-links a {
+  color: #f4e733;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 1.5s;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 8px;
+  background: none;
+  border: none;
+  color: #f4e733;
+  cursor: pointer;
+}
+
 .container {
   display: grid;
   grid-template-columns: 1fr;
@@ -89,49 +120,57 @@ body {
   margin-top: 30px;
   margin-bottom: 30px;
 }
-    .login-container {
-      max-width: 500px;
-      margin: 50px auto;
-      padding: 30px;
-      background: rgba(0, 0, 0, 0.9);
-      border-radius: 10px;
-      text-align: center;
-    }
-    .login-container h2 {
-      color: #f4e733;
-      margin-bottom: 20px;
-    }
-    .form-group {
-      margin-bottom: 20px;
-      text-align: right;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      color: #f4e733;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #f4e733;
-      background: #222;
-      color: white;
-    }
-    .btn {
-      background: #f4e733;
-      color: black;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      margin: 5px;
-    }
-    .btn-block {
-      display: block;
-      width: 100%;
-    }
+
+.login-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.login-container h2 {
+  color: #f4e733;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #f4e733;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #f4e733;
+  background: #222;
+  color: white;
+}
+
+.btn {
+  background: #f4e733;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
 .remember-me {
   display: flex;
   align-items: center;
@@ -139,58 +178,68 @@ body {
   margin-top: 10px;
   direction: rtl;
 }
+
 .remember-me input[type="checkbox"] {
   margin: 0;
   width: auto;
 }
+
 .remember-me label {
   margin: 0;
   color: white !important;
 }
-    .nav-tabs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #f4e733;
-    }
-    .nav-tabs button {
-      background: none;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 20px;
-    }
-    .nav-tabs button.active {
-      background: #f4e733;
-      color: black;
-      border-radius: 5px 5px 0 0;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #f4e733;
-      padding: 10px;
-      text-align: center;
-    }
-    th {
-      background-color: #333;
-      color: #f4e733;
-    }
-  .date-filter-container {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
+
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f4e733;
+}
+
+.nav-tabs button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.nav-tabs button.active {
+  background: #f4e733;
+  color: black;
+  border-radius: 5px 5px 0 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #f4e733;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #333;
+  color: #f4e733;
+}
+
+.date-filter-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
 
 #playersListTab {
   padding: 20px;
 }
+
 .table-responsive {
   overflow-x: auto;
   margin: 20px 0;
@@ -219,139 +268,150 @@ body {
 .players-table tr:nth-child(even) {
   background-color: rgba(244, 231, 51, 0.1);
 }
-    .evaluation-form {
-      background: #222;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-    }
-    .evaluation-criteria {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 15px;
-    }
-    .criteria-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .criteria-item label {
-      color: #f4e733;
-    }
-    .criteria-item select {
-      width: 100px;
-      padding: 5px;
-      border-radius: 5px;
-      background: #333;
-      color: white;
-      border: 1px solid #f4e733;
-    }
-    .hidden {
-      display: none;
-    }
-    .player-card {
-      background: #222;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      border-left: 4px solid #f4e733;
-    }
-    .player-card h3 {
-      margin-top: 0;
-      color: #f4e733;
-    }
-    .progress-container {
-      margin-top: 20px;
-    }
-    .progress-bar {
-      height: 20px;
-      background: #333;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      background: #f4e733;
-      width: 0%;
-      transition: width 0.5s;
-    }
-    .rankings {
-      margin-top: 30px;
-    }
-    .ranking-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      background: #222;
-      margin-bottom: 10px;
-      border-radius: 5px;
-    }
-    .rank-badge {
-      background: #f4e733;
-      color: black;
-      padding: 5px 10px;
-      border-radius: 50%;
-      font-weight: bold;
-      margin-left: 10px;
-    }
-    footer {
-      background-color: #000;
-      color: white;
-      padding: 40px 10vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 40px;
-      direction: rtl;
-      border-top: 3px solid #f4e733;
-      text-align: right;
-    }
 
-    .footer-column {
-      flex: 1;
-      min-width: 250px;
-    }
+.evaluation-form {
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
 
-    .footer-bottom {
-      width: 100%;
-      text-align: center;
-      padding-top: 15px;
-      border-top: 1px solid #444;
-      color: #888;
-      font-size: 14px;
-      margin-top: 30px;
-    }
+.evaluation-criteria {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+}
 
-    .footer-column a {
-      color: #ccc;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 8px;
-    }
+.criteria-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .footer-column a:hover {
-      color: #f4e733;
-    }
+.criteria-item label {
+  color: #f4e733;
+}
 
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      margin-top: 15px;
-    }
+.criteria-item select {
+  width: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  background: #333;
+  color: white;
+  border: 1px solid #f4e733;
+}
 
-    .social-icons a {
-      color: white;
-      font-size: 20px;
-    }
+.hidden {
+  display: none;
+}
 
-   @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+.player-card {
+  background: #222;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border-left: 4px solid #f4e733;
+}
+
+.player-card h3 {
+  margin-top: 0;
+  color: #f4e733;
+}
+
+.progress-container {
+  margin-top: 20px;
+}
+
+.progress-bar {
+  height: 20px;
+  background: #333;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #f4e733;
+  width: 0%;
+  transition: width 0.5s;
+}
+
+.rankings {
+  margin-top: 30px;
+}
+
+.ranking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #222;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.rank-badge {
+  background: #f4e733;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 50%;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+footer {
+  background-color: #000;
+  color: white;
+  padding: 40px 10vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
+  direction: rtl;
+  border-top: 3px solid #f4e733;
+  text-align: right;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-bottom {
+  width: 100%;
+  text-align: center;
+  padding-top: 15px;
+  border-top: 1px solid #444;
+  color: #888;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.footer-column a {
+  color: #ccc;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.footer-column a:hover {
+  color: #f4e733;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 20px;
+}
+
 .top-three-grid {
   display: flex;
   justify-content: center;
@@ -376,6 +436,7 @@ body {
   position: relative;
   transition: transform 0.3s ease;
 }
+
 .ranking-card:hover {
   transform: scale(1.05);
 }
@@ -398,6 +459,7 @@ body {
   border: 2px solid #f4e733;
   box-shadow: 0 0 20px #f4e733, 0 0 40px #f4e73388;
 }
+
 .activity-label {
   font-weight: bold;
   margin-bottom: 8px;
@@ -410,7 +472,7 @@ body {
   box-shadow: 0 0 4px rgba(0,0,0,0.3);
 }
 
- #activityFilter {
+#activityFilter {
   padding: 10px 16px;
   font-size: 16px;
   background-color: #111;
@@ -427,6 +489,7 @@ body {
   padding-left: 40px;
   cursor: pointer;
 }
+
 #evaluatedPlayersTab {
   padding: 20px;
 }
@@ -450,6 +513,7 @@ body {
   gap: 10px;
   margin: 10px 0;
 }
+
 .welcome-banner {
   text-align: center;
   padding: 20px;
@@ -466,67 +530,360 @@ body {
 .welcome-banner span {
   color: #fff;
 }
+
 #playersCount i {
   display: inline-block;
   margin-left: 5px;
   color: #f4e733;
 }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-    #progressChartContainer {
+
+#progressChartContainer {
   width: 100%;
   height: 300px;
   position: relative;
   direction: ltr; 
 }
+
 #progressChart {
   width: 100% !important;
   height: 100% !important;
 }
-    @media (max-width: 768px) {
-   html {
-  -webkit-text-size-adjust: 100%; 
-       }
 
-  .header-container {
-    padding: 0;
+/* Chatbot Styles */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-8px);}
+  60% {transform: translateY(-4px);}
+}
+
+.typing-dots span {
+  animation: blink 1s infinite;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0 1px;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+#chat-box {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background-color: white;
+  color: black;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 0;
+  max-width: 90%;
+  width: 360px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  display: none;
+  z-index: 9999;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: flex-start;
+  padding: 8px 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.chat-header span {
+  font-size: 18px;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+}
+
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  max-height: 450px;
+}
+
+.chat-footer {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-top: 1px solid #ccc;
+  background: white;
+  gap: 10px;
+}
+
+.chat-footer input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.chat-footer button {
+  background: #f4e733;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#chat-box::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 12px;
+}
+
+#chat-box::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 12px;
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+}
+
+.message-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px;
+}
+
+.message-wrapper.user {
+  flex-direction: row-reverse;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.content {
+  background-color: #f4e733;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 75%;
+  font-size: 18px;
+}
+
+.message-wrapper.bot .content {
+  background-color: #eee;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.chat-btn {
+  background-color: #f4e733;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#chat-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+#chat-tooltip {
+  background: white;
+  color: black;
+  padding: 10px 14px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-weight: bold;
+  font-size: 14px;
+  max-width: 260px;
+  direction: rtl;
+  text-align: right;
+  white-space: nowrap;
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 9999;
+  line-height: 1.4;
+}
+
+#chat-toggle {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  cursor: pointer;
+  padding: 0;
+}
+
+#chat-badge {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#loadingPopup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #222;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  z-index: 9999;
+  text-align: center;
+  font-family: 'NotoKufiArabic', sans-serif;
+}
+
+#loadingPopup .spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 10px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #f4e733;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  html {
+    -webkit-text-size-adjust: 100%; 
+  }
+
+  header {
+    padding: 10px 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 93%;
+  }
+  
+  body {
+    overflow-x: hidden;  
+    background: url('phonebkg.jpg') no-repeat top left fixed;
+    background-size: 250%;
+  }
+  
+  .header-right img.logo {
+    height: 50px !important;
+    max-height: 50px !important;
+  }
+  
+  .header-right .divider {
+    height: 45px;
+    width: 1.5px;
+  }
+
+  .menu-toggle {
+    font-size: 35px;
+    margin-right: 10px;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 200px;
+    background: #000;
+    border-left: 2px solid #f4e733;
+    padding: 40px 20px;
+    flex-direction: column;
+    z-index: 9999;
+    gap: 20px;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+  }
+
+  .nav-links.show {
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .header-info {
+    display: none;
   }
 
   .header-right {
-    padding: 10px 15px;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 10px;
+    flex: 1;
+    justify-content: center;
+  }
+    
+  .mobile-nav {
+    display: flex;
   }
 
-  .header-content {
-    padding: 0;
-    justify-content: space-between;
-    gap: 10px;
+  .menu-toggle {
+    display: block;
   }
 
-  .header-right img.logo {
-    height: 50px;
-    width: auto;
-  }
-
-  .divider {
-    height: 40px;
-  }
-
-  .arabic-name {
-    font-size: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .english-name {
-    font-size: 12px;
-  }
   .container {
     padding: 10px;
     margin: 15px auto;
@@ -538,7 +895,7 @@ body {
     border-bottom: none;
   }
 
-    button, .btn, .nav-tabs button, .criteria-item select {
+  button, .btn, .nav-tabs button, .criteria-item select {
     min-height: 44px;
     padding: 12px 16px !important;
     touch-action: manipulation;
@@ -587,27 +944,27 @@ body {
     margin-top: 8px;
   }
 
-#loadingPopup {
-  background: rgba(0, 0, 0, 0.9) !important;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid #f4e733;
-  max-width: 300px;
-  width: 80%;
-  text-align: center;
-  padding: 25px !important;
-  border-radius: 15px !important;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
-}
+  #loadingPopup {
+    background: rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid #f4e733;
+    max-width: 300px;
+    width: 80%;
+    text-align: center;
+    padding: 25px !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+  }
 
-#loadingPopup .spinner {
-  width: 50px !important;
-  height: 50px !important;
-  margin: 0 auto 15px !important;
-  border-width: 4px !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
-  border-top-color: #f4e733 !important;
-}
+  #loadingPopup .spinner {
+    width: 50px !important;
+    height: 50px !important;
+    margin: 0 auto 15px !important;
+    border-width: 4px !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    border-top-color: #f4e733 !important;
+  }
 
   .login-container {
     padding: 20px 15px;
@@ -627,7 +984,8 @@ body {
   canvas {
     max-width: 100%;
   }
-    .footer-container {
+
+  .footer-container {
     padding: 15px 10px;
   }
 
@@ -654,7 +1012,61 @@ body {
   .social-icons a {
     margin: 0;
     font-size: 18px;
-  }    
+  }
+
+  /* Chatbot mobile styles */
+  #chat-tooltip {
+    max-width: 90% !important;
+    font-size: 13px !important;
+    padding: 8px 12px !important;
+    bottom: 100px !important;
+    right: 10px !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+    white-space: normal !important;
+  }
+  
+  #chat-box {
+    width: 90% !important;
+    padding: 12px !important;
+    min-height: 280px !important;
+    max-height: 80vh !important;
+    height: 460px !important; 
+    font-size: 15px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .chat-body {
+    flex: 1;
+    overflow-y: auto !important;
+    padding: 10px !important;
+  }
+
+  .chat-footer input {
+    font-size: 14px !important;
+    padding: 6px !important;
+  }
+
+  .chat-footer button {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .chat-btn {
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+  }
+
+  .content {
+    font-size: 15px !important;
+  }
+
+  .message-wrapper {
+    margin: 6px !important;
+    gap: 8px !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -681,6 +1093,7 @@ body {
   .divider {
     display: none; 
   }
+  
   .players-table {
     font-size: 12px;
   }
@@ -694,7 +1107,8 @@ body {
   .form-group select {
     padding: 10px 6px !important;
   }
-    .footer-container {
+  
+  .footer-container {
     padding: 12px 8px;
   }
 
@@ -710,24 +1124,34 @@ body {
     font-size: 16px;
   }
 }
-
   </style>
 </head>
 <body>
 
-  <header class="header-container">
-    <div class="header-right">
-      <img src="Picture3.png" alt="شعار الشارقة" class="logo">
-      <div class="divider"></div>
-      <img src="logo.png" alt="شعار نادي كلباء" class="logo">
-      <div class="header-info">
-        <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
-        <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
-      </div>
+<header>
+  <div class="mobile-nav">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="header-right">
+    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
+    <div class="divider"></div>
+    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
+    <div class="header-info">
+      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+      <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
     </div>
-  </header>
+  </div>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">الرئيسية</a>
+    <a href="news.html">الأخبار</a>
+    <a href="media.html">الوسائط</a>
+    <a href="register.html">التسجيل</a>
+    <a href="evaluate.html">بوابة المدربين</a>
+    <a href="contact.html">اتصل بنا</a>
+  </nav>
+</header>
 
-  <div id="loginView" class="login-container">
+<div id="loginView" class="login-container">
     <h2>تسجيل دخول المدربين</h2>
     <form id="loginForm">
       <div class="form-group">
@@ -746,30 +1170,8 @@ body {
     </form>
   </div>
 
-<div id="loadingPopup" style="
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #222;
-  color: white;
-  padding: 20px 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
-  z-index: 9999;
-  text-align: center;
-  font-family: 'NotoKufiArabic', sans-serif;
-">
-  <div class="spinner" style="
-    width: 40px;
-    height: 40px;
-    margin: 0 auto 10px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #f4e733;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  "></div>
+<div id="loadingPopup" style="display: none;">
+  <div class="spinner"></div>
   جاري تحميل البيانات...
 </div>
 
@@ -813,38 +1215,39 @@ body {
       <div id="playersList"></div>
     </div>
 
-  <div id="evaluatedPlayersTab" class="hidden">
-  <h2 style="color:#f4e733; text-align:center">اللاعبون المقييمون</h2>
-  <div id="evaluatedPlayersList"></div>
-</div>
+    <div id="evaluatedPlayersTab" class="hidden">
+      <h2 style="color:#f4e733; text-align:center">اللاعبون المقييمون</h2>
+      <div id="evaluatedPlayersList"></div>
+    </div>
 
     <div id="rankingsTab" class="hidden">
-<h2 style="color:#f4e733; text-align:center">تصنيف اللاعبين</h2>
+      <h2 style="color:#f4e733; text-align:center">تصنيف اللاعبين</h2>
 
-<div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px;">
-  <label for="activityFilter" style="color:#fff; font-size:16px;">اختر النشاط:</label>
-  <select id="activityFilter" onchange="updateRankings()">
-    <option value="all">الكل</option>
-    <option value="كرة يد">كرة يد</option>
-    <option value="كرة طائرة">كرة طائرة</option>
-    <option value="كرة سلة">كرة سلة</option>
-    <option value="شطرنج">شطرنج</option>
-  </select>
-</div>
+      <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px;">
+        <label for="activityFilter" style="color:#fff; font-size:16px;">اختر النشاط:</label>
+        <select id="activityFilter" onchange="updateRankings()">
+          <option value="all">الكل</option>
+          <option value="كرة يد">كرة يد</option>
+          <option value="كرة طائرة">كرة طائرة</option>
+          <option value="كرة سلة">كرة سلة</option>
+          <option value="شطرنج">شطرنج</option>
+        </select>
+      </div>
 
-<div id="topThreeContainer" class="top-three-grid"></div>
-<div id="rankingsContainer" class="ranking-grid"></div>
-<button class="btn" onclick="exportRankings()">تصدير التصنيفات</button>
+      <div id="topThreeContainer" class="top-three-grid"></div>
+      <div id="rankingsContainer" class="ranking-grid"></div>
+      <button class="btn" onclick="exportRankings()">تصدير التصنيفات</button>
     </div>
 
     <div id="progressTab" class="hidden">
       <h2 style="color:#f4e733; text-align:center">تطور الأداء</h2>
       <div class="form-group">
         <label for="playerSelect">اختر اللاعب</label>
-<select id="playerSelect"></select>
-<div id="progressChartContainer">
-  <canvas id="progressChart"></canvas>
-</div>
+        <select id="playerSelect"></select>
+        <div id="progressChartContainer">
+          <canvas id="progressChart"></canvas>
+        </div>
+      </div>
     </div>
   </div>
   <script>
@@ -1967,7 +2370,732 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
 </html>
 
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>نادي كلباء الرياضي الثقافي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-8px);}
+  60% {transform: translateY(-4px);}
+}
+
+    .typing-dots span {
+      animation: blink 1s infinite;
+      font-weight: bold;
+      font-size: 24px;
+      margin: 0 1px;
+    }
+
+    .typing-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .typing-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body, .content, .chat-btn {
+      font-family: 'NotoKufiArabic', 'Cairo', sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+
+
+#chat-box {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background-color: white;
+  color: black;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 0;
+  max-width: 90%;
+  width: 360px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  display: none;
+  z-index: 9999;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: flex-start;
+  padding: 8px 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.chat-header span {
+  font-size: 18px;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+}
+
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+max-height: 450px;
+}
+
+.chat-footer {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-top: 1px solid #ccc;
+  background: white;
+gap: 10px;
+}
+
+.chat-footer input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.chat-footer button {
+  background: #f4e733;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Scrollbar styling */
+#chat-box::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 12px;
+}
+
+#chat-box::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 12px;
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+}
+
+.message-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px;
+}
+
+.message-wrapper.user {
+  flex-direction: row-reverse;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+
+    .content {
+      background-color: #f4e733;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 75%;
+      font-size: 18px;
+    }
+
+    .message-wrapper.bot .content {
+      background-color: #eee;
+    }
+
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .chat-btn {
+      background-color: #f4e733;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 600px) {
+      #chat-box {
+        width: 75% !important;
+        padding: 25px !important;
+        max-width: 95% !important;
+        min-height: 70vh !important;
+        font-size: 18px !important;
+      }
+
+      .content {
+        font-size: 18px !important;
+      }
+
+      .chat-btn {
+        padding: 14px 18px !important;
+        font-size: 17px !important;
+      }
+
+      header h1 {
+        font-size: 22px !important;
+      }
+
+      header img {
+        height: 70px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="chat-box">
+  <div class="chat-header">
+<span onclick="toggleChat()">✕</span>
+  </div>
+
+  <div class="chat-body" id="chat-body">
+    <!-- messages will appear here -->
+  </div>
+
+  <!-- input bar should stay fixed at the bottom -->
+  <div class="chat-footer" id="inner-input-bar" style="display: none;">
+    <input id="userMessage" type="text" placeholder="اكتب شيئًا...">
+    <button onclick="submitUserMessage()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="20" height="20">
+        <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<div id="chat-wrapper" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+">
+
+<div id="chat-tooltip" style="
+  background: white;
+  color: black;
+  padding: 10px 14px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-weight: bold;
+  font-size: 14px;
+  max-width: 260px;
+  direction: rtl;
+  text-align: right;
+  white-space: nowrap;
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 9999;
+  line-height: 1.4;
+">
+  <span style="flex: 1;">مرحباً بك في نادي كلباء الرياضي الثقافي</span>
+  <span onclick="dismissTooltip()" style="
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+    line-height: 1;
+    margin-top: -2px;
+  ">✕</span>
+</div>
+
+  <!-- Chat button with badge -->
+  <button id="chat-toggle" onclick="toggleChat()" style="
+    position: relative;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    padding: 0;
+  ">
+    <img src="logo.png" alt="Chat Logo" style="width: 100%; height: 100%; border-radius: 50%;">
+    <span id="chat-badge" style="
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      background: red;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    ">1</span>
+  </button>
+</div>
+
+<script>
+let userName = '';
+  
+function showMainButtons() {
+  const buttonsWrapper = document.createElement("div");
+  buttonsWrapper.className = "button-container";
+
+  const buttons = [
+    { label: "مواعيد التدريبات", action: () => reply('training') },
+    { label: "التسجيل في النادي", action: () => reply('register') },
+    { label: "معلومات عن الرياضات", action: () => reply('teams') },
+    { label: "تواصل معنا", action: () => showContactMain() },
+    { label: "🔁 إعادة المحادثة", action: () => startChat() },
+  ];
+
+  buttons.forEach(btn => {
+    const el = document.createElement("button");
+    el.className = "chat-btn";
+    el.innerText = btn.label;
+    el.onclick = btn.action;
+    buttonsWrapper.appendChild(el);
+  });
+
+  const wrapper = document.createElement("div");
+  wrapper.className = 'message-wrapper bot';
+
+  const avatar = document.createElement("div");
+  avatar.className = 'avatar';
+  avatar.style.backgroundImage = "url('bot-icon.png')";
+
+  const bubble = document.createElement("div");
+  bubble.className = 'content';
+  bubble.appendChild(buttonsWrapper);
+
+  wrapper.appendChild(avatar);
+  wrapper.appendChild(bubble);
+
+  const chatBody = document.getElementById("chat-body");
+  chatBody.appendChild(wrapper);
+  wrapper.scrollIntoView({ behavior: "smooth" });
+}
+
+function addMessage(content, isUser = false) {
+  const chatBody = document.getElementById('chat-body');
+  if (!chatBody) {
+    console.warn("chat-body not found when adding message.");
+    return;
+  }
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'message-wrapper ' + (isUser ? 'user' : 'bot');
+
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar';
+  avatar.style.backgroundImage = `url('${isUser ? 'user-icon.png' : 'bot-icon.png'}')`;
+
+  const bubble = document.createElement('div');
+  bubble.className = 'content';
+  bubble.innerHTML = content;
+
+  wrapper.appendChild(avatar);
+  wrapper.appendChild(bubble);
+  chatBody.appendChild(wrapper);
+
+  setTimeout(() => {
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }, 100);
+}
+
+function clearChat() {
+  const chatBody = document.getElementById('chat-body');
+  if (chatBody) chatBody.innerHTML = ''; 
+
+  const buttons = document.getElementById("main-buttons");
+  const inputBar = document.getElementById("inner-input-bar");
+
+  if (buttons) buttons.style.display = "none";
+  if (inputBar) inputBar.style.display = "none";
+}
+
+function startChat(retries = 0) {
+  const chatBody = document.getElementById("chat-body");
+
+  if (!chatBody) {
+    if (retries < 10) {
+      console.warn("⏳ Waiting for chat-body... Retry:", retries + 1);
+      return setTimeout(() => startChat(retries + 1), 150);
+    } else {
+      console.error("❌ chat-body not found after retries.");
+      return;
+    }
+  }
+
+  clearChat();
+
+  addMessage("مرحباً بك في نادي كلباء الرياضي الثقافي! 👋 ما اسمك؟", false);
+
+  const inputDiv = document.createElement("div");
+  inputDiv.id = "nameInputWrapper";
+  inputDiv.style.marginTop = "10px";
+inputDiv.innerHTML = `
+  <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
+    <input id="nameInput" type="text" placeholder="اكتب اسمك هنا..." 
+           style="padding:10px; font-size:16px; flex: 1; border-radius:5px; border:1px solid #ccc;">
+    <button onclick="submitName()" 
+            style="padding:10px 15px; background:#f4e733; font-weight:bold; border:none; border-radius:5px;">
+      إرسال
+    </button>
+  </div>
+`;
+  chatBody.appendChild(inputDiv);
+}
+
+ function submitName() {
+  const input = document.getElementById("nameInput");
+
+  const name = input.value.trim();
+
+  if (name) {
+  addMessage(`${name}`, true);
+  userName = name;
+  document.getElementById("nameInputWrapper").remove();
+  
+  setTimeout(() => {
+    addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
+    showMainButtons();
+    const inputBar = document.getElementById("inner-input-bar");
+    if (inputBar) inputBar.style.display = "flex";
+  }, 500);
+}
+ }
+  
+  function submitUserMessage() {
+    const input = document.getElementById("userMessage");
+    const msg = input.value.trim();
+    if (msg) {
+      addMessage(msg, true);
+
+
+    fetch('https://script.google.com/macros/s/AKfycbyh1Wj8HJ7qVypnVXQgvwfOJdMz7CBKj_U26NmMlKOgG-JmnGnzSn6tvycvpClTZZAE_w/exec', {
+  method: 'POST',
+  mode: 'no-cors',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name: userName, message: msg })
+})
+.finally(() => {
+  addMessage("شكراً على تواصلك، سيتم الرد عليك في أقرب وقت.", false);
+});
+
+input.value = '';
+
+    }
+  }
+  
+ function handleTeamOption(type) {
+ 
+  const lastWrappers = document.querySelectorAll('.message-wrapper.bot');
+  const last = lastWrappers[lastWrappers.length - 1];
+  if (last) last.remove();
+
+  addMessage(type === 'individual' ? "🎯 الألعاب الفردية" : "🏃‍♂️ الألعاب الجماعية", true);
+
+  const sportsList = (type === "individual") ? [
+    { name: "الشطرنج", info: "رياضة ذهنية تساعد على التركيز والتخطيط." },
+    { name: "الجودو", info: "فن قتالي ياباني يعتمد على التوازن والرمي." },
+    { name: "الكاراتيه", info: "فن قتالي يركز على الضربات واللياقة." },
+    { name: "التايكوندو", info: "رياضة كورية تعتمد على الركلات العالية." },
+    { name: "الدراجات", info: "رياضة تعتمد على التحمل والسرعة." },
+    { name: "ألعاب القوى", info: "تضم الجري، الرمي، الوثب، والمشي." },
+    { name: "الخماسي الحديث", info: "تشمل السباحة، الرماية، الفروسية، الجري، والمبارزة." },
+    { name: "الريشة الطائرة", info: "رياضة سريعة تتطلب رد فعل سريع ومهارة." }
+  ] : [
+    { name: "كرة الطائرة", info: "لعبة جماعية تعتمد على التمريرات والضربات الساحقة." },
+    { name: "كرة السلة", info: "رياضة تتطلب دقة تصويب وسرعة حركة." },
+    { name: "كرة اليد", info: "رياضة جماعية تتميز بالسرعة والتعاون." },
+    { name: "كرة قدم الصالات", info: "نسخة داخلية من كرة القدم تُلعب في صالات مغلقة." }
+  ];
+
+
+  const wrapper = document.createElement("div");
+  wrapper.className = 'message-wrapper bot';
+
+  const avatar = document.createElement("div");
+  avatar.className = 'avatar';
+  avatar.style.backgroundImage = "url('bot-icon.png')";
+
+  const bubble = document.createElement("div");
+  bubble.className = 'content';
+
+  const buttonsWrapper = document.createElement("div");
+  buttonsWrapper.className = "button-container";  
+  buttonsWrapper.style.marginTop = "10px";
+
+  sportsList.forEach(sport => {
+    const btn = document.createElement("button");
+    btn.className = "chat-btn";
+    btn.innerText = sport.name;
+    btn.onclick = () => {
+      addMessage(sport.name, true);
+      addMessage(sport.info, false);
+      setTimeout(() => {
+    const html = `
+  <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+  <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+    <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+  </div>
+   <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+`;
+    addMessage(html, false);
+  }, 1000);   
+};
+    buttonsWrapper.appendChild(btn);
+  });
+
+  bubble.appendChild(buttonsWrapper);
+  wrapper.appendChild(avatar);
+  wrapper.appendChild(bubble);
+
+  const chatBox = document.getElementById("chat-body");
+  chatBox.appendChild(wrapper);
+  wrapper.scrollIntoView({ behavior: "smooth" });
+}
+
+
+  function reply(option) {
+
+    let userText = '';
+    if (option === 'training') userText = 'مواعيد التدريبات';
+    else if (option === 'register') userText = 'التسجيل في النادي';
+    else if (option === 'teams') userText = 'معلومات عن الرياضات';
+
+    addMessage(userText, true); 
+    addMessage(`<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`, false);
+
+    setTimeout(() => {
+const typingDots = document.querySelector('.typing-dots');
+if (typingDots) {
+  const bubble = typingDots.closest('.message-wrapper');
+  if (bubble) bubble.remove();
+}
+
+      if (option === 'teams') {
+const html = `
+  <p style="font-weight: bold; text-align: center;">اختر نوع الرياضة:</p>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 10px;">
+    <button class="chat-btn" onclick="handleTeamOption('individual')">🎯 الألعاب الفردية</button>
+    <button class="chat-btn" onclick="handleTeamOption('group')">🏃‍♂️ الألعاب الجماعية</button>
+  </div>
+`;
+  addMessage(html, false);
+}
+ else if (option === 'training') {
+        addMessage("تُقام التدريبات من يوم السبت إلى الخميس من الساعة 5 مساءً وحتى الساعة 8 مساءً.", false);
+      } else if (option === 'register') {
+        addMessage("للتسجيل، يرجى التواصل مع إداري اللعبة المعنية من خلال الأرقام التالية:", false);
+      }
+
+           if (option !== 'teams') {
+        setTimeout(() => {
+  const html =` 
+    <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+    <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+      <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+    </div>
+    <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+  `;
+  addMessage(html, false);
+}, 1000);
+
+      }
+
+    }, 1000);
+  } // ✅ THIS closes the reply() function
+
+function showContactMain() {
+  addMessage("تواصل معنا", true);
+  addMessage(`<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`, false);
+
+  setTimeout(() => {
+    const typingDots = document.querySelector('.typing-dots');
+    if (typingDots) {
+      const bubble = typingDots.closest('.message-wrapper');
+      if (bubble) bubble.remove();
+    }
+
+    addMessage(`
+      يمكنك التواصل معنا عبر البريد الإلكتروني: 
+      <a href="mailto:info@ksc.shj.ae" style="color:blue;">info@ksc.shj.ae</a><br><br>
+      أو استخدام أي من وسائل التواصل الاجتماعي التالية:
+      <div style="margin-top: 15px; text-align: center;">
+        <!-- social icons -->
+      </div>
+      <br>
+      <p style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">
+        إذا كنت بحاجة إلى مساعدة مباشرة، يمكنك التواصل مع السكرتير:
+      </p>
+      <button onclick="showContactOptions()" 
+        style="margin-top:5px; padding:16px 28px; font-size:18px; background:#f4e733; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
+        تواصل مع السكرتير
+      </button>
+    `, false);
+
+    setTimeout(() => {
+      const html = `
+        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+          <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+        </div>
+         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+      `;
+      addMessage(html, false);
+    }, 1000);
+  }, 1000);
+}
+
+function toggleChat() {
+  const chatBox = document.getElementById('chat-box');
+  const badge = document.getElementById('chat-badge');
+  const tooltip = document.getElementById('chat-tooltip');
+  const alreadyStarted = !!chatBox.querySelector('.message-wrapper');
+
+  if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+    chatBox.style.display = 'block';
+    badge.style.display = 'none';
+    tooltip.style.display = 'none';
+
+    setTimeout(() => {
+      chatBox.style.opacity = '1';
+      chatBox.style.transform = 'translateY(0)';
+
+      setTimeout(() => {
+        const chatBody = document.getElementById('chat-body');
+        if (chatBody && !alreadyStarted) {
+          startChat(); 
+        }
+      }, 200);
+    }, 50);
+
+  } else {
+    chatBox.style.opacity = '0';
+    chatBox.style.transform = 'translateY(30px)';
+    setTimeout(() => {
+      chatBox.style.display = 'none';
+      badge.style.display = 'flex';
+      if (!tooltipDismissed) tooltip.style.display = 'block';
+    }, 500);
+  }
+}
+
+let tooltipDismissed = false;
+
+function dismissTooltip() {
+  document.getElementById('chat-tooltip').style.display = 'none';
+  tooltipDismissed = true;
+}
+
+function showContactOptions() {
+  addMessage("تواصل مع السكرتير", true);
+  addMessage(`<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`, false);
+
+  setTimeout(() => {
+    const typingDots = document.querySelector('.typing-dots');
+    if (typingDots) {
+      const bubble = typingDots.closest('.message-wrapper');
+      if (bubble) bubble.remove();
+    }
+
+    addMessage(`يرجى زيارة بطاقة السكرتير عبر 
+      <a href="https://kalbasc.github.io/sameh/Business%20E-Card.html" target="_blank" style="color:blue;">هذا الرابط</a>.`, false);
+
+    setTimeout(() => {
+      const html = `
+        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+          <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+        </div>
+         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+      `;
+      addMessage(html, false);
+    }, 1000);
+  }, 1000);
+}
+document.addEventListener("keydown", function (e) {
+  const nameInput = document.getElementById("nameInput");
+  if (nameInput && document.activeElement === nameInput && e.key === "Enter") {
+    submitName();
+  }
+});
+
+document.addEventListener("keydown", function (e) {
+  const msgInput = document.getElementById("userMessage");
+  if (msgInput && document.activeElement === msgInput && e.key === "Enter") {
+    submitUserMessage();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  startChat();
+});
+
+</script>
+</body>
+</html>
+
 <footer>
+  <!-- Right side -->
   <div class="footer-column">
     <h3 style="color: #f4e733;">تواصل معنا</h3>
     <p><a href="mailto:info@ksc.shj.ae" style="color: white; text-decoration: none;">info@ksc.shj.ae</a></p>
@@ -1992,6 +3120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </div>
 
+  <!-- Left side -->
   <div class="footer-column">
     <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
 <form id="feedbackForm">
