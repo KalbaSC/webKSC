@@ -15,18 +15,18 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">  <style>
-    @font-face {
-      font-family: 'NotoKufiArabic';
-      src: url('NotoKufiArabic.ttf') format('truetype');
-    }
-    body {
-      font-family: 'NotoKufiArabic', sans-serif;
-      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      margin: 0;
-      padding: 0;
-    }
+@font-face {
+  font-family: 'NotoKufiArabic';
+  src: url('NotoKufiArabic.ttf') format('truetype');
+}
+body {
+  font-family: 'NotoKufiArabic', sans-serif;
+  background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
 .header-container {
   width: 100%;
   background: #111;
@@ -56,44 +56,39 @@
   color: white;
   box-sizing: border-box;
 }
-
 .header-right img.logo {
   height: 70px;
   width: auto;
 }
-
 .divider {
   width: 1.5px;
   height: 65px;
   background-color: #f4e733;
   flex-shrink: 0;
 }
-
 .header-info {
   text-align: center;
 }
-
 .arabic-name {
   font-weight: bold;
   font-size: 20px;
 }
-
 .english-name {
   font-size: 14px;
   color: #f4e733;
 }
-    .container {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.9);
-      border-radius: 10px;
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
     .login-container {
       max-width: 500px;
       margin: 50px auto;
@@ -137,24 +132,21 @@
       display: block;
       width: 100%;
     }
-      .remember-me {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-    direction: rtl;
-  }
-
-  .remember-me input[type="checkbox"] {
-    margin: 0;
-    width: auto;
-  }
-
-  .remember-me label {
-    margin: 0;
-    color: white !important;
-  }
-
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  direction: rtl;
+}
+.remember-me input[type="checkbox"] {
+  margin: 0;
+  width: auto;
+}
+.remember-me label {
+  margin: 0;
+  color: white !important;
+}
     .nav-tabs {
       display: flex;
       justify-content: center;
@@ -305,28 +297,57 @@
       font-weight: bold;
       margin-left: 10px;
     }
-    .footer-container {
-      width: 100%;
-      background-color: #111;
+    footer {
+      background-color: #000;
       color: white;
-      text-align: center;
-      padding: 20px 0;
+      padding: 40px 10vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+      direction: rtl;
       border-top: 3px solid #f4e733;
+      text-align: right;
     }
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
+
+    .footer-column {
+      flex: 1;
+      min-width: 250px;
     }
-    .social-icons a {
-      color: white;
-      margin: 0 10px;
-      font-size: 20px;
-      transition: color 0.3s;
+
+    .footer-bottom {
+      width: 100%;
+      text-align: center;
+      padding-top: 15px;
+      border-top: 1px solid #444;
+      color: #888;
+      font-size: 14px;
+      margin-top: 30px;
     }
-    .social-icons a:hover {
+
+    .footer-column a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .footer-column a:hover {
       color: #f4e733;
     }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 20px;
+    }
+
    @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
@@ -1942,20 +1963,40 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => showTab('rankings'), 100);
   }
 });
+</script>  
+</body>
 
-    </script>  
-  </body>
-  <div class="footer-container">
 <footer>
-<p>© 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة</p>
-<p style="font-size: 14px; color: #aaa; margin-top: -10px;">تم التطوير بواسطة روند أحمد الضمور</p>
-<div class="social-icons">
-<a href="https://facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
-<a href="https://instagram.com/kalbasc" target="_blank"><i class="fab fa-instagram"></i></a>
-<a href="https://x.com/Kalba_sc" target="_blank"><i class="fab fa-twitter"></i></a>
-<a href="https://youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
-<a href="https://tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
-</div>
+  <div class="footer-column">
+    <h3 style="color: #f4e733;">تواصل معنا</h3>
+    <p><a href="mailto:info@ksc.shj.ae">info@ksc.shj.ae</a></p>
+    <p><a href="tel:+971092777873">092777873</a></p>
+  </div>
+
+  <div class="footer-column">
+    <h3 style="color: #f4e733;">روابط سريعة</h3>
+    <a href="index.html">الرئيسية</a>
+    <a href="news.html">الأخبار</a>
+    <a href="media.html">الوسائط</a>
+    <a href="evaluate.html">بوابة المدربين</a>
+    <a href="register.html">التسجيل</a>
+    <a href="contact.html">اتصل بنا</a>
+  </div>
+
+  <div class="footer-column">
+    <h3 style="color: #f4e733;">تابعنا</h3>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/kalbasc/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com/Kalba_sc?mx=2" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
+  </div>
 </footer>
-</div>
+
 </html>
