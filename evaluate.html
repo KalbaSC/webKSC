@@ -1079,24 +1079,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('username').value = savedUsername;
     document.getElementById('password').value = savedPassword;
   }
-
-  document.getElementById("feedbackForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-
-    fetch("https://script.google.com/macros/s/AKfycbzi-wTOLYTxam6icurg5QOi1cJak8r7UPiw8Itea6RQmzdVavRGapbxFVesTIVAefCFmQ/exec", {
-      method: "POST",
-      body: formData
-    }).then(() => {
-      document.getElementById("responseMessage").style.display = "block";
-      form.reset();
-    }).catch(() => {
-      document.getElementById("responseMessage").textContent = "❌ Error sending. Try again.";
-      document.getElementById("responseMessage").style.color = "red";
-      document.getElementById("responseMessage").style.display = "block";
-    });
-  });
 });
 
 function setupEventListeners() {
