@@ -31,7 +31,48 @@
       flex-wrap: wrap;
       border-bottom: 3px solid #f4e733;
     }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
+.header-right img.logo {
+  height: 70px;
+}
+
+.header-right .divider {
+  width: 1.5px;
+  height: 65px;
+  background-color: #f4e733;
+}
+
+.header-info {
+  text-align: right;
+}
+
+.header-info .arabic-name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.header-info .english-name {
+  font-size: 14px;
+  color: #f4e733;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 8px;
+  background: none;
+  border: none;
+  color: #f4e733;
+  cursor: pointer;
+}
     .logo {
       height: 60px;
     }
@@ -133,7 +174,68 @@
       font-size: 20px;
     }
     @media (max-width: 768px) {
-      .hero .hero-text h1 {
+        header {
+    padding: 10px 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 93%;
+  }
+  
+  img.logo {
+    height: 50px !important;
+    max-height: 50px !important;
+  }
+  
+  .header-right .divider {
+    height: 45px;
+    width: 1.5px;
+  }
+
+  .menu-toggle {
+    font-size: 35px;
+    margin-right: 10px;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 200px;
+    background: #000;
+    border-left: 2px solid #f4e733;
+    padding: 40px 20px;
+    flex-direction: column;
+    z-index: 9999;
+    gap: 20px;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+  }
+
+  .nav-links.show {
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .header-info {
+    display: none;
+  }
+
+  .header-right {
+    flex: 1;
+    justify-content: center;
+  }
+    
+  .mobile-nav {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+		.hero .hero-text h1 {
         font-size: 2em;
       }
       .hero .hero-text p {
@@ -160,12 +262,12 @@
     <a href="index.html">الرئيسية</a>
     <a href="news.html">الأخبار</a>
     <a href="media.html">الوسائط</a>
-	<a href="register.html">التسجيل</a>
-	<a href="evaluate.html">بوابة المدربين</a>
-	<a href="contact.html">اتصل بنا</a>
-</nav>
+    <a href="register.html">التسجيل</a>
+    <a href="evaluate.html">بوابة المدربين</a>
+    <a href="contact.html">اتصل بنا</a>
+  </nav>
 </header>
-
+	
 <section style='padding: 30px;'><h2>📢 آخر الأخبار</h2><p>تغطية آخر المباريات والأنشطة الرياضية للنادي.</p></section>
 
 <!DOCTYPE html>
@@ -399,10 +501,8 @@ gap: 10px;
   </div>
 
   <div class="chat-body" id="chat-body">
-    <!-- messages will appear here -->
   </div>
 
-  <!-- input bar should stay fixed at the bottom -->
   <div class="chat-footer" id="inner-input-bar" style="display: none;">
     <input id="userMessage" type="text" placeholder="اكتب شيئًا...">
     <button onclick="submitUserMessage()">
@@ -456,7 +556,6 @@ gap: 10px;
   ">✕</span>
 </div>
 
-  <!-- Chat button with badge -->
   <button id="chat-toggle" onclick="toggleChat()" style="
     position: relative;
     background-color: transparent;
@@ -970,6 +1069,20 @@ window.addEventListener('DOMContentLoaded', () => {
 </footer>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-	
+	<script>
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navLinks = document.getElementById('navLinks');
+
+  toggleBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    navLinks.classList.toggle('show');
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+      navLinks.classList.remove('show');
+    }
+  });
+</script>
 </body>
 </html>
