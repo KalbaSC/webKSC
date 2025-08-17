@@ -198,46 +198,75 @@
       margin: 20px 0 0;
     }
 
-    .scanner-container {
+    :root {
+      --club-yellow: #f4e733;
+      --panel: rgba(0,0,0,0.9);
+      --text: #fff;
+      --muted: #ccc;
+      --border: #444;
+    }
+    * { box-sizing: border-box; }
+
+    .register-page {
+      width: min(1200px, 100%);
+      margin: 24px auto;
+      padding: 16px;
+      color: var(--text);
+    }
+
+    .register-title {
+      color: var(--club-yellow);
       text-align: center;
-      padding: 40px;
+      margin: 0 0 16px;
+      font-size: clamp(20px, 3.2vw, 28px);
+      font-weight: 700;
     }
 
-    .scanner-placeholder {
-      border: 2px dashed #f4e733;
-      padding: 40px;
-      border-radius: 10px;
-      margin-top: 20px;
+    .register-panel {
+      background: var(--panel);
+      border: 1px solid #222;
+      border-radius: 14px;
+      padding: 14px;
+      backdrop-filter: blur(2px);
     }
 
-    .table-responsive {
-      overflow-x: auto;
-      margin: 20px 0;
+    .reg-tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-bottom: 2px solid var(--club-yellow);
+      padding: 10px;
     }
+    .reg-tab-btn {
+      background: transparent;
+      color: #fff;
+      border: 1px solid var(--club-yellow);
+      padding: 10px 16px;
+      border-radius: 8px 8px 0 0;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, transform .15s ease;
+    }
+    .reg-tab-btn:hover { transform: translateY(-1px); }
+    .reg-tab-btn.active { background: var(--club-yellow); color: #000; }
 
-    .players-table {
+    .reg-frames-wrap { position: relative; width: 100%; }
+
+    .reg-frame {
       width: 100%;
-      border-collapse: collapse;
-      direction: rtl;
-      margin: 0 auto;
+      height: clamp(520px, 70vh, 860px);
+      border: 0;
+      display: none;
+      background: #111;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 6px 14px rgba(0,0,0,.25);
     }
+    .reg-frame.visible { display: block; }
 
-    .players-table th, 
-    .players-table td {
-      padding: 12px 15px;
-      text-align: center;
-      border: 1px solid #f4e733;
-    }
-
-    .players-table th {
-      background-color: #333;
-      color: #f4e733;
-      font-weight: bold;
-    }
-
-    .players-table tr:nth-child(even) {
-      background-color: rgba(244, 231, 51, 0.1);
-    }
+    .register-page .sp-8 { height: 8px; }
+    .register-page .sp-16 { height: 16px; }
 
     footer {
       background-color: #000;
@@ -459,21 +488,26 @@
   </nav>
 </header>
 
-<main>
-  <h1 style="color:#f4e733; text-align:center;">بوابة التسجيل والحضور والتقييم والتقارير</h1>
+ <main class="register-page" id="registerPage">
+    <h1 class="register-title">بوابة التسجيل والحضور والتقارير</h1>
 
-  <div class="reg-tabs">
-    <button class="reg-tab-btn active" data-target="tab-camp">نموذج التسجيل</button>
-    <button class="reg-tab-btn" data-target="tab-scan">ماسح QR للحضور</button>
-    <button class="reg-tab-btn" data-target="tab-reports">التقارير</button>
-  </div>
+    <section class="register-panel">
+      <div class="reg-tabs" role="tablist">
+        <button class="reg-tab-btn active" data-target="tab-camp" role="tab" aria-selected="true">نموذج التسجيل</button>
+        <button class="reg-tab-btn" data-target="tab-scan" role="tab" aria-selected="false">ماسح QR للحضور</button>
+        <button class="reg-tab-btn" data-target="tab-reports" role="tab" aria-selected="false">التقارير</button>
+      </div>
 
-  <div class="reg-frames-wrap">
-    <iframe id="tab-camp" class="reg-frame visible" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
-    <iframe id="tab-scan" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
-    <iframe id="tab-reports" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
-  </div>
-</main>
+      <div class="reg-frames-wrap">
+        <!-- Lazy-loaded iframes -->
+        <iframe id="tab-camp" class="reg-frame visible" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+        <iframe id="tab-scan" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+        <iframe id="tab-reports" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+      </div>
+    </section>
+
+    <div class="sp-16"></div>
+  </main>
 	
 <div class="chatbot">
 <!DOCTYPE html>
