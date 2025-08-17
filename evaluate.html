@@ -112,28 +112,36 @@ header {
   box-shadow: 0 0 20px rgba(244, 231, 51, 0.2);
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 .login-container {
   width: 100%;
-  max-width: 400px; 
-  margin: 50px auto;
-  padding: 30px;
+  max-width: 400px;
+  margin-inline: auto;      
+  margin-block: 50px;       
+  padding-inline: 30px;      
+  padding-block: 30px;      
   background: rgba(0, 0, 0, 0.9);
   border-radius: 12px;
   border: 2px solid #f4e733;
   box-shadow: 0 0 15px rgba(244, 231, 51, 0.3);
-  text-align: center;
+  direction: rtl;           
+  text-align: initial;     
 }
 
+/* العنوان فقط يكون في المنتصف */
 .login-container h2 {
   color: #f4e733;
-  margin-bottom: 25px;
+  margin: 0 0 25px 0;
   font-size: 22px;
   font-weight: bold;
+  text-align: center;
 }
 
 .form-group {
   margin-bottom: 20px;
-  text-align: right;
 }
 
 .form-group label {
@@ -141,26 +149,40 @@ header {
   margin-bottom: 8px;
   color: #f4e733;
   font-size: 16px;
+  padding-inline-start: 2px;
 }
 
 .form-group input {
   width: 100%;
-  padding: 12px 15px;
+  padding-block: 12px;
+  padding-inline: 15px;   
   border-radius: 8px;
   border: 1px solid #f4e733;
   background: #222;
   color: white;
   font-size: 16px;
-  text-align: right;
+  text-align: right;       
+  direction: ltr; text-align: left;  (اختياري) 
 }
 
 .remember-me {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: flex-start; 
   gap: 8px;
   margin: 15px 0;
-  direction: rtl;
+}
+
+.login-container button,
+.login-container .btn-submit {
+  width: 100%;
+  padding: 12px 15px;
+  background: #f4e733;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .btn {
