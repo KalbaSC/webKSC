@@ -238,7 +238,7 @@ footer {
 </header>
 	
 <section style='padding: 30px;'><h2>📢 آخر الأخبار</h2><p>تغطية آخر المباريات والأنشطة الرياضية للنادي.</p></section>
-
+	
 <div class="chatbot">
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -293,8 +293,6 @@ footer {
       flex-direction: column;
       align-items: center;
     }
-
-
 
 #chat-box {
   position: fixed;
@@ -369,7 +367,6 @@ gap: 10px;
   cursor: pointer;
 }
 
-/* Scrollbar styling */
 #chat-box::-webkit-scrollbar {
   width: 8px;
   border-radius: 12px;
@@ -435,32 +432,68 @@ gap: 10px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    @media (max-width: 600px) {
-      #chat-box {
-        width: 75% !important;
-        padding: 25px !important;
-        max-width: 95% !important;
-        min-height: 70vh !important;
-        font-size: 18px !important;
-      }
+@media (max-width: 600px) {
+	#chat-tooltip {
+  max-width: 90% !important;
+  font-size: 13px !important;
+  padding: 8px 12px !important;
+  bottom: 100px !important;
+  right: 10px !important;
+  gap: 6px !important;
+  flex-wrap: wrap !important;
+  white-space: normal !important;
+}
+  #chat-box {
+    width: 90% !important;
+    padding: 12px !important;
+    min-height: 280px !important;
+    max-height: 80vh !important;
+    height: 460px !important; 
+    font-size: 15px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
 
-      .content {
-        font-size: 18px !important;
-      }
+  .chat-body {
+    flex: 1;
+    overflow-y: auto !important;
+    padding: 10px !important;
+  }
 
-      .chat-btn {
-        padding: 14px 18px !important;
-        font-size: 17px !important;
-      }
+  .chat-footer input {
+    font-size: 14px !important;
+    padding: 6px !important;
+  }
 
-      header h1 {
-        font-size: 22px !important;
-      }
+  .chat-footer button {
+    width: 34px !important;
+    height: 34px !important;
+  }
 
-      header img {
-        height: 70px !important;
-      }
-    }
+  .chat-btn {
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+  }
+
+  .content {
+    font-size: 15px !important;
+  }
+
+  .message-wrapper {
+    margin: 6px !important;
+    gap: 8px !important;
+  }
+
+  header h1 {
+    font-size: 18px !important;
+  }
+
+  header img {
+    height: 50px !important;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -688,7 +721,7 @@ inputDiv.innerHTML = `
 }
  }
   
-  function submitUserMessage() {
+function submitUserMessage() {
     const input = document.getElementById("userMessage");
     const msg = input.value.trim();
     if (msg) {
@@ -701,10 +734,20 @@ inputDiv.innerHTML = `
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ name: userName, message: msg })
 })
+
 .finally(() => {
   addMessage("شكراً على تواصلك، سيتم الرد عليك في أقرب وقت.", false);
-});
-
+    setTimeout(() => {
+      const html = `
+        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+          <button type="button" class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+        </div>
+         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+      `;
+      addMessage(html, false);
+    }, 1000);	
+    });
 input.value = '';
 
     }
@@ -828,7 +871,7 @@ const html = `
       }
 
     }, 1000);
-  } // ✅ THIS closes the reply() function
+  } 
 
 function showContactMain() {
   addMessage("تواصل معنا", true);
