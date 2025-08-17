@@ -49,44 +49,6 @@ main {
       background-size: cover;
     }
 
-    .header-container {
-      width: 100%;
-      background: #111;
-      border-bottom: 3px solid #f4e733;
-    }
-    .header-right {
-      width: 100%;
-      max-width: 1170px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px 42px;
-      background-color: #111;
-      color: white;
-      box-sizing: border-box;
-    }
-    .header-right img.logo {
-      height: 70px;
-    }
-    .divider {
-      width: 1.5px;
-      height: 65px;
-      background-color: #f4e733;
-    }
-    .header-info {
-      text-align: center;
-    }
-    .arabic-name {
-      font-weight: bold;
-      font-size: 20px;
-    }
-    .english-name {
-      font-size: 14px;
-      color: #f4e733;
-    }
-
 .container {
   max-width: 600px;
   background: #111;
@@ -128,8 +90,8 @@ main {
     }
 
 .card {
-  width: 500px; /* fixed width */
-  height: 280px; /* fixed height */
+  width: 500px;
+  height: 280px; 
   background: #000;
   color: white;
   padding: 10px;
@@ -151,25 +113,11 @@ main {
     }
 
 .card .info p {
-  font-size: 10px; /* or 15px, test what looks best */
+  font-size: 10px; 
   color: #f4e733;
   margin: 4px 0;
 }
 
-    footer {
-      background-color: #111;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      border-top: 3px solid #f4e733;
-      font-size: 14px;
-    }
-
-    .social-icons a {
-      color: white;
-      margin: 0 8px;
-      font-size: 20px;
-    }
     * {
   box-sizing: border-box;
 }
@@ -181,40 +129,7 @@ main {
   font-size: 10px;
 }
 
-
-    @media (max-width: 768px) {
- .header-right {
-    padding: 10px 10px;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .header-info {
-    display: block;
-    text-align: center;
-  }
-
-  .header-info .arabic-name {
-    font-size: 16px;
-  }
-
-  .header-info .english-name {
-    font-size: 12px;
-  }
-
-  .header-right .divider {
-    height: 45px;
-    width: 1.5px;
-    background-color: #f4e733;
-  }
-
-  img.logo {
-    height: 50px !important;
-    max-height: 50px !important;
-  }
-
+@media (max-width: 768px) {
 .container {
   width: 90%;
   margin: 20px auto;
@@ -233,42 +148,11 @@ input {
   button {
     font-size: 14px;
   }
-      footer {
-  text-align: center;
-  padding: 15px 10px;
-}
-
-footer p {
-  margin-bottom: 10px;
-  font-size: 13px;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-  .social-icons a {
-    font-size: 18px;
-  }
     }
   </style>
 </head>
 <body>
   <div class="page-wrapper">
-<header class="header-container">
-  <div class="header-right">
-    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
-    <div class="divider"></div>
-    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
-    <div class="header-info">
-      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
-      <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
-    </div>
-  </div>
-</header>
-
     <main>
 <div class="container">
   <h2>التسجيل في صيف الشارقة الرياضي (عطلتنا غير)</h2>
@@ -580,17 +464,6 @@ document.getElementById('idnum').addEventListener('change', function () {
 });
 </script>
 
-<footer>
-  <p>© 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة</p>
-    <p style="font-size: 14px; color: #aaa; margin-top: -10px;">تم التطوير بواسطة روند أحمد الضمور</p>
-  <div class="social-icons">
-    <a href="https://facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://instagram.com/kalbasc" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://x.com/Kalba_sc" target="_blank"><i class="fab fa-twitter"></i></a>
-    <a href="https://youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
-    <a href="https://tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
-  </div>
-</footer>
   </div>
 
 </body>
