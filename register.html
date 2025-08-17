@@ -7,143 +7,88 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     @font-face {
-      font-family: 'NotoKufiArabic';
-      src: url('NotoKufiArabic-Light.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
+  font-family: 'NotoKufiArabic';
+  src: url('NotoKufiArabic-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-    body {
-      margin: 0;
-      font-family: 'NotoKufiArabic', sans-serif;
-      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      direction: rtl;
-    }
-    
-    header {
-      background-color: #111;
-      padding: 20px 30px;
-      width: 96%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      border-bottom: 3px solid #f4e733;
-    }
+body {
+  margin: 0;
+  font-family: 'NotoKufiArabic', sans-serif;
+  background-color: #000;
+  color: white;
+  direction: rtl;
+}
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+header {
+  background-color: #111;
+  padding: 20px 42px;
+  width: 94.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid #f4e733;
+}
 
-    .header-right img.logo {
-      height: 70px;
-    }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
-    .header-right .divider {
-      width: 1.5px;
-      height: 65px;
-      background-color: #f4e733;
-    }
+.header-right img.logo {
+  height: 70px;
+}
 
-    .header-info {
-      text-align: right;
-    }
+.header-right .divider {
+  width: 1.5px;
+  height: 65px;
+  background-color: #f4e733;
+}
 
-    .header-info .arabic-name {
-      font-weight: bold;
-      font-size: 20px;
-    }
+.header-info {
+  text-align: right;
+}
 
-    .header-info .english-name {
-      font-size: 14px;
-      color: #f4e733;
-    }
+.header-info .arabic-name {
+  font-weight: bold;
+  font-size: 20px;
+}
 
-    .nav-links {
-      display: flex;
-      gap: 70px;
-    }
+.header-info .english-name {
+  font-size: 14px;
+  color: #f4e733;
+}
 
-    .nav-links a {
-      color: #f4e733;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: color 1.5s;
-    }
+.nav-links {
+  display: flex;
+  gap: 70px;
+}
 
-    .nav-links a:hover {
-      color: white;
-    }
+.nav-links a {
+  color: #f4e733;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 1.5s;
+}
 
-    .mobile-nav {
-      display: none;
-    }
+.nav-links a:hover {
+  color: white;
+}
 
-    .menu-toggle {
-      display: none;
-      font-size: 8px;
-      background: none;
-      border: none;
-      color: #f4e733;
-      cursor: pointer;
-    }
+.mobile-nav {
+  display: none;
+}
 
-    main {
-      padding: 30px;
-      background: transparent;
-      min-height: calc(100vh - 200px);
-    }
-
-    .reg-tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-
-    .reg-tab-btn {
-      background: #111;
-      color: #f4e733;
-      border: 1px solid #f4e733;
-      padding: 8px 16px;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .reg-tab-btn.active {
-      background: #f4e733;
-      color: #000;
-    }
-
-    .reg-tab-btn:hover {
-      background: #f4e733;
-      color: #000;
-    }
-
-    .reg-frames-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .reg-frame {
-      width: 100%;
-      height: 80vh;
-      border: 0;
-      display: none;
-    }
-
-    .reg-frame.visible {
-      display: block;
-    }
-
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #f4e733;
+  cursor: pointer;
+}
     footer {
       background-color: #000;
       color: white;
@@ -194,60 +139,125 @@
       color: white;
       font-size: 20px;
     }
+    main {
+      padding: 30px;
+      background: transparent;
+      min-height: calc(100vh - 200px);
+    }
 
+    .reg-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .reg-tab-btn {
+      background: #111;
+      color: #f4e733;
+      border: 1px solid #f4e733;
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .reg-tab-btn.active {
+      background: #f4e733;
+      color: #000;
+    }
+
+    .reg-tab-btn:hover {
+      background: #f4e733;
+      color: #000;
+    }
+
+    .reg-frames-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .reg-frame {
+      width: 100%;
+      height: 80vh;
+      border: 0;
+      display: none;
+    }
+
+    .reg-frame.visible {
+      display: block;
+    }
     @media (max-width: 768px) {
-      header {
-        padding: 10px 15px;
-      }
+  header {
+    padding: 10px 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 93%;
+  }
 
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: 200px;
-        background: #000;
-        border-left: 2px solid #f4e733;
-        padding: 40px 20px;
-        flex-direction: column;
-        z-index: 9999;
-        gap: 20px;
-        transition: transform 0.3s ease;
-        transform: translateX(100%);
-      }
+  img.logo {
+    height: 50px !important;
+    max-height: 50px !important;
+  }
+  
+  .header-right .divider {
+    height: 45px;
+    width: 1.5px;
+  }
 
-      .nav-links.show {
-        display: flex;
-        transform: translateX(0);
-      }
+  .menu-toggle {
+    font-size: 35px;
+    margin-right: 10px;
+  }
 
-      .header-info {
-        display: none;
-      }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 200px;
+    background: #000;
+    border-left: 2px solid #f4e733;
+    padding: 40px 20px;
+    flex-direction: column;
+    z-index: 9999;
+    gap: 20px;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+  }
 
-      .mobile-nav {
-        display: flex;
-      }
+  .nav-links.show {
+    display: flex;
+    transform: translateX(0);
+  }
 
-      .menu-toggle {
-        display: block;
-        font-size: 35px;
-        margin-right: 10px;
-      }
+  .header-info {
+    display: none;
+  }
 
-      .reg-tabs {
-        flex-direction: column;
-        align-items: stretch;
-      }
+  .header-right {
+    flex: 1;
+    justify-content: center;
+  }
+    
+  .mobile-nav {
+    display: flex;
+  }
 
-      .reg-tab-btn {
-        width: 100%;
-      }
-
-      .reg-frame {
-        height: 70vh;
-      }
+  .menu-toggle {
+    display: block;
+  }
+  
+  .hero .hero-text h1 {
+    font-size: 2em;
+  }
+  .hero .hero-text p {
+    font-size: 1.1em;
+  }
     }
   </style>
 </head>
@@ -270,8 +280,9 @@
     <a href="index.html">الرئيسية</a>
     <a href="news.html">الأخبار</a>
     <a href="media.html">الوسائط</a>
-    <a href="contact.html">اتصل بنا</a>
     <a href="register.html">التسجيل</a>
+    <a href="evaluate.html">بوابة المدربين</a>
+    <a href="contact.html">اتصل بنا</a>
   </nav>
 </header>
 
@@ -290,14 +301,13 @@
     <iframe id="tab-reports" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
   </div>
 </main>
-
 <footer>
   <div class="footer-column">
     <h3 style="color: #f4e733;">تواصل معنا</h3>
     <p><a href="mailto:info@ksc.shj.ae">info@ksc.shj.ae</a></p>
     <p><a href="tel:+971092777873">092777873</a></p>
   </div>
-
+	
   <div class="footer-column">
     <h3 style="color: #f4e733;">روابط سريعة</h3>
     <a href="index.html">الرئيسية</a>
@@ -317,24 +327,69 @@
       <a href="https://www.youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
       <a href="https://www.tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
     </div>
-  </div>
 
+	    <div>
+    <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
+<form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+  <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
+  <br><br>
+ <button type="submit" style="background-color: yellow; padding: 10px 20px; border: none; border-radius: 10px; cursor:pointer;">إرسال</button>
+</form>
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const confirmationMessage = document.createElement("div");
+    confirmationMessage.style.marginTop = "15px";
+    confirmationMessage.style.color = "#00ff88";
+    confirmationMessage.style.fontWeight = "bold";
+    form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
+
+    let submitted = false;
+
+    form.addEventListener("submit", function () {
+      submitted = true;
+      confirmationMessage.textContent = "جارٍ الإرسال...";
+      
+      setTimeout(function () {
+        if (submitted) {
+          confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
+          form.reset();
+          submitted = false;
+        }
+      }, 2000); 
+    });
+
+    window.addEventListener("error", function () {
+      if (submitted) {
+        confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
+        submitted = false;
+      }
+    });
+  });
+</script>
+  </div>
+	  
+  </div>
+	
   <div class="footer-bottom">
     © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
   </div>
 </footer>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <script>
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navLinks = document.getElementById('navLinks');
+
   function toggleMenu() {
-    const navLinks = document.getElementById('navLinks');
     navLinks.classList.toggle('show');
   }
 
-  document.addEventListener('click', function(e) {
-    const navLinks = document.getElementById('navLinks');
-    const menuToggle = document.querySelector('.menu-toggle');
-    
-    if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+  document.addEventListener('click', function (e) {
+    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
       navLinks.classList.remove('show');
     }
   });
