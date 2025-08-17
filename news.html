@@ -2,242 +2,83 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <title>الأخبار</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>التسجيل - نادي كلباء الرياضي الثقافي</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
   <style>
-    @font-face {
-      font-family: 'NotoKufiArabic';
-      src: url('NotoKufiArabic.ttf') format('truetype');
-    }
-    @font-face {
-      font-family: 'NotoKufiArabic';
-      src: url('NotoKufiArabic-Light.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
+@font-face {
+  font-family: 'NotoKufiArabic';
+  src: url('NotoKufiArabic-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
     body {
-      font-family: 'NotoKufiArabic', sans-serif;
-      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
       margin: 0;
-      padding: 0;
+      font-family: 'NotoKufiArabic', sans-serif;
+      background-color: #000;
+      color: white;
       direction: rtl;
     }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
-    header {
-      background-color: #111;
-      padding: 20px 42px;
-      width: 94.5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 3px solid #f4e733;
-    }
+.header-right img.logo {
+  height: 70px;
+}
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+.header-right .divider {
+  width: 1.5px;
+  height: 65px;
+  background-color: #f4e733;
+}
 
-    .header-right img.logo {
-      height: 70px;
-    }
+.header-info {
+  text-align: right;
+}
 
-    .header-right .divider {
-      width: 1.5px;
-      height: 65px;
-      background-color: #f4e733;
-    }
+.header-info .arabic-name {
+  font-weight: bold;
+  font-size: 20px;
+}
 
-    .header-info {
-      text-align: right;
-    }
+.header-info .english-name {
+  font-size: 14px;
+  color: #f4e733;
+}
 
-    .header-info .arabic-name {
-      font-weight: bold;
-      font-size: 20px;
-    }
+.mobile-nav {
+  display: none;
+}
 
-    .header-info .english-name {
-      font-size: 14px;
-      color: #f4e733;
-    }
+.menu-toggle {
+  display: none;
+  font-size: 8px;
+  background: none;
+  border: none;
+  color: #f4e733;
+  cursor: pointer;
+}
 
-    .nav-links {
-      display: flex;
-      gap: 70px;
-    }
+.nav-links {
+  display: flex;
+  gap: 70px;
+}
 
-    .nav-links a {
-      color: #f4e733;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      transition: color 1.5s;
-    }
+.nav-links a {
+  color: #f4e733;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 1.5s;
+}
 
-    .nav-links a:hover {
-      color: white;
-    }
-
-    .mobile-nav {
-      display: none;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 8px;
-      background: none;
-      border: none;
-      color: #f4e733;
-      cursor: pointer;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      max-width: 100%;
-      margin: auto;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.9);
-      border-radius: 10px;
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
-
-    .nav-tabs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #f4e733;
-    }
-
-    .nav-tabs button {
-      background: none;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 20px;
-    }
-
-    .nav-tabs button.active {
-      background: #f4e733;
-      color: black;
-      border-radius: 5px 5px 0 0;
-    }
-
-    .form-content {
-      display: none;
-      padding: 20px;
-      background: #222;
-      border-radius: 10px;
-      margin-top: 20px;
-      border-left: 4px solid #f4e733;
-    }
-
-    .form-content.visible {
-      display: block;
-    }
-
-    .evaluation-form {
-      background: #222;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-      text-align: right;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      color: #f4e733;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #f4e733;
-      background: #222;
-      color: white;
-    }
-
-    .btn {
-      background: #f4e733;
-      color: black;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      margin: 8px;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .btn:hover {
-      background: #e6d429;
-      transform: translateY(-2px); 
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .btn-block {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      margin: 20px 0 0;
-    }
-
-    .scanner-container {
-      text-align: center;
-      padding: 40px;
-    }
-
-    .scanner-placeholder {
-      border: 2px dashed #f4e733;
-      padding: 40px;
-      border-radius: 10px;
-      margin-top: 20px;
-    }
-
-    .table-responsive {
-      overflow-x: auto;
-      margin: 20px 0;
-    }
-
-    .players-table {
-      width: 100%;
-      border-collapse: collapse;
-      direction: rtl;
-      margin: 0 auto;
-    }
-
-    .players-table th, 
-    .players-table td {
-      padding: 12px 15px;
-      text-align: center;
-      border: 1px solid #f4e733;
-    }
-
-    .players-table th {
-      background-color: #333;
-      color: #f4e733;
-      font-weight: bold;
-    }
-
-    .players-table tr:nth-child(even) {
-      background-color: rgba(244, 231, 51, 0.1);
-    }
+.nav-links a:hover {
+  color: white;
+}
 
     footer {
       background-color: #000;
@@ -289,152 +130,78 @@
       color: white;
       font-size: 20px;
     }
-
     @media (max-width: 768px) {
-      header {
-        padding: 10px 16px;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 93%;
-      }
+ header {
+    padding: 10px 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 93%;
+  }
 
-      body {
-        overflow-x: hidden;  
-        background: url('phonebkg.jpg') no-repeat top left fixed;
-        background-size: 250%;
-      }
-      
-      .header-right img.logo {
-        height: 50px !important;
-        max-height: 50px !important;
-      }
-      
-      .header-right .divider {
-        height: 45px;
-        width: 1.5px;
-      }
+  img.logo {
+    height: 50px !important;
+    max-height: 50px !important;
+  }
+  
+  .header-right .divider {
+    height: 45px;
+    width: 1.5px;
+  }
 
-      .menu-toggle {
-        font-size: 35px;
-        margin-right: 10px;
-      }
+  .menu-toggle {
+    font-size: 35px;
+    margin-right: 10px;
+  }
 
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: 200px;
-        background: #000;
-        border-left: 2px solid #f4e733;
-        padding: 40px 20px;
-        flex-direction: column;
-        z-index: 9999;
-        gap: 20px;
-        transition: transform 0.3s ease;
-        transform: translateX(100%);
-      }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 200px;
+    background: #000;
+    border-left: 2px solid #f4e733;
+    padding: 40px 20px;
+    flex-direction: column;
+    z-index: 9999;
+    gap: 20px;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+  }
 
-      .nav-links.show {
-        display: flex;
-        transform: translateX(0);
-      }
+  .nav-links.show {
+    display: flex;
+    transform: translateX(0);
+  }
 
-      .header-info {
-        display: none;
-      }
+  .header-info {
+    display: none;
+  }
 
-      .header-right {
-        flex: 1;
-        justify-content: center;
-      }
-        
-      .mobile-nav {
-        display: flex;
-      }
+  .header-right {
+    flex: 1;
+    justify-content: center;
+  }
+    
+  .mobile-nav {
+    display: flex;
+  }
 
-      .menu-toggle {
-        display: block;
+  .menu-toggle {
+    display: block;
+  }
+		.hero .hero-text h1 {
+        font-size: 2em;
       }
-
-      .container {
-        padding: 10px;
-        margin: 15px auto;
-        width: 95%;
-      }
-
-      .nav-tabs {
-        flex-direction: column;
-        border-bottom: none;
-      }
-
-      button, .btn, .nav-tabs button {
-        min-height: 44px;
-        padding: 12px 16px !important;
-        touch-action: manipulation;
-      }
-
-      .form-content {
-        padding: 15px;
-      }
-      
-      .form-group input {
-        padding: 12px;
-        font-size: 16px;
-      }
-      
-      .scanner-container {
-        padding: 20px;
-      }
-      
-      .scanner-placeholder {
-        padding: 30px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      button, .btn {
-        padding: 14px 16px !important;
-      }
-
-      .header-right {
-        padding: 8px 10px;
-      }
-
-      .header-right img.logo {
-        height: 40px;
-      }
-
-      .arabic-name {
-        font-size: 14px;
-      }
-
-      .english-name {
-        font-size: 11px;
-      }
-
-      .divider {
-        display: none; 
-      }
-      
-      .form-group input {
-        padding: 10px;
-      }
-      
-      .scanner-placeholder {
-        padding: 20px;
-      }
-      
-      .scanner-placeholder i {
-        font-size: 80px;
+      .hero .hero-text p {
+        font-size: 1.1em;
       }
     }
   </style>
 </head>
 <body>
-
 <header>
   <div class="mobile-nav">
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -457,93 +224,9 @@
     <a href="contact.html">اتصل بنا</a>
   </nav>
 </header>
-
-<main>
-  <div class="container">
-    <h1 style="color:#f4e733; text-align:center;">بوابة التسجيل والحضور والتقييم والتقارير</h1>
-
-    <div class="nav-tabs">
-      <button class="active" onclick="showForm('register')">نموذج التسجيل</button>
-      <button onclick="showForm('scan')">ماسح QR للحضور</button>
-      <button onclick="showForm('reports')">التقارير</button>
-    </div>
-
-    <div id="form-container">
-      <!-- Register Form -->
-      <div id="register-form" class="form-content visible">
-        <form class="evaluation-form">
-          <h3 style="color:#f4e733; text-align:center;">التسجيل في صيف المنافسات الرياضية</h3>
-          
-          <div class="form-group">
-            <label for="membership">العضوية:</label>
-            <input type="text" id="membership" placeholder="إدخال رقم العوية" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="child-name">اسم الطفل:</label>
-            <input type="text" id="child-name" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="photo">الصورة:</label>
-            <input type="file" id="photo" accept="image/*">
-          </div>
-          
-          <div class="form-group">
-            <label for="parent-name">اسم ولي الأمر:</label>
-            <input type="text" id="parent-name" required>
-          </div>
-          
-          <button type="submit" class="btn btn-block">حفظ البيانات</button>
-        </form>
-      </div>
-      
-      <!-- QR Scanner -->
-      <div id="scan-form" class="form-content">
-        <div class="scanner-container">
-          <h3 style="color:#f4e733; text-align:center;">ماسح QR للحضور</h3>
-          <div class="scanner-placeholder">
-            <i class="fas fa-qrcode" style="font-size: 100px; color: #f4e733;"></i>
-            <p>سيتم تفعيل الماسح الضوئي عند النقر عليه</p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Reports -->
-      <div id="reports-form" class="form-content">
-        <h3 style="color:#f4e733; text-align:center;">تقارير الحضور والتسجيل</h3>
-        <div class="table-responsive">
-          <table class="players-table">
-            <thead>
-              <tr>
-                <th>اسم اللاعب</th>
-                <th>رقم العضوية</th>
-                <th>تاريخ التسجيل</th>
-                <th>الحالة</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>محمد أحمد</td>
-                <td>KSC2023001</td>
-                <td>2023-05-15</td>
-                <td>نشط</td>
-              </tr>
-              <tr>
-                <td>علي محمود</td>
-                <td>KSC2023002</td>
-                <td>2023-06-20</td>
-                <td>نشط</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
 	
-<div class="chatbot">
+<section style='padding: 30px;'><h2>📢 آخر الأخبار</h2><p>تغطية آخر المباريات والأنشطة الرياضية للنادي.</p></section>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -597,6 +280,9 @@
       flex-direction: column;
       align-items: center;
     }
+
+
+
 #chat-box {
   position: fixed;
   bottom: 90px;
@@ -1129,7 +815,7 @@ const html = `
       }
 
     }, 1000);
-  } 
+  } // ✅ THIS closes the reply() function
 
 function showContactMain() {
   addMessage("تواصل معنا", true);
@@ -1260,7 +946,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-</div>
+
 
 <footer>
   <div class="footer-column">
@@ -1268,7 +954,7 @@ window.addEventListener('DOMContentLoaded', () => {
     <p><a href="mailto:info@ksc.shj.ae">info@ksc.shj.ae</a></p>
     <p><a href="tel:+971092777873">092777873</a></p>
   </div>
-  
+	
   <div class="footer-column">
     <h3 style="color: #f4e733;">روابط سريعة</h3>
     <a href="index.html">الرئيسية</a>
@@ -1289,56 +975,59 @@ window.addEventListener('DOMContentLoaded', () => {
       <a href="https://www.tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
     </div>
 
-    <div>
-      <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
-      <form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
-        <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
-        <br><br>
-        <button type="submit" style="background-color: yellow; padding: 10px 20px; border: none; border-radius: 10px; cursor:pointer;">إرسال</button>
-      </form>
-      <iframe name="hidden_iframe" style="display:none;"></iframe>
+	    <div>
+    <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
+<form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+  <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
+  <br><br>
+ <button type="submit" style="background-color: yellow; padding: 10px 20px; border: none; border-radius: 10px; cursor:pointer;">إرسال</button>
+</form>
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const form = document.querySelector("form");
-          const confirmationMessage = document.createElement("div");
-          confirmationMessage.style.marginTop = "15px";
-          confirmationMessage.style.color = "#00ff88";
-          confirmationMessage.style.fontWeight = "bold";
-          form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const confirmationMessage = document.createElement("div");
+    confirmationMessage.style.marginTop = "15px";
+    confirmationMessage.style.color = "#00ff88";
+    confirmationMessage.style.fontWeight = "bold";
+    form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
 
-          let submitted = false;
+    let submitted = false;
 
-          form.addEventListener("submit", function () {
-            submitted = true;
-            confirmationMessage.textContent = "جارٍ الإرسال...";
-            
-            setTimeout(function () {
-              if (submitted) {
-                confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
-                form.reset();
-                submitted = false;
-              }
-            }, 2000); 
-          });
+    form.addEventListener("submit", function () {
+      submitted = true;
+      confirmationMessage.textContent = "جارٍ الإرسال...";
+      
+      setTimeout(function () {
+        if (submitted) {
+          confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
+          form.reset();
+          submitted = false;
+        }
+      }, 2000); 
+    });
 
-          window.addEventListener("error", function () {
-            if (submitted) {
-              confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
-              submitted = false;
-            }
-          });
-        });
-      </script>
-    </div>
+    window.addEventListener("error", function () {
+      if (submitted) {
+        confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
+        submitted = false;
+      }
+    });
+  });
+</script>
   </div>
-  
+	  
+  </div>
+	
   <div class="footer-bottom">
     © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
   </div>
 </footer>
 
-<script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+	<script>
   const toggleBtn = document.querySelector('.menu-toggle');
   const navLinks = document.getElementById('navLinks');
 
@@ -1351,28 +1040,7 @@ window.addEventListener('DOMContentLoaded', () => {
       navLinks.classList.remove('show');
     }
   });
-
-  function showForm(formType) {
-    document.querySelectorAll('.nav-tabs button').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-    
-    document.querySelectorAll('.form-content').forEach(form => {
-      form.classList.remove('visible');
-    });
-    document.getElementById(`${formType}-form`).classList.add('visible');
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    showForm('register');
-  });
-
-  document.querySelector('.evaluation-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('تم حفظ البيانات بنجاح!');
-    this.reset();
-  });
 </script>
+	
 </body>
 </html>
