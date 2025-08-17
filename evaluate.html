@@ -116,19 +116,21 @@ header {
 }
 
 .login-container {
-  width: 1700px; 
-  max-width: 90%; 
-  height: auto;
-  margin: auto;
+  width: 90%;
+  max-width: 500px; 
+  margin: 50px auto;
   padding: 30px;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.85);
   border-radius: 10px;
-  text-align: center;
+  box-shadow: 0 0 20px rgba(244, 231, 51, 0.3);
+  border: 1px solid #f4e733;
 }
 
 .login-container h2 {
   color: #f4e733;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  font-size: 24px;
+  text-align: center;
 }
 
 .form-group {
@@ -138,39 +140,26 @@ header {
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   color: #f4e733;
+  font-size: 16px;
 }
 
 .form-group input {
-  width: 80%;
-  padding: 10px;
-  border-radius: 5px;
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 6px;
   border: 1px solid #f4e733;
   background: #222;
   color: white;
-  margin: 0 auto; 
+  font-size: 16px;
 }
 
 .btn {
-  background: #f4e733;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  margin: 8px;
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
   font-size: 16px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  min-width: 100px; 
-  text-align: center;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
 }
 
 .btn:hover {
@@ -190,15 +179,13 @@ header {
   padding: 12px 24px; 
   margin: 0 auto; 
 }
-
 .remember-me {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 8px;
-  margin-top: 10px;
-  direction: rtl;
+  margin-top: 15px;
 }
-
 .remember-me input[type="checkbox"] {
   margin: 0;
   width: auto;
