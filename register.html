@@ -459,90 +459,20 @@
 </header>
 
 <main>
-  <div class="container">
-    <h1 style="color:#f4e733; text-align:center;">بوابة التسجيل والحضور والتقييم والتقارير</h1>
+  <h1 style="color:#f4e733; text-align:center;">بوابة التسجيل والحضور والتقييم والتقارير</h1>
 
-    <div class="nav-tabs">
-      <button class="active" onclick="showForm('register', event)">نموذج التسجيل</button>
-      <button onclick="showForm('scan')">ماسح الحضور</button>
-      <button onclick="showForm('reports')">التقارير</button>
-    </div>
+  <div class="reg-tabs">
+    <button class="reg-tab-btn active" data-target="tab-camp">نموذج التسجيل</button>
+    <button class="reg-tab-btn" data-target="tab-scan">ماسح QR للحضور</button>
+    <button class="reg-tab-btn" data-target="tab-reports">التقارير</button>
+  </div>
 
-    <div id="form-container">
-      <!-- Register Form -->
-      <div id="register-form" class="form-content visible">
-        <form class="evaluation-form">
-          <h3 style="color:#f4e733; text-align:center;">التسجيل في صيف المنافسات الرياضية</h3>
-          
-          <div class="form-group">
-            <label for="membership">العضوية:</label>
-            <input type="text" id="membership" placeholder="إدخال رقم العوية" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="child-name">اسم الطفل:</label>
-            <input type="text" id="child-name" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="photo">الصورة:</label>
-            <input type="file" id="photo" accept="image/*">
-          </div>
-          
-          <div class="form-group">
-            <label for="parent-name">اسم ولي الأمر:</label>
-            <input type="text" id="parent-name" required>
-          </div>
-          
-          <button type="submit" class="btn btn-block">حفظ البيانات</button>
-        </form>
-      </div>
-      
-      <!-- QR Scanner -->
-      <div id="scan-form" class="form-content">
-        <div class="scanner-container">
-          <h3 style="color:#f4e733; text-align:center;">ماسح QR للحضور</h3>
-          <div class="scanner-placeholder">
-            <i class="fas fa-qrcode" style="font-size: 100px; color: #f4e733;"></i>
-            <p>سيتم تفعيل الماسح الضوئي عند النقر عليه</p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Reports -->
-      <div id="reports-form" class="form-content">
-        <h3 style="color:#f4e733; text-align:center;">تقارير الحضور والتسجيل</h3>
-        <div class="table-responsive">
-          <table class="players-table">
-            <thead>
-              <tr>
-                <th>اسم اللاعب</th>
-                <th>رقم العضوية</th>
-                <th>تاريخ التسجيل</th>
-                <th>الحالة</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>محمد أحمد</td>
-                <td>KSC2023001</td>
-                <td>2023-05-15</td>
-                <td>نشط</td>
-              </tr>
-              <tr>
-                <td>علي محمود</td>
-                <td>KSC2023002</td>
-                <td>2023-06-20</td>
-                <td>نشط</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+  <div class="reg-frames-wrap">
+    <iframe id="tab-camp" class="reg-frame visible" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+    <iframe id="tab-scan" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+    <iframe id="tab-reports" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
   </div>
 </main>
-	
 	
 <div class="chatbot">
 <!DOCTYPE html>
