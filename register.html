@@ -544,6 +544,7 @@
   </div>
 </main>
 	
+	
 <div class="chatbot">
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -598,6 +599,7 @@
       flex-direction: column;
       align-items: center;
     }
+
 #chat-box {
   position: fixed;
   bottom: 90px;
@@ -671,7 +673,6 @@ gap: 10px;
   cursor: pointer;
 }
 
-/* Scrollbar styling */
 #chat-box::-webkit-scrollbar {
   width: 8px;
   border-radius: 12px;
@@ -737,32 +738,68 @@ gap: 10px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    @media (max-width: 600px) {
-      #chat-box {
-        width: 75% !important;
-        padding: 25px !important;
-        max-width: 95% !important;
-        min-height: 70vh !important;
-        font-size: 18px !important;
-      }
+@media (max-width: 600px) {
+	#chat-tooltip {
+  max-width: 90% !important;
+  font-size: 13px !important;
+  padding: 8px 12px !important;
+  bottom: 100px !important;
+  right: 10px !important;
+  gap: 6px !important;
+  flex-wrap: wrap !important;
+  white-space: normal !important;
+}
+  #chat-box {
+    width: 90% !important;
+    padding: 12px !important;
+    min-height: 280px !important;
+    max-height: 80vh !important;
+    height: 460px !important; 
+    font-size: 15px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
 
-      .content {
-        font-size: 18px !important;
-      }
+  .chat-body {
+    flex: 1;
+    overflow-y: auto !important;
+    padding: 10px !important;
+  }
 
-      .chat-btn {
-        padding: 14px 18px !important;
-        font-size: 17px !important;
-      }
+  .chat-footer input {
+    font-size: 14px !important;
+    padding: 6px !important;
+  }
 
-      header h1 {
-        font-size: 22px !important;
-      }
+  .chat-footer button {
+    width: 34px !important;
+    height: 34px !important;
+  }
 
-      header img {
-        height: 70px !important;
-      }
-    }
+  .chat-btn {
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+  }
+
+  .content {
+    font-size: 15px !important;
+  }
+
+  .message-wrapper {
+    margin: 6px !important;
+    gap: 8px !important;
+  }
+
+  header h1 {
+    font-size: 18px !important;
+  }
+
+  header img {
+    height: 50px !important;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -990,23 +1027,33 @@ inputDiv.innerHTML = `
 }
  }
   
-  function submitUserMessage() {
+function submitUserMessage() {
     const input = document.getElementById("userMessage");
     const msg = input.value.trim();
     if (msg) {
       addMessage(msg, true);
 
 
-    fetch('https://script.google.com/macros/s/AKfycbyh1Wj8HJ7qVypnVXQgvwfOJdMz7CBKj_U26NmMlKOgG-JmnGnzSn6tvycvpClTZZAE_w/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxTb9_7bVSNPqkErv5NFNpMk55MdVkzfdMxrRGSaeIeKl-Shv3WP82UybUX8IEzPVGw/exec', {
   method: 'POST',
   mode: 'no-cors',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ name: userName, message: msg })
 })
+
 .finally(() => {
   addMessage("شكراً على تواصلك، سيتم الرد عليك في أقرب وقت.", false);
-});
-
+    setTimeout(() => {
+      const html = `
+        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+          <button type="button" class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+        </div>
+         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+      `;
+      addMessage(html, false);
+    }, 1000);	
+    });
 input.value = '';
 
     }
@@ -1269,7 +1316,7 @@ window.addEventListener('DOMContentLoaded', () => {
     <p><a href="mailto:info@ksc.shj.ae">info@ksc.shj.ae</a></p>
     <p><a href="tel:+971092777873">092777873</a></p>
   </div>
-  
+	
   <div class="footer-column">
     <h3 style="color: #f4e733;">روابط سريعة</h3>
     <a href="index.html">الرئيسية</a>
@@ -1290,54 +1337,57 @@ window.addEventListener('DOMContentLoaded', () => {
       <a href="https://www.tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
     </div>
 
-    <div>
-      <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
-      <form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
-        <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
-        <br><br>
-        <button type="submit" style="background-color: yellow; padding: 10px 20px; border: none; border-radius: 10px; cursor:pointer;">إرسال</button>
-      </form>
-      <iframe name="hidden_iframe" style="display:none;"></iframe>
+	    <div>
+    <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
+<form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+  <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
+  <br><br>
+ <button type="submit" style="background-color: yellow; padding: 10px 20px; border: none; border-radius: 10px; cursor:pointer;">إرسال</button>
+</form>
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const form = document.querySelector("form");
-          const confirmationMessage = document.createElement("div");
-          confirmationMessage.style.marginTop = "15px";
-          confirmationMessage.style.color = "#00ff88";
-          confirmationMessage.style.fontWeight = "bold";
-          form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const confirmationMessage = document.createElement("div");
+    confirmationMessage.style.marginTop = "15px";
+    confirmationMessage.style.color = "#00ff88";
+    confirmationMessage.style.fontWeight = "bold";
+    form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
 
-          let submitted = false;
+    let submitted = false;
 
-          form.addEventListener("submit", function () {
-            submitted = true;
-            confirmationMessage.textContent = "جارٍ الإرسال...";
-            
-            setTimeout(function () {
-              if (submitted) {
-                confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
-                form.reset();
-                submitted = false;
-              }
-            }, 2000); 
-          });
+    form.addEventListener("submit", function () {
+      submitted = true;
+      confirmationMessage.textContent = "جارٍ الإرسال...";
+      
+      setTimeout(function () {
+        if (submitted) {
+          confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
+          form.reset();
+          submitted = false;
+        }
+      }, 2000); 
+    });
 
-          window.addEventListener("error", function () {
-            if (submitted) {
-              confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
-              submitted = false;
-            }
-          });
-        });
-      </script>
-    </div>
+    window.addEventListener("error", function () {
+      if (submitted) {
+        confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
+        submitted = false;
+      }
+    });
+  });
+</script>
   </div>
-  
+	  
+  </div>
+	
   <div class="footer-bottom">
     © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
   </div>
 </footer>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <script>
   const toggleBtn = document.querySelector('.menu-toggle');
