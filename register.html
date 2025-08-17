@@ -1387,16 +1387,14 @@ window.addEventListener('DOMContentLoaded', () => {
 </footer>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <script>
   const toggleBtn = document.querySelector('.menu-toggle');
   const navLinks = document.getElementById('navLinks');
 
-function toggleMenu() {
-    const navLinks = document.getElementById('navLinks');
-    if (navLinks) {
-        navLinks.classList.toggle('show');
-    }
-}
+  function toggleMenu() {
+    navLinks.classList.toggle('show');
+  }
 
   document.addEventListener('click', function (e) {
     if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
@@ -1404,40 +1402,6 @@ function toggleMenu() {
     }
   });
 </script>
-<script>
-
-function showForm(formType, event) {
-    if (event) {
-        event.preventDefault();
-        document.querySelectorAll('.nav-tabs button').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        event.target.classList.add('active');
-    }
-
-    document.querySelectorAll('.form-content').forEach(form => {
-        form.classList.remove('visible');
-    });
-    
-    const formToShow = document.getElementById(`${formType}-form`);
-    if (formToShow) {
-        formToShow.classList.add('visible');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    showForm('register');
-    
-    const evaluationForm = document.querySelector('.evaluation-form');
-    if (evaluationForm) {
-        evaluationForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('تم حفظ البيانات بنجاح');
-            this.reset();
-        });
-    }
-});
-
-</script>
+	
 </body>
 </html>
