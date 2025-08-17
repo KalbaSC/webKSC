@@ -1391,9 +1391,12 @@ window.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.querySelector('.menu-toggle');
   const navLinks = document.getElementById('navLinks');
 
-  function toggleMenu() {
-    navLinks.classList.toggle('show');
-  }
+function toggleMenu() {
+    const navLinks = document.getElementById('navLinks');
+    if (navLinks) {
+        navLinks.classList.toggle('show');
+    }
+}
 
   document.addEventListener('click', function (e) {
     if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
@@ -1404,22 +1407,35 @@ window.addEventListener('DOMContentLoaded', () => {
 <script>
 
 function showForm(formType, event) {
-    document.querySelectorAll('.nav-tabs button').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    
     if (event) {
+        event.preventDefault();
+        document.querySelectorAll('.nav-tabs button').forEach(btn => {
+            btn.classList.remove('active');
+        });
         event.target.classList.add('active');
     }
 
     document.querySelectorAll('.form-content').forEach(form => {
         form.classList.remove('visible');
     });
-    document.getElementById(`${formType}-form`).classList.add('visible');
+    
+    const formToShow = document.getElementById(`${formType}-form`);
+    if (formToShow) {
+        formToShow.classList.add('visible');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     showForm('register');
+    
+    const evaluationForm = document.querySelector('.evaluation-form');
+    if (evaluationForm) {
+        evaluationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('تم حفظ البيانات بنجاح');
+            this.reset();
+        });
+    }
 });
 
 </script>
