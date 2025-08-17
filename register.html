@@ -7,88 +7,238 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     @font-face {
-  font-family: 'NotoKufiArabic';
-  src: url('NotoKufiArabic-Light.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic-Light.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
-body {
-  margin: 0;
-  font-family: 'NotoKufiArabic', sans-serif;
-  background-color: #000;
-  color: white;
-  direction: rtl;
-}
+    body {
+      font-family: 'NotoKufiArabic', sans-serif;
+      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+    }
 
-header {
-  background-color: #111;
-  padding: 20px 42px;
-  width: 94.5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 3px solid #f4e733;
-}
+    header {
+      background-color: #111;
+      padding: 20px 42px;
+      width: 94.5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #f4e733;
+    }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
 
-.header-right img.logo {
-  height: 70px;
-}
+    .header-right img.logo {
+      height: 70px;
+    }
 
-.header-right .divider {
-  width: 1.5px;
-  height: 65px;
-  background-color: #f4e733;
-}
+    .header-right .divider {
+      width: 1.5px;
+      height: 65px;
+      background-color: #f4e733;
+    }
 
-.header-info {
-  text-align: right;
-}
+    .header-info {
+      text-align: right;
+    }
 
-.header-info .arabic-name {
-  font-weight: bold;
-  font-size: 20px;
-}
+    .header-info .arabic-name {
+      font-weight: bold;
+      font-size: 20px;
+    }
 
-.header-info .english-name {
-  font-size: 14px;
-  color: #f4e733;
-}
+    .header-info .english-name {
+      font-size: 14px;
+      color: #f4e733;
+    }
 
-.nav-links {
-  display: flex;
-  gap: 70px;
-}
+    .nav-links {
+      display: flex;
+      gap: 70px;
+    }
 
-.nav-links a {
-  color: #f4e733;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 16px;
-  transition: color 1.5s;
-}
+    .nav-links a {
+      color: #f4e733;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 1.5s;
+    }
 
-.nav-links a:hover {
-  color: white;
-}
+    .nav-links a:hover {
+      color: white;
+    }
 
-.mobile-nav {
-  display: none;
-}
+    .mobile-nav {
+      display: none;
+    }
 
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: #f4e733;
-  cursor: pointer;
-}
+    .menu-toggle {
+      display: none;
+      font-size: 8px;
+      background: none;
+      border: none;
+      color: #f4e733;
+      cursor: pointer;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 100%;
+      margin: auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #f4e733;
+    }
+
+    .nav-tabs button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .nav-tabs button.active {
+      background: #f4e733;
+      color: black;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .form-content {
+      display: none;
+      padding: 20px;
+      background: #222;
+      border-radius: 10px;
+      margin-top: 20px;
+      border-left: 4px solid #f4e733;
+    }
+
+    .form-content.visible {
+      display: block;
+    }
+
+    .evaluation-form {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: right;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #f4e733;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #f4e733;
+      background: #222;
+      color: white;
+    }
+
+    .btn {
+      background: #f4e733;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 8px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+      background: #e6d429;
+      transform: translateY(-2px); 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .btn-block {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 20px 0 0;
+    }
+
+    .scanner-container {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .scanner-placeholder {
+      border: 2px dashed #f4e733;
+      padding: 40px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    .players-table {
+      width: 100%;
+      border-collapse: collapse;
+      direction: rtl;
+      margin: 0 auto;
+    }
+
+    .players-table th, 
+    .players-table td {
+      padding: 12px 15px;
+      text-align: center;
+      border: 1px solid #f4e733;
+    }
+
+    .players-table th {
+      background-color: #333;
+      color: #f4e733;
+      font-weight: bold;
+    }
+
+    .players-table tr:nth-child(even) {
+      background-color: rgba(244, 231, 51, 0.1);
+    }
+
     footer {
       background-color: #000;
       color: white;
@@ -139,207 +289,147 @@ header {
       color: white;
       font-size: 20px;
     }
-    main {
-      padding: 30px;
-      background: transparent;
-      min-height: calc(100vh - 200px);
+
+    @media (max-width: 768px) {
+      header {
+        padding: 10px 16px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 93%;
+      }
+
+      body {
+        overflow-x: hidden;  
+        background: url('phonebkg.jpg') no-repeat top left fixed;
+        background-size: 250%;
+      }
+      
+      .header-right img.logo {
+        height: 50px !important;
+        max-height: 50px !important;
+      }
+      
+      .header-right .divider {
+        height: 45px;
+        width: 1.5px;
+      }
+
+      .menu-toggle {
+        font-size: 35px;
+        margin-right: 10px;
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 200px;
+        background: #000;
+        border-left: 2px solid #f4e733;
+        padding: 40px 20px;
+        flex-direction: column;
+        z-index: 9999;
+        gap: 20px;
+        transition: transform 0.3s ease;
+        transform: translateX(100%);
+      }
+
+      .nav-links.show {
+        display: flex;
+        transform: translateX(0);
+      }
+
+      .header-info {
+        display: none;
+      }
+
+      .header-right {
+        flex: 1;
+        justify-content: center;
+      }
+        
+      .mobile-nav {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .container {
+        padding: 10px;
+        margin: 15px auto;
+        width: 95%;
+      }
+
+      .nav-tabs {
+        flex-direction: column;
+        border-bottom: none;
+      }
+
+      button, .btn, .nav-tabs button {
+        min-height: 44px;
+        padding: 12px 16px !important;
+        touch-action: manipulation;
+      }
+
+      .form-content {
+        padding: 15px;
+      }
+      
+      .form-group input {
+        padding: 12px;
+        font-size: 16px;
+      }
+      
+      .scanner-container {
+        padding: 20px;
+      }
+      
+      .scanner-placeholder {
+        padding: 30px;
+      }
     }
-.container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  max-width: 100%;
-  margin: auto;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.9);
-  border-radius: 10px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
 
-.nav-tabs {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #f4e733;
-}
+    @media (max-width: 480px) {
+      button, .btn {
+        padding: 14px 16px !important;
+      }
 
-.nav-tabs button {
-  background: none;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 20px;
-}
+      .header-right {
+        padding: 8px 10px;
+      }
 
-.nav-tabs button.active {
-  background: #f4e733;
-  color: black;
-  border-radius: 5px 5px 0 0;
-}
+      .header-right img.logo {
+        height: 40px;
+      }
 
-.reg-frames-wrap {
-  width: 100%;
-  margin: 0 auto;
-}
+      .arabic-name {
+        font-size: 14px;
+      }
 
-.reg-frame {
-  width: 100%;
-  height: 70vh;
-  border: 0;
-  display: none;
-}
+      .english-name {
+        font-size: 11px;
+      }
 
-.reg-frame.visible {
-  display: block;
-}
-.form-content {
-  display: none;
-  padding: 20px;
-  background: #222;
-  border-radius: 10px;
-  margin-top: 20px;
-  border-left: 4px solid #f4e733;
-}
-
-.form-content.visible {
-  display: block;
-}
-
-.evaluation-form {
-  background: #222;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-  text-align: right;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  color: #f4e733;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #f4e733;
-  background: #222;
-  color: white;
-}
-
-.scanner-container {
-  text-align: center;
-  padding: 40px;
-}
-
-.scanner-placeholder {
-  border: 2px dashed #f4e733;
-  padding: 40px;
-  border-radius: 10px;
-  margin-top: 20px;
-}	  
-@media (max-width: 768px) {
-  header {
-    padding: 10px 16px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 93%;
-  }
-
-  img.logo {
-    height: 50px !important;
-    max-height: 50px !important;
-  }
-  
-  .header-right .divider {
-    height: 45px;
-    width: 1.5px;
-  }
-
-  .menu-toggle {
-    font-size: 35px;
-    margin-right: 10px;
-  }
-
-  .nav-links {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: 200px;
-    background: #000;
-    border-left: 2px solid #f4e733;
-    padding: 40px 20px;
-    flex-direction: column;
-    z-index: 9999;
-    gap: 20px;
-    transition: transform 0.3s ease;
-    transform: translateX(100%);
-  }
-
-  .nav-links.show {
-    display: flex;
-    transform: translateX(0);
-  }
-
-  .header-info {
-    display: none;
-  }
-
-  .header-right {
-    flex: 1;
-    justify-content: center;
-  }
-    
-  .mobile-nav {
-    display: flex;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-  
-  .hero .hero-text h1 {
-    font-size: 2em;
-  }
-  .hero .hero-text p {
-    font-size: 1.1em;
-  }
-	  .form-content {
-    padding: 15px;
-  }
-  
-  .form-group input {
-    padding: 12px;
-    font-size: 16px;
-  }
-  
-  .scanner-container {
-    padding: 20px;
-  }
-  
-  .scanner-placeholder {
-    padding: 30px;
-  }
-}
-  .form-group input {
-    padding: 10px;
-  }
-  .scanner-placeholder {
-    padding: 20px;
-  }  
-  .scanner-placeholder i {
-    font-size: 80px;
-  }
+      .divider {
+        display: none; 
+      }
+      
+      .form-group input {
+        padding: 10px;
+      }
+      
+      .scanner-placeholder {
+        padding: 20px;
+      }
+      
+      .scanner-placeholder i {
+        font-size: 80px;
+      }
     }
   </style>
 </head>
@@ -379,37 +469,39 @@ header {
     </div>
 
     <div id="form-container">
+      <!-- Register Form -->
       <div id="register-form" class="form-content visible">
         <form class="evaluation-form">
-          <h3 style="color:#f4e733;">التسجيل في صيف المنافسات الرياضية</h3>
+          <h3 style="color:#f4e733; text-align:center;">التسجيل في صيف المنافسات الرياضية</h3>
           
           <div class="form-group">
             <label for="membership">العضوية:</label>
-            <input type="text" id="membership" placeholder="إدخال رقم العوية">
+            <input type="text" id="membership" placeholder="إدخال رقم العوية" required>
           </div>
           
           <div class="form-group">
             <label for="child-name">اسم الطفل:</label>
-            <input type="text" id="child-name">
+            <input type="text" id="child-name" required>
           </div>
           
           <div class="form-group">
             <label for="photo">الصورة:</label>
-            <input type="file" id="photo">
+            <input type="file" id="photo" accept="image/*">
           </div>
           
           <div class="form-group">
             <label for="parent-name">اسم ولي الأمر:</label>
-            <input type="text" id="parent-name">
+            <input type="text" id="parent-name" required>
           </div>
           
           <button type="submit" class="btn btn-block">حفظ البيانات</button>
         </form>
       </div>
       
+      <!-- QR Scanner -->
       <div id="scan-form" class="form-content">
         <div class="scanner-container">
-          <h3 style="color:#f4e733;">ماسح QR للحضور</h3>
+          <h3 style="color:#f4e733; text-align:center;">ماسح QR للحضور</h3>
           <div class="scanner-placeholder">
             <i class="fas fa-qrcode" style="font-size: 100px; color: #f4e733;"></i>
             <p>سيتم تفعيل الماسح الضوئي عند النقر عليه</p>
@@ -417,11 +509,33 @@ header {
         </div>
       </div>
       
+      <!-- Reports -->
       <div id="reports-form" class="form-content">
-        <h3 style="color:#f4e733;">تقارير الحضور والتسجيل</h3>
+        <h3 style="color:#f4e733; text-align:center;">تقارير الحضور والتسجيل</h3>
         <div class="table-responsive">
           <table class="players-table">
-            <!-- Table content would go here -->
+            <thead>
+              <tr>
+                <th>اسم اللاعب</th>
+                <th>رقم العضوية</th>
+                <th>تاريخ التسجيل</th>
+                <th>الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>محمد أحمد</td>
+                <td>KSC2023001</td>
+                <td>2023-05-15</td>
+                <td>نشط</td>
+              </tr>
+              <tr>
+                <td>علي محمود</td>
+                <td>KSC2023002</td>
+                <td>2023-06-20</td>
+                <td>نشط</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -483,7 +597,6 @@ header {
       flex-direction: column;
       align-items: center;
     }
-
 #chat-box {
   position: fixed;
   bottom: 90px;
@@ -557,6 +670,7 @@ gap: 10px;
   cursor: pointer;
 }
 
+/* Scrollbar styling */
 #chat-box::-webkit-scrollbar {
   width: 8px;
   border-radius: 12px;
@@ -622,98 +736,35 @@ gap: 10px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-@media (max-width: 600px) {
-	#chat-tooltip {
-  max-width: 90% !important;
-  font-size: 13px !important;
-  padding: 8px 12px !important;
-  bottom: 100px !important;
-  right: 10px !important;
-  gap: 6px !important;
-  flex-wrap: wrap !important;
-  white-space: normal !important;
-}
-  #chat-box {
-    width: 90% !important;
-    padding: 12px !important;
-    min-height: 280px !important;
-    max-height: 80vh !important;
-    height: 460px !important; 
-    font-size: 15px !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-  }
+    @media (max-width: 600px) {
+      #chat-box {
+        width: 75% !important;
+        padding: 25px !important;
+        max-width: 95% !important;
+        min-height: 70vh !important;
+        font-size: 18px !important;
+      }
 
-  .chat-body {
-    flex: 1;
-    overflow-y: auto !important;
-    padding: 10px !important;
-  }
+      .content {
+        font-size: 18px !important;
+      }
 
-  .chat-footer input {
-    font-size: 14px !important;
-    padding: 6px !important;
-  }
+      .chat-btn {
+        padding: 14px 18px !important;
+        font-size: 17px !important;
+      }
 
-  .chat-footer button {
-    width: 34px !important;
-    height: 34px !important;
-  }
+      header h1 {
+        font-size: 22px !important;
+      }
 
-  .chat-btn {
-    font-size: 14px !important;
-    padding: 10px 14px !important;
-  }
-
-  .content {
-    font-size: 15px !important;
-  }
-
-  .message-wrapper {
-    margin: 6px !important;
-    gap: 8px !important;
-  }
-
-  header h1 {
-    font-size: 18px !important;
-  }
-
-  header img {
-    height: 50px !important;
-  }
-}
-
+      header img {
+        height: 70px !important;
+      }
+    }
   </style>
 </head>
 <body>
-<script>
-let slideIndex = 0;
-showSlides();
-
-function plusSlides(n) {
-  slideIndex += n;
-  showSlides();
-}
-
-function showSlides() {
-  let slides = document.getElementsByClassName("carousel-slide");
-  if (slideIndex >= slides.length) slideIndex = 0;
-  if (slideIndex < 0) slideIndex = slides.length - 1;
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-
-  slides[slideIndex].style.display = "block";
-}
-
-setInterval(() => {
-  slideIndex++;
-  showSlides();
-}, 5000);
-	
-</script>
 
 <div id="chat-box">
   <div class="chat-header">
@@ -938,33 +989,23 @@ inputDiv.innerHTML = `
 }
  }
   
-function submitUserMessage() {
+  function submitUserMessage() {
     const input = document.getElementById("userMessage");
     const msg = input.value.trim();
     if (msg) {
       addMessage(msg, true);
 
 
-    fetch('https://script.google.com/macros/s/AKfycbxTb9_7bVSNPqkErv5NFNpMk55MdVkzfdMxrRGSaeIeKl-Shv3WP82UybUX8IEzPVGw/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbyh1Wj8HJ7qVypnVXQgvwfOJdMz7CBKj_U26NmMlKOgG-JmnGnzSn6tvycvpClTZZAE_w/exec', {
   method: 'POST',
   mode: 'no-cors',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ name: userName, message: msg })
 })
-
 .finally(() => {
   addMessage("شكراً على تواصلك، سيتم الرد عليك في أقرب وقت.", false);
-    setTimeout(() => {
-      const html = `
-        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
-        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
-          <button type="button" class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
-        </div>
-         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
-      `;
-      addMessage(html, false);
-    }, 1000);	
-    });
+});
+
 input.value = '';
 
     }
@@ -1219,6 +1260,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+</div>
 
 <footer>
   <div class="footer-column">
@@ -1226,7 +1268,7 @@ window.addEventListener('DOMContentLoaded', () => {
     <p><a href="mailto:info@ksc.shj.ae">info@ksc.shj.ae</a></p>
     <p><a href="tel:+971092777873">092777873</a></p>
   </div>
-	
+  
   <div class="footer-column">
     <h3 style="color: #f4e733;">روابط سريعة</h3>
     <a href="index.html">الرئيسية</a>
@@ -1247,57 +1289,54 @@ window.addEventListener('DOMContentLoaded', () => {
       <a href="https://www.tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
     </div>
 
-	    <div>
-    <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
-<form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
-  <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
-  <br><br>
- <button type="submit" style="background-color: yellow; padding: 10px 20px; border: none; border-radius: 10px; cursor:pointer;">إرسال</button>
-</form>
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+    <div>
+      <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
+      <form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+        <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
+        <br><br>
+        <button type="submit" style="background-color: yellow; padding: 10px 20px; border: none; border-radius: 10px; cursor:pointer;">إرسال</button>
+      </form>
+      <iframe name="hidden_iframe" style="display:none;"></iframe>
 
- <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form");
-    const confirmationMessage = document.createElement("div");
-    confirmationMessage.style.marginTop = "15px";
-    confirmationMessage.style.color = "#00ff88";
-    confirmationMessage.style.fontWeight = "bold";
-    form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const form = document.querySelector("form");
+          const confirmationMessage = document.createElement("div");
+          confirmationMessage.style.marginTop = "15px";
+          confirmationMessage.style.color = "#00ff88";
+          confirmationMessage.style.fontWeight = "bold";
+          form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
 
-    let submitted = false;
+          let submitted = false;
 
-    form.addEventListener("submit", function () {
-      submitted = true;
-      confirmationMessage.textContent = "جارٍ الإرسال...";
-      
-      setTimeout(function () {
-        if (submitted) {
-          confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
-          form.reset();
-          submitted = false;
-        }
-      }, 2000); 
-    });
+          form.addEventListener("submit", function () {
+            submitted = true;
+            confirmationMessage.textContent = "جارٍ الإرسال...";
+            
+            setTimeout(function () {
+              if (submitted) {
+                confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
+                form.reset();
+                submitted = false;
+              }
+            }, 2000); 
+          });
 
-    window.addEventListener("error", function () {
-      if (submitted) {
-        confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
-        submitted = false;
-      }
-    });
-  });
-</script>
+          window.addEventListener("error", function () {
+            if (submitted) {
+              confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
+              submitted = false;
+            }
+          });
+        });
+      </script>
+    </div>
   </div>
-	  
-  </div>
-	
+  
   <div class="footer-bottom">
     © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
   </div>
 </footer>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <script>
   const toggleBtn = document.querySelector('.menu-toggle');
@@ -1312,34 +1351,28 @@ window.addEventListener('DOMContentLoaded', () => {
       navLinks.classList.remove('show');
     }
   });
-const PAGES = {
-  "tab-camp": "camp.html",
-  "tab-scan": "AttendanceScan.html",
-  "tab-reports": "reports.html",
-};
 
-function ensureSrc(id) {
-  const el = document.getElementById(id);
-  if (el && !el.src) el.src = PAGES[id];
-}
+  function showForm(formType) {
+    document.querySelectorAll('.nav-tabs button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    document.querySelectorAll('.form-content').forEach(form => {
+      form.classList.remove('visible');
+    });
+    document.getElementById(`${formType}-form`).classList.add('visible');
+  }
 
-function showForm(formType) {
-  document.querySelectorAll('.nav-tabs button').forEach(btn => {
-    btn.classList.remove('active');
+  document.addEventListener('DOMContentLoaded', () => {
+    showForm('register');
   });
-  event.target.classList.add('active');
-  
-  document.querySelectorAll('.form-content').forEach(form => {
-    form.classList.remove('visible');
+
+  document.querySelector('.evaluation-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('تم حفظ البيانات بنجاح!');
+    this.reset();
   });
-  document.getElementById(`${formType}-form`).classList.add('visible');
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  showForm('register');
-});
-
 </script>
-
 </body>
 </html>
