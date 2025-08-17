@@ -2808,57 +2808,56 @@ window.addEventListener('DOMContentLoaded', () => {
     </div>
 
 	    <div>
- <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
+<h3 style="color:#f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
 
 <form id="feedbackForm"
       action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec"
-      method="POST"
-      target="hidden_iframe">
+      method="POST" target="hidden_iframe" novalidate>
   <textarea name="message" placeholder="اكتب رسالتك هنا ..." required
-            style="width:100%; height:150px; background:#222; color:#fff; padding:10px; border-radius:10px;"></textarea>
+    style="width:100%;height:150px;background:#222;color:#fff;padding:10px;border-radius:10px;"></textarea>
+  <!-- cache-buster -->
+  <input type="hidden" name="t" id="cacheBust">
   <br><br>
-  <button type="submit" style="background-color:yellow; padding:10px 20px; border:none; border-radius:10px; cursor:pointer;">
+  <button type="submit" style="background-color:yellow;padding:10px 20px;border:none;border-radius:10px;cursor:pointer;">
     إرسال
   </button>
 </form>
 
 <iframe id="hidden_iframe" name="hidden_iframe" style="display:none;"></iframe>
+<div id="feedbackStatus" style="margin-top:15px;color:#00ff88;font-weight:bold;"></div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const form  = document.getElementById("feedbackForm");
-  const frame = document.getElementById("hidden_iframe");
-
+document.addEventListener("DOMContentLoaded", () => {
+  const form   = document.getElementById("feedbackForm");
+  const frame  = document.getElementById("hidden_iframe");
+  const status = document.getElementById("feedbackStatus");
   if (!form || !frame) return;
 
-  const confirmationMessage = document.createElement("div");
-  confirmationMessage.style.marginTop = "15px";
-  confirmationMessage.style.color = "#00ff88";
-  confirmationMessage.style.fontWeight = "bold";
-  form.insertAdjacentElement("afterend", confirmationMessage);
+  let submitting = false;
 
-  let submitted = false;
-
-  form.addEventListener("submit", function (e) {
-    submitted = true;
-    confirmationMessage.textContent = "جارٍ الإرسال...";
+  form.addEventListener("submit", () => {
+    form.target = "hidden_iframe";
+    document.getElementById("cacheBust").value = Date.now().toString();
+    submitting = true;
+    status.textContent = "جارٍ الإرسال...";
   });
 
-  frame.addEventListener("load", function () {
-    if (!submitted) return; 
-    confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
+  frame.addEventListener("load", () => {
+    if (!submitting) return; 
+    status.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
     form.reset();
-    submitted = false;
+    submitting = false;
   });
 
-  window.addEventListener("error", function () {
-    if (submitted) {
-      confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
-      submitted = false;
+  window.addEventListener("error", () => {
+    if (submitting) {
+      status.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
+      submitting = false;
     }
   });
 });
 </script>
+
   </div>
 	  
   </div>
