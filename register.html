@@ -194,6 +194,57 @@ header {
 .reg-frame.visible {
   display: block;
 }
+.form-content {
+  display: none;
+  padding: 20px;
+  background: #222;
+  border-radius: 10px;
+  margin-top: 20px;
+  border-left: 4px solid #f4e733;
+}
+
+.form-content.visible {
+  display: block;
+}
+
+.evaluation-form {
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #f4e733;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #f4e733;
+  background: #222;
+  color: white;
+}
+
+.scanner-container {
+  text-align: center;
+  padding: 40px;
+}
+
+.scanner-placeholder {
+  border: 2px dashed #f4e733;
+  padding: 40px;
+  border-radius: 10px;
+  margin-top: 20px;
+}	  
 @media (max-width: 768px) {
   header {
     padding: 10px 16px;
@@ -263,6 +314,32 @@ header {
   .hero .hero-text p {
     font-size: 1.1em;
   }
+	  .form-content {
+    padding: 15px;
+  }
+  
+  .form-group input {
+    padding: 12px;
+    font-size: 16px;
+  }
+  
+  .scanner-container {
+    padding: 20px;
+  }
+  
+  .scanner-placeholder {
+    padding: 30px;
+  }
+}
+  .form-group input {
+    padding: 10px;
+  }
+  .scanner-placeholder {
+    padding: 20px;
+  }  
+  .scanner-placeholder i {
+    font-size: 80px;
+  }
     }
   </style>
 </head>
@@ -296,15 +373,58 @@ header {
     <h1 style="color:#f4e733; text-align:center;">بوابة التسجيل والحضور والتقييم والتقارير</h1>
 
     <div class="nav-tabs">
-      <button class="active" onclick="activateTab('tab-camp')">نموذج التسجيل</button>
-      <button onclick="activateTab('tab-scan')">ماسح QR للحضور</button>
-      <button onclick="activateTab('tab-reports')">التقارير</button>
+      <button class="active" onclick="showForm('register')">نموذج التسجيل</button>
+      <button onclick="showForm('scan')">ماسح QR للحضور</button>
+      <button onclick="showForm('reports')">التقارير</button>
     </div>
 
-    <div class="reg-frames-wrap">
-      <iframe id="tab-camp" class="reg-frame visible" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
-      <iframe id="tab-scan" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
-      <iframe id="tab-reports" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+    <div id="form-container">
+      <div id="register-form" class="form-content visible">
+        <form class="evaluation-form">
+          <h3 style="color:#f4e733;">التسجيل في صيف المنافسات الرياضية</h3>
+          
+          <div class="form-group">
+            <label for="membership">العضوية:</label>
+            <input type="text" id="membership" placeholder="إدخال رقم العوية">
+          </div>
+          
+          <div class="form-group">
+            <label for="child-name">اسم الطفل:</label>
+            <input type="text" id="child-name">
+          </div>
+          
+          <div class="form-group">
+            <label for="photo">الصورة:</label>
+            <input type="file" id="photo">
+          </div>
+          
+          <div class="form-group">
+            <label for="parent-name">اسم ولي الأمر:</label>
+            <input type="text" id="parent-name">
+          </div>
+          
+          <button type="submit" class="btn btn-block">حفظ البيانات</button>
+        </form>
+      </div>
+      
+      <div id="scan-form" class="form-content">
+        <div class="scanner-container">
+          <h3 style="color:#f4e733;">ماسح QR للحضور</h3>
+          <div class="scanner-placeholder">
+            <i class="fas fa-qrcode" style="font-size: 100px; color: #f4e733;"></i>
+            <p>سيتم تفعيل الماسح الضوئي عند النقر عليه</p>
+          </div>
+        </div>
+      </div>
+      
+      <div id="reports-form" class="form-content">
+        <h3 style="color:#f4e733;">تقارير الحضور والتسجيل</h3>
+        <div class="table-responsive">
+          <table class="players-table">
+            <!-- Table content would go here -->
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </main>
@@ -1203,23 +1323,20 @@ function ensureSrc(id) {
   if (el && !el.src) el.src = PAGES[id];
 }
 
-function activateTab(id, event) {
-  if (event) {
-    document.querySelectorAll('.nav-tabs button').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-  }
-  
-  document.querySelectorAll('.reg-frame').forEach(frame => {
-    frame.classList.toggle('visible', frame.id === id);
+function showForm(formType) {
+  document.querySelectorAll('.nav-tabs button').forEach(btn => {
+    btn.classList.remove('active');
   });
-  ensureSrc(id);
+  event.target.classList.add('active');
+  
+  document.querySelectorAll('.form-content').forEach(form => {
+    form.classList.remove('visible');
+  });
+  document.getElementById(`${formType}-form`).classList.add('visible');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  ensureSrc('tab-camp');
-  activateTab('tab-camp');
+  showForm('register');
 });
 
 </script>
