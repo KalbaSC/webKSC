@@ -464,8 +464,9 @@
 
     <div class="nav-tabs">
       <button class="active" onclick="showForm('register')">نموذج التسجيل</button>
-      <button onclick="showForm('scan')">ماسح QR للحضور</button>
+      <button onclick="showForm('scan')">ماسح الحضور</button>
       <button onclick="showForm('reports')">التقارير</button>
+	  <button onclick="showForm('register', event)">نموذج التسجيل</button>
     </div>
 
     <div id="form-container">
@@ -1352,27 +1353,33 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  function showForm(formType) {
+function showForm(formType, event) {
     document.querySelectorAll('.nav-tabs button').forEach(btn => {
-      btn.classList.remove('active');
+        btn.classList.remove('active');
     });
-    event.target.classList.add('active');
     
+    if (event) {
+        event.target.classList.add('active');
+    }
+
     document.querySelectorAll('.form-content').forEach(form => {
-      form.classList.remove('visible');
+        form.classList.remove('visible');
     });
     document.getElementById(`${formType}-form`).classList.add('visible');
-  }
+}
 
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     showForm('register');
-  });
+});
 
-  document.querySelector('.evaluation-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('تم حفظ البيانات بنجاح!');
-    this.reset();
-  });
+const evaluationForm = document.querySelector('.evaluation-form');
+if (evaluationForm) {
+    evaluationForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('تم حفظ البيانات بنجاح!');
+        this.reset();
+    });
+}
 </script>
 </body>
 </html>
