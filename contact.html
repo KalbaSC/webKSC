@@ -13,76 +13,84 @@
   font-style: normal;
 }
 
-    body {
-      margin: 0;
-      font-family: 'NotoKufiArabic', sans-serif;
-      background-color: #000;
-      color: white;
-      direction: rtl;
-    }
+body {
+  margin: 0;
+  font-family: 'NotoKufiArabic', sans-serif;
+  background-color: #000;
+  color: white;
+  direction: rtl;
+}
 
-    header {
-      background-color: #111;
-      padding: 20px 40px;
-      width: 96%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      border-bottom: 3px solid #f4e733;
-    }
+header {
+  background-color: #111;
+  padding: 20px 42px;
+  width: 94.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid #f4e733;
+}
 
-    .logo {
-      height: 60px;
-    }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
-    .nav-links {
-      display: flex;
-      gap: 25px;
-    }
+.header-right img.logo {
+  height: 70px;
+}
 
-    .nav-links a {
-      color: #f4e733;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 18px;
-      transition: color 0.3s;
-    }
+.header-right .divider {
+  width: 1.5px;
+  height: 65px;
+  background-color: #f4e733;
+}
 
-    .nav-links a:hover {
-      color: white;
-    }
+.header-info {
+  text-align: right;
+}
 
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      background: url('hero.jpg') center center / cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+.header-info .arabic-name {
+  font-weight: bold;
+  font-size: 20px;
+}
 
-    .hero .hero-text {
-      background: rgba(0, 0, 0, 0.75);
-      padding: 15px 30px;
-      border-radius: 16px;
-      border: 1px solid #f4e733;
-      color: #f4e733;
-    }
+.header-info .english-name {
+  font-size: 14px;
+  color: #f4e733;
+}
 
-    .hero .hero-text h1 {
-      font-size: 2em;
-      margin-bottom: 15px;
-    }
+.nav-links {
+  display: flex;
+  gap: 70px;
+}
 
-    .hero .hero-text p {
-      font-size: 1.5em;
-      color: white;
-    }
+.nav-links a {
+  color: #f4e733;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 1.5s;
+}
 
-    footer {
+.nav-links a:hover {
+  color: white;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #f4e733;
+  cursor: pointer;
+}
+
+footer {
   background-color: #000;
   color: white;
   padding: 40px 10vw;
@@ -107,58 +115,125 @@
   padding-top: 15px;
   border-top: 1px solid #444;
   color: #888;
-  font-size: 18px;
+  font-size: 14px;
   margin-top: 30px;
 }
-    .footer-column a:hover {
-      color: #fff;
-    }
 
-    .footer-bottom {
-      font-size: 13px;
-      color: #888;
-      border-top: 1px solid #444;
-      padding-top: 15px;
-    }
-
-.footer-column form textarea {
-  font-family: 'NotoKufiArabic', sans-serif;
-  font-size: 14px;
+.footer-column a {
+  color: #ccc;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 8px;
 }
 
-.footer-column form button:hover {
-  background-color: #ffe800;
+.footer-column a:hover {
+  color: #f4e733;
 }
 
-    @media (max-width: 768px) {
-      .hero .hero-text h1 {
-        font-size: 2em;
-      }
-      .hero .hero-text p {
-        font-size: 1.1em;
-      }
-    }
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 10px 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 93%;
+  }
+
+  img.logo {
+    height: 50px !important;
+    max-height: 50px !important;
+  }
+  
+  .header-right .divider {
+    height: 45px;
+    width: 1.5px;
+  }
+
+  .menu-toggle {
+    font-size: 35px;
+    margin-right: 10px;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 200px;
+    background: #000;
+    border-left: 2px solid #f4e733;
+    padding: 40px 20px;
+    flex-direction: column;
+    z-index: 9999;
+    gap: 20px;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+  }
+
+  .nav-links.show {
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .header-info {
+    display: none;
+  }
+
+  .header-right {
+    flex: 1;
+    justify-content: center;
+  }
+    
+  .mobile-nav {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+  
+  .hero .hero-text h1 {
+    font-size: 2em;
+  }
+  .hero .hero-text p {
+    font-size: 1.1em;
+  }
+}
   </style>
 </head>
 <body>
-<header style="background-color: #111; color: white; padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <div style="display: flex; align-items: center; gap: 15px;">
-  <img src="Picture3.png" alt="شعار الشارقة" style="height: 70px;">
-  <div style="width: 2px; height: 70px; background-color: #f4e733;"></div>
-  <img src="logo.png" alt="شعار نادي كلباء" style="height: 60px;">
-</div>
-    <div style="line-height: 1.8;">
-      <div style="font-weight: bold; font-size: 20px;">نادي كلباء الرياضي الثقافي</div>
-      <div style="font-size: 14px; color: #f4e733;">KALBA SPORTS & CULTURE CLUB</div>
+<header>
+  <div class="mobile-nav">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="header-right">
+    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
+    <div class="divider"></div>
+    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
+    <div class="header-info">
+      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+      <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
     </div>
   </div>
-  <nav style="display: flex; gap: 70px;">
-    <a href="index.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الرئيسية</a>
-    <a href="news.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الأخبار</a>
-    <a href="media.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">الوسائط</a>
-    <a href="contact.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">اتصل بنا</a>
-	<a href="register.html" style="color: #f4e733; text-decoration: none; font-weight: bold;">التسجيل</a>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">الرئيسية</a>
+    <a href="news.html">الأخبار</a>
+    <a href="media.html">الوسائط</a>
+    <a href="register.html">التسجيل</a>
+    <a href="evaluate.html">بوابة المدربين</a>
+    <a href="contact.html">اتصل بنا</a>
   </nav>
 </header>
 
@@ -169,7 +244,8 @@
   <p>📸 إنستغرام: <a href='https://instagram.com/kalbasc' target='_blank'>@kalbasc</a></p>
 </section>
 
-
+	
+<div class="chatbot">
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -223,8 +299,6 @@
       flex-direction: column;
       align-items: center;
     }
-
-
 
 #chat-box {
   position: fixed;
@@ -299,7 +373,6 @@ gap: 10px;
   cursor: pointer;
 }
 
-/* Scrollbar styling */
 #chat-box::-webkit-scrollbar {
   width: 8px;
   border-radius: 12px;
@@ -365,32 +438,68 @@ gap: 10px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    @media (max-width: 600px) {
-      #chat-box {
-        width: 75% !important;
-        padding: 25px !important;
-        max-width: 95% !important;
-        min-height: 70vh !important;
-        font-size: 18px !important;
-      }
+@media (max-width: 600px) {
+	#chat-tooltip {
+  max-width: 90% !important;
+  font-size: 13px !important;
+  padding: 8px 12px !important;
+  bottom: 100px !important;
+  right: 10px !important;
+  gap: 6px !important;
+  flex-wrap: wrap !important;
+  white-space: normal !important;
+}
+  #chat-box {
+    width: 90% !important;
+    padding: 12px !important;
+    min-height: 280px !important;
+    max-height: 80vh !important;
+    height: 460px !important; 
+    font-size: 15px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
 
-      .content {
-        font-size: 18px !important;
-      }
+  .chat-body {
+    flex: 1;
+    overflow-y: auto !important;
+    padding: 10px !important;
+  }
 
-      .chat-btn {
-        padding: 14px 18px !important;
-        font-size: 17px !important;
-      }
+  .chat-footer input {
+    font-size: 14px !important;
+    padding: 6px !important;
+  }
 
-      header h1 {
-        font-size: 22px !important;
-      }
+  .chat-footer button {
+    width: 34px !important;
+    height: 34px !important;
+  }
 
-      header img {
-        height: 70px !important;
-      }
-    }
+  .chat-btn {
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+  }
+
+  .content {
+    font-size: 15px !important;
+  }
+
+  .message-wrapper {
+    margin: 6px !important;
+    gap: 8px !important;
+  }
+
+  header h1 {
+    font-size: 18px !important;
+  }
+
+  header img {
+    height: 50px !important;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -401,10 +510,8 @@ gap: 10px;
   </div>
 
   <div class="chat-body" id="chat-body">
-    <!-- messages will appear here -->
   </div>
 
-  <!-- input bar should stay fixed at the bottom -->
   <div class="chat-footer" id="inner-input-bar" style="display: none;">
     <input id="userMessage" type="text" placeholder="اكتب شيئًا...">
     <button onclick="submitUserMessage()">
@@ -458,7 +565,6 @@ gap: 10px;
   ">✕</span>
 </div>
 
-  <!-- Chat button with badge -->
   <button id="chat-toggle" onclick="toggleChat()" style="
     position: relative;
     background-color: transparent;
@@ -621,23 +727,33 @@ inputDiv.innerHTML = `
 }
  }
   
-  function submitUserMessage() {
+function submitUserMessage() {
     const input = document.getElementById("userMessage");
     const msg = input.value.trim();
     if (msg) {
       addMessage(msg, true);
 
 
-    fetch('https://script.google.com/macros/s/AKfycbyh1Wj8HJ7qVypnVXQgvwfOJdMz7CBKj_U26NmMlKOgG-JmnGnzSn6tvycvpClTZZAE_w/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxTb9_7bVSNPqkErv5NFNpMk55MdVkzfdMxrRGSaeIeKl-Shv3WP82UybUX8IEzPVGw/exec', {
   method: 'POST',
   mode: 'no-cors',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ name: userName, message: msg })
 })
+
 .finally(() => {
   addMessage("شكراً على تواصلك، سيتم الرد عليك في أقرب وقت.", false);
-});
-
+    setTimeout(() => {
+      const html = `
+        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+          <button type="button" class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+        </div>
+         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+      `;
+      addMessage(html, false);
+    }, 1000);	
+    });
 input.value = '';
 
     }
@@ -761,7 +877,7 @@ const html = `
       }
 
     }, 1000);
-  } // ✅ THIS closes the reply() function
+  } 
 
 function showContactMain() {
   addMessage("تواصل معنا", true);
@@ -892,71 +1008,100 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
+</div>
 <footer>
-  <!-- Right side -->
   <div class="footer-column">
     <h3 style="color: #f4e733;">تواصل معنا</h3>
-    <p><a href="mailto:info@ksc.shj.ae" style="color: white; text-decoration: none;">info@ksc.shj.ae</a></p>
-    <p><a href="tel:+971092777873" style="color: white; text-decoration: none;">
-                    092777873
-                </a>
-		</p>
-    <h3 style="margin-top: 25px; color: #f4e733;">روابط سريعة</h3>
-    <p><a href="index.html" style="color: #ccc; text-decoration: none;">الرئيسية</a></p>
-    <p><a href="news.html" style="color: #ccc; text-decoration: none;">الأخبار</a></p>
-    <p><a href="media.html" style="color: #ccc; text-decoration: none;">الوسائط</a></p>
-    <p><a href="contact.html" style="color: #ccc; text-decoration: none;">اتصل بنا</a></p>
-	<p><a href="register.html" style="color: #ccc; text-decoration: none;">التسجيل</a></p>
-
-    <h3 style="margin-top: 25px; color: #f4e733;">تابعنا</h3>
-    <div style="display: flex; gap: 10px; margin-top: 10px;">
-      <a href="https://www.facebook.com/Kalbasc1" target="_blank" style="color: white;"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://www.instagram.com/kalbasc/" target="_blank" style="color: white;"><i class="fab fa-instagram"></i></a>
-      <a href="https://x.com/Kalba_sc?mx=2" target="_blank" style="color: white;"><i class="fab fa-twitter"></i></a>
-      <a href="https://www.youtube.com/@kalbasc" target="_blank" style="color: white;"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.tiktok.com/@kalbasc" target="_blank" style="color: white;"><i class="fab fa-tiktok"></i></a>
-    </div>
+    <p><a href="mailto:info@ksc.shj.ae">info@ksc.shj.ae</a></p>
+    <p><a href="tel:+971092777873">092777873</a></p>
+  </div>
+	
+  <div class="footer-column">
+    <h3 style="color: #f4e733;">روابط سريعة</h3>
+    <a href="index.html">الرئيسية</a>
+    <a href="news.html">الأخبار</a>
+    <a href="media.html">الوسائط</a>
+    <a href="evaluate.html">بوابة المدربين</a>
+    <a href="register.html">التسجيل</a>
+    <a href="contact.html">اتصل بنا</a>
   </div>
 
-  <!-- Left side -->
   <div class="footer-column">
+    <h3 style="color: #f4e733;">تابعنا</h3>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/kalbasc/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com/Kalba_sc?mx=2" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+	    <div>
     <h3 style="color: #f4e733;">أرسل ملاحظاتك أو اقتراحاتك</h3>
-<form id="feedbackForm">
-  <textarea name="feedback" rows="6" placeholder="اكتب رسالتك هنا..." style="width: 100%; background: #222; color: white; border: none; padding: 12px; border-radius: 10px; font-size: 14px; resize: vertical;"></textarea>
-  <button type="submit" style="margin-top: 12px; background: #f4e733; color: black; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">إرسال</button>
-  <p id="responseMessage" style="margin-top: 10px; color: #4caf50; display: none;">✔️ تم الإرسال بنجاح!</p>
+<form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+  <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
+  <br><br>
+ <button type="submit" style="background-color: yellow; padding: 10px 20px; border: none; border-radius: 10px; cursor:pointer;">إرسال</button>
 </form>
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
-<script>
-  document.getElementById("feedbackForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const confirmationMessage = document.createElement("div");
+    confirmationMessage.style.marginTop = "15px";
+    confirmationMessage.style.color = "#00ff88";
+    confirmationMessage.style.fontWeight = "bold";
+    form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
 
-    fetch("https://script.google.com/macros/s/AKfycbzi-wTOLYTxam6icurg5QOi1cJak8r7UPiw8Itea6RQmzdVavRGapbxFVesTIVAefCFmQ/exec", {
-      method: "POST",
-      body: formData
-    }).then(() => {
-      document.getElementById("responseMessage").style.display = "block";
-      form.reset();
-    }).catch(() => {
-      document.getElementById("responseMessage").textContent = "❌ Error sending. Try again.";
-      document.getElementById("responseMessage").style.color = "red";
-      document.getElementById("responseMessage").style.display = "block";
+    let submitted = false;
+
+    form.addEventListener("submit", function () {
+      submitted = true;
+      confirmationMessage.textContent = "جارٍ الإرسال...";
+      
+      setTimeout(function () {
+        if (submitted) {
+          confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
+          form.reset();
+          submitted = false;
+        }
+      }, 2000); 
+    });
+
+    window.addEventListener("error", function () {
+      if (submitted) {
+        confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
+        submitted = false;
+      }
     });
   });
 </script>
-
   </div>
-
+	  
+  </div>
+	
   <div class="footer-bottom">
     © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
   </div>
 </footer>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</div>
+
+<script>
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navLinks = document.getElementById('navLinks');
+
+  function toggleMenu() {
+    navLinks.classList.toggle('show');
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+      navLinks.classList.remove('show');
+    }
+  });
+</script>
 
 </body>
 </html>
