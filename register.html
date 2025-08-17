@@ -1324,5 +1324,50 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </footer>
 	
+<script>
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navLinks = document.getElementById('navLinks');
+
+  function toggleMenu() {
+    navLinks.classList.toggle('show');
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+      navLinks.classList.remove('show');
+    }
+  });
+
+  const PAGES = {
+    "tab-camp": "camp.html",
+    "tab-scan": "AttendanceScan.html",
+    "tab-evaluate": "evaluate.html",
+    "tab-reports": "reports.html",
+  };
+
+  function ensureSrc(id) {
+    const el = document.getElementById(id);
+    if (el && !el.src) el.src = PAGES[id];
+  }
+
+  function activateTab(id) {
+    document.querySelectorAll('.reg-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.target === id);
+    });
+    document.querySelectorAll('.reg-frame').forEach(frame => {
+      frame.style.display = (frame.id === id) ? 'block' : 'none';
+    });
+    ensureSrc(id);
+  }
+
+  document.querySelectorAll('.reg-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => activateTab(btn.dataset.target));
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    ensureSrc('tab-camp');
+  });
+</script>
+
 </body>
 </html>
