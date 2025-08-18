@@ -261,231 +261,78 @@ header {
       font-size: 20px;
     }
 	  
-@media (max-width: 768px) {
-  body {
-    background: url('phonebkg.jpg') no-repeat center center fixed !important;
-    background-size: cover !important;
-    overflow-x: hidden;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  header {
-    padding: 8px 12px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 1000;
-    border-bottom-width: 2px !important;
-  }
-
-  .header-right {
-    gap: 12px !important;
-    justify-content: flex-start !important;
-  }
-
-  .header-right img.logo {
-    height: 38px !important;
-    width: auto !important;
-    max-height: 38px !important;
-  }
-
-  .header-right .divider {
-    height: 32px !important;
-    margin: 0 5px !important;
-  }
-
-  .menu-toggle {
-    font-size: 26px !important;
-    padding: 0 !important;
-    margin-left: 8px !important;
-    order: -1;
-  }
-
-  .nav-links {
-    width: 75% !important;
-    padding-top: 50px !important;
-    border-left-width: 1px !important;
-  }
-
-  .nav-links a {
-    font-size: 15px !important;
-    padding: 10px 0 !important;
-  }
-
-  .hero-carousel {
-    padding: 20px 0 !important;
-  }
-
-  .carousel-container {
-    height: 280px !important;
-    width: 93% !important;
-    margin: 0 auto !important;
-    border-width: 1.5px !important;
-  }
-
-  .carousel-slide img {
-    object-position: center !important;
-  }
-
-  .caption {
-    height: auto !important;
-    min-height: 70px !important;
-    padding: 8px 10px !important;
-    font-size: 12px !important;
-    line-height: 1.4 !important;
-    border-radius: 0 !important;
-  }
-
-  .prev, .next {
-    padding: 12px !important;
-    font-size: 18px !important;
-    top: 50% !important;
-    transform: translateY(-50%);
-  }
-
-  /* Hero section perfection */
-  .hero {
-    height: 38vh !important;
-    padding: 0 !important;
-    align-items: center !important;
-  }
-
-  .hero .hero-text {
-    padding: 12px 16px !important;
-    margin: 0 15px !important;
-    width: auto !important;
-    max-width: 90% !important;
-    border-width: 1px !important;
-  }
-
-  .hero .hero-text h1 {
-    font-size: 1.3em !important;
-    margin-bottom: 6px !important;
-  }
-
-  .hero .hero-text p {
-    font-size: 0.95em !important;
-    margin: 0 !important;
-  }
-
-  footer {
-    padding: 20px 15px !important;
-    width: 100% !important;
-    gap: 25px !important;
-  }
-
-  .footer-column {
-    min-width: 100% !important;
-    margin-bottom: 0 !important;
-  }
-
-  .footer-column h3 {
-    margin-bottom: 12px !important;
-  }
-
-  .footer-column a {
-    margin-bottom: 6px !important;
-    display: inline-block !important;
-    padding: 3px 0 !important;
-  }
-
-  .social-icons {
-    gap: 12px !important;
-    margin-top: 12px !important;
-    font-size: 18px !important;
-  }
-
-  textarea {
-    height: 110px !important;
-    padding: 10px !important;
-    font-size: 14px !important;
-  }
-
-  button[type="submit"] {
-    width: 100% !important;
-    padding: 12px !important;
-    font-size: 15px !important;
-    margin-top: 8px !important;
-  }
-
-  #chat-box {
-    width: 92% !important;
-    right: 4% !important;
-    bottom: 85px !important;
-    max-height: 65vh !important;
-    min-height: 300px !important;
-    border-radius: 12px !important;
-  }
-
-  #chat-tooltip {
-    max-width: 80% !important;
-    right: 4% !important;
-    padding: 8px 12px !important;
-    font-size: 13px !important;
-    bottom: 75px !important;
-  }
-
-  #chat-toggle {
-    width: 52px !important;
-    height: 52px !important;
-    bottom: 18px !important;
-    right: 18px !important;
-  }
-
-  #chat-badge {
-    width: 18px !important;
-    height: 18px !important;
-    font-size: 11px !important;
-  }
-
-  .chat-body {
-    padding: 8px !important;
-    max-height: calc(65vh - 120px) !important;
-  }
-
-  .chat-footer {
-    padding: 8px !important;
-  }
-
-  .chat-footer input {
-    padding: 8px 12px !important;
-    font-size: 14px !important;
-  }
-
-  .message-wrapper {
-    margin: 8px 0 !important;
-  }
-
-  .content {
-    font-size: 14px !important;
-    padding: 8px 12px !important;
-  }
-
-  .chat-btn {
-    padding: 10px 14px !important;
-    font-size: 14px !important;
-    margin: 4px !important;
-  }
+:root {
+  --text-xs: clamp(0.75rem, 2vw, 0.8rem);
+  --text-sm: clamp(0.875rem, 2.5vw, 1rem);
+  --text-base: clamp(1rem, 3vw, 1.2rem);
+  --text-lg: clamp(1.125rem, 3.5vw, 1.44rem);
+  --text-xl: clamp(1.25rem, 4vw, 1.728rem);
+  
+  --space-xxs: clamp(0.25rem, 1vw, 0.5rem);
+  --space-xs: clamp(0.5rem, 1.5vw, 1rem);
+  --space-sm: clamp(0.75rem, 2vw, 1.5rem);
+  --space-md: clamp(1rem, 3vw, 2rem);
+  --space-lg: clamp(1.5rem, 4vw, 3rem);
+  
+  --container-sm: clamp(300px, 90vw, 540px);
+  --container-md: clamp(720px, 90vw, 960px);
+  --container-lg: clamp(960px, 90vw, 1170px);
+}
+	  
+body {
+  font-size: var(--text-base);
+  line-height: 1.6;
 }
 
-@media (max-width: 360px) {
-  .carousel-container {
-    height: 240px !important;
-  }
+h1 { font-size: var(--text-xl); }
+h2 { font-size: var(--text-lg); }
+h3 { font-size: var(--text-base); }
 
+header {
+  padding: var(--space-sm) var(--space-md);
+}
+
+.logo {
+  height: clamp(40px, 8vw, 70px);
+}
+
+.carousel-container {
+  width: var(--container-sm);
+  height: clamp(250px, 50vh, 550px);
+}
+
+.caption {
+  font-size: var(--text-sm);
+  padding: var(--space-xs);
+}
+
+#chat-box {
+  width: clamp(300px, 90vw, 360px);
+  bottom: clamp(70px, 15vh, 90px);
+}
+
+#chat-toggle {
+  width: clamp(50px, 10vw, 60px);
+  height: clamp(50px, 10vw, 60px);
+}
+	  
+@media (max-width: 768px) {
   .hero {
-    height: 34vh !important;
+    height: clamp(300px, 50vh, 500px);
   }
-
-  .hero .hero-text h1 {
-    font-size: 1.1em !important;
+  
+  .nav-links {
+    width: clamp(250px, 70vw, 300px);
   }
-
-  #chat-box {
-    max-height: 60vh !important;
-    min-height: 280px !important;
+  
+  .footer-column {
+    min-width: 100%;
+    margin-bottom: var(--space-md);
+  }
+  
+  a, button {
+    min-width: 44px;
+    min-height: 44px;
   }
 }
 
@@ -553,6 +400,17 @@ header {
       navLinks.classList.remove('show');
     }
   });
+	
+function setViewportVariables() {
+  const vh = window.innerHeight * 0.01;
+  const vw = window.innerWidth * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+  document.documentElement.style.setProperty('--vw', `${vw}px`);
+}
+
+window.addEventListener('resize', setViewportVariables);
+setViewportVariables();
+	
 </script>
 	
 <div class="chatbot">
