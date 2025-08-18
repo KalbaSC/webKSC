@@ -317,25 +317,137 @@ header {
 }
 	  
 @media (max-width: 768px) {
-  .hero {
-    height: clamp(300px, 50vh, 500px);
+  header {
+    padding: 12px 15px !important;
+    flex-wrap: wrap;
+    gap: 12px;
   }
-  
+
+  .header-right {
+    order: 2;
+    flex: 1 1 100%;
+    justify-content: center !important;
+    gap: 15px !important;
+  }
+
+  .mobile-nav {
+    order: 1;
+    margin-left: auto;
+  }
+
+  .menu-toggle {
+    font-size: 28px !important;
+    padding: 5px !important;
+    color: #f4e733 !important;
+    background: none;
+    border: none;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
   .nav-links {
-    width: clamp(250px, 70vw, 300px);
+    position: fixed !important;
+    top: 0 !important;
+    right: -100% !important;
+    width: 85% !important;
+    max-width: 300px !important;
+    height: 100vh !important;
+    background: #000 !important;
+    border-left: 2px solid #f4e733 !important;
+    padding: 70px 20px 20px !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    z-index: 9999;
+    transition: right 0.3s ease !important;
+    margin: 0 !important;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
   }
-  
-  .footer-column {
-    min-width: 100%;
-    margin-bottom: var(--space-md);
+
+  .nav-links.show {
+    right: 0 !important;
   }
-  
-  a, button {
-    min-width: 44px;
-    min-height: 44px;
+
+  .nav-links a {
+    width: 100% !important;
+    padding: 15px 0 !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    color: white !important;
+    border-bottom: 1px solid #333 !important;
+    display: flex !important;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: #f4e733 !important;
+    background: rgba(244, 231, 51, 0.1);
+    padding-right: 15px !important;
+  }
+
+  .nav-links a:before {
+    content: "•";
+    color: #f4e733;
+    margin-left: 10px;
+    font-size: 20px;
+  }
+
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .nav-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
   }
 }
 
+@media (min-width: 769px) {
+  .mobile-nav {
+    display: none !important;
+  }
+  
+  .nav-links {
+    display: flex !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    flex-direction: row !important;
+    gap: 25px !important;
+  }
+  
+  .nav-links a {
+    padding: 5px 0 !important;
+    border: none !important;
+    font-size: 14px !important;
+    color: #f4e733 !important;
+    width: auto !important;
+  }
+  
+  .nav-links a:before {
+    display: none !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -401,15 +513,51 @@ header {
     }
   });
 	
-function setViewportVariables() {
-  const vh = window.innerHeight * 0.01;
-  const vw = window.innerWidth * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-  document.documentElement.style.setProperty('--vw', `${vw}px`);
+function toggleMenu() {
+  const navLinks = document.getElementById('navLinks');
+  const body = document.body;
+  
+  let overlay = document.querySelector('.nav-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    overlay.onclick = toggleMenu;
+    document.body.appendChild(overlay);
+  }
+  
+  navLinks.classList.toggle('show');
+  overlay.classList.toggle('show');
+  body.classList.toggle('menu-open');
+  
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (navLinks.classList.contains('show')) {
+    menuToggle.innerHTML = '✕';
+  } else {
+    menuToggle.innerHTML = '☰';
+  }
 }
 
-window.addEventListener('resize', setViewportVariables);
-setViewportVariables();
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) {
+      toggleMenu();
+    }
+  });
+});
+
+window.addEventListener('resize', function() {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const overlay = document.querySelector('.nav-overlay');
+    const body = document.body;
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    navLinks.classList.remove('show');
+    if (overlay) overlay.classList.remove('show');
+    body.classList.remove('menu-open');
+    menuToggle.innerHTML = '☰';
+  }
+});
 	
 </script>
 	
