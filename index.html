@@ -260,113 +260,124 @@ header {
       color: white;
       font-size: 20px;
     }
+	  
 @media (max-width: 768px) {
   header {
-    padding: 10px 16px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 93%;
+    padding: 10px 15px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
   }
-	
-  body {
-    overflow-x: hidden;  
-    background: url('phonebkg.jpg') no-repeat top left fixed;
-    background-size: 250%;
+  
+  .header-right img.logo {
+    height: 40px !important;
+    max-height: 40px !important;
   }
-	
-img.logo {
-  height: 50px !important;
-  max-height: 50px !important;
-}
-	
-.header-right .divider {
-  height: 45px;
-  width: 1.5px;
-}
-
-.menu-toggle {
-  font-size: 35px;
-  margin-right: 10px;
-}
-
-.nav-links {
-  display: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 200px;
-  background: #000;
-  border-left: 2px solid #f4e733;
-  padding: 40px 20px;
-  flex-direction: column;
-  z-index: 9999;
-  gap: 20px;
-  transition: transform 0.3s ease;
-  transform: translateX(100%);
-}
-
-.nav-links.show {
-  display: flex;
-  transform: translateX(0);
-}
-
-  .header-info {
-    display: none;
+  
+  .header-right .divider {
+    height: 35px !important;
   }
-
-  .header-right {
-    flex: 1;
-    justify-content: center;
+  
+  .nav-links {
+    width: 70% !important;
+    padding-top: 60px !important;
   }
-		
-  .mobile-nav {
-    display: flex;
-  }
-
+  
   .menu-toggle {
-    display: block;
+    font-size: 28px !important;
+    padding: 5px !important;
   }
-
+  
   .carousel-container {
-    width: 95%;
-    height: 400px;
+    height: 300px !important;
+    width: 95% !important;
+    margin: 0 auto !important;
   }
-
-.carousel-slide img {
-  width: 100%;
-  height: 100%; 
-}
-	
-.caption {
-  height: 90px;
-  font-size: 14px;
-  padding: 10px;
-}
-
+  
+  .caption {
+    height: auto !important;
+    padding: 8px !important;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+  
   .hero {
-    height: 50vh;
-    padding: 15px 7px;
-    align-items: flex-end;
+    height: 40vh !important;
+    background-size: cover !important;
+    background-position: center !important;
   }
-
+  
+  .hero .hero-text {
+    padding: 10px 15px !important;
+    margin: 15px !important;
+    width: 90% !important;
+  }
+  
   .hero .hero-text h1 {
-    font-size: 16px;
+    font-size: 1.2em !important;
+    margin-bottom: 8px !important;
   }
-
+  
   .hero .hero-text p {
-    font-size: 12px;
+    font-size: 0.9em !important;
   }
-
+  
   footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 30px;
+    padding: 20px 15px !important;
+    width: 100% !important;
   }
-
+  
   .footer-column {
-    width: 100%;
+    min-width: 100% !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .social-icons {
+    justify-content: flex-start !important;
+  }
+  
+  #chat-box {
+    width: 95% !important;
+    right: 2.5% !important;
+    bottom: 80px !important;
+    max-height: 60vh !important;
+  }
+  
+  #chat-tooltip {
+    max-width: 85% !important;
+    right: 2.5% !important;
+    white-space: normal !important;
+    padding: 8px 12px !important;
+  }
+  
+  #chat-toggle {
+    width: 50px !important;
+    height: 50px !important;
+    bottom: 15px !important;
+    right: 15px !important;
+  }
+  
+  textarea {
+    height: 100px !important;
+  }
+  
+  button[type="submit"] {
+    width: 100% !important;
+    padding: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    height: 250px !important;
+  }
+  
+  .hero {
+    height: 35vh !important;
+  }
+  
+  #chat-box {
+    max-height: 55vh !important;
   }
 }
 
