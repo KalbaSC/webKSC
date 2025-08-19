@@ -277,6 +277,10 @@ body.no-scroll {
 	
   .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
 	
+  #chat-box[style*="display: none"] { pointer-events: none; }
+   .nav-links { pointer-events: none; }
+   .nav-links.show { pointer-events: auto; }
+	
   .nav-links {
     position: fixed; top: 0; right: -100%;
     width: 78%; height: 100vh; padding: 70px 20px;
@@ -811,7 +815,6 @@ gap: 10px;
     height: 460px !important; 
     font-size: 15px !important;
     overflow: hidden !important;
-    display: flex !important;
     flex-direction: column !important;
   }
 
