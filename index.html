@@ -275,8 +275,7 @@ body.no-scroll {
 
   :where(p, h1, h2, h3, h4, h5, h6, a, li, td) { overflow-wrap: anywhere; }
 	
-  .menu-toggle { display: none; background: none; border: 0; font-size: 24px; color: #f4e733; cursor: pointer; }
-  .menu-toggle { display: inline-block; } 
+  .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
 	
   .nav-links {
     position: fixed; top: 0; right: -100%;
@@ -369,11 +368,11 @@ body.no-scroll {
   .nav-links a { font-size: 14px !important; }
 	
 header { 
-  padding-inline: 16px !important;           /* equal space from screen edges */
+  padding-inline: 16px !important;           
 }
 
 .header-right {
-  gap: 8px !important;                        /* equal gap between logo | divider | logo */
+  gap: 8px !important;                        
   align-items: center !important;
 }
 
@@ -397,8 +396,6 @@ header {
   line-height: 1 !important;
   margin: 0 !important;
 }
-
-.mobile-nav { margin-inline-start: 0 !important; }
 	
   .header-info {
     display: flex !important;
