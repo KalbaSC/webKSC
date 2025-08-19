@@ -485,33 +485,85 @@ header {
     color: #000 !important;
   }
 	
-#chat-tooltip > span:first-child {
-  flex: 0 0 auto !important;
-  white-space: nowrap !important;
-}
-
-#chat-tooltip {
-  display: inline-flex !important;
-  width: max-content !important;
-  max-width: calc(100vw - 40px) !important; 
-  overflow: hidden; 
-}
-
-#chat-tooltip span:last-child { font-size: 14px !important; }
+  #chat-tooltip > span:first-child {
+    flex: 1 1 auto !important; 
+    white-space: normal !important; 
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+	  
+  #chat-tooltip {
+    display: flex !important; 
+    width: auto !important; 
+    max-width: calc(100vw - 40px) !important; 
+    overflow: visible !important; 
+    flex-wrap: wrap !important;
+    white-space: normal !important;
+    text-align: center !important;
+    padding: 12px 15px !important;
+    line-height: 1.4 !important;
+  }
+	
+  #chat-tooltip span:last-child { 
+    font-size: 12px !important;
+    flex-shrink: 0 !important;
+    margin-top: 5px !important;
+  }
+  
+  #chat-tooltip {
+    animation: tooltip-pulse 2s infinite, tooltip-fade 10s forwards;
+  }
+  
+  @keyframes tooltip-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  
+  @keyframes tooltip-fade {
+    0%, 80% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+  }
 
 	}	
 	  
 @media (max-width: 600px) {
-  #chat-box { width: 90% !important; height: 460px !important; }
-	
   #chat-tooltip {
     right: 8px !important;
     bottom: 80px !important;
-    font-size: 12px !important;    
-    padding: 6px 10px !important;  
+    font-size: 12px !important;
+    padding: 10px 12px !important;
+    max-width: calc(100vw - 50px) !important;
   }
-}	  
+  
+  #chat-box {
+    width: 94% !important;
+    right: 3% !important;
+    height: 460px !important;
+    max-height: 70vh !important;
+  }
+  
+  .chat-body {
+    max-height: 55vh !important;
+  }
+  
+  #chat-tooltip span:last-child {
+    font-size: 14px !important;
+  }
+	#chat-tooltip {
+  animation: tooltip-fade 10s forwards;
+}
 
+@keyframes tooltip-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+@keyframes tooltip-fade {
+  0%, 80% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+}
+	  
   </style>
 </head>
 <body>
@@ -598,6 +650,27 @@ window.addEventListener('resize', function() {
     menuToggle.innerHTML = '☰';
   }
 });
+
+setTimeout(function() {
+  var tooltip = document.getElementById('chat-tooltip');
+  if (tooltip) {
+    tooltip.style.display = 'none';
+  }
+}, 10000);
+
+document.getElementById('chat-toggle').addEventListener('click', function() {
+  var tooltip = document.getElementById('chat-tooltip');
+  if (tooltip) {
+    tooltip.style.display = 'none';
+  }
+});
+
+function dismissTooltip() {
+  var tooltip = document.getElementById('chat-tooltip');
+  if (tooltip) {
+    tooltip.style.display = 'none';
+  }
+}	
 	
 </script>
 	
