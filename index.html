@@ -286,6 +286,7 @@ body.no-scroll {
     transition: right .3s ease;
     z-index: 1000;
   }
+	
   .nav-links.show { right: 0; }
   .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
 
@@ -293,6 +294,20 @@ body.no-scroll {
 
   body { background-attachment: scroll !important; }
 
+  .header-info .arabic-name,
+  .header-info .english-name {
+    white-space: nowrap;        
+    line-height: 1.2;
+  }
+
+  .header-right { gap: 6px !important; }
+  .header-right img.logo { height: 40px !important; }
+  .header-right .divider { display: none !important; }	
+  .header-right { flex-direction: row !important; align-items: center; gap: 8px !important; }
+  .header-info { display: flex !important; flex-direction: row !important; gap: 10px; }
+  .header-info .arabic-name,
+  .header-info .english-name { white-space: nowrap; font-size: 12px !important; }
+	
   #chat-box {
     position: fixed; right: 20px; bottom: 90px;
     width: 360px; max-width: 90%; max-height: 85vh;
