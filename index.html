@@ -303,10 +303,17 @@ body.no-scroll {
   .header-right { gap: 6px !important; }
   .header-right img.logo { height: 40px !important; }
   .header-right .divider { display: none !important; }	
-  .header-right { flex-direction: row !important; align-items: center; gap: 8px !important; }
-  .header-info { display: flex !important; flex-direction: row !important; gap: 10px; }
+  .header-right { flex-direction: row !important; align-items: center !important; gap: 8px !important; }
+	
+  .header-info { 
+    display: flex !important; 
+    flex-direction: column; 
+    justify-content: center; 
+    margin: 0 !important; 
+  }
+	
   .header-info .arabic-name,
-  .header-info .english-name { white-space: nowrap; font-size: 12px !important; }
+  .header-info .english-name { white-space: nowrap; line-height: 1.2; font-size: 12px !important; }
 	
   #chat-box {
     position: fixed; right: 20px; bottom: 90px;
@@ -326,7 +333,16 @@ body.no-scroll {
     white-space: normal !important;
   }
 	
-  .prev, .next { bottom: 12px; top: auto; font-size: 20px; padding: 10px; }	  
+  .prev, .next {
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%);
+    font-size: 20px;
+    padding: 10px;
+    z-index: 2;               
+  }
+	
+  .caption { z-index: 1; }       
 	
   .carousel-slide img{
     object-fit: cover !important;      
@@ -382,12 +398,6 @@ body.no-scroll {
   .header-info .english-name {
     font-size: 12px !important;
     color: #f4e733;
-  }
-
-  .header-right {
-    flex-direction: column;  
-    align-items: center;
-    gap: 4px !important;
   }
 
   .header-right .divider {
