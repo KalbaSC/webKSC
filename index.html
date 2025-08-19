@@ -276,8 +276,6 @@ img, video, iframe { max-width: 100%; height: auto; }
 
 :where(p, h1, h2, h3, h4, h5, h6, a, li, td) { overflow-wrap: anywhere; }
 
-.menu-toggle { display: none; background: none; border: 0; font-size: 24px; color: #f4e733; cursor: pointer; }
-
 @media (max-width: 768px) {
   .menu-toggle { display: inline-block; }
   .nav-links {
@@ -467,8 +465,6 @@ img, video, iframe { max-width: 100%; height: auto; }
   </nav>
 </header>
 	
-<button class="menu-toggle" aria-label="فتح القائمة" onclick="document.querySelector('.nav-links').classList.toggle('show')">☰</button>
-
 <section class="hero-carousel">
   <div class="carousel-container">
 <div class="carousel-slide fade" style="position: relative;">
@@ -494,19 +490,6 @@ img, video, iframe { max-width: 100%; height: auto; }
 </section>
 
 <script>
-  const toggleBtn = document.querySelector('.menu-toggle');
-  const navLinks = document.getElementById('navLinks');
-
-  toggleBtn.addEventListener('click', function (e) {
-    e.stopPropagation();
-    navLinks.classList.toggle('show');
-  });
-
-  document.addEventListener('click', function (e) {
-    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
-      navLinks.classList.remove('show');
-    }
-  });
 	
 function toggleMenu() {
   const navLinks = document.getElementById('navLinks');
