@@ -148,14 +148,25 @@ header {
 
   .header-right { display:flex !important; align-items:center !important; gap: 8px !important; }
   .header-right img.logo { height: 40px !important; }
-  .header-right .divider { display:inline-block !important; height:40px !important; margin-inline:8px !important; }
+  .header-right .divider { display:inline-block !important; height: 40px !important; margin-inline: 8px !important; }
 
   .header-info {
     display:flex !important; flex-direction:column !important;
-    align-items:center !important; text-align:center !important; gap:6px !important;
+    align-items:center !important; text-align:center !important; gap: 6px !important;
   }
-  .header-info .arabic-name  { font-size:14px !important; white-space:nowrap; }
-  .header-info .english-name { font-size:12px !important; white-space:nowrap; color:#f4e733; }
+  .header-info .arabic-name  { font-size: 14px !important; white-space: nowrap; }
+  .header-info .english-name { font-size: 12px !important; white-space: nowrap; color: #f4e733; }
+
+  footer { flex-direction: column; gap: 20px; }
+  .footer-column { width: 90%; min-width: auto; }
+  .footer-column h3 { font-size: 16px !important; margin-bottom: 10px; }
+  .footer-column a  { font-size: 14px !important; }
+  .social-icons { justify-content: flex-start; gap: 15px; }
+  .footer-bottom { margin-top: 20px; padding-top: 15px; font-size: 12px; }
+  textarea { height: 120px !important; width: 100% !important; }
+  button[type="submit"] { width: 100% !important; }
+  footer button[type="submit"] { background-color: #f4e733 !important; color: #000 !important; }
+}
 	
   .mobile-nav { display: block !important; }
   .menu-toggle { display: inline-block !important; font-size: 24px; color: #f4e733; }
@@ -1159,21 +1170,6 @@ window.addEventListener('DOMContentLoaded', () => {
 </footer>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-	
-<script>
-  const toggleBtn = document.querySelector('.menu-toggle');
-  const navLinks = document.getElementById('navLinks');
-
-  function toggleMenu() {
-    navLinks.classList.toggle('show');
-  }
-
-  document.addEventListener('click', function (e) {
-    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
-      navLinks.classList.remove('show');
-    }
-  });
-</script>
 	
 </body>
 </html>
