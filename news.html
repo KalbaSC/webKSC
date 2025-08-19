@@ -194,6 +194,10 @@ body.no-scroll {
 	
   .header-info .arabic-name,
   .header-info .english-name { white-space: nowrap; line-height: 1.2; font-size: 12px !important; }
+
+	#chat-box[style*="display: none"] { pointer-events: none; }
+	.nav-links { pointer-events: none; }
+    .nav-links.show { pointer-events: auto; }
 	
   #chat-box {
     position: fixed; right: 20px; bottom: 90px;
@@ -667,7 +671,6 @@ gap: 10px;
     height: 460px !important; 
     font-size: 15px !important;
     overflow: hidden !important;
-    display: flex !important;
     flex-direction: column !important;
   }
 
