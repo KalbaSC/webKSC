@@ -327,7 +327,14 @@ body.no-scroll {
   }
 	
   .prev, .next { bottom: 12px; top: auto; font-size: 20px; padding: 10px; }	  
-  .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+	
+  .carousel-slide img{
+    object-fit: cover !important;      
+    object-position: 50% 50% !important; 
+    width: 100% !important;
+    height: 100% !important;
+    display: block;                      
+  }
 
   .footer-column { min-width: 0 !important; width: 100% !important; }
   .footer-column h3 { font-size: 16px !important; margin-bottom: 10px; }
@@ -365,6 +372,7 @@ body.no-scroll {
     display: block !important;
     text-align: center;
     margin-top: 5px;
+	gap: 2px !important;
   }
 
   .header-info .arabic-name {
@@ -379,11 +387,12 @@ body.no-scroll {
   .header-right {
     flex-direction: column;  
     align-items: center;
-    gap: 6px !important;
+    gap: 4px !important;
   }
 
   .header-right .divider {
-    display: none;  
+    display: inline-block !important;
+    height: 40px !important;   
   }
 
   .mobile-nav {
