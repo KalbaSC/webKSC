@@ -345,13 +345,30 @@ body.no-scroll {
   .header-right img.logo {
     height: 40px !important;
   }
-
-  .header-right .divider {
-    height: 40px !important;
+	
+  .header-info {
+    display: block !important;
+    text-align: center;
+    margin-top: 5px;
   }
 
-  .header-info {
-    display: none;
+  .header-info .arabic-name {
+    font-size: 14px !important;
+  }
+
+  .header-info .english-name {
+    font-size: 12px !important;
+    color: #f4e733;
+  }
+
+  .header-right {
+    flex-direction: column;  
+    align-items: center;
+    gap: 6px !important;
+  }
+
+  .header-right .divider {
+    display: none;  
   }
 
   .mobile-nav {
