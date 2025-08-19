@@ -615,7 +615,6 @@ header {
 </section>
 
 <script>
-	
 function toggleMenu() {
   const navLinks = document.getElementById('navLinks');
   const body = document.body;
@@ -658,19 +657,22 @@ setTimeout(function() {
     }
 }, 10000);
 
-document.getElementById('chat-toggle').addEventListener('click', function() {
-    var tooltip = document.getElementById('chat-tooltip');
-    if (tooltip) {
-        tooltip.style.display = 'none';
-    }
-});
+var chatToggle = document.getElementById('chat-toggle');
+if (chatToggle) {
+    chatToggle.addEventListener('click', function() {
+        var tooltip = document.getElementById('chat-tooltip');
+        if (tooltip) {
+            tooltip.style.display = 'none';
+        }
+    });
+}
 
 function dismissTooltip() {
   var tooltip = document.getElementById('chat-tooltip');
   if (tooltip) {
     tooltip.style.display = 'none';
   }
-}	
+}
 	
 </script>
 	
