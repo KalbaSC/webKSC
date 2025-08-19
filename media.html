@@ -91,11 +91,11 @@ header {
   cursor: pointer;
 }
 
-    footer {
+     footer {
       background-color: #000;
       color: white;
       padding: 16px 90px;
-	  width: 88%;	
+	  width: 88%;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -142,34 +142,127 @@ header {
       color: white;
       font-size: 20px;
     }
+	  	  
+body.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
 
 @media (max-width: 768px) {
-  header, footer { width: 100% !important; padding: 12px 16px !important; }
+  *, *::before, *::after { box-sizing: border-box; }
 
-  .header-right { display:flex !important; align-items:center !important; gap: 8px !important; }
-  .header-right img.logo { height: 40px !important; }
-  .header-right .divider { display:inline-block !important; height: 40px !important; margin-inline: 8px !important; }
+  img, video, iframe { max-width: 100%; height: auto; }
 
-  .header-info {
-    display:flex !important; flex-direction:column !important;
-    align-items:center !important; text-align:center !important; gap: 6px !important;
+  :where(p, h1, h2, h3, h4, h5, h6, a, li, td) { overflow-wrap: anywhere; }
+	
+  .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
+	
+  .nav-links {
+    position: fixed; top: 0; right: -100%;
+    width: 78%; height: 100vh; padding: 70px 20px;
+    background: #000; border-left: 2px solid #f4e733;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: right .3s ease;
+    z-index: 1000;
   }
-  .header-info .arabic-name  { font-size: 14px !important; white-space: nowrap; }
-  .header-info .english-name { font-size: 12px !important; white-space: nowrap; color: #f4e733; }
+  .mobile-nav { display: block !important; }	
+  .nav-links.show { right: 0; }
+  .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
 
-  footer { flex-direction: column; gap: 20px; }
-  .footer-column { width: 90%; min-width: auto; }
-  .footer-column h3 { font-size: 16px !important; margin-bottom: 10px; }
-  .footer-column a  { font-size: 14px !important; }
-  .social-icons { justify-content: flex-start; gap: 15px; }
-  .footer-bottom { margin-top: 20px; padding-top: 15px; font-size: 12px; }
-  textarea { height: 120px !important; width: 100% !important; }
-  button[type="submit"] { width: 100% !important; }
-  footer button[type="submit"] { background-color: #f4e733 !important; color: #000 !important; }
+  .carousel-container { height: 550px; }
+
+  body { background-attachment: scroll !important; }
+
+  .header-info .arabic-name,
+  .header-info .english-name {
+    white-space: nowrap;        
+    line-height: 1.2;
+  }
+
+  .header-right { gap: 6px !important; }
+  .header-right img.logo { height: 40px !important; }
+  .header-right .divider { display: none !important; }	
+  .header-right { flex-direction: row !important; align-items: center !important; gap: 2px !important; }
+	
+.header-info {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;  
+  text-align: center !important;   
+  gap: 6px !important;             
 }
 	
-  .mobile-nav { display: block !important; }
-  .menu-toggle { display: inline-block !important; font-size: 24px; color: #f4e733; }
+  .header-info .arabic-name,
+  .header-info .english-name { white-space: nowrap; line-height: 1.2; font-size: 12px !important; }
+	
+  #chat-box {
+    position: fixed; right: 20px; bottom: 90px;
+    width: 360px; max-width: 90%; max-height: 85vh;
+    display: none;
+    flex-direction: column; overflow: hidden; z-index: 9999;
+  }
+	
+  .footer-column { min-width: 0 !important; width: 100% !important; }
+  .footer-column h3 { font-size: 16px !important; margin-bottom: 10px; }
+  .footer-column a { font-size: 14px !important; }
+  textarea { width: 100% !important; height: 120px !important; }
+  button[type="submit"] { width: 100% !important; }
+  header, footer { padding: 12px 16px !important; }
+
+  header, footer {
+    width: 100% !important;
+    padding: 12px 16px !important;
+  }
+
+  .nav-links { gap: 12px !important; flex-wrap: wrap; }
+  .nav-links a { font-size: 14px !important; }
+	
+header { 
+  padding-inline: 16px !important;           
+}
+
+.header-right {
+  gap: 8px !important;                        
+  align-items: center !important;
+}
+
+.header-right img.logo {
+  height: 40px !important;
+  margin: 0 !important;
+}
+
+.header-right .divider {
+  display: inline-block !important;
+  height: 40px !important;
+  margin-inline: 8px !important;           
+}
+
+.mobile-nav .menu-toggle {
+  padding: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: grid !important;
+  place-items: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+	
+  .header-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;          
+  }
+
+  .header-info .arabic-name {
+    font-size: 14px !important;
+  }
+
+  .header-info .english-name {
+    font-size: 12px !important;
+    color: #f4e733;
+  }
 
   .nav-links {
     position: fixed;
@@ -253,9 +346,7 @@ header {
 }
 
 #chat-tooltip span:last-child { font-size: 14px !important; }
-
-	}	
-	  
+}
 @media (max-width: 600px) {
   #chat-box { width: 90% !important; height: 460px !important; }
 	
