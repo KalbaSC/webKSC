@@ -161,13 +161,19 @@ header {
   .header-info .arabic-name  { font-size: 14px !important; white-space: nowrap; }
   .header-info .english-name { font-size: 12px !important; white-space: nowrap; color: #f4e733; }	
 
-  .mobile-nav { display: flex !important; }             
-  .menu-toggle { display: block !important; font-size: 28px; }
+  .mobile-nav { display: block !important; }
+  .menu-toggle { display: inline-block !important; font-size: 24px; color: #f4e733; }
 
-  .nav-links{
-    width: 75vw !important;       
+  .nav-links {
+    position: fixed; top: 0; right: -100%;
+    width: 75%; height: 100vh; padding: 60px 20px;
+    background: #000; border-left: 2px solid #f4e733;
+    display: flex; flex-direction: column; gap: 15px;
+    transition: right .3s ease; z-index: 1000;
   }
-  .nav-links.show{ display:flex; transform: translateX(0); }	
+  .nav-links.show { right: 0; }
+  .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
+
 
   .footer-column { min-width: 0 !important; width: 100% !important; }
   .footer-column h3 { font-size: 16px !important; }
@@ -216,6 +222,36 @@ header {
 </header>
 
 <section style='padding: 30px;'><h2>🎥 معرض الوسائط</h2><p>صور وفيديوهات حصرية من مباريات وتدريبات النادي.</p></section>
+	
+<script>
+function toggleMenu() {
+  const navLinks = document.getElementById('navLinks');
+  const body = document.body;
+
+  navLinks.classList.toggle('show');
+  body.classList.toggle('no-scroll');
+
+  const menuToggle = document.querySelector('.menu-toggle');
+  menuToggle.innerHTML = navLinks.classList.contains('show') ? '✕' : '☰';
+}
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) toggleMenu();
+  });
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const body = document.body;
+    const menuToggle = document.querySelector('.menu-toggle');
+    navLinks.classList.remove('show');
+    body.classList.remove('no-scroll');
+    menuToggle.innerHTML = '☰';
+  }
+});
+</script>
 	
 	
 <div class="chatbot">
