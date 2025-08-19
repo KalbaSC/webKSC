@@ -217,6 +217,7 @@ header {
 
 <section style='padding: 30px;'><h2>🎥 معرض الوسائط</h2><p>صور وفيديوهات حصرية من مباريات وتدريبات النادي.</p></section>
 	
+	
 <div class="chatbot">
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -475,33 +476,6 @@ gap: 10px;
   </style>
 </head>
 <body>
-<script>
-let slideIndex = 0;
-showSlides();
-
-function plusSlides(n) {
-  slideIndex += n;
-  showSlides();
-}
-
-function showSlides() {
-  let slides = document.getElementsByClassName("carousel-slide");
-  if (slideIndex >= slides.length) slideIndex = 0;
-  if (slideIndex < 0) slideIndex = slides.length - 1;
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-
-  slides[slideIndex].style.display = "block";
-}
-
-setInterval(() => {
-  slideIndex++;
-  showSlides();
-}, 5000);
-	
-</script>
 
 <div id="chat-box">
   <div class="chat-header">
@@ -1007,7 +981,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-</div>
+</div>>
 	
 <footer>
   <div class="footer-column">
