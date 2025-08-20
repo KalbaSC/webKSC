@@ -260,6 +260,25 @@ header {
       color: white;
       font-size: 20px;
     }
+	  
+#chat-tooltip {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+  white-space: nowrap !important;
+  pointer-events: auto !important;
+  max-width: calc(100vw - 40px);
+  overflow: hidden;
+}
+
+#chat-tooltip span:first-child {
+  flex: 0 0 auto;
+}
+
+#chat-tooltip span:last-child {
+  pointer-events: auto;
+}
 	  	  
 body.no-scroll {
   overflow: hidden;
@@ -761,26 +780,18 @@ header {
   }
 	}	
   
-#chat-tooltip { pointer-events: auto !important; }
-#chat-tooltip span:last-child { pointer-events: auto; }
-
 @media (max-width: 600px) {
   #chat-tooltip {
-    display: flex !important;
-    flex-direction: column; 
-    align-items: center;
-    gap: 8px;
-    max-height: 70vh;
-    overflow: auto;
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+    right: 8px !important;
+    bottom: 60px !important;
   }
-  #chat-tooltip .tooltip-rotate {
-    display: inline-block;
-    transform: rotate(90deg);         
-    transform-origin: top right;
-    white-space: nowrap;              
-    line-height: 1.2;
+  #chat-tooltip span:last-child {
+    font-size: 14px !important;
   }
 }
+
   </style>
 </head>
 <body>
@@ -963,7 +974,6 @@ setInterval(() => {
   max-width: 260px;
   direction: rtl;
   text-align: right;
-  white-space: normal;
   position: absolute;
   bottom: 80px;
   right: 20px;
@@ -972,18 +982,15 @@ setInterval(() => {
   gap: 10px;
   z-index: 9999;
   line-height: 1.4;
-  max-height: 70vh;            
-  overflow: auto;
+  white-space: nowrap;  
 ">
-	
-  <span class="tooltip-rotate">مرحباً بك في نادي كلباء الرياضي الثقافي</span>
+  <span>مرحباً بك في نادي كلباء الرياضي الثقافي</span>
   <span onclick="dismissTooltip()" style="
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
     color: red;
     line-height: 1;
-    margin-top: -2px;
   ">✕</span>
 </div>
 
