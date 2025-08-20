@@ -471,18 +471,6 @@ gap: 10px;
     }
 
 @media (max-width: 600px) {
-  #chat-tooltip {
-    right: 8px !important;
-    bottom: 80px !important;
-    font-size: 12px !important;     
-    padding: 6px 10px !important;    
-  }
-
-  #chat-tooltip span:last-child {
-    font-size: 10px !important;  
-    margin-top: 0 !important;
-  }
-	
   #chat-box {
     width: 90% !important;
     padding: 12px !important;
@@ -533,25 +521,7 @@ gap: 10px;
     height: 50px !important;
   }
 }
-	  
-@media (max-width: 768px) {	  
-  #chat-tooltip > span:first-child {
-    flex: 0 0 auto !important;
-    white-space: nowrap !important;
-  }
-	  
-  #chat-tooltip {
-    display: inline-flex !important;
-    width: max-content !important;
-    max-width: calc(100vw - 40px) !important; 
-    overflow: hidden; 
-  }
-	
-  #chat-tooltip span:last-child { 
-    font-size: 12px !important; 
-  }			
-  } 	
-	
+	  	
 @media (max-width: 768px) {
   *, *::before, *::after { box-sizing: border-box; }
 
@@ -768,22 +738,6 @@ header {
     background-color: #f4e733 !important;
     color: #000 !important;
   }
-	
-  #chat-tooltip {
-    right: 8px !important;
-    bottom: 80px !important;
-    font-size: 12px !important;
-    padding: 10px 12px !important;
-    max-width: calc(100vw - 50px) !important;
-    display: inline-flex !important;   
-    align-items: center;              
-    gap: 8px;                          
-  }
-
-  #chat-tooltip span:last-child {
-    font-size: 14px !important; 
-    line-height: 1;
-  }
 
   #chat-box {
     width: 94% !important;
@@ -794,10 +748,6 @@ header {
 
   .chat-body {
     max-height: 55vh !important;
-  }
-
-  #chat-tooltip {
-    animation: tooltip-fade 10s forwards;
   }
 
   @keyframes tooltip-pulse {
@@ -810,63 +760,27 @@ header {
     100% { opacity: 0; visibility: hidden; }
   }
 	}	
-	  
+  
+#chat-tooltip { pointer-events: auto !important; }
+#chat-tooltip span:last-child { pointer-events: auto; }
+
 @media (max-width: 600px) {
   #chat-tooltip {
-    right: 8px !important;
-    bottom: 80px !important;
-    font-size: 12px !important;
-    padding: 10px 12px !important;
-    max-width: calc(100vw - 50px) !important;
+    display: flex !important;
+    flex-direction: column; 
+    align-items: center;
+    gap: 8px;
+    max-height: 70vh;
+    overflow: auto;
   }
-  
-  #chat-box {
-    width: 94% !important;
-    right: 3% !important;
-    height: 460px !important;
-    max-height: 70vh !important;
+  #chat-tooltip .tooltip-rotate {
+    display: inline-block;
+    transform: rotate(90deg);         
+    transform-origin: top right;
+    white-space: nowrap;              
+    line-height: 1.2;
   }
-  
-  .chat-body {
-    max-height: 55vh !important;
-  }
-  
-  #chat-tooltip span:last-child {
-    font-size: 14px !important;
-  }
-	#chat-tooltip {
-  animation: tooltip-fade 10s forwards;
 }
-
-@keyframes tooltip-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-}
-
-@keyframes tooltip-fade {
-  0%, 80% { opacity: 1; visibility: visible; }
-  100% { opacity: 0; visibility: hidden; }
-}
-}
-  #chat-tooltip { pointer-events: auto !important; }
-  #chat-tooltip span:last-child { pointer-events: auto; }
-
-  @media (max-width: 600px) {
-    #chat-tooltip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      max-height: 70vh;
-      overflow: auto;
-    }
-    #chat-tooltip span:first-child {
-      writing-mode: vertical-rl;
-      text-orientation: mixed;       
-      white-space: normal !important; 
-      line-height: 1.4;
-      flex: 0 0 auto;
-    }
-  }	  
   </style>
 </head>
 <body>
@@ -1061,14 +975,8 @@ setInterval(() => {
   max-height: 70vh;            
   overflow: auto;
 ">
-    <span style="
-    flex: 0 0 auto;              
-    writing-mode: vertical-rl;    
-    text-orientation: mixed;      
-    white-space: normal;         
-    line-height: 1.4;           
-  ">مرحباً بك في نادي كلباء الرياضي الثقافي</span>
 	
+  <span class="tooltip-rotate">مرحباً بك في نادي كلباء الرياضي الثقافي</span>
   <span onclick="dismissTooltip()" style="
     cursor: pointer;
     font-size: 16px;
