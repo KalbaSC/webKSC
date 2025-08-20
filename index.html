@@ -263,7 +263,8 @@ header {
 	  
  input, textarea, button {
     pointer-events: auto !important;
-  } 	  
+  } 	
+	  
 #chat-tooltip {
   display: inline-flex !important;
   flex-direction: row !important;
@@ -305,10 +306,28 @@ footer button {
   z-index: 1; 
 }
 
-#chat-wrapper,
-#chat-box {
-  pointer-events: none;
+#chat-wrapper {
+    pointer-events: none; 
+ }	 
+
+#chat-box,
+#chat-tooltip,
+#chat-toggle {
+   pointer-events: auto !important;
+}	  
+
+#chat-box *,
+#chat-tooltip * {
+   pointer-events: auto !important;
+}	 
+
+#chat-tooltip span:last-child {
+   cursor: pointer !important;
 }
+    
+input, textarea, button, .chat-btn {
+   pointer-events: auto !important;
+}	  
 	  
 #chat-toggle,
 #chat-box .chat-header span,
@@ -987,7 +1006,6 @@ let tooltipDismissed = false;
     if (tooltipCloseBtn) {
       tooltipCloseBtn.addEventListener('click', dismissTooltip);
     }
-    
     const chatInput = document.getElementById('userMessage');
     if (chatInput) {
       chatInput.addEventListener('focus', function() {
@@ -1345,7 +1363,27 @@ input.value = '';
   wrapper.scrollIntoView({ behavior: "smooth" });
 }
 
-
+  function dismissTooltip() {
+    const tooltip = document.getElementById('chat-tooltip');
+    if (tooltip) {
+      tooltip.style.display = 'none';
+      tooltipDismissed = true;
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
+    if (tooltipCloseBtn) {
+      tooltipCloseBtn.addEventListener('click', dismissTooltip);
+    }
+    const chatInput = document.getElementById('userMessage');
+    if (chatInput) {
+      chatInput.addEventListener('focus', function() {
+        this.style.pointerEvents = 'auto';
+      });
+    }
+  });
+	
   function reply(option) {
 
     let userText = '';
@@ -1463,6 +1501,7 @@ function showContactOptions() {
     }, 1000);
   }, 1000);
 }
+	
 document.addEventListener("keydown", function (e) {
   const nameInput = document.getElementById("nameInput");
   if (nameInput && document.activeElement === nameInput && e.key === "Enter") {
