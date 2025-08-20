@@ -850,20 +850,6 @@ header {
 </section>
 
 <script>
-function toggleMenu() {
-  const navLinks = document.getElementById('navLinks');
-  const body = document.body;
-  
-  navLinks.classList.toggle('show');
-  body.classList.toggle('no-scroll');
-  
-  const menuToggle = document.querySelector('.menu-toggle');
-  if (navLinks.classList.contains('show')) {
-    menuToggle.innerHTML = '✕';
-  } else {
-    menuToggle.innerHTML = '☰';
-  }
-}
 
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => {
@@ -886,12 +872,6 @@ window.addEventListener('resize', function() {
 });
 
 let tooltipDismissed = false;
-
-function dismissTooltip() {
-  const tooltip = document.getElementById('chat-tooltip');
-  if (tooltip) tooltip.style.display = 'none';
-  tooltipDismissed = true;                
-}
 
   function toggleChat() {
     const chatBox = document.getElementById('chat-box');
