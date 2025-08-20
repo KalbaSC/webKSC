@@ -893,6 +893,47 @@ function dismissTooltip() {
   tooltipDismissed = true;                
 }
 
+  function toggleChat() {
+    const chatBox = document.getElementById('chat-box');
+    const badge = document.getElementById('chat-badge');
+    const tooltip = document.getElementById('chat-tooltip');
+    const alreadyStarted = !!chatBox.querySelector('.message-wrapper');
+
+    if (typeof dismissTooltip === 'function') dismissTooltip();
+
+    if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+      chatBox.style.display = 'block';
+      badge.style.display = 'none';
+      tooltip.style.display = 'none';
+
+      setTimeout(() => {
+        chatBox.style.opacity = '1';
+        chatBox.style.transform = 'translateY(0)';
+
+        setTimeout(() => {
+          const chatBody = document.getElementById('chat-body');
+          if (chatBody && !alreadyStarted) {
+            startChat();
+          }
+        }, 200);
+      }, 50);
+
+    } else {
+      chatBox.style.opacity = '0';
+      chatBox.style.transform = 'translateY(30px)';
+      setTimeout(() => {
+        chatBox.style.display = 'none';
+        badge.style.display = 'flex';
+        if (!tooltipDismissed) tooltip.style.display = 'block';
+      }, 500);
+    }
+  }
+
+  function dismissTooltip() {
+    const tooltip = document.getElementById('chat-tooltip');
+    tooltip.style.display = 'none';
+    tooltipDismissed = true;
+  }	
 </script>
 	
 <div class="chatbot">
@@ -1334,67 +1375,8 @@ function showContactMain() {
   }, 1000);
 }
 	
-function toggleChat() {
-  const chatBox = document.getElementById('chat-box');
-  const badge   = document.getElementById('chat-badge');
-  const tooltip = document.getElementById('chat-tooltip');
-
-  const alreadyStarted = !!(chatBox && chatBox.querySelector('.message-wrapper'));
-
-  if (typeof dismissTooltip === 'function') dismissTooltip();
-
-  const isHidden = !chatBox || chatBox.style.display === 'none' || chatBox.style.display === '';
-  if (isHidden) {
-    if (chatBox) {
-      chatBox.style.display = 'block';
-      chatBox.style.opacity = '0';
-      chatBox.style.transform = 'translateY(30px)';
-    }
-    if (badge)   badge.style.display   = 'none';
-    if (tooltip) tooltip.style.display = 'none';
-
-    setTimeout(() => {
-      if (chatBox) {
-        chatBox.style.opacity = '1';
-        chatBox.style.transform = 'translateY(0)';
-      }
-      setTimeout(() => {
-        const chatBody = document.getElementById('chat-body');
-        if (chatBody && !alreadyStarted && typeof startChat === 'function') {
-          startChat();
-        }
-      }, 200);
-    }, 50);
-
-  } else {
-    if (chatBox) {
-      chatBox.style.opacity = '0';
-      chatBox.style.transform = 'translateY(30px)';
-    }
-    setTimeout(() => {
-      if (chatBox) chatBox.style.display = 'none';
-      if (badge)   badge.style.display   = 'flex';
-      if (tooltip && !tooltipDismissed) tooltip.style.display = 'block';
-    }, 500);
-  }
-
-  if (typeof updateChatbotInteractivity === 'function') {
-    setTimeout(updateChatbotInteractivity, 50);
-  }
-}
-
 window.addEventListener('load', updateChatbotInteractivity);
 window.addEventListener('resize', updateChatbotInteractivity);
-
-let tooltipDismissed = false;
-
-function dismissTooltip() {
-  document.getElementById('chat-tooltip').style.display = 'none';
-  tooltipDismissed = true;
- if (window.matchMedia('(max-width: 600px)').matches) {
-  setTimeout(() => { try { dismissTooltip(); } catch(e){} }, 5000);
- }	
-}
 
 function showContactOptions() {
   addMessage("تواصل مع السكرتير", true);
