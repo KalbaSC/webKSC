@@ -181,7 +181,7 @@ button {
 
 #chat-tooltip span:last-child {
   cursor: pointer;
-}
+}	  
 	  
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
@@ -367,7 +367,7 @@ gap: 10px;
     }
 
 @media (max-width: 600px) {
-   #chat-box {
+  #chat-box {
     pointer-events: auto !important; 
   }
   
@@ -682,7 +682,8 @@ header {
   #chat-tooltip span:last-child {
     cursor: pointer !important;
     pointer-events: auto !important;
-  }	
+  }
+	
   #chat-tooltip {
     font-size: 12px !important;
     padding: 8px 10px !important;
@@ -728,34 +729,6 @@ header {
 
 	
 <div class="chatbot">
-<script>
-let slideIndex = 0;
-showSlides();
-
-function plusSlides(n) {
-  slideIndex += n;
-  showSlides();
-}
-
-function showSlides() {
-  let slides = document.getElementsByClassName("carousel-slide");
-  if (slideIndex >= slides.length) slideIndex = 0;
-  if (slideIndex < 0) slideIndex = slides.length - 1;
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-
-  slides[slideIndex].style.display = "block";
-}
-
-setInterval(() => {
-  slideIndex++;
-  showSlides();
-}, 5000);
-	
-</script>
-
 <div id="chat-box">
   <div class="chat-header">
 <span onclick="toggleChat()">✕</span>
@@ -1325,6 +1298,39 @@ window.addEventListener('DOMContentLoaded', () => {
       navLinks.classList.remove('show');
     }
   });
+
+let tooltipDismissed = false;
+
+function toggleChat() {
+  const chatBox = document.getElementById('chat-box');
+  const badge = document.getElementById('chat-badge');
+  const tooltip = document.getElementById('chat-tooltip');
+  const alreadyStarted = chatBox.querySelector('.message-wrapper') !== null;
+
+  if (typeof dismissTooltip === 'function') dismissTooltip();
+
+  if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+    chatBox.style.display = 'block';
+    badge.style.display = 'none';
+    tooltip.style.display = 'none';
+
+    setTimeout(() => {
+      chatBox.style.opacity = '1';
+      chatBox.style.transform = 'translateY(0)';
+
+      if (!alreadyStarted) {
+        startChat();
+      }
+    }, 50);
+  } else {
+    chatBox.style.opacity = '0';
+    chatBox.style.transform = 'translateY(30px)';
+    setTimeout(() => {
+      chatBox.style.display = 'none';
+      badge.style.display = 'flex';
+    }, 500);
+  }
+}	
 </script>
 
 </body>
