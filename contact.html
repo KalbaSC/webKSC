@@ -365,8 +365,18 @@ gap: 10px;
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
+#chat-box {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+#chat-box .chat-header {
+    display: flex !important;
+}
+
 #inner-input-bar {
-    display: flex !important; 
+    display: flex !important;
 }	
 @media (max-width: 600px) {
   #chat-box {
@@ -419,9 +429,19 @@ gap: 10px;
   header img {
     height: 50px !important;
   }
+#chat-box {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+#chat-box .chat-header {
+    display: flex !important;
+}
+
 #inner-input-bar {
-    display: flex !important; 
-}		
+    display: flex !important;
+}	
 }
 	  	
 @media (max-width: 768px) {
@@ -673,9 +693,19 @@ header {
     0%, 80% { opacity: 1; visibility: visible; }
     100% { opacity: 0; visibility: hidden; }
   }
+#chat-box {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+#chat-box .chat-header {
+    display: flex !important;
+}
+
 #inner-input-bar {
-    display: flex !important; 
-}		
+    display: flex !important;
+}	
 	}	
   
 @media (max-width: 600px) {
@@ -701,8 +731,18 @@ header {
   #chat-tooltip span:last-child {
     font-size: 14px !important;
   }
+#chat-box {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+#chat-box .chat-header {
+    display: flex !important;
+}
+
 #inner-input-bar {
-    display: flex !important; 
+    display: flex !important;
 }	
 }  
   </style>
@@ -937,24 +977,46 @@ inputDiv.innerHTML = `
   chatBody.appendChild(inputDiv);
 }
 
- function submitName() {
+function submitName() {
+  console.log("submitName function called"); 
+  
   const input = document.getElementById("nameInput");
+  if (!input) {
+    console.error("Name input field not found!");
+    return;
+  }
 
   const name = input.value.trim();
+  console.log("Name entered:", name); 
 
   if (name) {
-  addMessage(`${name}`, true);
-  userName = name;
-  document.getElementById("nameInputWrapper").remove();
-  
-  setTimeout(() => {
-    addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
-    showMainButtons();
-    const inputBar = document.getElementById("inner-input-bar");
-    if (inputBar) inputBar.style.display = "flex";
-  }, 500);
+    addMessage(`${name}`, true);
+    userName = name;
+    
+    const nameInputWrapper = document.getElementById("nameInputWrapper");
+    if (nameInputWrapper) {
+      nameInputWrapper.remove();
+      console.log("Name input wrapper removed"); 
+    }
+    
+    setTimeout(() => {
+      addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
+      showMainButtons();
+      
+      const inputBar = document.getElementById("inner-input-bar");
+      console.log("Input bar element:", inputBar); 
+      
+      if (inputBar) {
+        inputBar.style.display = "flex";
+        console.log("Input bar should now be visible"); 
+      } else {
+        console.error("Input bar not found!");
+      }
+    }, 500);
+  } else {
+    console.log("No name entered"); 
+  }
 }
- }
   
 function submitUserMessage() {
     const input = document.getElementById("userMessage");
