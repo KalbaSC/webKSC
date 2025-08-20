@@ -261,6 +261,9 @@ header {
       font-size: 20px;
     }
 	  
+ input, textarea, button {
+    pointer-events: auto !important;
+  } 	  
 #chat-tooltip {
   display: inline-flex !important;
   flex-direction: row !important;
@@ -314,6 +317,19 @@ footer button {
   pointer-events: auto;
 }	  
 
+  #chat-box {
+    pointer-events: auto !important; 
+  }
+  
+  #chat-box * {
+    pointer-events: auto !important;
+  }
+  
+  #chat-tooltip span:last-child {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+	  
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
   40% {transform: translateY(-8px);}
@@ -499,6 +515,18 @@ gap: 10px;
 
 @media (max-width: 600px) {
   #chat-box {
+    pointer-events: auto !important; 
+  }
+  
+  #chat-box * {
+    pointer-events: auto !important;
+  }
+  
+  #chat-tooltip span:last-child {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }	
+  #chat-box {
     width: 90% !important;
     padding: 12px !important;
     min-height: 280px !important;
@@ -550,6 +578,18 @@ gap: 10px;
 }
 	  	
 @media (max-width: 768px) {
+  #chat-box {
+    pointer-events: auto !important; 
+  }
+  
+  #chat-box * {
+    pointer-events: auto !important;
+  }
+  
+  #chat-tooltip span:last-child {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }	
   *, *::before, *::after { box-sizing: border-box; }
 
   img, video, iframe { max-width: 100%; height: auto; }
@@ -789,6 +829,18 @@ header {
 	}	
   
 @media (max-width: 600px) {
+  #chat-box {
+    pointer-events: auto !important; 
+  }
+  
+  #chat-box * {
+    pointer-events: auto !important;
+  }
+  
+  #chat-tooltip span:last-child {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }	
   #chat-tooltip {
     font-size: 12px !important;
     padding: 8px 10px !important;
@@ -929,13 +981,21 @@ let tooltipDismissed = false;
       tooltipDismissed = true;
     }
   }
-	
+  
   document.addEventListener('DOMContentLoaded', function() {
     const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
     if (tooltipCloseBtn) {
       tooltipCloseBtn.addEventListener('click', dismissTooltip);
     }
-  });	
+    
+    const chatInput = document.getElementById('userMessage');
+    if (chatInput) {
+      chatInput.addEventListener('focus', function() {
+        this.style.pointerEvents = 'auto';
+      });
+    }
+  });
+	
 </script>
 	
 <div class="chatbot">
