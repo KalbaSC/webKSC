@@ -285,6 +285,7 @@ header {
 #chat-toggle,
 #chat-box {
   pointer-events: auto !important;
+  cursor: pointer;
 }
 	  
 body.no-scroll {
@@ -923,9 +924,18 @@ let tooltipDismissed = false;
 
   function dismissTooltip() {
     const tooltip = document.getElementById('chat-tooltip');
-    tooltip.style.display = 'none';
-    tooltipDismissed = true;
-  }	
+    if (tooltip) {
+      tooltip.style.display = 'none';
+      tooltipDismissed = true;
+    }
+  }
+	
+  document.addEventListener('DOMContentLoaded', function() {
+    const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
+    if (tooltipCloseBtn) {
+      tooltipCloseBtn.addEventListener('click', dismissTooltip);
+    }
+  });	
 </script>
 	
 <div class="chatbot">
