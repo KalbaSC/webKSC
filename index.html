@@ -482,13 +482,6 @@ gap: 10px;
     font-size: 10px !important;  
     margin-top: 0 !important;
   }
-
-
-  #chat-tooltip span:first-child {
-    writing-mode: vertical-rl;  
-    text-orientation: upright;   
-    white-space: nowrap;   
-  }	
 	
   #chat-box {
     width: 90% !important;
@@ -787,14 +780,6 @@ header {
     gap: 8px;                          
   }
 
-  #chat-tooltip span:first-child {
-    writing-mode: vertical-rl;   
-    text-orientation: upright;  
-    white-space: nowrap;         
-    line-height: 1;              
-    flex: 0 0 auto;              
-  }
-
   #chat-tooltip span:last-child {
     font-size: 14px !important; 
     line-height: 1;
@@ -863,7 +848,25 @@ header {
   100% { opacity: 0; visibility: hidden; }
 }
 }
-	  
+  #chat-tooltip { pointer-events: auto !important; }
+  #chat-tooltip span:last-child { pointer-events: auto; }
+
+  @media (max-width: 600px) {
+    #chat-tooltip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      max-height: 70vh;
+      overflow: auto;
+    }
+    #chat-tooltip span:first-child {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;       
+      white-space: normal !important; 
+      line-height: 1.4;
+      flex: 0 0 auto;
+    }
+  }	  
   </style>
 </head>
 <body>
@@ -1046,7 +1049,7 @@ setInterval(() => {
   max-width: 260px;
   direction: rtl;
   text-align: right;
-  white-space: nowrap;
+  white-space: normal;
   position: absolute;
   bottom: 80px;
   right: 20px;
@@ -1055,8 +1058,17 @@ setInterval(() => {
   gap: 10px;
   z-index: 9999;
   line-height: 1.4;
+  max-height: 70vh;            
+  overflow: auto;
 ">
-  <span style="flex: 1;">مرحباً بك في نادي كلباء الرياضي الثقافي</span>
+    <span style="
+    flex: 0 0 auto;              
+    writing-mode: vertical-rl;    
+    text-orientation: mixed;      
+    white-space: normal;         
+    line-height: 1.4;           
+  ">مرحباً بك في نادي كلباء الرياضي الثقافي</span>
+	
   <span onclick="dismissTooltip()" style="
     cursor: pointer;
     font-size: 16px;
