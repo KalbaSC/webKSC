@@ -850,7 +850,19 @@ header {
 </section>
 
 <script>
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navLinks = document.getElementById('navLinks');
 
+  function toggleMenu() {
+    navLinks.classList.toggle('show');
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+      navLinks.classList.remove('show');
+    }
+  });
+	
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => {
     if (window.innerWidth < 769) {
