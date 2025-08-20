@@ -268,6 +268,26 @@ body.no-scroll {
   height: 100%;
 }
 
+footer form,
+footer textarea,
+footer button {
+  position: relative;
+  z-index: 1; 
+
+#chat-wrapper,
+#chat-tooltip,
+#chat-box {
+  pointer-events: none;
+}
+
+#chat-toggle,
+#chat-tooltip span:last-child,
+#chat-box .chat-header span,
+#chat-box .chat-footer button,
+#chat-box .chat-footer input {
+  pointer-events: auto;
+}	  
+	
 @media (max-width: 768px) {
   *, *::before, *::after { box-sizing: border-box; }
 
@@ -1396,6 +1416,30 @@ function showContactMain() {
   }, 1000);
 }
 
+function updateChatbotInteractivity() {
+  const chatBox = document.getElementById('chat-box');
+  const chatWrapper = document.getElementById('chat-wrapper');
+  
+  if (chatBox && chatWrapper) {
+    if (chatBox.style.display === 'block') {
+      chatWrapper.style.pointerEvents = 'auto';
+      chatBox.style.pointerEvents = 'auto';
+    } else {
+      chatWrapper.style.pointerEvents = 'none';
+      chatBox.style.pointerEvents = 'none';
+      
+      const toggleBtn = document.getElementById('chat-toggle');
+      if (toggleBtn) toggleBtn.style.pointerEvents = 'auto';
+      
+      const tooltip = document.getElementById('chat-tooltip');
+      if (tooltip && tooltip.style.display !== 'none') {
+        const closeBtn = tooltip.querySelector('span:last-child');
+        if (closeBtn) closeBtn.style.pointerEvents = 'auto';
+      }
+    }
+  }
+}
+
 function toggleChat() {
   const chatBox = document.getElementById('chat-box');
   const badge = document.getElementById('chat-badge');
@@ -1428,7 +1472,12 @@ function toggleChat() {
       if (!tooltipDismissed) tooltip.style.display = 'block';
     }, 500);
   }
+  
+  setTimeout(updateChatbotInteractivity, 50);
 }
+
+window.addEventListener('load', updateChatbotInteractivity);
+window.addEventListener('resize', updateChatbotInteractivity);
 
 let tooltipDismissed = false;
 
