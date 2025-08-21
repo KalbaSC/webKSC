@@ -203,8 +203,15 @@ body.no-scroll {
     position: fixed; right: 20px; bottom: 90px;
     width: 360px; max-width: 90%; max-height: 85vh;
     display: none;
-    flex-direction: column; overflow: hidden; z-index: 9999;
+    overflow: hidden; 
+	z-index: 9999;
   }
+
+    #chat-box.open {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+	
   .carousel-container { min-height: 340px; border-radius: 12px; }
 	
   .caption {
@@ -512,6 +519,7 @@ window.addEventListener('resize', function() {
       align-items: center;
     }
 
+/* hidden by default */
 #chat-box {
   position: fixed;
   bottom: 90px;
@@ -519,21 +527,29 @@ window.addEventListener('resize', function() {
   background-color: white;
   color: black;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
   padding: 0;
   max-width: 90%;
   width: 360px;
   min-height: 300px;
-  display: flex;
-  flex-direction: column;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1.5s ease, transform 1.5s ease;
-  display: none;
+  display: none;          
   z-index: 9999;
-  overflow-y: auto;
+  overflow: hidden;       
   max-height: 90vh;
 }
+
+#chat-box.open {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header { display: flex; }
+
+#inner-input-bar { display: none; }
+#inner-input-bar.active { display: flex; }
 
 .chat-header {
   display: flex;
@@ -935,7 +951,7 @@ inputDiv.innerHTML = `
     addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
     showMainButtons();
     const inputBar = document.getElementById("inner-input-bar");
-    if (inputBar) inputBar.style.display = "flex";
+    if (inputBar) inputBar.classList.add("active");
   }, 500);
 }
  }
@@ -1135,37 +1151,39 @@ function showContactMain() {
 
 function toggleChat() {
   const chatBox = document.getElementById('chat-box');
-  const badge = document.getElementById('chat-badge');
+  const badge   = document.getElementById('chat-badge');
   const tooltip = document.getElementById('chat-tooltip');
   const alreadyStarted = !!chatBox.querySelector('.message-wrapper');
 
-  if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-    chatBox.style.display = 'block';
-    badge.style.display = 'none';
-    tooltip.style.display = 'none';
+  const isHidden = getComputedStyle(chatBox).display === 'none';
 
-    setTimeout(() => {
+  if (isHidden) {
+    chatBox.style.display = 'flex';
+    chatBox.classList.add('open');
+    if (badge)   badge.style.display = 'none';
+    if (tooltip) tooltip.style.display = 'none';
+
+    requestAnimationFrame(() => {
       chatBox.style.opacity = '1';
       chatBox.style.transform = 'translateY(0)';
+    });
 
-      setTimeout(() => {
-        const chatBody = document.getElementById('chat-body');
-        if (chatBody && !alreadyStarted) {
-          startChat(); 
-        }
-      }, 200);
-    }, 50);
+    if (!alreadyStarted) startChat();
 
   } else {
     chatBox.style.opacity = '0';
     chatBox.style.transform = 'translateY(30px)';
     setTimeout(() => {
+      chatBox.classList.remove('open');  
       chatBox.style.display = 'none';
-      badge.style.display = 'flex';
-      if (!tooltipDismissed) tooltip.style.display = 'block';
-    }, 500);
+      if (badge) badge.style.display = 'flex';
+      if (typeof tooltipDismissed !== 'undefined' && !tooltipDismissed && tooltip) {
+        tooltip.style.display = 'block';
+      }
+    }, 500); 
   }
 }
+
 
 let tooltipDismissed = false;
 
