@@ -483,21 +483,52 @@ gap: 10px;
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
+	  
+#chat-box {
+  display: flex !important;
+  flex-direction: column !important;
+}
 
+.chat-header {
+  display: flex !important;
+  flex-shrink: 0 !important;
+}
+
+.chat-body {
+  flex: 1 !important;
+  overflow-y: auto !important;
+}
+
+.chat-footer {
+  display: flex !important;
+  flex-shrink: 0 !important;
+}
+
+#chat-box .chat-header {
+  border: 2px solid red !important;
+}
+
+#inner-input-bar {
+  border: 2px solid blue !important;
+}
+
+#chat-body {
+  border: 2px solid green !important;
+  min-height: 100px !important;
+}
+	  
 @media (max-width: 600px) {
-   #chat-box {
-    pointer-events: auto !important; 
+  #chat-box .chat-header,
+  #inner-input-bar {
+    display: flex !important;
   }
   
-  #chat-box * {
-    pointer-events: auto !important;
+  #chat-tooltip {
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+    right: 8px !important;
+    bottom: 60px !important;
   }
-  
-  #chat-tooltip span:last-child {
-    cursor: pointer !important;
-    pointer-events: auto !important;
-  }
-
 .chat-body {
     flex: 1;
     overflow-y: auto !important;
@@ -538,18 +569,29 @@ gap: 10px;
 }
 	  	
 @media (max-width: 768px) {
+  #chat-box .chat-header {
+    display: flex !important;
+    padding: 8px 10px !important;
+  }
+  
+  #inner-input-bar {
+    display: flex !important;
+    padding: 6px 10px !important;
+  }
+  
   #chat-box {
-    pointer-events: auto !important; 
+    width: 94% !important;
+    right: 3% !important;
+    height: 460px !important;
+    max-height: 70vh !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
   
-  #chat-box * {
-    pointer-events: auto !important;
+  .chat-body {
+    max-height: 55vh !important;
+    overflow-y: auto !important;
   }
-  
-  #chat-tooltip span:last-child {
-    cursor: pointer !important;
-    pointer-events: auto !important;
-  }	
   *, *::before, *::after { box-sizing: border-box; }
 
   img, video, iframe { max-width: 100%; height: auto; }
@@ -789,18 +831,11 @@ header {
 	}	
   
 @media (max-width: 600px) {
-  #chat-box {
-    pointer-events: auto !important; 
+  #chat-box .chat-header,
+  #inner-input-bar {
+    display: flex !important;
   }
   
-  #chat-box * {
-    pointer-events: auto !important;
-  }
-  
-  #chat-tooltip span:last-child {
-    cursor: pointer !important;
-    pointer-events: auto !important;
-  }	
   #chat-tooltip {
     font-size: 12px !important;
     padding: 8px 10px !important;
@@ -899,7 +934,13 @@ window.addEventListener('resize', function() {
 let tooltipDismissed = false;
 
 function toggleChat() {
+  console.log("toggleChat called");	
   const chatBox = document.getElementById('chat-box');
+  const header = chatBox.querySelector('.chat-header');
+  const footer = chatBox.querySelector('.chat-footer');
+	  console.log("Chat box:", chatBox);
+      console.log("Header exists:", !!header);
+      console.log("Footer exists:", !!footer);
   const badge = document.getElementById('chat-badge');
   const tooltip = document.getElementById('chat-tooltip');
   const alreadyStarted = chatBox.querySelector('.message-wrapper') !== null;
