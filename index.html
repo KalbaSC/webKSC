@@ -500,28 +500,42 @@ gap: 10px;
 }
 
 .chat-footer {
-  display: flex !important;
   flex-shrink: 0 !important;
 }
 
+#inner-input-bar{
+  display:none;            /
+  pointer-events:none;     
+  opacity:0.5;           
+}
+
+#inner-input-bar.active{
+  display:flex !important; 
+  pointer-events:auto;
+  opacity:1;
+}
+	  
 #chat-box .chat-header {
-  border: 2px solid red !important;
+  border: 2px solid gold !important;
 }
 
 #inner-input-bar {
-  border: 2px solid blue !important;
+  border: 2px solid gold !important;
 }
 
 #chat-body {
-  border: 2px solid green !important;
+  border: 2px solid white !important;
   min-height: 100px !important;
+}
+
+#inner-input-bar.active {
+  pointer-events: auto;
+  opacity: 1;
 }
 	  
 @media (max-width: 600px) {
-  #chat-box .chat-header,
-  #inner-input-bar {
-    display: flex !important;
-  }
+  #chat-box .chat-header { display:flex !important; }
+  #inner-input-bar.active { display:flex !important; }
   
   #chat-tooltip {
     font-size: 12px !important;
@@ -569,15 +583,8 @@ gap: 10px;
 }
 	  	
 @media (max-width: 768px) {
-  #chat-box .chat-header {
-    display: flex !important;
-    padding: 8px 10px !important;
-  }
-  
-  #inner-input-bar {
-    display: flex !important;
-    padding: 6px 10px !important;
-  }
+  #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
+  #inner-input-bar.active { display:flex !important; }
   
   #chat-box {
     width: 94% !important;
@@ -831,16 +838,14 @@ header {
 	}	
   
 @media (max-width: 600px) {
-  #chat-box .chat-header,
-  #inner-input-bar {
-    display: flex !important;
-  }
+  #chat-box .chat-header { display:flex !important; }
+  #inner-input-bar.active { display:flex !important; }
   
   #chat-tooltip {
     font-size: 12px !important;
     padding: 8px 10px !important;
     right: 8px !important;
-    bottom: 60px !important;
+    bottom: 80px !important;
   }
   #chat-tooltip span:last-child {
     font-size: 14px !important;
@@ -1234,7 +1239,7 @@ inputDiv.innerHTML = `
     addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
     showMainButtons();
     const inputBar = document.getElementById("inner-input-bar");
-    if (inputBar) inputBar.style.display = "flex";
+    if (inputBar) inputBar.classList.add("active");
   }, 500);
 }
  }
