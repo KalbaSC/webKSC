@@ -490,11 +490,6 @@ gap: 10px;
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
-	  
-#chat-box {
-  display: flex !important;
-  flex-direction: column !important;
-}
 
 .chat-header {
   display: flex !important;
@@ -598,10 +593,13 @@ gap: 10px;
     right: 3% !important;
     height: 460px !important;
     max-height: 70vh !important;
+  }
+	
+    #chat-box.open {
     display: flex !important;
     flex-direction: column !important;
   }
-  
+	
   .chat-body {
     max-height: 55vh !important;
     overflow-y: auto !important;
