@@ -772,34 +772,6 @@ window.addEventListener('resize', function() {
 	
 <div class="chatbot">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script>
-let slideIndex = 0;
-showSlides();
-
-function plusSlides(n) {
-  slideIndex += n;
-  showSlides();
-}
-
-function showSlides() {
-  let slides = document.getElementsByClassName("carousel-slide");
-  if (slideIndex >= slides.length) slideIndex = 0;
-  if (slideIndex < 0) slideIndex = slides.length - 1;
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-
-  slides[slideIndex].style.display = "block";
-}
-
-setInterval(() => {
-  slideIndex++;
-  showSlides();
-}, 5000);
-	
-</script>
-
 <div id="chat-box">
   <div class="chat-header">
 <span onclick="toggleChat()">✕</span>
