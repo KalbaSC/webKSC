@@ -285,7 +285,8 @@ footer button {
   overflow: hidden;
 }
 
-#chat-wrapper,
+#chat-wrapper { pointer-events: none; }
+	  
 #chat-box,
 #chat-toggle,
 #chat-box *,
@@ -595,7 +596,7 @@ gap: 10px;
     max-height: 70vh !important;
   }
 	
-    #chat-box.open {
+  #chat-box.open {
     display: flex !important;
     flex-direction: column !important;
   }
@@ -944,41 +945,45 @@ window.addEventListener('resize', function() {
 let tooltipDismissed = false;
 
 function toggleChat() {
-  console.log("toggleChat called");	
-  const chatBox = document.getElementById('chat-box');
-  const header = chatBox.querySelector('.chat-header');
-  const footer = chatBox.querySelector('.chat-footer');
-	  console.log("Chat box:", chatBox);
-      console.log("Header exists:", !!header);
-      console.log("Footer exists:", !!footer);
-  const badge = document.getElementById('chat-badge');
-  const tooltip = document.getElementById('chat-tooltip');
-  const alreadyStarted = chatBox.querySelector('.message-wrapper') !== null;
+  console.log("toggleChat called");
+
+  const chatBox  = document.getElementById('chat-box');
+  const badge    = document.getElementById('chat-badge');
+  const tooltip  = document.getElementById('chat-tooltip');
+
+  if (!chatBox) return;
 
   if (typeof dismissTooltip === 'function') dismissTooltip();
+  const alreadyStarted = chatBox.querySelector('.message-wrapper') !== null;
+  const isHidden = getComputedStyle(chatBox).display === 'none';
 
-  if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-    chatBox.style.display = 'block';
-    badge.style.display = 'none';
-    tooltip.style.display = 'none';
+  if (isHidden) {
+    chatBox.style.display = 'flex';    
+    chatBox.classList.add('open');     
+    if (badge)   badge.style.display = 'none';
+    if (tooltip) tooltip.style.display = 'none';
 
-    setTimeout(() => {
-      chatBox.style.opacity = '1';
+    requestAnimationFrame(() => {
+      chatBox.style.opacity   = '1';
       chatBox.style.transform = 'translateY(0)';
+    });
 
-      if (!alreadyStarted) {
-        startChat();
-      }
-    }, 50);
+    if (!alreadyStarted) {
+      startChat();
+    }
+
   } else {
-    chatBox.style.opacity = '0';
+    chatBox.style.opacity   = '0';
     chatBox.style.transform = 'translateY(30px)';
+
     setTimeout(() => {
+      chatBox.classList.remove('open'); 
       chatBox.style.display = 'none';
-      badge.style.display = 'flex';
+      if (badge) badge.style.display = 'flex';
     }, 500);
   }
 }
+
 
   function dismissTooltip() {
     const tooltip = document.getElementById('chat-tooltip');
