@@ -1187,7 +1187,10 @@ function clearChat() {
 
   const buttons = document.getElementById("main-buttons");
   const inputBar = document.getElementById("inner-input-bar");
-
+     if (inputBar) {
+          inputBar.classList.remove("active");   
+          inputBar.style.display = "none";       
+       }
   if (buttons) buttons.style.display = "none";
   if (inputBar) inputBar.style.display = "none";
 }
@@ -1239,9 +1242,10 @@ inputDiv.innerHTML = `
     addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
     showMainButtons();
     const inputBar = document.getElementById("inner-input-bar");
-    if (inputBar) inputBar.classList.add("active");
-  }, 500);
-}
+  if (inputBar) {
+         inputBar.classList.add("active");   
+	  }}, 500);
+    }
  }
   
 function submitUserMessage() {
