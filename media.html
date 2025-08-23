@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl"> 
 <head>
   <meta charset="UTF-8">
-  <title>الإعلام</title>   
+  <title>الوسائط</title>   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
   <style>
@@ -90,11 +90,11 @@ header {
   cursor: pointer;
 }
 
-     footer {
+    footer {
       background-color: #000;
       color: white;
       padding: 16px 90px;
-	  width: 88%;
+	  width: 88%;	
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -141,7 +141,6 @@ header {
       color: white;
       font-size: 20px;
     }
-	  	  
 body.no-scroll {
   overflow: hidden;
   position: fixed;
@@ -149,284 +148,47 @@ body.no-scroll {
   height: 100%;
 }
 
-@media (max-width: 768px) {
-  *, *::before, *::after { box-sizing: border-box; }
-
-  img, video, iframe { max-width: 100%; height: auto; }
-
-  :where(p, h1, h2, h3, h4, h5, h6, a, li, td) { overflow-wrap: anywhere; }
-	
-  .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
-	
-  .nav-links {
-    position: fixed; top: 0; right: -100%;
-    width: 78%; height: 100vh; padding: 70px 20px;
-    background: #000; border-left: 2px solid #f4e733;
-    display: flex; flex-direction: column; gap: 10px;
-    transition: right .3s ease;
-    z-index: 1000;
-  }
-  .mobile-nav { display: block !important; }	
-  .nav-links.show { right: 0; }
-  .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
-
-  .carousel-container { height: 550px; }
-
-  body { background-attachment: scroll !important; }
-
-  .header-info .arabic-name,
-  .header-info .english-name {
-    white-space: nowrap;        
-    line-height: 1.2;
-  }
-
-  .header-right { gap: 6px !important; }
-  .header-right img.logo { height: 40px !important; }
-  .header-right .divider { display: none !important; }	
-  .header-right { flex-direction: row !important; align-items: center !important; gap: 2px !important; }
-	
-.header-info {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;  
-  text-align: center !important;   
-  gap: 6px !important;             
+footer form,
+footer textarea,
+footer button {
+  position: relative;
+  z-index: 1; 
 }
-	
-  .header-info .arabic-name,
-  .header-info .english-name { white-space: nowrap; line-height: 1.2; font-size: 12px !important; }
-	
-  #chat-box {
-    position: fixed; right: 20px; bottom: 90px;
-    width: 360px; max-width: 90%; max-height: 85vh;
-    display: none;
-    flex-direction: column; overflow: hidden; z-index: 9999;
-  }
-	
-  .footer-column { min-width: 0 !important; width: 100% !important; }
-  .footer-column h3 { font-size: 16px !important; margin-bottom: 10px; }
-  .footer-column a { font-size: 14px !important; }
-  textarea { width: 100% !important; height: 120px !important; }
-  button[type="submit"] { width: 100% !important; }
-  header, footer { padding: 12px 16px !important; }
-
-  header, footer {
-    width: 100% !important;
-    padding: 12px 16px !important;
-  }
-
-  .nav-links { gap: 12px !important; flex-wrap: wrap; }
-  .nav-links a { font-size: 14px !important; }
-	
-header { 
-  padding-inline: 16px !important;           
-}
-
-.header-right {
-  gap: 8px !important;                        
-  align-items: center !important;
-}
-
-.header-right img.logo {
-  height: 40px !important;
-  margin: 0 !important;
-}
-
-.header-right .divider {
-  display: inline-block !important;
-  height: 40px !important;
-  margin-inline: 8px !important;           
-}
-
-.mobile-nav .menu-toggle {
-  padding: 0 !important;
-  width: 36px !important;
-  height: 36px !important;
-  display: grid !important;
-  place-items: center !important;
-  line-height: 1 !important;
-  margin: 0 !important;
-}
-	
-  .header-info {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 6px !important;          
-  }
-
-  .header-info .arabic-name {
-    font-size: 14px !important;
-  }
-
-  .header-info .english-name {
-    font-size: 12px !important;
-    color: #f4e733;
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    height: 100vh;
-    background: #000;
-    border-left: 2px solid #f4e733;
-    padding: 60px 20px 20px;
-    flex-direction: column;
-    gap: 15px;
-    transition: right 0.3s ease;
-    z-index: 1000;
-  }
-
-  .nav-links.show {
-    right: 0;
-  }
-
-  .nav-links a {
-    padding: 12px 0;
-    font-size: 16px;
-    border-bottom: 1px solid #222;
-  }
-#chat-box[style*="display: none"] { pointer-events: none; }
-	.nav-links { pointer-events: none; }
-.nav-links.show { pointer-events: auto; }
-  footer {
-    padding: 20px 15px !important;
-    width: 100% !important;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .footer-column {
-    width: 90%;
-    min-width: auto;
-  }
-
-  .footer-column h3 {
-    font-size: 16px !important;
-    margin-bottom: 10px;
-  }
-
-  .footer-column a {
-    font-size: 14px !important;
-  }
-
-  .social-icons {
-    justify-content: flex-start;
-    gap: 15px;
-  }
-
-  .footer-bottom {
-    margin-top: 20px;
-    padding-top: 15px;
-    font-size: 12px;
-  }
-
-  textarea {
-    height: 120px !important;
-  }
-
-  button[type="submit"] {
-    width: 100% !important;
-  }
-  footer button[type="submit"] {
-    background-color: #f4e733 !important;
-    color: #000 !important;
-  }
-	
-#chat-tooltip > span:first-child {
-  flex: 0 0 auto !important;
-  white-space: nowrap !important;
-}
-
+	  
 #chat-tooltip {
-  display: inline-flex !important;
-  width: max-content !important;
-  max-width: calc(100vw - 40px) !important; 
-  overflow: hidden; 
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  max-width: calc(100vw - 40px);
+  overflow: hidden;
 }
 
-#chat-tooltip span:last-child { font-size: 14px !important; }
+#chat-wrapper { pointer-events: none; }
+	  
+#chat-box,
+#chat-toggle,
+#chat-box *,
+.chat-btn,
+input,
+textarea,
+button {
+  pointer-events: auto;
 }
-@media (max-width: 600px) {
-  #chat-box { width: 90% !important; height: 460px !important; }
-	
-  #chat-tooltip {
-    right: 8px !important;
-    bottom: 80px !important;
-    font-size: 12px !important;    
-    padding: 6px 10px !important;  
-  }
-	  }
-  </style>
-</head>
-<body>
-<header>
-  <div class="mobile-nav">
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  </div>
-  <div class="header-right">
-    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
-    <div class="divider"></div>
-    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
-    <div class="header-info">
-      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
-      <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
-    </div>
-  </div>
-  <nav class="nav-links" id="navLinks">
-    <a href="index.html">الرئيسية</a>
-    <a href="news.html">الأخبار</a>
-    <a href="media.html">الوسائط</a>
-    <a href="register.html">التسجيل</a>
-    <a href="evaluate.html">بوابة المدربين</a>
-    <a href="contact.html">اتصل بنا</a>
-  </nav>
-</header>
-
-<section style='padding: 30px;'><h2>🎥 معرض الوسائط</h2><p>صور وفيديوهات حصرية من مباريات وتدريبات النادي.</p></section>
-	
-<script>
-function toggleMenu() {
-  const navLinks = document.getElementById('navLinks');
-  const body = document.body;
-
-  navLinks.classList.toggle('show');
-  body.classList.toggle('no-scroll');
-
-  const menuToggle = document.querySelector('.menu-toggle');
-  menuToggle.innerHTML = navLinks.classList.contains('show') ? '✕' : '☰';
+	  
+#chat-tooltip { 
+  pointer-events: none; 
 }
 
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    if (window.innerWidth < 769) toggleMenu();
-  });
-});
-
-window.addEventListener('resize', () => {
-  if (window.innerWidth >= 769) {
-    const navLinks = document.getElementById('navLinks');
-    const body = document.body;
-    const menuToggle = document.querySelector('.menu-toggle');
-    navLinks.classList.remove('show');
-    body.classList.remove('no-scroll');
-    menuToggle.innerHTML = '☰';
-  }
-});
-</script>
-	
-	
-<div class="chatbot">
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <title>نادي كلباء الرياضي الثقافي</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-
+#chat-tooltip span:last-child { 
+  pointer-events: auto; 
+}
+	  
+#chat-tooltip span:last-child {
+  cursor: pointer;
+}
+	  
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
   40% {transform: translateY(-8px);}
@@ -513,7 +275,7 @@ window.addEventListener('resize', () => {
   flex: 1;
   overflow-y: auto;
   padding: 10px;
-max-height: 450px;
+  max-height: 450px;
 }
 
 .chat-footer {
@@ -579,13 +341,13 @@ gap: 10px;
   border-radius: 50%;
 }
 
-    .content {
-      background-color: #f4e733;
-      padding: 10px;
-      border-radius: 10px;
-      max-width: 75%;
-      font-size: 18px;
-    }
+.content {
+  background-color: #f4e733;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 75%;
+  font-size: 18px;
+}
 
     .message-wrapper.bot .content {
       background-color: #eee;
@@ -610,31 +372,61 @@ gap: 10px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
+.chat-header {
+  display: flex !important;
+  flex-shrink: 0 !important;
+}
+
+.chat-body {
+  flex: 1 !important;
+  overflow-y: auto !important;
+}
+
+.chat-footer {
+  flex-shrink: 0 !important;
+}
+
+#inner-input-bar{
+  display:none;            
+  pointer-events:none;     
+  opacity:0.5;           
+}
+
+#inner-input-bar.active{
+  display:flex !important; 
+  pointer-events:auto;
+  opacity:1;
+}
+	  
+#chat-box .chat-header {
+  border: 2px solid gold !important;
+}
+
+#inner-input-bar {
+  border: 2px solid gold !important;
+}
+
+#chat-body {
+  border: 2px solid white !important;
+  min-height: 100px !important;
+}
+
+#inner-input-bar.active {
+  pointer-events: auto;
+  opacity: 1;
+}
+	  
 @media (max-width: 600px) {
+  #chat-box .chat-header { display:flex !important; }
+  #inner-input-bar.active { display:flex !important; }
+  
   #chat-tooltip {
+    font-size: 12px !important;
+    padding: 8px 10px !important;
     right: 8px !important;
-    bottom: 80px !important;
-    font-size: 12px !important;     
-    padding: 6px 10px !important;    
+    bottom: 60px !important;
   }
-
-#chat-tooltip span:last-child {
-  font-size: 10px !important;  
-  margin-top: 0 !important;
-} 
-#chat-box[style*="display: none"] { pointer-events: none; }	
-  #chat-box {
-    width: 90% !important;
-    padding: 12px !important;
-    min-height: 280px !important;
-    max-height: 80vh !important;
-    height: 460px !important; 
-    font-size: 15px !important;
-    overflow: hidden !important;
-    flex-direction: column !important;
-  }
-
-  .chat-body {
+.chat-body {
     flex: 1;
     overflow-y: auto !important;
     padding: 10px !important;
@@ -671,12 +463,316 @@ gap: 10px;
   header img {
     height: 50px !important;
   }
+}	  
+@media (max-width: 768px) {
+  #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
+  #inner-input-bar.active { display:flex !important; }
+  
+  #chat-box {
+    width: 94% !important;
+    right: 3% !important;
+    height: 460px !important;
+    max-height: 70vh !important;
+  }
+	
+  #chat-box.open {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+	
+  .chat-body {
+    max-height: 55vh !important;
+    overflow-y: auto !important;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+
+  img, video, iframe { max-width: 100%; height: auto; }
+
+  :where(p, h1, h2, h3, h4, h5, h6, a, li, td) { overflow-wrap: anywhere; }
+	
+  .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
+	
+  #chat-box[style*="display: none"] { pointer-events: none; }
+   .nav-links { pointer-events: none; }
+   .nav-links.show { pointer-events: auto; }
+	
+  .nav-links {
+    position: fixed; top: 0; right: -100%;
+    width: 78%; height: 100vh; padding: 70px 20px;
+    background: #000; border-left: 2px solid #f4e733;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: right .3s ease;
+    z-index: 1000;
+  }
+  .mobile-nav { display: block !important; }	
+  .nav-links.show { right: 0; }
+  .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
+
+  body { background-attachment: scroll !important; }
+
+  .header-info .arabic-name,
+  .header-info .english-name {
+    white-space: nowrap;        
+    line-height: 1.2;
+  }
+
+  .header-right { gap: 6px !important; }
+  .header-right img.logo { height: 40px !important; }
+  .header-right .divider { display: none !important; }	
+  .header-right { flex-direction: row !important; align-items: center !important; gap: 2px !important; }
+	
+.header-info {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;  
+  text-align: center !important;   
+  gap: 6px !important;             
+}
+	
+  .header-info .arabic-name,
+  .header-info .english-name { white-space: nowrap; line-height: 1.2; font-size: 12px !important; }
+	
+  #chat-box {
+    position: fixed; right: 20px; bottom: 90px;
+    width: 360px; max-width: 90%; max-height: 85vh;
+    display: none;
+    flex-direction: column; overflow: hidden; z-index: 9999;
+  }
+  .footer-column { min-width: 0 !important; width: 100% !important; }
+  .footer-column h3 { font-size: 16px !important; margin-bottom: 10px; }
+  .footer-column a { font-size: 14px !important; }
+  textarea { width: 100% !important; height: 120px !important; }
+  button[type="submit"] { width: 100% !important; }
+  header, footer { padding: 12px 16px !important; }
+
+  header, footer {
+    width: 100% !important;
+    padding: 12px 16px !important;
+  }
+
+  .nav-links { gap: 12px !important; flex-wrap: wrap; }
+  .nav-links a { font-size: 14px !important; }
+	
+header { 
+  padding-inline: 16px !important;           
+}
+
+.header-right {
+  gap: 8px !important;                        
+  align-items: center !important;
+}
+
+.header-right img.logo {
+  height: 40px !important;
+  margin: 0 !important;
+}
+
+.header-right .divider {
+  display: inline-block !important;
+  height: 40px !important;
+  margin-inline: 8px !important;           
+}
+
+.mobile-nav .menu-toggle {
+  padding: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: grid !important;
+  place-items: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+	
+  .header-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;          
+  }
+
+  .header-info .arabic-name {
+    font-size: 14px !important;
+  }
+
+  .header-info .english-name {
+    font-size: 12px !important;
+    color: #f4e733;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    height: 100vh;
+    background: #000;
+    border-left: 2px solid #f4e733;
+    padding: 60px 20px 20px;
+    flex-direction: column;
+    gap: 15px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+
+  .nav-links.show {
+    right: 0;
+  }
+
+  .nav-links a {
+    padding: 12px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #222;
+  }
+
+  footer {
+    padding: 20px 15px !important;
+    width: 100% !important;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-column {
+    width: 90%;
+    min-width: auto;
+  }
+
+  .footer-column h3 {
+    font-size: 16px !important;
+    margin-bottom: 10px;
+  }
+
+  .footer-column a {
+    font-size: 14px !important;
+  }
+
+  .social-icons {
+    justify-content: flex-start;
+    gap: 15px;
+  }
+
+  .footer-bottom {
+    margin-top: 20px;
+    padding-top: 15px;
+    font-size: 12px;
+  }
+
+  textarea {
+    height: 120px !important;
+  }
+
+  button[type="submit"] {
+    width: 100% !important;
+  }
+  footer button[type="submit"] {
+    background-color: #f4e733 !important;
+    color: #000 !important;
+  }
+
+  #chat-box {
+    width: 94% !important;
+    right: 3% !important;
+    height: 460px !important;
+    max-height: 70vh !important;
+  }
+
+  .chat-body {
+    max-height: 55vh !important;
+  }
+
+  @keyframes tooltip-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  @keyframes tooltip-fade {
+    0%, 80% { opacity: 1; visibility: visible; }
+    100% { opacity: 0; visibility: hidden; }
+  }
+	}	
+  
+@media (max-width: 600px) {
+  #chat-box .chat-header { display:flex !important; }
+  #inner-input-bar.active { display:flex !important; }
+  
+  #chat-tooltip {
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+    right: 8px !important;
+    bottom: 80px !important;
+  }
+  #chat-tooltip span:last-child {
+    font-size: 14px !important;
+  }
 }
 
   </style>
 </head>
 <body>
+<header>
+  <div class="mobile-nav">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="header-right">
+    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
+    <div class="divider"></div>
+    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
+    <div class="header-info">
+      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+      <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
+    </div>
+  </div>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">الرئيسية</a>
+    <a href="news.html">الأخبار</a>
+    <a href="media.html">الوسائط</a>
+    <a href="register.html">التسجيل</a>
+    <a href="evaluate.html">بوابة المدربين</a>
+    <a href="contact.html">اتصل بنا</a>
+  </nav>
+</header>
 
+<section style='padding: 30px;'><h2>🎥 معرض الوسائط</h2><p>صور وفيديوهات حصرية من مباريات وتدريبات النادي.</p></section>
+	
+<script>
+	
+function toggleMenu() {
+  const navLinks = document.getElementById('navLinks');
+  const body = document.body;
+  
+  navLinks.classList.toggle('show');
+  body.classList.toggle('no-scroll');
+  
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (navLinks.classList.contains('show')) {
+    menuToggle.innerHTML = '✕';
+  } else {
+    menuToggle.innerHTML = '☰';
+  }
+}
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) {
+      toggleMenu();
+    }
+  });
+});
+
+window.addEventListener('resize', function() {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const body = document.body;
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    navLinks.classList.remove('show');
+    body.classList.remove('no-scroll');
+    menuToggle.innerHTML = '☰';
+  }
+});
+	
+</script>
+	
+<div class="chatbot">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <div id="chat-box">
   <div class="chat-header">
 <span onclick="toggleChat()">✕</span>
@@ -717,7 +813,6 @@ gap: 10px;
   max-width: 260px;
   direction: rtl;
   text-align: right;
-  white-space: nowrap;
   position: absolute;
   bottom: 80px;
   right: 20px;
@@ -726,16 +821,10 @@ gap: 10px;
   gap: 10px;
   z-index: 9999;
   line-height: 1.4;
+  white-space: nowrap;  
 ">
-  <span style="flex: 1;">مرحباً بك في نادي كلباء الرياضي الثقافي</span>
-  <span onclick="dismissTooltip()" style="
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    color: red;
-    line-height: 1;
-    margin-top: -2px;
-  ">✕</span>
+  <span>مرحباً بك في نادي كلباء الرياضي الثقافي</span>
+  <span onclick="dismissTooltip()" style="cursor:pointer; font-weight:bold; color: red; line-height: 1; ">✕</span>
 </div>
 
   <button id="chat-toggle" onclick="toggleChat()" style="
@@ -843,7 +932,10 @@ function clearChat() {
 
   const buttons = document.getElementById("main-buttons");
   const inputBar = document.getElementById("inner-input-bar");
-
+     if (inputBar) {
+          inputBar.classList.remove("active");   
+          inputBar.style.display = "none";       
+       }
   if (buttons) buttons.style.display = "none";
   if (inputBar) inputBar.style.display = "none";
 }
@@ -881,24 +973,57 @@ inputDiv.innerHTML = `
   chatBody.appendChild(inputDiv);
 }
 
- function submitName() {
-  const input = document.getElementById("nameInput");
+function toggleChat() {
+  const chatBox = document.getElementById('chat-box');
+  const badge   = document.getElementById('chat-badge');
+  const tooltip = document.getElementById('chat-tooltip');
+  const alreadyStarted = !!chatBox.querySelector('.message-wrapper');
 
+  const isHidden = getComputedStyle(chatBox).display === 'none';
+
+  if (isHidden) {
+    chatBox.style.display = 'flex';
+    chatBox.classList.add('open');
+    if (badge)   badge.style.display = 'none';
+    if (tooltip) tooltip.style.display = 'none';
+
+    requestAnimationFrame(() => {
+      chatBox.style.opacity = '1';
+      chatBox.style.transform = 'translateY(0)';
+    });
+
+    if (!alreadyStarted) startChat();
+  } else {
+    chatBox.style.opacity = '0';
+    chatBox.style.transform = 'translateY(30px)';
+    setTimeout(() => {
+      chatBox.classList.remove('open');
+      chatBox.style.display = 'none';
+      if (badge) badge.style.display = 'flex';
+      if (typeof tooltipDismissed !== 'undefined' && !tooltipDismissed && tooltip) {
+        tooltip.style.display = 'block';
+      }
+    }, 500);
+  }
+}
+	
+function submitName() {
+  const input = document.getElementById("nameInput");
   const name = input.value.trim();
 
   if (name) {
-  addMessage(`${name}`, true);
-  userName = name;
-  document.getElementById("nameInputWrapper").remove();
-  
-  setTimeout(() => {
-    addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
-    showMainButtons();
-    const inputBar = document.getElementById("inner-input-bar");
-    if (inputBar) inputBar.style.display = "flex";
-  }, 500);
+    addMessage(`${name}`, true);
+    userName = name;
+    document.getElementById("nameInputWrapper").remove();
+
+    setTimeout(() => {
+      addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
+      showMainButtons();
+      const inputBar = document.getElementById("inner-input-bar");
+      if (inputBar) inputBar.classList.add("active");   // <-- keep this
+    }, 500);
+  }
 }
- }
   
 function submitUserMessage() {
     const input = document.getElementById("userMessage");
@@ -1001,7 +1126,27 @@ input.value = '';
   wrapper.scrollIntoView({ behavior: "smooth" });
 }
 
-
+  function dismissTooltip() {
+    const tooltip = document.getElementById('chat-tooltip');
+    if (tooltip) {
+      tooltip.style.display = 'none';
+      tooltipDismissed = true;
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
+    if (tooltipCloseBtn) {
+      tooltipCloseBtn.addEventListener('click', dismissTooltip);
+    }
+    const chatInput = document.getElementById('userMessage');
+    if (chatInput) {
+      chatInput.addEventListener('focus', function() {
+        this.style.pointerEvents = 'auto';
+      });
+    }
+  });
+	
   function reply(option) {
 
     let userText = '';
@@ -1093,47 +1238,6 @@ function showContactMain() {
   }, 1000);
 }
 
-function toggleChat() {
-  const chatBox = document.getElementById('chat-box');
-  const badge = document.getElementById('chat-badge');
-  const tooltip = document.getElementById('chat-tooltip');
-  const alreadyStarted = !!chatBox.querySelector('.message-wrapper');
-
-  if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-    chatBox.style.display = 'block';
-    badge.style.display = 'none';
-    tooltip.style.display = 'none';
-
-    setTimeout(() => {
-      chatBox.style.opacity = '1';
-      chatBox.style.transform = 'translateY(0)';
-
-      setTimeout(() => {
-        const chatBody = document.getElementById('chat-body');
-        if (chatBody && !alreadyStarted) {
-          startChat(); 
-        }
-      }, 200);
-    }, 50);
-
-  } else {
-    chatBox.style.opacity = '0';
-    chatBox.style.transform = 'translateY(30px)';
-    setTimeout(() => {
-      chatBox.style.display = 'none';
-      badge.style.display = 'flex';
-      if (!tooltipDismissed) tooltip.style.display = 'block';
-    }, 500);
-  }
-}
-
-let tooltipDismissed = false;
-
-function dismissTooltip() {
-  document.getElementById('chat-tooltip').style.display = 'none';
-  tooltipDismissed = true;
-}
-
 function showContactOptions() {
   addMessage("تواصل مع السكرتير", true);
   addMessage(`<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`, false);
@@ -1160,6 +1264,7 @@ function showContactOptions() {
     }, 1000);
   }, 1000);
 }
+	
 document.addEventListener("keydown", function (e) {
   const nameInput = document.getElementById("nameInput");
   if (nameInput && document.activeElement === nameInput && e.key === "Enter") {
@@ -1179,8 +1284,6 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
-</body>
-</html>
 </div>
 	
 <footer>
@@ -1189,7 +1292,7 @@ window.addEventListener('DOMContentLoaded', () => {
     <p><a href="mailto:info@ksc.shj.ae" style="color: #FFFFFF; font-size: 12px;">info@ksc.shj.ae</a></p>
     <p><a href="tel:+971092777873" style="color: #FFFFFF; font-size: 12px;">092777873</a></p>
   </div>
-
+	
   <div class="footer-column">
    <h3 style="color:#f4e733; font-size:14px; font-weight:700;">روابط سريعة</h3>
     <a href="index.html" style="color: #FFFFFF; font-size: 12px;">الرئيسية</a>
@@ -1199,7 +1302,7 @@ window.addEventListener('DOMContentLoaded', () => {
     <a href="register.html" style="color: #FFFFFF; font-size: 12px;">التسجيل</a>
     <a href="contact.html" style="color: #FFFFFF; font-size: 12px;">اتصل بنا</a>
   </div>
-	
+
   <div class="footer-column">
     <h3 style="color:#f4e733; font-size:14px; font-weight:700;">تابعنا</h3>
     <div class="social-icons">
@@ -1210,8 +1313,8 @@ window.addEventListener('DOMContentLoaded', () => {
       <a href="https://www.tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
     </div>
 
-    <div>
-      <h3 style="color:#f4e733; font-size:14px; font-weight:700;">أرسل ملاحظاتك أو اقتراحاتك</h3>
+	    <div>
+    <h3 style="color:#f4e733; font-size:14px; font-weight:700;">أرسل ملاحظاتك أو اقتراحاتك</h3>
 <form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
   <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
   <br><br>
@@ -1261,6 +1364,21 @@ window.addEventListener('DOMContentLoaded', () => {
 </footer>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+	<script>
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navLinks = document.getElementById('navLinks');
+
+  function toggleMenu() {
+    navLinks.classList.toggle('show');
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+      navLinks.classList.remove('show');
+    }
+  });
+</script>
 	
 </body>
 </html>
