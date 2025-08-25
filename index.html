@@ -635,8 +635,26 @@ html { scroll-behavior: smooth; }
   margin-left: 8px;
 }
 
-.section:target .card { 
-  box-shadow: 0 0 0 2px #f4e733 inset, 0 10px 40px rgba(244,231,51,.18);
+.info-container {
+  width: 1170px;
+  max-width: 100%;
+  border: 2px solid #f4e733;
+  border-radius: 16px;
+  background: #000;
+  margin: 40px auto;   
+  padding: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
+}
+.info-container h2 {
+  color: #f4e733;
+  margin-bottom: 16px;
+  font-size: 22px;
+}
+.info-container p, 
+.info-container li {
+  color: #eee;
+  line-height: 1.8;
+  font-size: 16px;
 }
 
 .dropdown-content a.active {
@@ -996,16 +1014,50 @@ header {
       <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
     </div>
   </div>
+	
   <nav class="nav-links" id="navLinks">
-<div class="dropdown">
-  <a href="#home" class="dropbtn">الرئيسية ▾</a>
-  <div class="dropdown-content">
-    <a href="#history">لمحة تاريخية</a>
-    <a href="#president">رئيس النادي</a>
-    <a href="#vice">نائب رئيس النادي</a>
-    <a href="#board">مجلس الإدارة</a>
+<section id="history" class="section">
+  <div class="info-container">
+    <h2>لمحة تاريخية</h2>
+    <p>
+      تأسس نادي كلباء الرياضي الثقافي كأحد الصروح الرياضية والثقافية في إمارة الشارقة،
+      ليكون مركزًا لتنمية المواهب وصقل المهارات الرياضية والثقافية لأبناء المنطقة الشرقية.
+    </p>
   </div>
-</div>
+</section>
+
+<section id="president" class="section">
+  <div class="info-container">
+    <h2>رئيس النادي</h2>
+    <p>
+      كلمة رئيس النادي: نسعى في نادي كلباء الرياضي الثقافي إلى تعزيز القيم الرياضية والثقافية،
+      وتوفير بيئة مثالية لدعم اللاعبين والمنتسبين نحو التميز والإبداع.
+    </p>
+  </div>
+</section>
+
+<section id="vice" class="section">
+  <div class="info-container">
+    <h2>نائب رئيس النادي</h2>
+    <p>
+      يساهم نائب رئيس النادي في دعم الخطط الاستراتيجية والإشراف على سير الأنشطة لضمان
+      استمرار التقدم وتحقيق الأهداف المنشودة.
+    </p>
+  </div>
+</section>
+
+<section id="board" class="section">
+  <div class="info-container">
+    <h2>مجلس الإدارة</h2>
+    <ul style="list-style:none; padding:0; margin:0;">
+      <li>✔️ رئيس مجلس الإدارة</li>
+      <li>✔️ نائب الرئيس</li>
+      <li>✔️ عضو مجلس الإدارة</li>
+      <li>✔️ عضو مجلس الإدارة</li>
+    </ul>
+  </div>
+</section>
+
     <a href="news.html">الأخبار</a>
     <a href="media.html">الوسائط</a>
     <a href="register.html">التسجيل</a>
