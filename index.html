@@ -577,6 +577,10 @@ gap: 10px;
   display: block;
 }
 	  
+html {
+  scroll-behavior: smooth;
+}
+	  
 @media (max-width: 600px) {
   #chat-box .chat-header { display:flex !important; }
   #inner-input-bar.active { display:flex !important; }
@@ -925,15 +929,15 @@ header {
     </div>
   </div>
   <nav class="nav-links" id="navLinks">
-      <div class="dropdown">
-    <a href="index.html" class="dropbtn">الرئيسية ▾</a>
-    <div class="dropdown-content">
-      <a href="history.html">لمحة تاريخية</a>
-      <a href="president.html">رئيس النادي</a>
-      <a href="vice.html">نائب رئيس النادي</a>
-      <a href="board.html">مجلس الإدارة</a>
-    </div>
+<div class="dropdown">
+  <a href="#home" class="dropbtn">الرئيسية ▾</a>
+  <div class="dropdown-content">
+    <a href="#history">لمحة تاريخية</a>
+    <a href="#president">رئيس النادي</a>
+    <a href="#vice">نائب رئيس النادي</a>
+    <a href="#board">مجلس الإدارة</a>
   </div>
+</div>
     <a href="news.html">الأخبار</a>
     <a href="media.html">الوسائط</a>
     <a href="register.html">التسجيل</a>
@@ -1065,6 +1069,38 @@ function toggleChat() {
   });
 	
 </script>
+<section id="history" style="padding:60px; background:#111; color:white; text-align:right;">
+  <h2 style="color:#f4e733;">لمحة تاريخية</h2>
+  <p>
+    تأسس نادي كلباء الرياضي الثقافي كأحد الصروح الرياضية والثقافية في إمارة الشارقة،
+    ليكون مركزاً لتنمية المواهب وصقل المهارات الرياضية والثقافية لأبناء المنطقة الشرقية.
+  </p>
+</section>
+
+<section id="president" style="padding:60px; background:#000; color:white; text-align:right;">
+  <h2 style="color:#f4e733;">رئيس النادي</h2>
+  <p>
+    كلمة رئيس النادي: نسعى في نادي كلباء الرياضي الثقافي إلى تعزيز القيم الرياضية
+    والثقافية وتوفير بيئة مثالية لدعم اللاعبين والمنتسبين نحو التميز والإبداع.
+  </p>
+</section>
+
+<section id="vice" style="padding:60px; background:#111; color:white; text-align:right;">
+  <h2 style="color:#f4e733;">نائب رئيس النادي</h2>
+  <p>
+    يساهم نائب رئيس النادي في دعم الخطط الاستراتيجية والإشراف على سير الأنشطة
+    لضمان استمرار التقدم وتحقيق الأهداف المنشودة.
+  </p>
+</section>
+
+<section id="board" style="padding:60px; background:#000; color:white; text-align:right;">
+  <h2 style="color:#f4e733;">مجلس الإدارة</h2>
+  <ul style="list-style:none; padding:0; line-height:2;">
+    <li>✔️ رئيس مجلس الإدارة</li>
+    <li>✔️ نائب الرئيس</li>
+    <li>✔️ الأعضاء</li>
+  </ul>
+</section>
 	
 <div class="chatbot">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
