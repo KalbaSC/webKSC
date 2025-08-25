@@ -835,6 +835,107 @@ header {
       ليكون مركزاً لتنمية المواهب وصقل المهارات الرياضية والثقافية لأبناء المنطقة الشرقية.
     </p>
   </main>
+
+<script>
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navLinks = document.getElementById('navLinks');
+
+  function toggleMenu() {
+    navLinks.classList.toggle('show');
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+      navLinks.classList.remove('show');
+    }
+  });
+	
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) {
+      toggleMenu();
+    }
+  });
+});
+
+window.addEventListener('resize', function() {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const body = document.body;
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    navLinks.classList.remove('show');
+    body.classList.remove('no-scroll');
+    menuToggle.innerHTML = '☰';
+  }
+});
+
+let tooltipDismissed = false;
+
+function toggleChat() {
+  console.log("toggleChat called");
+
+  const chatBox  = document.getElementById('chat-box');
+  const badge    = document.getElementById('chat-badge');
+  const tooltip  = document.getElementById('chat-tooltip');
+
+  if (!chatBox) return;
+
+  if (typeof dismissTooltip === 'function') dismissTooltip();
+  const alreadyStarted = chatBox.querySelector('.message-wrapper') !== null;
+  const isHidden = getComputedStyle(chatBox).display === 'none';
+
+  if (isHidden) {
+    chatBox.style.display = 'flex';    
+    chatBox.classList.add('open');     
+    if (badge)   badge.style.display = 'none';
+    if (tooltip) tooltip.style.display = 'none';
+
+    requestAnimationFrame(() => {
+      chatBox.style.opacity   = '1';
+      chatBox.style.transform = 'translateY(0)';
+    });
+
+    if (!alreadyStarted) {
+      startChat();
+    }
+
+  } else {
+    chatBox.style.opacity   = '0';
+    chatBox.style.transform = 'translateY(30px)';
+
+    setTimeout(() => {
+      chatBox.classList.remove('open'); 
+      chatBox.style.display = 'none';
+      if (badge) badge.style.display = 'flex';
+    }, 500);
+  }
+}
+
+
+  function dismissTooltip() {
+    const tooltip = document.getElementById('chat-tooltip');
+    if (tooltip) {
+      tooltip.style.display = 'none';
+      tooltipDismissed = true;
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
+    if (tooltipCloseBtn) {
+      tooltipCloseBtn.addEventListener('click', dismissTooltip);
+    }
+    const chatInput = document.getElementById('userMessage');
+    if (chatInput) {
+      chatInput.addEventListener('focus', function() {
+        this.style.pointerEvents = 'auto';
+      });
+    }
+  });
+	
+</script>	
+	
 <div class="chatbot">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <div id="chat-box">
