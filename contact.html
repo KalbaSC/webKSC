@@ -377,7 +377,29 @@ gap: 10px;
 
 #inner-input-bar {
     display: flex !important;
-}	
+}
+
+.dropdown { position: relative; display: inline-block; }
+.dropbtn { color:#f4e733; text-decoration:none; font-weight:bold; font-size:14px; }
+.dropdown-content {
+  display:none; position:absolute; background:#111; border:1px solid #f4e733;
+  border-radius:6px; min-width:180px; z-index:1000; text-align:right;
+}
+.dropdown-content a { display:block; padding:10px 16px; color:#f4e733; text-decoration:none; }
+.dropdown-content a:hover { background:#f4e733; color:#000; }
+.dropdown:hover .dropdown-content { display:block; }
+html { scroll-behavior:smooth; }
+.section { padding:40px 0; scroll-margin-top:110px; }
+
+.info-container{
+  width:1170px; max-width:100%;
+  border:2px solid #f4e733; border-radius:16px;
+  background:#000; margin:40px auto; padding:28px;
+  box-shadow:0 6px 20px rgba(0,0,0,.3);
+}
+.info-container h2{ color:#f4e733; margin:0 0 12px; font-size:22px; }
+.info-container p, .info-container li{ color:#eee; line-height:1.9; font-size:16px; }	
+	  
 @media (max-width: 600px) {
   #chat-box {
     pointer-events: auto !important; 
@@ -443,7 +465,12 @@ gap: 10px;
     display: flex !important;
 }	
 }
-	  	
+
+@media (max-width:768px){
+  .dropdown-content{ position:static; border:none; background:#000; }
+  .dropdown-content a{ border-bottom:1px solid #222; }
+}	  
+	  
 @media (max-width: 768px) {
   #chat-box {
     pointer-events: auto !important; 
@@ -762,9 +789,17 @@ header {
     </div>
   </div>
   <nav class="nav-links" id="navLinks">
-    <a href="index.html">الرئيسية</a>
+    <div class="dropdown">
+    <a href="#home" class="dropbtn">الرئيسية ▾</a>
+    <div class="dropdown-content">
+      <a href="#history">لمحة تاريخية</a>
+      <a href="#president">رئيس النادي</a>
+      <a href="#vice">نائب رئيس النادي</a>
+      <a href="#board">مجلس الإدارة</a>
+    </div>
+  </div>
     <a href="news.html">الأخبار</a>
-    <a href="media.html">الوسائط</a>
+    <a href="sports.html">الألعاب الرياضية</a>
     <a href="register.html">التسجيل</a>
     <a href="evaluate.html">بوابة المدربين</a>
     <a href="contact.html">اتصل بنا</a>
@@ -1290,7 +1325,7 @@ window.addEventListener('DOMContentLoaded', () => {
     <h3 style="color: #f4e733; font-size: 14px;">روابط سريعة</strong></h3>
     <a href="index.html" style="color: #FFFFFF; font-size: 12px;">الرئيسية</a>
     <a href="news.html" style="color: #FFFFFF; font-size: 12px;">الأخبار</a>
-    <a href="media.html" style="color: #FFFFFF; font-size: 12px;">الوسائط</a>
+    <a href="sports.html" style="color: #FFFFFF; font-size: 12px;">الألعاب الرياضية</a>
     <a href="evaluate.html" style="color: #FFFFFF; font-size: 12px;">بوابة المدربين</a>
     <a href="register.html" style="color: #FFFFFF; font-size: 12px;">التسجيل</a>
     <a href="contact.html" style="color: #FFFFFF; font-size: 12px;">اتصل بنا</a>
