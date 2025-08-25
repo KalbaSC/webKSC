@@ -536,6 +536,16 @@ gap: 10px;
   opacity: 1;
 }
 	  
+.dropdown { position: relative; display: inline-block; }
+.dropbtn { color:#f4e733; text-decoration:none; font-weight:bold; font-size:14px; }
+.dropdown-content {
+  display:none; position:absolute; background:#111; border:1px solid #f4e733;
+  border-radius:6px; min-width:180px; z-index:1000; text-align:right;
+}
+.dropdown-content a { display:block; padding:10px 16px; color:#f4e733; text-decoration:none; }
+.dropdown-content a:hover { background:#f4e733; color:#000; }
+.dropdown:hover .dropdown-content { display:block; }
+	  
 @media (max-width: 600px) {
   #chat-box .chat-header { display:flex !important; }
   #inner-input-bar.active { display:flex !important; }
@@ -586,6 +596,23 @@ gap: 10px;
 }
 	  	
 @media (max-width: 768px) {
+	
+  .dropdown-content{ position:static; border:none; background:#000; }
+  .dropdown-content a{ border-bottom:1px solid #222; }
+}
+
+html { scroll-behavior:smooth; }
+.section { padding:40px 0; scroll-margin-top:110px; }
+
+.info-container{
+  width:1170px; max-width:100%;
+  border:2px solid #f4e733; border-radius:16px;
+  background:#000; margin:40px auto; padding:28px;
+  box-shadow:0 6px 20px rgba(0,0,0,.3);
+}
+.info-container h2{ color:#f4e733; margin:0 0 12px; font-size:22px; }
+.info-container p, .info-container li{ color:#eee; line-height:1.9; font-size:16px; }
+	  
   #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
   #inner-input-bar.active { display:flex !important; }
   
@@ -874,14 +901,24 @@ header {
       <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
     </div>
   </div>
-  <nav class="nav-links" id="navLinks">
-    <a href="index.html">الرئيسية</a>
-    <a href="news.html">الأخبار</a>
-    <a href="media.html">الوسائط</a>
-    <a href="register.html">التسجيل</a>
-    <a href="evaluate.html">بوابة المدربين</a>
-    <a href="contact.html">اتصل بنا</a>
-  </nav>
+	
+<nav class="nav-links" id="navLinks">
+  <div class="dropdown">
+    <a href="#home" class="dropbtn">الرئيسية ▾</a>
+    <div class="dropdown-content">
+      <a href="#history">لمحة تاريخية</a>
+      <a href="#president">رئيس النادي</a>
+      <a href="#vice">نائب رئيس النادي</a>
+      <a href="#board">مجلس الإدارة</a>
+    </div>
+  </div>
+  <a href="news.html">الأخبار</a>
+  <a href="media.html">الوسائط</a>
+  <a href="register.html">التسجيل</a>
+  <a href="evaluate.html">بوابة المدربين</a>
+  <a href="contact.html">اتصل بنا</a>
+</nav>
+
 </header>
 	
 <section class="hero-carousel">
@@ -908,6 +945,48 @@ header {
   </div>
 </section>
 
+<section id="history" class="section">
+  <div class="info-container">
+    <h2>لمحة تاريخية</h2>
+    <p>
+      تأسس نادي كلباء الرياضي الثقافي كأحد الصروح الرياضية والثقافية في إمارة الشارقة،
+      ليكون مركزًا لتنمية المواهب وصقل المهارات الرياضية والثقافية لأبناء المنطقة الشرقية.
+    </p>
+  </div>
+</section>
+
+<section id="president" class="section">
+  <div class="info-container">
+    <h2>رئيس النادي</h2>
+    <p>
+      كلمة رئيس النادي: نسعى في نادي كلباء الرياضي الثقافي إلى تعزيز القيم الرياضية والثقافية،
+      وتوفير بيئة مثالية لدعم اللاعبين والمنتسبين نحو التميز والإبداع.
+    </p>
+  </div>
+</section>
+
+<section id="vice" class="section">
+  <div class="info-container">
+    <h2>نائب رئيس النادي</h2>
+    <p>
+      يساهم نائب رئيس النادي في دعم الخطط الاستراتيجية والإشراف على سير الأنشطة لضمان
+      استمرار التقدم وتحقيق الأهداف المنشودة.
+    </p>
+  </div>
+</section>
+
+<section id="board" class="section">
+  <div class="info-container">
+    <h2>مجلس الإدارة</h2>
+    <ul style="list-style:none; padding:0; margin:0;">
+      <li>✔️ رئيس مجلس الإدارة</li>
+      <li>✔️ نائب الرئيس</li>
+      <li>✔️ عضو مجلس الإدارة</li>
+      <li>✔️ عضو مجلس الإدارة</li>
+    </ul>
+  </div>
+</section>
+	
 <script>
   const toggleBtn = document.querySelector('.menu-toggle');
   const navLinks = document.getElementById('navLinks');
