@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl"> 
 <head>
   <meta charset="UTF-8">
-  <title>الوسائط</title>   
+  <title>الألعاب الرياضية</title>   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
   <style>
@@ -415,6 +415,17 @@ gap: 10px;
   pointer-events: auto;
   opacity: 1;
 }
+
+.dropdown { position: relative; display: inline-block; }
+.dropbtn { color:#f4e733; text-decoration:none; font-weight:bold; font-size:14px; }
+.dropdown-content {
+  display:none; position:absolute; background:#111; border:1px solid #f4e733;
+  border-radius:6px; min-width:180px; z-index:1000; text-align:right;
+}
+.dropdown-content a { display:block; padding:10px 16px; color:#f4e733; text-decoration:none; }
+.dropdown-content a:hover { background:#f4e733; color:#000; }
+.dropdown:hover .dropdown-content { display:block; }
+html { scroll-behavior:smooth; }
 	  
 @media (max-width: 600px) {
   #chat-box .chat-header { display:flex !important; }
@@ -464,6 +475,12 @@ gap: 10px;
     height: 50px !important;
   }
 }	  
+
+@media (max-width:768px){
+  .dropdown-content{ position:static; border:none; background:#000; }
+  .dropdown-content a{ border-bottom:1px solid #222; }
+}	
+	  
 @media (max-width: 768px) {
   #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
   #inner-input-bar.active { display:flex !important; }
@@ -721,9 +738,17 @@ header {
     </div>
   </div>
   <nav class="nav-links" id="navLinks">
-    <a href="index.html">الرئيسية</a>
+    <div class="dropdown">
+    <a href="#home" class="dropbtn">الرئيسية ▾</a>
+    <div class="dropdown-content">
+      <a href="#history">لمحة تاريخية</a>
+      <a href="#president">رئيس النادي</a>
+      <a href="#vice">نائب رئيس النادي</a>
+      <a href="#board">مجلس الإدارة</a>
+    </div>
+  </div>
     <a href="news.html">الأخبار</a>
-    <a href="media.html">الوسائط</a>
+    <a href="media.html">الألعاب الرياضية</a>
     <a href="register.html">التسجيل</a>
     <a href="evaluate.html">بوابة المدربين</a>
     <a href="contact.html">اتصل بنا</a>
