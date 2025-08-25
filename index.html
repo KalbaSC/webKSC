@@ -21,6 +21,25 @@
   max-width: 1170px;
   margin: 40px auto;       
 }
+	  
+.carousel-container{
+  position: relative;         
+  height: 520px;              
+  background: #000;
+  border: 2px solid #f4e733;
+  border-radius: 16px;
+  overflow: hidden;            
+}
+
+@media (max-width: 768px){
+  .carousel-container{
+    width: 94%;
+    margin: 20px auto;
+    height: auto;
+    aspect-ratio: 16/9;      
+    min-height: 0;
+  }
+}
 
 .carousel-slide {
   display: none;
@@ -920,7 +939,7 @@ header {
 
 </header>
 	
-<section class="hero-carousel">
+<section id="home" class="hero-carousel">
   <div class="carousel-container">
 <div class="carousel-slide fade" style="position: relative;">
   <img src="KSC.jpg" alt="عطلتنا غير">
