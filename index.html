@@ -15,16 +15,19 @@
   padding: 40px 0;
 }
  
-.carousel-container {
-  width: 1170px;
-  max-width: 100%;
-  height: 550px;
+.carousel-container,
+.info-container {
+  width: 88%;
+  max-width: 1170px;
+  margin: 40px auto;       
+}
+
+.info-container {
   border: 2px solid #f4e733;
   border-radius: 16px;
   background: #000;
-  position: relative;
-  margin: auto;
-  overflow: hidden;
+  padding: 28px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
 }
 
 .carousel-slide {
@@ -116,6 +119,7 @@ body {
 header {
   background-color: #111;
   padding: 16px 90px;
+  margin: 0 auto;	
   width: 88%;
   display: flex;
   align-items: center;
@@ -213,6 +217,7 @@ header {
       background-color: #000;
       color: white;
       padding: 16px 90px;
+	  margin: 0 auto;	
 	  width: 88%;
       display: flex;
       justify-content: space-between;
@@ -343,15 +348,6 @@ button {
 
     body, .content, .chat-btn {
       font-family: 'NotoKufiArabic', 'Cairo', sans-serif;
-    }
-
-    body {
-      background-color: #000;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
 #chat-box {
@@ -655,7 +651,17 @@ html { scroll-behavior:smooth; }
   .nav-links.show { right: 0; }
   .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
 
-  .carousel-container { height: 550px; }
+    .carousel-container,
+  .info-container {
+    width: 94%;
+    margin: 20px auto;
+  }
+
+  .carousel-container {
+    height: auto;          
+    aspect-ratio: 16/9;    
+    min-height: 0;       
+  }
 
   body { background-attachment: scroll !important; }
 
@@ -687,7 +693,6 @@ html { scroll-behavior:smooth; }
     display: none;
     flex-direction: column; overflow: hidden; z-index: 9999;
   }
-  .carousel-container { min-height: 340px; border-radius: 12px; }
 	
   .caption {
     height: auto !important;
