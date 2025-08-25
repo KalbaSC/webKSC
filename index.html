@@ -535,6 +535,47 @@ gap: 10px;
   pointer-events: auto;
   opacity: 1;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  color: #f4e733;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #111;
+  min-width: 180px;
+  z-index: 1000;
+  border: 1px solid #f4e733;
+  border-radius: 6px;
+  text-align: right;
+}
+
+.dropdown-content a {
+  color: #f4e733;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f4e733;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 	  
 @media (max-width: 600px) {
   #chat-box .chat-header { display:flex !important; }
@@ -586,6 +627,15 @@ gap: 10px;
 }
 	  	
 @media (max-width: 768px) {
+  .dropdown-content {
+    position: static;
+    border: none;
+    background: #000;
+  }
+  .dropdown-content a {
+    border-bottom: 1px solid #222;
+  }
+	
   #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
   #inner-input-bar.active { display:flex !important; }
   
