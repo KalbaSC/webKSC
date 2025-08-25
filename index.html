@@ -22,58 +22,57 @@
   margin: 40px auto;       
 }
 
+.carousel-slide {
+  display: none;
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.carousel-slide img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 0;            
+}
+
+.caption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff; text-align: right;
+  height: auto;                 
+  border-radius: 0;           
+  overflow: hidden;
+  z-index: 2;
+}
+
 .info-container {
+  width: 88%;           
+  max-width: 1170px;
+  margin: 40px auto;
   border: 2px solid #f4e733;
   border-radius: 16px;
   background: #000;
   padding: 28px;
   box-shadow: 0 6px 20px rgba(0,0,0,.3);
 }
-
-.carousel-slide {
-  display: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-}
-
-.caption {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  height: 90px;          
-  font-size: 16px;           
-  padding: 15px 20px;
-  background: rgba(0, 0, 0, 0.7);
-  text-align: right;
-  color: white;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  overflow: hidden;        
-}
-
+	  
 .prev, .next {
   cursor: pointer;
-  position: absolute;
-  top: 45%;
-  padding: 16px;
-  color: white;
-  font-size: 24px;
-  transition: 0.3s;
-  user-select: none;
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  padding: 12px;
+  color: #fff; font-size: 22px;
   background-color: rgba(0,0,0,0.5);
   border-radius: 10px;
+  user-select: none;
+  transition: .3s;
+  z-index: 3;                  
 }
+
+.prev:hover, .next:hover { background-color: #f4e733; color: #000; }
+.prev { left: 10px; }
+.next { right: 10px; }
+
 
 .prev:hover, .next:hover {
   background-color: #f4e733;
@@ -651,20 +650,16 @@ html { scroll-behavior:smooth; }
   .nav-links.show { right: 0; }
   .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
 
-    .carousel-container,
-  .info-container {
+  .carousel-container {
     width: 94%;
     margin: 20px auto;
+    height: auto;             
+    aspect-ratio: 16/9;        
+    min-height: 0;
   }
-
-  .carousel-container {
-    height: auto;          
-    aspect-ratio: 16/9;    
-    min-height: 0;       
-  }
-
-  body { background-attachment: scroll !important; }
-
+	
+  .info-container { width: 94%; margin: 20px auto; }
+  
   .header-info .arabic-name,
   .header-info .english-name {
     white-space: nowrap;        
