@@ -23,9 +23,9 @@
 }
 	  
 .carousel-container{
-  position: relative;  
-  z-index: 1	
-  height: 520px;              
+  position: relative;
+  z-index: 1;
+  height: 520px;
   background: #000;
   border: 2px solid #f4e733;
   border-radius: 16px;
@@ -585,7 +585,7 @@ gap: 10px;
     max-height: 80vh;
     overflow-y: auto;
     transition: all 0.4s ease;
-    width: 160px; /* Reduced width */
+    width: 160px; 
   }
   
   .side-menu a {
@@ -600,10 +600,9 @@ gap: 10px;
     background: rgba(0, 0, 0, 0.7);
     border: 1px solid transparent;
     display: block;
-    font-size: 13px; /* Slightly smaller font */
+    font-size: 13px;
   }
   
-  /* Bottom navigation that appears when scrolling */
   .side-menu.bottom-nav {
     position: fixed;
     top: 0;
@@ -868,42 +867,21 @@ gap: 10px;
     
     .side-menu.bottom-nav.visible {
       transform: translateY(0);
-    }
-  }
-		
-     .side-menu {
-      position: fixed;
-      bottom: 0;
-      top: auto;
-      right: 0;
-      left: 0;
-      transform: none;
-      flex-direction: row;
-      width: 100%;
-      justify-content: center;
-      padding: 10px 5px;
-      border-radius: 0;
-      border-left: none;
-      border-right: none;
-      border-bottom: none;
-      overflow-x: auto;
-      max-height: none;
-    }
-    
-    .side-menu a {
-      padding: 8px 10px;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-      .org-row {
+      }
+
+	.side-menu.bottom-nav a {
+		padding: 8px 10px; font-size: 12px; 
+	}
+	  
+	.org-row {
         flex-direction: column;
         align-items: center;
       }
       
-      .org-item {
+     .org-item {
         width: 100%;
         max-width: 300px;
-      }
+      }  
     }
 	  
 @media (max-width: 768px) {
@@ -1508,26 +1486,24 @@ function toggleChat() {
 
 function checkMenuPosition() {
   const sideMenu = document.querySelector('.side-menu');
-  const footer = document.querySelector('footer');
-  
   if (!sideMenu) return;
-  
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  const shouldShowBottomNav = scrollTop > 200; 
-  
-  if (shouldShowBottomNav) {
+
+  const scrolled = (window.pageYOffset || document.documentElement.scrollTop) > 200;
+  const isMobile = window.innerWidth <= 768;
+
+  if (scrolled || isMobile) {
     sideMenu.classList.add('bottom-nav', 'visible');
-    
-    sideMenu.style.top = '-1000px';
+    sideMenu.style.top = '';
+    sideMenu.style.transform = '';
+    sideMenu.style.right = '';
   } else {
     sideMenu.classList.remove('bottom-nav', 'visible');
-    
-    const windowHeight = window.innerHeight;
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const centerPosition = scrollTop + (windowHeight / 2);
-    sideMenu.style.top = centerPosition + 'px';
+    sideMenu.style.top = '50%';
+    sideMenu.style.transform = 'translateY(-50%)';
+    sideMenu.style.right = '20px';
   }
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
   checkMenuPosition();
