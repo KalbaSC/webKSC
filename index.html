@@ -561,47 +561,94 @@ gap: 10px;
 .info-container h2{ color:#f4e733; margin:0 0 12px; font-size:22px; }
 .info-container p, .info-container li{ color:#eee; line-height:1.9; font-size:16px; }	 
 
-    .side-menu {
+  .side-menu {
       position: fixed;
       top: 50%;
       right: 20px;
       transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.9);
       border: 2px solid #f4e733;
       border-radius: 12px;
-      padding: 15px 10px;
+      padding: 20px 15px;
       z-index: 900;
       display: flex;
       flex-direction: column;
-      gap: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
     }
     
     .side-menu a {
       color: #f4e733;
       text-decoration: none;
       font-weight: bold;
-      padding: 10px 15px;
+      padding: 12px 18px;
       border-radius: 8px;
       text-align: center;
-      transition: all 0.3s;
+      transition: all 0.3s ease;
       white-space: nowrap;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid transparent;
     }
     
     .side-menu a:hover,
     .side-menu a.active {
       background: #f4e733;
       color: #000;
+      border-color: #000;
+      transform: translateX(-5px);
     }
     
     .section {
       display: none;
       padding: 40px 0;
-      scroll-margin-top: 110px;
     }
     
     .section.active {
       display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .org-structure {
+      padding: 20px;
+    }
+    
+    .org-level {
+      margin-bottom: 30px;
+    }
+    
+    .org-title {
+      color: #f4e733;
+      font-size: 22px;
+      margin-bottom: 15px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #f4e733;
+      display: inline-block;
+    }
+    
+    .org-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      margin-left: 20px;
+    }
+    
+    .org-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 3px solid #f4e733;
+      transition: transform 0.3s ease;
+    }
+    
+    .org-item:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.1);
     }	  
 	  
 @media (max-width: 600px) {
@@ -653,34 +700,45 @@ gap: 10px;
   }
 }
   	
-@media (max-width:768px){
-      .side-menu {
-        position: fixed;
-        bottom: 20px;
-        top: auto;
-        right: 50%;
-        transform: translateX(50%);
-        flex-direction: row;
-        width: 90%;
-        justify-content: center;
-        padding: 10px;
-      }
-      
-      .side-menu a {
-        padding: 8px 12px;
-        font-size: 12px;
-      }
-}	  
-
     @media (max-width: 1024px) {
       .side-menu {
         right: 10px;
-        padding: 10px 8px;
+        padding: 15px 10px;
+      }
+      
+      .side-menu a {
+        padding: 10px 12px;
+        font-size: 14px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .side-menu {
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        right: 0;
+        left: 0;
+        transform: none;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        padding: 10px 5px;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        overflow-x: auto;
       }
       
       .side-menu a {
         padding: 8px 10px;
-        font-size: 14px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      
+      .org-items {
+        grid-template-columns: 1fr;
       }
     }
 	  
@@ -994,6 +1052,7 @@ header {
   <a href="#president" onclick="showSection('president')">رئيس النادي</a>
   <a href="#vice" onclick="showSection('vice')">نائب الرئيس</a>
   <a href="#board" onclick="showSection('board')">مجلس الإدارة</a>
+  <a href="#orgstructure" onclick="showSection('orgstructure')">الهيكل التنظيمي</a>	
 </div>
 	
 <section id="home" class="hero-carousel">
@@ -1062,7 +1121,68 @@ header {
   </div>
 </section>
 
-	
+<section id="orgstructure" class="section">
+  <div class="info-container">
+    <h2>الهيكل التنظيمي</h2>
+    
+    <div class="org-structure">
+      <div class="org-level">
+        <h3 class="org-title">رئيس مجلس الإدارة</h3>
+        <div class="org-items">
+          <div class="org-item">مكتب الرئيس</div>
+          <div class="org-item">مكتب التدقيق الداخلي</div>
+        </div>
+      </div>
+      
+      <div class="org-level">
+        <h3 class="org-title">مجلس الإدارة</h3>
+        <div class="org-items">
+          <div class="org-item">إدارة الاتصال الداخلي</div>
+          <div class="org-item">مكتب الشؤون القانونية</div>
+          <div class="org-item">مستشارون</div>
+          <div class="org-item">مكتب العلاقات العامة</div>
+          <div class="org-item">مكتب الأداء والمشاريع</div>
+        </div>
+      </div>
+      
+      <div class="org-level">
+        <h3 class="org-title">اللجنة العامة</h3>
+        <div class="org-items">
+          <div class="org-item">قطاع الخدمات المساندة</div>
+          <div class="org-item">قطاع الخدمات الإعلامية</div>
+          <div class="org-item">قطاع الاستراتيجية والسياسات الإعلامية</div>
+        </div>
+      </div>
+      
+      <div class="org-level">
+        <h3 class="org-title">قطاع الخدمات المساندة</h3>
+        <div class="org-items">
+          <div class="org-item">إدارة الموارد البشرية والخدمات الإدارية</div>
+          <div class="org-item">إدارة المالية والمشتريات</div>
+          <div class="org-item">إدارة تقنية المعلومات والأمن السيبراني</div>
+        </div>
+      </div>
+      
+      <div class="org-level">
+        <h3 class="org-title">قطاع الخدمات الإعلامية</h3>
+        <div class="org-items">
+          <div class="org-item">إدارة الإنتاج الإعلامي</div>
+          <div class="org-item">إدارة الرصد وخدمات المحتوى</div>
+          <div class="org-item">إدارة المتابعة والتفتيش</div>
+        </div>
+      </div>
+      
+      <div class="org-level">
+        <h3 class="org-title">قطاع الاستراتيجية والسياسات الإعلامية</h3>
+        <div class="org-items">
+          <div class="org-item">إدارة التخطيط الاستراتيجي</div>
+          <div class="org-item">إدارة التنظيم الإعلامي</div>
+          <div class="org-item">إدارة الشراكات والتعاون الدولي</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>	
 <script>
 
 window.addEventListener('resize', function() {
@@ -1141,29 +1261,29 @@ function toggleChat() {
     }
   });
 
-function showSection(sectionId) {
-  document.querySelectorAll('.section').forEach(section => {
-    section.classList.remove('active');
-  });
-  
-  if (sectionId) {
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-      targetSection.classList.add('active');
-      
-      setTimeout(() => {
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+  function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(section => {
+      section.classList.remove('active');
+    });
+    
+    if (sectionId) {
+      const targetSection = document.getElementById(sectionId);
+      if (targetSection) {
+        targetSection.classList.add('active');
+        
+        setTimeout(() => {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
     }
+    
+    document.querySelectorAll('.side-menu a').forEach(link => {
+      link.classList.remove('active');
+      if (sectionId && link.getAttribute('href') === '#' + sectionId) {
+        link.classList.add('active');
+      }
+    });
   }
-  
-  document.querySelectorAll('.side-menu a').forEach(link => {
-    link.classList.remove('active');
-    if (sectionId && link.getAttribute('href') === '#' + sectionId) {
-      link.classList.add('active');
-    }
-  });
-}
 	
   const toggleBtn = document.querySelector('.menu-toggle');
   const navLinks = document.getElementById('navLinks');
