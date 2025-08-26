@@ -567,7 +567,7 @@ gap: 10px;
     z-index: 1;
   }
 	  
-  .side-menu {
+ .side-menu {
     position: fixed;
     top: 50%;
     right: 20px;
@@ -575,24 +575,24 @@ gap: 10px;
     background: rgba(0, 0, 0, 0.95);
     border: 2px solid #f4e733;
     border-radius: 12px;
-    padding: 20px 15px;
+    padding: 15px 10px;
     z-index: 10000;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.7);
     backdrop-filter: blur(5px);
     max-height: 80vh;
     overflow-y: auto;
     transition: all 0.4s ease;
-    width: 180px; 
+    width: 160px; /* Reduced width */
   }
   
   .side-menu a {
     color: #f4e733;
     text-decoration: none;
     font-weight: bold;
-    padding: 12px 18px;
+    padding: 10px 12px;
     border-radius: 8px;
     text-align: center;
     transition: all 0.3s ease;
@@ -600,49 +600,47 @@ gap: 10px;
     background: rgba(0, 0, 0, 0.7);
     border: 1px solid transparent;
     display: block;
-    font-size: 14px;
+    font-size: 13px; /* Slightly smaller font */
   }
   
-  .side-menu a:hover,
-  .side-menu a.active {
-    background: #f4e733;
-    color: #000;
-    border-color: #000;
-    transform: translateX(-5px);
-  }
-  
+  /* Bottom navigation that appears when scrolling */
   .side-menu.bottom-nav {
-    top: auto !important;
-    bottom: 0;
+    position: fixed;
+    top: 0;
     right: 0;
     left: 0;
-    transform: none !important;
+    transform: translateY(-100%);
     flex-direction: row;
     width: 100%;
     justify-content: center;
-    padding: 10px 5px;
+    padding: 12px 5px;
     border-radius: 0;
     border-left: none;
     border-right: none;
-    border-bottom: none;
+    border-top: none;
+    border-bottom: 2px solid #f4e733;
     overflow-x: auto;
     max-height: none;
     background: rgba(0, 0, 0, 0.98);
+    transition: transform 0.3s ease;
+  }
+  
+  .side-menu.bottom-nav.visible {
+    transform: translateY(0);
   }
   
   .side-menu.bottom-nav a {
-    padding: 8px 12px;
+    padding: 8px 10px;
     font-size: 12px;
     white-space: nowrap;
-    flex: 1;
+    flex: 0 1 auto;
     min-width: 0;
     max-width: 120px;
   }
   
   .side-menu.bottom-nav a:hover {
-    transform: translateY(-3px) !important;
-  }
-  
+    transform: translateY(-2px);
+  }  
     
     .section {
       display: none;
@@ -844,23 +842,34 @@ gap: 10px;
     height: 50px !important;
   }
 }
-  	
-    @media (max-width: 1024px) {
+
+  @media (max-width: 1024px) {
     .side-menu {
       right: 10px;
-      padding: 15px 10px;
+      padding: 12px 8px;
+      width: 150px;
     }
     
     .side-menu a {
-      padding: 10px 12px;
-      font-size: 14px;
+      padding: 8px 10px;
+      font-size: 12px;
     }
-    }
+  }	  
     
-    @media (max-width: 768px) {
-	.side-menu.bottom-nav {
+  @media (max-width: 768px) {
+    .side-menu:not(.bottom-nav) {
       display: none;
     }
+    
+    .side-menu.bottom-nav {
+      display: flex;
+      transform: translateY(-100%);
+    }
+    
+    .side-menu.bottom-nav.visible {
+      transform: translateY(0);
+    }
+  }
 		
      .side-menu {
       position: fixed;
@@ -1501,20 +1510,19 @@ function checkMenuPosition() {
   const sideMenu = document.querySelector('.side-menu');
   const footer = document.querySelector('footer');
   
-  if (!sideMenu || !footer) return;
+  if (!sideMenu) return;
   
-  const menuRect = sideMenu.getBoundingClientRect();
-  const footerRect = footer.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const shouldShowBottomNav = scrollTop > 200; 
   
-  const isNearFooter = footerRect.top < windowHeight * 0.8;
-  const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
-  
-  if (isNearFooter || isAtBottom) {
-    sideMenu.classList.add('bottom-nav');
-  } else {
-    sideMenu.classList.remove('bottom-nav');
+  if (shouldShowBottomNav) {
+    sideMenu.classList.add('bottom-nav', 'visible');
     
+    sideMenu.style.top = '-1000px';
+  } else {
+    sideMenu.classList.remove('bottom-nav', 'visible');
+    
+    const windowHeight = window.innerHeight;
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const centerPosition = scrollTop + (windowHeight / 2);
     sideMenu.style.top = centerPosition + 'px';
@@ -1527,7 +1535,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let scrollTimeout;
   window.addEventListener('scroll', function() {
     clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(checkMenuPosition, 100);
+    scrollTimeout = setTimeout(checkMenuPosition, 50); 
   });
   
   window.addEventListener('resize', checkMenuPosition);
@@ -1557,7 +1565,7 @@ function showSection(sectionId) {
       link.classList.add('active');
     }
   });
-}	
+}
 </script>
 	
 <div class="chatbot">
