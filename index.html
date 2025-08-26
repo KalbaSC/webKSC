@@ -990,7 +990,7 @@ header {
 </header>
 	
 <div class="side-menu">
-  <a href="#history" onclick="showSection('history')" class="active">لمحة تاريخية</a>
+  <a href="#history" onclick="showSection('history')">لمحة تاريخية</a>
   <a href="#president" onclick="showSection('president')">رئيس النادي</a>
   <a href="#vice" onclick="showSection('vice')">نائب الرئيس</a>
   <a href="#board" onclick="showSection('board')">مجلس الإدارة</a>
@@ -1142,10 +1142,11 @@ function toggleChat() {
   });
 
 function showSection(sectionId) {
-    document.querySelectorAll('.section').forEach(section => {
-      section.classList.remove('active');
-    });
-    
+  document.querySelectorAll('.section').forEach(section => {
+    section.classList.remove('active');
+  });
+  
+  if (sectionId) {
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
       targetSection.classList.add('active');
@@ -1154,19 +1155,16 @@ function showSection(sectionId) {
         targetSection.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
-    
-    document.querySelectorAll('.side-menu a').forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === '#' + sectionId) {
-        link.classList.add('active');
-      }
-    });
   }
   
-  document.addEventListener('DOMContentLoaded', function() {
-    showSection('history');
+  document.querySelectorAll('.side-menu a').forEach(link => {
+    link.classList.remove('active');
+    if (sectionId && link.getAttribute('href') === '#' + sectionId) {
+      link.classList.add('active');
+    }
   });
-
+}
+	
   const toggleBtn = document.querySelector('.menu-toggle');
   const navLinks = document.getElementById('navLinks');
 
