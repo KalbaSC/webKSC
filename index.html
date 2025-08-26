@@ -6,6 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <style>
+body {
+  position: relative;
+}
+
+.side-menu {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 10000; 
+}
+	  
  .hero-carousel {
   width: 100%;
   display: flex;  
@@ -23,7 +35,8 @@
 }
 	  
 .carousel-container{
-  position: relative;         
+  position: relative;  
+  z-index: 1	
   height: 520px;              
   background: #000;
   border: 2px solid #f4e733;
@@ -561,11 +574,6 @@ gap: 10px;
 .info-container h2{ color:#f4e733; margin:0 0 12px; font-size:22px; }
 .info-container p, .info-container li{ color:#eee; line-height:1.9; font-size:16px; }	 
 	  
-  .carousel-container {
-    position: relative;
-    z-index: 1;
-  }
-  
   .info-container {
     position: relative;
     z-index: 1;
@@ -580,7 +588,7 @@ gap: 10px;
     border: 2px solid #f4e733;
     border-radius: 12px;
     padding: 20px 15px;
-    z-index: 100;
+    z-index: 10000;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -1143,11 +1151,11 @@ header {
 </header>
 	
 <div class="side-menu">
-  <a href="#history" onclick="showSection('history')">لمحة تاريخية</a>
-  <a href="#president" onclick="showSection('president')">رئيس النادي</a>
-  <a href="#vice" onclick="showSection('vice')">نائب الرئيس</a>
-  <a href="#board" onclick="showSection('board')">مجلس الإدارة</a>
-  <a href="#orgstructure" onclick="showSection('orgstructure')">الهيكل التنظيمي</a>	
+  <a href="javascript:void(0)" onclick="showSection('history')">لمحة تاريخية</a>
+  <a href="javascript:void(0)" onclick="showSection('president')">رئيس النادي</a>
+  <a href="javascript:void(0)" onclick="showSection('vice')">نائب الرئيس</a>
+  <a href="javascript:void(0)" onclick="showSection('board')">مجلس الإدارة</a>
+  <a href="javascript:void(0)" onclick="showSection('orgstructure')">الهيكل التنظيمي</a>	
 </div>
 	
 <section id="home" class="hero-carousel">
@@ -1399,12 +1407,12 @@ function toggleChat() {
     }
   });
 
-  function showSection(sectionId) {
+function showSection(sectionId) {
     document.querySelectorAll('.section').forEach(section => {
       section.classList.remove('active');
     });
     
-    if (sectionId) {
+    if (sectionId && sectionId !== '#') {
       const targetSection = document.getElementById(sectionId);
       if (targetSection) {
         targetSection.classList.add('active');
