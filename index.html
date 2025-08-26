@@ -5,19 +5,7 @@
   <title>نادي كلباء الرياضي الثقافي</title> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <style>
-body {
-  position: relative;
-}
-
-.side-menu {
-  position: fixed;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  z-index: 10000; 
-}
-	  
+  <style>  
  .hero-carousel {
   width: 100%;
   display: flex;  
@@ -588,7 +576,7 @@ gap: 10px;
     border: 2px solid #f4e733;
     border-radius: 12px;
     padding: 20px 15px;
-    z-index: 10000; 
+    z-index: 10000;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -596,16 +584,8 @@ gap: 10px;
     backdrop-filter: blur(5px);
     max-height: 80vh;
     overflow-y: auto;
-  }
-  
-  header {
-    z-index: 9999; 
-    position: relative;
-  }
-  
-  .carousel-container {
-    z-index: 1;
-    position: relative;
+    transition: all 0.4s ease;
+    width: 180px; 
   }
   
   .side-menu a {
@@ -620,8 +600,9 @@ gap: 10px;
     background: rgba(0, 0, 0, 0.7);
     border: 1px solid transparent;
     display: block;
+    font-size: 14px;
   }
-    
+  
   .side-menu a:hover,
   .side-menu a.active {
     background: #f4e733;
@@ -629,6 +610,39 @@ gap: 10px;
     border-color: #000;
     transform: translateX(-5px);
   }
+  
+  .side-menu.bottom-nav {
+    top: auto !important;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    transform: none !important;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    padding: 10px 5px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    overflow-x: auto;
+    max-height: none;
+    background: rgba(0, 0, 0, 0.98);
+  }
+  
+  .side-menu.bottom-nav a {
+    padding: 8px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+    max-width: 120px;
+  }
+  
+  .side-menu.bottom-nav a:hover {
+    transform: translateY(-3px) !important;
+  }
+  
     
     .section {
       display: none;
@@ -644,7 +658,7 @@ gap: 10px;
       from { opacity: 0; }
       to { opacity: 1; }
     }
-      .org-structure {
+ .org-structure {
     padding: 20px;
     font-family: 'NotoKufiArabic', sans-serif;
     text-align: center;
@@ -844,6 +858,10 @@ gap: 10px;
     }
     
     @media (max-width: 768px) {
+	.side-menu.bottom-nav {
+      display: none;
+    }
+		
      .side-menu {
       position: fixed;
       bottom: 0;
@@ -1457,30 +1475,6 @@ function toggleChat() {
       });
     }
   });
-
-function showSection(sectionId) {
-    document.querySelectorAll('.section').forEach(section => {
-      section.classList.remove('active');
-    });
-    
-    if (sectionId && sectionId !== '#') {
-      const targetSection = document.getElementById(sectionId);
-      if (targetSection) {
-        targetSection.classList.add('active');
-        
-        setTimeout(() => {
-          targetSection.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
-    }
-    
-    document.querySelectorAll('.side-menu a').forEach(link => {
-      link.classList.remove('active');
-      if (sectionId && link.getAttribute('href') === '#' + sectionId) {
-        link.classList.add('active');
-      }
-    });
-  }
 	
   const toggleBtn = document.querySelector('.menu-toggle');
   const navLinks = document.getElementById('navLinks');
@@ -1502,7 +1496,68 @@ function showSection(sectionId) {
       }
     });
   });
-	
+
+function checkMenuPosition() {
+  const sideMenu = document.querySelector('.side-menu');
+  const footer = document.querySelector('footer');
+  
+  if (!sideMenu || !footer) return;
+  
+  const menuRect = sideMenu.getBoundingClientRect();
+  const footerRect = footer.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+  
+  const isNearFooter = footerRect.top < windowHeight * 0.8;
+  const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+  
+  if (isNearFooter || isAtBottom) {
+    sideMenu.classList.add('bottom-nav');
+  } else {
+    sideMenu.classList.remove('bottom-nav');
+    
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const centerPosition = scrollTop + (windowHeight / 2);
+    sideMenu.style.top = centerPosition + 'px';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  checkMenuPosition();
+  
+  let scrollTimeout;
+  window.addEventListener('scroll', function() {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(checkMenuPosition, 100);
+  });
+  
+  window.addEventListener('resize', checkMenuPosition);
+});
+
+function showSection(sectionId) {
+  document.querySelectorAll('.section').forEach(section => {
+    section.classList.remove('active');
+  });
+  
+  if (sectionId && sectionId !== '#') {
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+      targetSection.classList.add('active');
+      
+      setTimeout(() => {
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+        
+        setTimeout(checkMenuPosition, 500);
+      }, 100);
+    }
+  }
+  
+  document.querySelectorAll('.side-menu a').forEach(link => {
+    link.classList.remove('active');
+    if (sectionId && link.onclick && link.onclick.toString().includes(sectionId)) {
+      link.classList.add('active');
+    }
+  });
+}	
 </script>
 	
 <div class="chatbot">
