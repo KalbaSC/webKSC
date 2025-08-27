@@ -1216,6 +1216,258 @@ header {
     font-size: 14px !important;
   }
 }
+
+@media (max-width: 768px) {
+  header {
+    padding: 12px 16px !important;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .header-right {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .header-right img.logo {
+    height: 40px !important;
+    margin: 0 !important;
+  }
+  
+  .header-right .divider {
+    display: none !important;
+  }
+  
+  .header-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: right !important;
+    gap: 2px !important;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .header-info .arabic-name {
+    font-size: 14px !important;
+    line-height: 1.2;
+    white-space: normal;
+  }
+  
+  .header-info .english-name {
+    font-size: 12px !important;
+    line-height: 1.2;
+    white-space: normal;
+  }
+  
+  .mobile-nav {
+    display: block;
+    order: -1;
+  }
+  
+  .menu-toggle {
+    display: block;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #f4e733;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    height: 100vh;
+    background: #000;
+    border-left: 2px solid #f4e733;
+    padding: 60px 20px 20px;
+    flex-direction: column;
+    gap: 15px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  
+  .nav-links.show {
+    right: 0;
+  }
+  
+  .nav-links a {
+    padding: 12px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #222;
+    width: 100%;
+    text-align: right;
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    padding: 20px 15px !important;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .footer-column {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .footer-column h3 {
+    font-size: 16px !important;
+    margin-bottom: 10px;
+  }
+  
+  .footer-column a, .footer-column p {
+    font-size: 14px !important;
+  }
+  
+  .social-icons {
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .footer-bottom {
+    margin-top: 20px;
+    padding-top: 15px;
+    font-size: 12px;
+  }
+  
+  textarea {
+    height: 120px !important;
+    width: 100% !important;
+  }
+  
+  button[type="submit"] {
+    width: 100% !important;
+    padding: 12px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-container {
+    width: 94%;
+    margin: 20px auto;
+    height: auto;
+    aspect-ratio: 16/9;
+    min-height: 0;
+  }
+  
+  .caption {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    padding: 10px 12px !important;
+    white-space: normal !important;
+  }
+  
+  .prev, .next {
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%);
+    font-size: 18px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .side-menu {
+    display: none;
+  }
+  
+  .side-menu.top-nav {
+    display: flex;
+    position: fixed;
+    top: calc(var(--headerH, 72px) + env(safe-area-inset-top));
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+    border-bottom: 2px solid #f4e733;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px 5px;
+    overflow-x: auto;
+    z-index: 1002;
+  }
+  
+  .side-menu.top-nav a {
+    flex: 0 0 auto;
+    min-width: 100px;
+    font-size: 12px;
+    padding: 8px 10px;
+    white-space: nowrap;
+  }
+  
+  body.with-top-nav {
+    padding-top: calc(var(--headerH, 72px) + var(--topNavH, 50px));
+  }
+}
+
+@media (max-width: 768px) {
+  #chat-box {
+    width: 94% !important;
+    right: 3% !important;
+    max-width: none !important;
+    height: 460px !important;
+    max-height: 70vh !important;
+  }
+  
+  .chat-body {
+    max-height: 55vh !important;
+  }
+  
+  #chat-tooltip {
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+    right: 8px !important;
+    bottom: 80px !important;
+    max-width: 80%;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-container {
+    width: 94%;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .org-item {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 15px;
+  }
+  
+  .org-row {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  body, html {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  * {
+    max-width: 100%;
+  }
+}
   </style>
 </head>
 <body>
