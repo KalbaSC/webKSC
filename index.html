@@ -574,16 +574,25 @@ gap: 10px;
   }
 	  
 .side-menu{
-  position: fixed; top:50%; right: 24px; transform: translateY(-50%);
+  position: fixed; top:50%; right:24px; transform: translateY(-50%);
   width: 220px; padding: 16px 14px;
   border-radius: 18px; border: 1.8px solid #f4e733;
   background: linear-gradient(180deg, rgba(0,0,0,.88), rgba(0,0,0,.92));
   backdrop-filter: blur(6px);
   box-shadow: 0 10px 35px rgba(0,0,0,.45), 0 0 0 1px rgba(244,231,51,.08) inset;
   display: flex; flex-direction: column; gap: 10px;
-  z-index: 10000; overflow: hidden;
+  z-index: 10000;
+  max-height: clamp(360px, 72vh, 640px);
+  overflow: auto;
+  overscroll-behavior: contain;
   scrollbar-width: none;
-  -ms-overflow-style: none;	
+  -ms-overflow-style: none;
+}
+	  
+.side-menu::-webkit-scrollbar{ display:none; }
+
+@media (max-width: 1024px){
+  .side-menu{ right:10px; width: 180px; padding:12px 10px; }
 }
 
 .side-menu::after{
@@ -937,13 +946,6 @@ body.with-top-nav{
 }
 
 .side-menu.top-nav .sm-indicator{ display: none; }
-
-@media (max-width: 768px){
-  header{ position: sticky; top: 0; z-index: 1001; }
-  .side-menu{ 
-  }
-  body{ padding-top: calc(var(--headerH, 72px) + 56px); }
-}
 	  
 @media (max-width: 768px) {
   #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
@@ -1447,17 +1449,7 @@ header {
   </div>
 </section>
 <script>
-function placeMobileMenu(){
-  const menu = document.getElementById('sideMenu');
-  const header = document.querySelector('header');
-  if (!menu || !header) return;
-  if (window.innerWidth <= 768) {
-    const h = Math.ceil(header.getBoundingClientRect().height);
-    menu.style.top = h + 'px';
-  } else {
-    menu.style.top = '';
-  }
-}
+
 window.addEventListener('load', placeMobileMenu);
 window.addEventListener('resize', placeMobileMenu);
 	
@@ -1577,9 +1569,9 @@ function applyMode(){
 
   if (shouldTopNav){
     sideMenu.classList.add('top-nav');
+	sideMenu.style.top = '';  
     document.body.classList.add('with-top-nav');
 
-    // wait a frame so layout is correct, then measure height for padding
     requestAnimationFrame(() => {
       const h = Math.ceil(sideMenu.getBoundingClientRect().height || 56);
       document.documentElement.style.setProperty('--topNavH', h + 'px');
@@ -1589,6 +1581,7 @@ function applyMode(){
     sideMenu.classList.remove('visible', 'top-nav');
     document.body.classList.remove('with-top-nav');
     document.documentElement.style.removeProperty('--topNavH');
+	sideMenu.style.top = '';  
   }
 }
 
