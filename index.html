@@ -880,6 +880,41 @@ gap: 10px;
         max-width: 300px;
       }  
     }
+
+.side-menu.bottom-nav{
+  position: fixed;
+  right: 0; left: 0; transform: none;
+  width: 100%;
+  border-radius: 0 0 14px 14px;
+  padding: 10px 8px;
+  border-left: 0; border-right: 0; border-top: 0;
+  border-bottom: 2px solid #f4e733;
+  flex-direction: row; justify-content: center; gap: 8px;
+  overflow-x: auto;
+  top: calc(var(--headerH, 72px) + env(safe-area-inset-top));
+  z-index: 10000;
+
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity .28s ease, transform .28s ease;
+}
+.side-menu.bottom-nav.visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+.side-menu.bottom-nav a{
+  flex: 0 0 auto; min-width: 140px; font-size: 13px;
+}
+.side-menu.bottom-nav .sm-indicator{
+  display: none; 
+}
+
+@media (max-width: 768px){
+  header{ position: sticky; top: 0; z-index: 1001; }
+  .side-menu{ 
+  }
+  body{ padding-top: calc(var(--headerH, 72px) + 56px); }
+}
 	  
 @media (max-width: 768px) {
   #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
@@ -921,6 +956,7 @@ gap: 10px;
     transition: right .3s ease;
     z-index: 1000;
   }
+	
   .mobile-nav { display: block !important; }	
   .nav-links.show { right: 0; }
   .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
@@ -1185,7 +1221,7 @@ header {
   </nav>
 </header>
 	
-<div class="side-menu">
+<div id="sideMenu" class="side-menu">
   <a href="javascript:void(0)" onclick="showSection('history')">لمحة تاريخية</a>
   <a href="javascript:void(0)" onclick="showSection('president')">رئيس النادي</a>
   <a href="javascript:void(0)" onclick="showSection('vice')">نائب الرئيس</a>
@@ -1493,38 +1529,35 @@ function toggleChat() {
     });
   });
 
-function checkMenuPosition() {
-  const sideMenu = document.querySelector('.side-menu');
-  if (!sideMenu) return;
+(function(){
+  const sideMenu = document.getElementById('sideMenu');
+  const header = document.querySelector('header');
 
-  const scrolled = (window.pageYOffset || document.documentElement.scrollTop) > 200;
-  const isMobile = window.innerWidth <= 768;
+  if(!sideMenu){ console.warn('No #sideMenu found'); return; }
 
-  if (scrolled || isMobile) {
-    sideMenu.classList.add('bottom-nav', 'visible');
-    sideMenu.style.top = '';
-    sideMenu.style.transform = '';
-    sideMenu.style.right = '';
-  } else {
-    sideMenu.classList.remove('bottom-nav', 'visible');
-    sideMenu.style.top = '50%';
-    sideMenu.style.transform = 'translateY(-50%)';
-    sideMenu.style.right = '20px';
+  function setHeaderH(){
+    const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
+    document.documentElement.style.setProperty('--headerH', h + 'px');
   }
-}
 
+  function isMobile(){ return window.innerWidth <= 768; }
 
-document.addEventListener('DOMContentLoaded', function() {
-  checkMenuPosition();
-  
-  let scrollTimeout;
-  window.addEventListener('scroll', function() {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(checkMenuPosition, 50); 
-  });
-  
-  window.addEventListener('resize', checkMenuPosition);
-});
+  function applyMode(){
+    const scrolled = (window.pageYOffset || document.documentElement.scrollTop) > 200;
+
+    if (isMobile() || scrolled){
+      sideMenu.classList.add('bottom-nav');
+      requestAnimationFrame(()=> sideMenu.classList.add('visible'));
+    } else {
+      sideMenu.classList.remove('visible');
+      sideMenu.classList.remove('bottom-nav');
+    }
+  }
+
+  window.addEventListener('load', ()=>{ setHeaderH(); applyMode(); });
+  window.addEventListener('resize', ()=>{ setHeaderH(); applyMode(); });
+  window.addEventListener('scroll', applyMode, { passive: true });
+})();
 
 function showSection(sectionId) {
   document.querySelectorAll('.section').forEach(section => {
