@@ -704,30 +704,51 @@ header {
   }
 }
 
+#chat-box.chat-box{
+  position:fixed; right:20px; bottom:90px; width:360px; max-width:92vw; max-height:85vh;
+  display:none; flex-direction:column; overflow:hidden; z-index:9999; border-radius:16px;
+  background:#0f0f0f; border:1px solid #222
+}
+.chat-header{ padding:10px 12px; background:#111; border-bottom:1px solid #222; color:#fff; display:flex; justify-content:space-between; align-items:center }
+.chat-body{ padding:12px; overflow:auto; height:100%; }
+.chat-footer{
+  display:flex; gap:8px; padding:10px; border-top:1px solid #222; background:#0b0b0b;
+  position:sticky; bottom:0
+}
+#chat-input{ flex:1; background:#161616; color:#fff; border:1px solid #333; border-radius:10px; padding:10px 12px }
+.send-btn{ background:var(--brand); border:0; border-radius:10px; padding:10px 14px; font-weight:800 }
+
+@media (max-width:768px){
+  #chat-box.chat-box{ right:12px; left:12px; width:auto; bottom:80px }
+}
+
   </style>
 </head>
 <body>
-<header>
-  <div class="mobile-nav">
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+<header class="site-header">
+  <div class="header-bar">
+    <button class="mobile-toggle" aria-label="فتح القائمة" onclick="toggleMenu()">☰</button>
+
+    <nav class="main-nav" id="mainNav">
+      <ul class="nav-list">
+        <li class="nav-item has-dropdown">
+          <a href="#" class="nav-link">الرئيسية</a>
+          <div class="dropdown">
+            <a href="#about" class="chip">لمحة تاريخية</a>
+            <a href="#president" class="chip">رئيس النادي</a>
+            <a href="#vp" class="chip">نائب الرئيس</a>
+            <a href="#board" class="chip">مجلس الإدارة</a>
+            <a href="#org" class="chip">الهيكل التنظيمي</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="news.html" class="nav-link">الأخبار</a></li>
+        <li class="nav-item"><a href="sports.html" class="nav-link">الألعاب الرياضية</a></li>
+        <li class="nav-item"><a href="register.html" class="nav-link">التسجيل</a></li>
+        <li class="nav-item"><a href="coaches.html" class="nav-link">بوابة المدربين</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">اتصل بنا</a></li>
+      </ul>
+    </nav>
   </div>
-  <div class="header-right">
-    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
-    <div class="divider"></div>
-    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
-    <div class="header-info">
-      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
-      <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
-    </div>
-  </div>
-  <nav class="nav-links" id="navLinks">
-    <a href="index.html">الرئيسية</a>
-    <a href="news.html">الأخبار</a>
-    <a href="media.html">الوسائط</a>
-    <a href="register.html">التسجيل</a>
-    <a href="evaluate.html">بوابة المدربين</a>
-    <a href="contact.html">اتصل بنا</a>
-  </nav>
 </header>
 	
 <section style='padding: 30px;'><h2>📢 آخر الأخبار</h2><p>تغطية آخر المباريات والأنشطة الرياضية للنادي.</p></section>
@@ -767,7 +788,24 @@ window.addEventListener('resize', function() {
     menuToggle.innerHTML = '☰';
   }
 });
-	
+
+function toggleMenu(){
+  const list = document.querySelector('.nav-list');
+  list.classList.toggle('open');
+  document.documentElement.style.overflow = list.classList.contains('open') ? 'hidden' : '';
+}
+addEventListener('resize', () => {
+  if (innerWidth > 768){
+    document.querySelector('.nav-list').classList.remove('open');
+    document.documentElement.style.overflow = '';
+  }
+});
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.nav-link')) {
+    document.querySelector('.nav-list').classList.remove('open');
+    document.documentElement.style.overflow = '';
+  }
+});	
 </script>
 	
 <div class="chatbot">
@@ -1019,7 +1057,7 @@ function submitName() {
       addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
       showMainButtons();
       const inputBar = document.getElementById("inner-input-bar");
-      if (inputBar) inputBar.classList.add("active");   // <-- keep this
+      if (inputBar) inputBar.classList.add("active");  
     }, 500);
   }
 }
