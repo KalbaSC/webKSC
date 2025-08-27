@@ -1203,6 +1203,28 @@ header {
     font-size: 14px !important;
   }
 }
+
+.hero-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 88%;
+  max-width: 1170px;
+  margin: 40px auto;
+  gap: 24px;  /* spacing between carousel and menu */
+}
+
+.hero-carousel {
+  flex: 1 1 auto;  /* carousel takes remaining space */
+}
+
+.side-menu {
+  position: static;    /* no fixed/absolute positioning */
+  transform: none;
+  flex: 0 0 220px;     /* fixed width column */
+  max-height: none;
+}
+	  
   </style>
 </head>
 <body>
@@ -1238,6 +1260,7 @@ header {
   <a href="javascript:void(0)" onclick="showSection('orgstructure')">الهيكل التنظيمي</a>	
 </div>
 	
+<div class="hero-wrapper">	
 <section id="home" class="hero-carousel">
   <div class="carousel-container">
     <div class="carousel-slide fade" style="position: relative;">
@@ -1261,7 +1284,7 @@ header {
     <a class="next" onclick="plusSlides(1)">&#10094;</a>
   </div>
 </section>
-
+	
 <section id="history" class="section">
   <div class="info-container">
     <h2>لمحة تاريخية</h2>
@@ -1426,6 +1449,8 @@ header {
     </div>
   </div>
 </section>
+</div>	
+	
 <script>
 
 (function(){
