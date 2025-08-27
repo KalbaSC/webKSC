@@ -1211,17 +1211,18 @@ header {
   width: 88%;
   max-width: 1170px;
   margin: 40px auto;
-  gap: 24px;  /* spacing between carousel and menu */
+  gap: 24px; 
 }
 
 .hero-carousel {
-  flex: 1 1 auto;  /* carousel takes remaining space */
+  flex: 1 1 auto; 
 }
 
-.side-menu {
-  position: static;    /* no fixed/absolute positioning */
+.hero-wrapper .side-menu{
+  position: static;
   transform: none;
-  flex: 0 0 220px;     /* fixed width column */
+  flex: 0 0 220px;   
+  align-self: flex-start;
   max-height: none;
 }
 	  
@@ -1252,6 +1253,8 @@ header {
   </nav>
 </header>
 	
+<div class="hero-wrapper">	
+
 <div id="sideMenu" class="side-menu">
   <a href="javascript:void(0)" onclick="showSection('history')">لمحة تاريخية</a>
   <a href="javascript:void(0)" onclick="showSection('president')">رئيس النادي</a>
@@ -1260,7 +1263,6 @@ header {
   <a href="javascript:void(0)" onclick="showSection('orgstructure')">الهيكل التنظيمي</a>	
 </div>
 	
-<div class="hero-wrapper">	
 <section id="home" class="hero-carousel">
   <div class="carousel-container">
     <div class="carousel-slide fade" style="position: relative;">
