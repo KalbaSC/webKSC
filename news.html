@@ -703,25 +703,6 @@ header {
     font-size: 14px !important;
   }
 }
-
-#chat-box.chat-box{
-  position:fixed; right:20px; bottom:90px; width:360px; max-width:92vw; max-height:85vh;
-  display:none; flex-direction:column; overflow:hidden; z-index:9999; border-radius:16px;
-  background:#0f0f0f; border:1px solid #222
-}
-.chat-header{ padding:10px 12px; background:#111; border-bottom:1px solid #222; color:#fff; display:flex; justify-content:space-between; align-items:center }
-.chat-body{ padding:12px; overflow:auto; height:100%; }
-.chat-footer{
-  display:flex; gap:8px; padding:10px; border-top:1px solid #222; background:#0b0b0b;
-  position:sticky; bottom:0
-}
-#chat-input{ flex:1; background:#161616; color:#fff; border:1px solid #333; border-radius:10px; padding:10px 12px }
-.send-btn{ background:var(--brand); border:0; border-radius:10px; padding:10px 14px; font-weight:800 }
-
-@media (max-width:768px){
-  #chat-box.chat-box{ right:12px; left:12px; width:auto; bottom:80px }
-}
-
   </style>
 </head>
 <body>
@@ -788,24 +769,6 @@ window.addEventListener('resize', function() {
     menuToggle.innerHTML = '☰';
   }
 });
-
-function toggleMenu(){
-  const list = document.querySelector('.nav-list');
-  list.classList.toggle('open');
-  document.documentElement.style.overflow = list.classList.contains('open') ? 'hidden' : '';
-}
-addEventListener('resize', () => {
-  if (innerWidth > 768){
-    document.querySelector('.nav-list').classList.remove('open');
-    document.documentElement.style.overflow = '';
-  }
-});
-document.addEventListener('click', (e) => {
-  if (e.target.closest('.nav-link')) {
-    document.querySelector('.nav-list').classList.remove('open');
-    document.documentElement.style.overflow = '';
-  }
-});	
 </script>
 	
 <div class="chatbot">
