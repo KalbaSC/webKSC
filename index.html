@@ -566,7 +566,7 @@ gap: 10px;
     position: relative;
     z-index: 1;
   }
-/* ===== Fancy Side Menu (desktop) ===== */
+	  
 .side-menu{
   position: fixed; top:50%; right: 24px; transform: translateY(-50%);
   width: 220px; padding: 16px 14px;
@@ -575,7 +575,9 @@ gap: 10px;
   backdrop-filter: blur(6px);
   box-shadow: 0 10px 35px rgba(0,0,0,.45), 0 0 0 1px rgba(244,231,51,.08) inset;
   display: flex; flex-direction: column; gap: 10px;
-  z-index: 10000; overflow: visible;
+  z-index: 10000; overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;	
 }
 
 .side-menu::after{
@@ -624,7 +626,6 @@ gap: 10px;
   box-shadow: 0 10px 28px rgba(244,231,51,.35), 0 0 0 1px rgba(0,0,0,.6) inset;
 }
 
-/* Live indicator bar */
 .side-menu .sm-indicator{
   position:absolute; right: 100%; top: 0;
   width: 4px; height: 40px; border-radius: 6px;
@@ -633,7 +634,20 @@ gap: 10px;
   transform: translateX(8px);
   transition: top .35s cubic-bezier(.2,.9,.2,1), height .35s;
 }
+.side-menu{
+  display: flex;
+  flex-wrap: wrap;         
+  box-sizing: border-box;  
+}
 
+.side-menu a{
+  flex: 1 1 200px; 
+  min-width: 150px;  
+  white-space: normal; 
+}
+.side-menu::-webkit-scrollbar{ 
+  display: none;
+}	  
 @keyframes sm-pop{
   0%{ transform: translateX(12px); opacity: 0; }
   100%{ transform: translateX(0); opacity: 1; }
@@ -644,7 +658,7 @@ gap: 10px;
     position: fixed; top: 0; right: 0; left: 0; transform: none;
     width: 100%; border-radius: 0 0 14px 14px; padding: 10px 8px;
     border-left: 0; border-right: 0; border-top: 0; border-bottom: 2px solid #f4e733;
-    flex-direction: row; justify-content: center; gap: 8px; overflow-x: auto;
+    flex-direction: row; justify-content: center; gap: 8px; 
   }
   .side-menu a{ flex: 0 0 auto; min-width: 140px; font-size: 13px; }
   .side-menu .sm-indicator{ display: none; }
