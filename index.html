@@ -572,23 +572,27 @@ gap: 10px;
     position: relative;
     z-index: 1;
   }
-	  
+  
 .side-menu{
-  position: fixed; top:50%; right:24px; transform: translateY(-50%);
-  width: 220px; padding: 16px 14px;
-  border-radius: 18px; border: 1.8px solid #f4e733;
+  position: fixed;
+  top: calc(var(--headerH, 72px) + 16px);
+  right: calc((100vw - min(88vw, 1170px)) / 2 - 8px);
+  transform: none;
+  width: 240px;
+  padding: 16px 14px;
+  border-radius: 18px;
+  border: 1.8px solid #f4e733;
   background: linear-gradient(180deg, rgba(0,0,0,.88), rgba(0,0,0,.92));
   backdrop-filter: blur(6px);
   box-shadow: 0 10px 35px rgba(0,0,0,.45), 0 0 0 1px rgba(244,231,51,.08) inset;
   display: flex; flex-direction: column; gap: 10px;
-  z-index: 10000;
-  max-height: clamp(320px, 60vh, 520px);
+  z-index: 1000;
+  max-height: calc(100vh - var(--headerH, 72px) - 32px);
   overflow: auto;
   overscroll-behavior: contain;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-	  
 .side-menu::-webkit-scrollbar{ display:none; }
 
 @media (max-width: 1024px){
@@ -649,20 +653,10 @@ gap: 10px;
   transform: translateX(8px);
   transition: top .35s cubic-bezier(.2,.9,.2,1), height .35s;
 }
-.side-menu{
-  display: flex;
-  flex-wrap: wrap;         
-  box-sizing: border-box;  
-}
-
-.side-menu a{
-  flex: 1 1 200px; 
-  min-width: 150px;  
-  white-space: normal; 
-}
 .side-menu::-webkit-scrollbar{ 
   display: none;
-}	  
+}
+	  
 @keyframes sm-pop{
   0%{ transform: translateX(12px); opacity: 0; }
   100%{ transform: translateX(0); opacity: 1; }
@@ -915,15 +909,12 @@ gap: 10px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-
-.side-menu.top-nav::-webkit-scrollbar{ display: none; }
+.side-menu.top-nav::-webkit-scrollbar{ display:none; }
+body.with-top-nav{ padding-top: calc(var(--headerH,72px) + var(--topNavH,56px)); }
+	  
 .side-menu.top-nav.visible{
   opacity: 1;
   transform: translateY(0);
-}
-
-body.with-top-nav{
-  padding-top: calc(var(--headerH, 72px) + var(--topNavH, 56px));
 }
 	  
 .side-menu.top-nav a{
