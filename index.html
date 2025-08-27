@@ -172,7 +172,13 @@ header {
   font-size: 16px;
   color: #f4e733;
 }
-
+	  
+header{
+  position: sticky;
+  top: 0; 
+   z-index: 1001; 
+}
+	  
 .nav-links {
   display: flex;
   gap: 70px;
@@ -567,7 +573,107 @@ gap: 10px;
     z-index: 1;
   }
 	  
+.side-menu{
+  position: fixed; top:50%; right: 24px; transform: translateY(-50%);
+  width: 220px; padding: 16px 14px;
+  border-radius: 18px; border: 1.8px solid #f4e733;
+  background: linear-gradient(180deg, rgba(0,0,0,.88), rgba(0,0,0,.92));
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 35px rgba(0,0,0,.45), 0 0 0 1px rgba(244,231,51,.08) inset;
+  display: flex; flex-direction: column; gap: 10px;
+  z-index: 10000; overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;	
+}
 
+.side-menu::after{
+  content:""; position:absolute; inset:-2px; border-radius:20px;
+  pointer-events:none;
+  box-shadow: 0 0 25px rgba(244,231,51,.18);
+}
+
+.side-menu a{
+  --i: 0;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 12px 14px; border-radius: 12px;
+  font-weight: 800; letter-spacing:.15px; font-size: 14px;
+  color: #fff; text-decoration: none; text-align: center;
+  background: radial-gradient(100% 100% at 50% 0%, rgba(255,255,255,.04), rgba(0,0,0,.28));
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  transition: transform .25s ease, box-shadow .25s ease, color .25s ease, border-color .25s ease;
+  isolation: isolate;
+  overflow: hidden;
+  animation: sm-pop .45s cubic-bezier(.2,.9,.2,1) both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+
+.side-menu a::before{
+  content:""; position:absolute; inset:-1px; border-radius:12px;
+  background: radial-gradient(120px 120px at var(--mx,50%) var(--my,50%), rgba(244,231,51,.18), transparent 50%);
+  opacity:0; transition: opacity .25s ease;
+}
+
+.side-menu a:hover{
+  transform: translateX(-4px);
+  border-color: rgba(244,231,51,.5);
+  box-shadow: 0 10px 24px rgba(244,231,51,.18), 0 0 0 1px rgba(244,231,51,.22) inset;
+  color: #f4e733;
+}
+.side-menu a:hover::before{ opacity:1; }
+
+.side-menu a:active{ transform: translateX(-2px) translateY(1px); }
+
+.side-menu a.active{
+  color: #0a0a0a;
+  background: linear-gradient(180deg,#f4e733,#c9b812);
+  border-color: #000;
+  box-shadow: 0 10px 28px rgba(244,231,51,.35), 0 0 0 1px rgba(0,0,0,.6) inset;
+}
+
+.side-menu .sm-indicator{
+  position:absolute; right: 100%; top: 0;
+  width: 4px; height: 40px; border-radius: 6px;
+  background: linear-gradient(180deg,#f4e733,#fff17a);
+  box-shadow: 0 0 14px rgba(244,231,51,.55);
+  transform: translateX(8px);
+  transition: top .35s cubic-bezier(.2,.9,.2,1), height .35s;
+}
+.side-menu{
+  display: flex;
+  flex-wrap: wrap;         
+  box-sizing: border-box;  
+}
+
+.side-menu a{
+  flex: 1 1 200px; 
+  min-width: 150px;  
+  white-space: normal; 
+}
+.side-menu::-webkit-scrollbar{ 
+  display: none;
+}	  
+@keyframes sm-pop{
+  0%{ transform: translateX(12px); opacity: 0; }
+  100%{ transform: translateX(0); opacity: 1; }
+}
+
+@media (max-width: 768px){
+  .side-menu{
+    position: fixed; top: 0; right: 0; left: 0; transform: none;
+    width: 100%; border-radius: 0 0 14px 14px; padding: 10px 8px;
+    border-left: 0; border-right: 0; border-top: 0; border-bottom: 2px solid #f4e733;
+    flex-direction: row; justify-content: center; gap: 8px; 
+  }
+  .side-menu a{ flex: 0 0 auto; min-width: 140px; font-size: 13px; }
+  .side-menu .sm-indicator{ display: none; }
+}
+	  
+@keyframes sm-pop{
+  0%{ transform: translateX(12px); opacity: 0; }
+  100%{ transform: translateX(0); opacity: 1; }
+}
     
     .section {
       display: none;
@@ -769,7 +875,20 @@ gap: 10px;
     height: 50px !important;
   }
 }
-     
+
+  @media (max-width: 1024px) {
+    .side-menu {
+      right: 10px;
+      padding: 12px 8px;
+      width: 150px;
+    }
+    
+    .side-menu a {
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+  }	  
+    
   @media (max-width: 768px) {	  
 	.org-row {
         flex-direction: column;
@@ -781,6 +900,50 @@ gap: 10px;
         max-width: 300px;
       }  
     }
+
+.side-menu.top-nav{
+  position: fixed;
+  right: 0; left: 0;
+  top: calc(var(--headerH, 72px) + env(safe-area-inset-top));
+  width: 100%;
+  z-index: 1002;
+  border-radius: 0 0 14px 14px;
+  padding: 10px 8px;
+  border: 0;
+  border-bottom: 2px solid #f4e733;
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.side-menu.top-nav::-webkit-scrollbar{ display: none; }
+.side-menu.top-nav.visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.with-top-nav{
+  padding-top: calc(var(--headerH, 72px) + var(--topNavH, 56px));
+}
+	  
+.side-menu.top-nav a{
+  flex: 0 1 auto;
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+.side-menu.top-nav .sm-indicator{ display: none; }
+
+@media (max-width: 768px){
+  header{ position: sticky; top: 0; z-index: 1001; }
+  .side-menu{ 
+  }
+  body{ padding-top: calc(var(--headerH, 72px) + 56px); }
+}
 	  
 @media (max-width: 768px) {
   #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
@@ -1060,128 +1223,6 @@ header {
     font-size: 14px !important;
   }
 }
-
-    .side-menu {
-      position: fixed;
-      top: 50%;
-      right: 24px;
-      transform: translateY(-50%);
-      width: 220px;
-      padding: 16px 14px;
-      border-radius: 18px;
-      border: 1.8px solid #f4e733;
-      background: linear-gradient(180deg, rgba(0,0,0,.88), rgba(0,0,0,.92));
-      backdrop-filter: blur(6px);
-      box-shadow: 0 10px 35px rgba(0,0,0,.45), 0 0 0 1px rgba(244,231,51,.08) inset;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 10000;
-      overflow: hidden;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      transition: all 0.4s ease;
-    }
-
-    .side-menu::after {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      border-radius: 20px;
-      pointer-events: none;
-      box-shadow: 0 0 25px rgba(244,231,51,.18);
-    }
-
-    .side-menu a {
-      --i: 0;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 14px;
-      border-radius: 12px;
-      font-weight: 800;
-      letter-spacing: .15px;
-      font-size: 14px;
-      color: #fff;
-      text-decoration: none;
-      text-align: center;
-      background: radial-gradient(100% 100% at 50% 0%, rgba(255,255,255,.04), rgba(0,0,0,.28));
-      border: 1px solid rgba(255,255,255,.08);
-      box-shadow: 0 4px 12px rgba(0,0,0,.25);
-      transition: transform .25s ease, box-shadow .25s ease, color .25s ease, border-color .25s ease;
-      isolation: isolate;
-      overflow: hidden;
-      animation: sm-pop .45s cubic-bezier(.2,.9,.2,1) both;
-      animation-delay: calc(var(--i) * 70ms);
-    }
-
-    .side-menu.top-nav {
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      transform: none;
-      width: 100%;
-      border-radius: 0;
-      padding: 10px 15px;
-      border: none;
-      border-bottom: 2px solid #f4e733;
-      flex-direction: row;
-      justify-content: center;
-      gap: 8px;
-      backdrop-filter: none;
-      background: #000;
-    }
-
-    .side-menu.top-nav a {
-      flex: 0 0 auto;
-      min-width: 120px;
-      font-size: 13px;
-      padding: 8px 10px;
-    }
-
-    .side-menu .sm-indicator {
-      position: absolute;
-      right: 100%;
-      top: 0;
-      width: 4px;
-      height: 40px;
-      border-radius: 6px;
-      background: linear-gradient(180deg, #f4e733, #fff17a);
-      box-shadow: 0 0 14px rgba(244,231,51,.55);
-      transform: translateX(8px);
-      transition: top .35s cubic-bezier(.2,.9,.2,1), height .35s;
-    }
-
-    .side-menu.top-nav .sm-indicator {
-      display: none;
-    }
-
-    @media (max-width: 768px) {
-      .side-menu:not(.top-nav) {
-        display: none;
-      }
-      
-      .side-menu.top-nav {
-        display: flex;
-        top: var(--headerH, 72px);
-      }
-      
-      body {
-        padding-top: calc(var(--headerH, 72px) + 50px);
-      }
-    }
-
-    @media (min-width: 769px) {
-      .side-menu.top-nav {
-        display: none;
-      }
-      
-      .side-menu:not(.top-nav) {
-        display: flex;
-      }
-    }
   </style>
 </head>
 <body>
@@ -1214,7 +1255,7 @@ header {
   <a href="javascript:void(0)" onclick="showSection('president')">رئيس النادي</a>
   <a href="javascript:void(0)" onclick="showSection('vice')">نائب الرئيس</a>
   <a href="javascript:void(0)" onclick="showSection('board')">مجلس الإدارة</a>
-  <a href="javascript:void(0)" onclick="showSection('orgstructure')">الهيكل التنظيمي</a> 
+  <a href="javascript:void(0)" onclick="showSection('orgstructure')">الهيكل التنظيمي</a>	
 </div>
 	
 <section id="home" class="hero-carousel">
@@ -1523,43 +1564,37 @@ function toggleChat() {
 
   if(!sideMenu){ console.warn('No #sideMenu found'); return; }
 
-  function setHeaderH(){
-    const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
-    document.documentElement.style.setProperty('--headerH', h + 'px');
-  }
+function setHeaderH(){
+  const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
+  document.documentElement.style.setProperty('--headerH', h + 'px');
+}
 
-  function isMobile(){ 
-    return window.innerWidth <= 768; 
-  }
+  function isMobile(){ return window.innerWidth <= 768; }
 
-  function applyMenuMode(){
-    const scrolled = window.pageYOffset > 100;
-    
-    if (isMobile()) {
-      // On mobile, always show as top nav
-      sideMenu.classList.add('top-nav');
-      sideMenu.classList.remove('bottom-nav');
-    } else {
-      // On desktop, toggle between sidebar and top nav based on scroll
-      if (scrolled) {
-        sideMenu.classList.add('top-nav');
-      } else {
-        sideMenu.classList.remove('top-nav');
-      }
-    }
-  }
+function applyMode(){
+  const scrolled = (window.pageYOffset || document.documentElement.scrollTop) > 200;
+  const shouldTopNav = isMobile() || scrolled;
 
-  window.addEventListener('load', ()=>{ 
-    setHeaderH(); 
-    applyMenuMode(); 
-  });
-  
-  window.addEventListener('resize', ()=>{ 
-    setHeaderH(); 
-    applyMenuMode(); 
-  });
-  
-  window.addEventListener('scroll', applyMenuMode, { passive: true });
+  if (shouldTopNav){
+    sideMenu.classList.add('top-nav');
+    document.body.classList.add('with-top-nav');
+
+    // wait a frame so layout is correct, then measure height for padding
+    requestAnimationFrame(() => {
+      const h = Math.ceil(sideMenu.getBoundingClientRect().height || 56);
+      document.documentElement.style.setProperty('--topNavH', h + 'px');
+      sideMenu.classList.add('visible');
+    });
+  } else {
+    sideMenu.classList.remove('visible', 'top-nav');
+    document.body.classList.remove('with-top-nav');
+    document.documentElement.style.removeProperty('--topNavH');
+  }
+}
+
+  window.addEventListener('load', ()=>{ setHeaderH(); applyMode(); });
+  window.addEventListener('resize', ()=>{ setHeaderH(); applyMode(); });
+  window.addEventListener('scroll', applyMode, { passive: true });
 })();
 
 function showSection(sectionId) {
@@ -1574,6 +1609,7 @@ function showSection(sectionId) {
       
       setTimeout(() => {
         targetSection.scrollIntoView({ behavior: 'smooth' });
+        
       }, 100);
     }
   }
@@ -1586,30 +1622,32 @@ function showSection(sectionId) {
   });
 }
 
-// Initialize the side menu with proper styling
 document.querySelectorAll('#sideMenu a').forEach((el,i)=>{
   el.style.setProperty('--i', i);
 });
 
-// Add indicator to the side menu
+document.getElementById('sideMenu').addEventListener('pointermove', (e)=>{
+  const t = e.target.closest('a'); if(!t) return;
+  const r = t.getBoundingClientRect();
+  t.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+  t.style.setProperty('--my', (e.clientY - r.top) + 'px');
+});
+
 const sideMenu = document.getElementById('sideMenu');
 let indicator = document.createElement('span');
 indicator.className = 'sm-indicator';
 sideMenu.appendChild(indicator);
 
 function moveIndicatorTo(link){
-  if (sideMenu.classList.contains('top-nav')) return; // Don't show indicator in top nav mode
-  
   const rect = link.getBoundingClientRect();
   const menuRect = sideMenu.getBoundingClientRect();
   indicator.style.top = (rect.top - menuRect.top + (rect.height - 40)/2) + 'px';
   indicator.style.height = Math.min(44, rect.height) + 'px';
 }
 
-// Update the showSection function to handle the indicator
-const originalShowSection = window.showSection;
+const _showSection = window.showSection;
 window.showSection = function(sectionId){
-  if (typeof originalShowSection === 'function') originalShowSection(sectionId);
+  if (typeof _showSection === 'function') _showSection(sectionId);
 
   const links = sideMenu.querySelectorAll('a');
   links.forEach(a => a.classList.remove('active'));
@@ -1620,7 +1658,6 @@ window.showSection = function(sectionId){
   }
 };
 
-// Set up intersection observer for sections
 const sections = ['history','president','vice','board','orgstructure']
   .map(id => document.getElementById(id))
   .filter(Boolean);
@@ -1642,20 +1679,14 @@ const obs = new IntersectionObserver((entries)=>{
 
 sections.forEach(sec => obs.observe(sec));
 
-// Initialize the menu on load
 window.addEventListener('load', ()=>{
   const first = sideMenu.querySelector('a');
-  if(first){ 
-    first.classList.add('active'); 
-    moveIndicatorTo(first); 
-  }
+  if(first){ first.classList.add('active'); moveIndicatorTo(first); }
 });
-
 window.addEventListener('resize', ()=>{
   const active = sideMenu.querySelector('a.active') || sideMenu.querySelector('a');
   if(active) moveIndicatorTo(active);
-});
-	
+});	
 </script>
 	
 <div class="chatbot">
