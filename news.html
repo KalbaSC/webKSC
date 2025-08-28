@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head> 
-  <meta charset="UTF-8">    
+<head>
+  <meta charset="UTF-8">   
   <title>الأخبار</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
   <style>
-	  
 @font-face {
   font-family: 'NotoKufiArabic';
   src: url('NotoKufiArabic-Light.ttf') format('truetype');
@@ -704,33 +703,31 @@ header {
     font-size: 14px !important;
   }
 }
+
   </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="header-bar">
-    <button class="mobile-toggle" aria-label="فتح القائمة" onclick="toggleMenu()">☰</button>
-
-    <nav class="main-nav" id="mainNav">
-      <ul class="nav-list">
-        <li class="nav-item has-dropdown">
-          <a href="#" class="nav-link">الرئيسية</a>
-          <div class="dropdown">
-            <a href="#about" class="chip">لمحة تاريخية</a>
-            <a href="#president" class="chip">رئيس النادي</a>
-            <a href="#vp" class="chip">نائب الرئيس</a>
-            <a href="#board" class="chip">مجلس الإدارة</a>
-            <a href="#org" class="chip">الهيكل التنظيمي</a>
-          </div>
-        </li>
-        <li class="nav-item"><a href="news.html" class="nav-link">الأخبار</a></li>
-        <li class="nav-item"><a href="sports.html" class="nav-link">الألعاب الرياضية</a></li>
-        <li class="nav-item"><a href="register.html" class="nav-link">التسجيل</a></li>
-        <li class="nav-item"><a href="coaches.html" class="nav-link">بوابة المدربين</a></li>
-        <li class="nav-item"><a href="contact.html" class="nav-link">اتصل بنا</a></li>
-      </ul>
-    </nav>
+<header>
+  <div class="mobile-nav">
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   </div>
+  <div class="header-right">
+    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
+    <div class="divider"></div>
+    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
+    <div class="header-info">
+      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
+      <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
+    </div>
+  </div>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">الرئيسية</a>
+    <a href="news.html">الأخبار</a>
+    <a href="media.html">الوسائط</a>
+    <a href="register.html">التسجيل</a>
+    <a href="evaluate.html">بوابة المدربين</a>
+    <a href="contact.html">اتصل بنا</a>
+  </nav>
 </header>
 	
 <section style='padding: 30px;'><h2>📢 آخر الأخبار</h2><p>تغطية آخر المباريات والأنشطة الرياضية للنادي.</p></section>
@@ -770,6 +767,7 @@ window.addEventListener('resize', function() {
     menuToggle.innerHTML = '☰';
   }
 });
+	
 </script>
 	
 <div class="chatbot">
@@ -1021,7 +1019,7 @@ function submitName() {
       addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
       showMainButtons();
       const inputBar = document.getElementById("inner-input-bar");
-      if (inputBar) inputBar.classList.add("active");  
+      if (inputBar) inputBar.classList.add("active");   // <-- keep this
     }, 500);
   }
 }
