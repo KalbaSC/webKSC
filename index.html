@@ -845,21 +845,7 @@
     
     body.with-top-nav { 
       padding-top: calc(var(--headerH,72px) + var(--topNavH,56px)); 
-    }
-      
-    @media (max-width: 1024px) {
-      .side-menu {
-        display: none;
-      }
-      
-      .mobile-side-menu {
-        display: flex;
-      }
-      
-      .carousel-container {
-        height: 400px;
-      }
-    }
+    }   
     
     @media (max-width: 900px) {
       .header-info .arabic-name {
@@ -878,249 +864,7 @@
         height: 50px;
       }
     }
-    
-    @media (max-width: 768px) {
-      /* Header */
-      header {
-        padding: 12px 16px;
-        width: 100%;
-        flex-wrap: nowrap;
-      }
-      
-      .mobile-nav {
-        display: block;
-      }
-      
-      .menu-toggle {
-        display: block;
-      }
-      
-      .header-right {
-        gap: 10px;
-        justify-content: flex-start;
-      }
-      
-      .header-right img.logo {
-        height: 50px;
-      }
-      
-      .header-right .divider {
-        display: none;
-      }
-      
-      .header-info {
-        text-align: right;
-        flex: 1;
-      }
-      
-      .header-info .arabic-name {
-        font-size: 14px;
-        white-space: normal;
-      }
-      
-      .header-info .english-name {
-        font-size: 12px;
-        white-space: normal;
-      }
-      
-      .nav-links {
-        display: none;
-      }
-      
-      /* Carousel */
-      .carousel-container {
-        width: 94%;
-        height: auto;
-        aspect-ratio: 16/9;
-        min-height: 0;
-        margin: 20px auto;
-      }
-      
-      .caption {
-        font-size: 14px;
-        line-height: 1.5;
-        padding: 10px 12px;
-        white-space: normal;
-      }
-      
-      .prev, .next {
-        font-size: 18px;
-        padding: 8px;
-      }
-      
-      /* Info Container */
-      .info-container {
-        width: 94%;
-        margin: 20px auto;
-        padding: 20px;
-      }
-      
-      .info-container h2 {
-        font-size: 20px;
-      }
-      
-      .info-container p, .info-container li {
-        font-size: 14px;
-        line-height: 1.7;
-      }
-      
-      /* Organizational Structure */
-      .org-structure {
-        padding: 10px;
-      }
-      
-      .org-title {
-        font-size: 20px;
-        margin-bottom: 20px;
-      }
-      
-      .org-item {
-        min-width: auto;
-        width: 100%;
-        max-width: 280px;
-        margin-bottom: 15px;
-        padding: 15px;
-      }
-      
-      .connector-arrow, 
-      .org-connector-line {
-        display: none;
-      }
-      
-      /* Footer */
-      footer {
-        padding: 20px 15px;
-        width: 100%;
-        flex-direction: column;
-        gap: 20px;
-      }
-      
-      .footer-column {
-        width: 100%;
-        min-width: auto;
-      }
-      
-      .footer-column h3 {
-        font-size: 16px;
-        margin-bottom: 10px;
-      }
-      
-      .footer-column a, .footer-column p {
-        font-size: 14px;
-      }
-      
-      .social-icons {
-        justify-content: flex-start;
-        gap: 15px;
-        margin-top: 10px;
-      }
-      
-      .footer-bottom {
-        margin-top: 20px;
-        padding-top: 15px;
-        font-size: 12px;
-      }
-      
-      footer textarea {
-        height: 120px;
-        width: 100%;
-      }
-      
-      footer button[type="submit"] {
-        width: 100%;
-        padding: 12px;
-      }
-      
-      /* Chat */
-      .chat-body {
-        max-height: 55vh;
-      }
 
-      #chat-box {
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        max-height: 100%;
-        border-radius: 0;
-      }
-
-      #chat-wrapper {
-        bottom: 15px;
-        right: 15px;
-      }
-
-      #chat-tooltip {
-        bottom: 70px;
-        right: 10px;
-        max-width: 80%;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .header-right img.logo {
-        height: 40px;
-      }
-      
-      .header-info .arabic-name {
-        font-size: 12px;
-      }
-      
-      .header-info .english-name {
-        font-size: 10px;
-      }
-      
-      .carousel-container {
-        width: 96%;
-      }
-      
-      .info-container {
-        width: 96%;
-        padding: 15px;
-      }
-      
-      .info-container h2 {
-        font-size: 18px;
-      }
-      
-      .info-container p, .info-container li {
-        font-size: 13px;
-      }
-      
-      #chat-box {
-        width: 96%;
-        right: 2%;
-      }
-      
-      .chat-header {
-        padding: 10px;
-      }
-      
-      .chat-footer {
-        padding: 8px;
-      }
-      
-      .chat-footer input {
-        padding: 8px;
-        font-size: 14px;
-      }
-      
-      .content {
-        font-size: 14px;
-        padding: 8px;
-      }
-      
-      .mobile-side-menu a {
-        font-size: 10px;
-        padding: 6px;
-      }
-      
-      .mobile-side-menu a i {
-        font-size: 18px;
-      }
-    }
-
-    /* Main Navigation */
     .main-nav {
       display: flex;
       justify-content: center;  
@@ -1392,19 +1136,30 @@ window.addEventListener('resize', updateHeaderHeight);
   const navLinks  = document.getElementById('navLinks');
   if (!toggleBtn || !navLinks) return;
 
-  function toggleMenu(){ navLinks.classList.toggle('show'); }
+  function toggleMenu(){
+    const willShow = !navLinks.classList.contains('show');
+    navLinks.classList.toggle('show', willShow);
+    document.body.classList.toggle('no-scroll', willShow);
+    toggleBtn.setAttribute('aria-expanded', String(willShow));
+  }
 
   toggleBtn.addEventListener('click', toggleMenu);
 
   document.addEventListener('click', (e)=>{
     if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)){
       navLinks.classList.remove('show');
+      document.body.classList.remove('no-scroll');
+      toggleBtn.setAttribute('aria-expanded','false');
     }
   });
 
-  document.querySelectorAll('#navLinks a, .nav-links a').forEach(a=>{
+  document.querySelectorAll('#navLinks a').forEach(a=>{
     a.addEventListener('click', ()=>{
-      if (window.innerWidth < 769) toggleMenu();
+      if (window.innerWidth < 769){
+        navLinks.classList.remove('show');
+        document.body.classList.remove('no-scroll');
+        toggleBtn.setAttribute('aria-expanded','false');
+      }
     });
   });
 
@@ -1412,7 +1167,7 @@ window.addEventListener('resize', updateHeaderHeight);
     if (window.innerWidth >= 769){
       document.body.classList.remove('no-scroll');
       navLinks.classList.remove('show');
-      toggleBtn.innerHTML = '☰';
+      toggleBtn.setAttribute('aria-expanded','false');
     }
   });
 })();
