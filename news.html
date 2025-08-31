@@ -985,54 +985,26 @@ inputDiv.innerHTML = `
   chatBody.appendChild(inputDiv);
 }
 
-function toggleChat() {
-  const chatBox = document.getElementById('chat-box');
-  const badge   = document.getElementById('chat-badge');
-  const tooltip = document.getElementById('chat-tooltip');
-  const alreadyStarted = !!chatBox.querySelector('.message-wrapper');
-
-  const isHidden = getComputedStyle(chatBox).display === 'none';
-
-  if (isHidden) {
-    chatBox.style.display = 'flex';
-    chatBox.classList.add('open');
-    if (badge)   badge.style.display = 'none';
-    if (tooltip) tooltip.style.display = 'none';
-
-    requestAnimationFrame(() => {
-      chatBox.style.opacity = '1';
-      chatBox.style.transform = 'translateY(0)';
-    });
-
-    if (!alreadyStarted) startChat();
-    } else {
-      chatBox.style.opacity   = '0';
-      chatBox.style.transform = 'translateY(30px)';
-      setTimeout(()=>{
-        chatBox.classList.remove('open');
-        chatBox.style.display = 'none';
-        if (badge) badge.style.display = 'flex';
-      }, 500);
-  }
-}
-	
-function submitName() {
+ function submitName() {
   const input = document.getElementById("nameInput");
+
   const name = input.value.trim();
 
   if (name) {
-    addMessage(`${name}`, true);
-    userName = name;
-    document.getElementById("nameInputWrapper").remove();
-
-    setTimeout(() => {
-      addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
-      showMainButtons();
-      const inputBar = document.getElementById("inner-input-bar");
-      if (inputBar) inputBar.classList.add("active");   // <-- keep this
-    }, 500);
-  }
-}
+  addMessage(`${name}`, true);
+  userName = name;
+  document.getElementById("nameInputWrapper").remove();
+  
+  setTimeout(() => {
+    addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
+    showMainButtons();
+    const inputBar = document.getElementById("inner-input-bar");
+  if (inputBar) {
+         inputBar.classList.add("active");
+		 inputBar.style.display = "flex";   
+	  }}, 500);
+    }
+ }
   
 function submitUserMessage() {
     const input = document.getElementById("userMessage");
@@ -1291,7 +1263,6 @@ document.addEventListener("keydown", function (e) {
 window.addEventListener('DOMContentLoaded', () => {
   startChat();
 });
-
 </script>
 </div>
 	
