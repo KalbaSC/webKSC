@@ -6,90 +6,113 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
   <style>
-@font-face {
-  font-family: 'NotoKufiArabic';
-  src: url('NotoKufiArabic-Light.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-body {
-  margin: 0;
-  font-family: 'NotoKufiArabic', sans-serif;
-  background-color: #000;
-  color: white;
-  direction: rtl;
-}
-
-header {
-  background-color: #111;
-  padding: 16px 90px;
-  width: 88%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 3px solid #f4e733;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.header-right img.logo {
-  height: 70px;
-}
-
-.header-right .divider {
-  width: 1.5px;
-  height: 65px;
-  background-color: #f4e733;
-}
-
-.header-info {
-  text-align: right;
-}
-
-.header-info .arabic-name {
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.header-info .english-name {
-  font-size: 16px;
-  color: #f4e733;
-}
-
-.nav-links {
-  display: flex;
-  gap: 70px;
-}
-
-.nav-links a {
-  color: #f4e733;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-  transition: color 1.5s;
-}
-
-.nav-links a:hover {
-  color: white;
-}
-
-.mobile-nav {
-  display: none;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: #f4e733;
-  cursor: pointer;
-}
-
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic-Light.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    
+    body {
+      font-family: 'NotoKufiArabic', sans-serif;
+      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+    }
+    
+    header {
+      background-color: #111;
+      padding: 16px 5%;
+      margin: 0 auto;	
+      width: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #f4e733;
+      position: sticky;
+      top: 0; 
+      z-index: 1001;
+      flex-wrap: wrap;
+    }
+    
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .header-right img.logo {
+      height: 70px;
+      object-fit: contain;
+    }
+    
+    .header-right .divider {
+      width: 1.5px;
+      height: 65px;
+      background-color: #f4e733;
+    }
+    
+    .header-info {
+      text-align: right;
+      min-width: 0;
+    }
+    
+    .header-info .arabic-name {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 0;
+    }
+    
+    .header-info .english-name {
+      font-size: 16px;
+      color: #f4e733;
+      margin: 0;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 70px;
+      flex-wrap: wrap;
+    }
+    
+    .nav-links a {
+      color: #f4e733;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+    
+    .nav-links a:hover {
+      color: white;
+    }
+    
+    .mobile-nav {
+      display: none;
+    }
+    
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: #f4e733;
+      cursor: pointer;
+      padding: 5px;
+    }
     footer {
       background-color: #000;
       color: white;
