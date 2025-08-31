@@ -1005,17 +1005,14 @@ function toggleChat() {
     });
 
     if (!alreadyStarted) startChat();
-  } else {
-    chatBox.style.opacity = '0';
-    chatBox.style.transform = 'translateY(30px)';
-    setTimeout(() => {
-      chatBox.classList.remove('open');
-      chatBox.style.display = 'none';
-      if (badge) badge.style.display = 'flex';
-      if (typeof tooltipDismissed !== 'undefined' && !tooltipDismissed && tooltip) {
-        tooltip.style.display = 'block';
-      }
-    }, 500);
+    } else {
+      chatBox.style.opacity   = '0';
+      chatBox.style.transform = 'translateY(30px)';
+      setTimeout(()=>{
+        chatBox.classList.remove('open');
+        chatBox.style.display = 'none';
+        if (badge) badge.style.display = 'flex';
+      }, 500);
   }
 }
 	
