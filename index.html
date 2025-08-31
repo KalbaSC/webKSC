@@ -934,6 +934,31 @@
   .side-menu.top-nav .sm-indicator{ display:none; }
 }
 
+@media (max-width: 768px) {
+  .mobile-nav {
+    display: block;
+  }
+
+  .menu-toggle {
+    display: block;       
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: rgba(0,0,0,0.95);
+    position: absolute;
+    top: var(--headerH, 72px);
+    right: 0;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+}
+
 .main-nav {
   display: flex;
   justify-content: center;  
