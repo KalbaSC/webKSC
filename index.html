@@ -1220,7 +1220,9 @@ window.addEventListener('resize', updateHeaderHeight);
   const navLinks  = document.getElementById('navLinks');
   if (!toggleBtn || !navLinks) return;
 
-  function toggleMenu(){ navLinks.classList.toggle('show'); }
+  window.toggleMenu = function(){
+  navLinks.classList.toggle('show');
+}
 
   toggleBtn.addEventListener('click', toggleMenu);
 
