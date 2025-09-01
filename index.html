@@ -847,6 +847,10 @@
       padding-top: calc(var(--headerH,72px) + var(--topNavH,56px)); 
     }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 @media (max-width: 768px){
 
 body.with-top-nav {
@@ -1004,6 +1008,7 @@ body.with-top-nav {
   <div class="mobile-nav">
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   </div>
+  
   <div class="header-right">
     <img src="Picture3.png" alt="شعار الشارقة" class="logo">
     <div class="divider"></div>
@@ -1235,6 +1240,41 @@ function updateHeaderHeight() {
 
 window.addEventListener('load', updateHeaderHeight);
 window.addEventListener('resize', updateHeaderHeight);
+
+function toggleMenu() {
+  const navLinks = document.getElementById('navLinks');
+  const body = document.body;
+  
+  navLinks.classList.toggle('show');
+  body.classList.toggle('no-scroll');
+  
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (navLinks.classList.contains('show')) {
+    menuToggle.innerHTML = '✕';
+  } else {
+    menuToggle.innerHTML = '☰';
+  }
+}
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) {
+      toggleMenu();
+    }
+  });
+});
+
+window.addEventListener('resize', function() {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const body = document.body;
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    navLinks.classList.remove('show');
+    body.classList.remove('no-scroll');
+    menuToggle.innerHTML = '☰';
+  }
+});
 
 (function(){
   const toggleBtn = document.querySelector('.menu-toggle');
