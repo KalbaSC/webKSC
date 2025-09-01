@@ -1173,25 +1173,31 @@ header {
 }
 
 @media (max-width: 768px){
-  /* side-menu كسطر تحتي */
-  .side-menu{
-    position: sticky;
+   #sideMenu {
+    position: fixed;
     top: var(--headerH,72px);
-    right: 0; left: 0;
-    width: 100%;
+    right: 0;
     transform: none;
-    margin: 0 auto;
-    border-radius: 0 0 14px 14px;
-    padding: 10px 8px;
-    border: 0;
-    border-bottom: 2px solid #f4e733;
-    flex-direction: row;
-    gap: 8px;
-    overflow-x: auto;
-    z-index: 1002;
-    background: linear-gradient(180deg, rgba(0,0,0,.96), rgba(0,0,0,.96));
+    width: 140px;
+    height: calc(100vh - var(--headerH,72px));
+    padding: 12px;
+    border-radius: 0;
+    border-left: 2px solid #f4e733;
+    border-right: none;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(0,0,0,0.95);
+    z-index: 1001;
+    overflow-y: auto;
   }
-  .side-menu .sm-indicator{ display: none; }
+
+  #sideMenu a {
+    padding: 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #222;
+  }
+
+  #sideMenu .sm-indicator { display: none; }
    body.with-top-nav {padding-top: 0 !important;}
 }
 
@@ -1530,7 +1536,7 @@ window.addEventListener('resize', updateHeaderHeight);
 
   function applyMode(){
     const scrolled     = (window.pageYOffset || document.documentElement.scrollTop) > 200;
-    const shouldTopNav = isMobile() || scrolled;
+    const shouldTopNav = scrolled;
 
     if (shouldTopNav){
       sideMenu.classList.add('top-nav');
