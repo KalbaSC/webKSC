@@ -1173,28 +1173,30 @@ header {
 }
 
 @media (max-width: 768px){
-   #sideMenu {
+  #sideMenu {
     position: fixed;
     top: var(--headerH,72px);
-    right: 0;
-    transform: none;
-    width: 140px;
-    height: calc(100vh - var(--headerH,72px));
-    padding: 12px;
-    border-radius: 0;
-    border-left: 2px solid #f4e733;
-    border-right: none;
-    flex-direction: column;
-    gap: 10px;
+    right: 0; left: 0;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
     background: rgba(0,0,0,0.95);
+    border: none;
+    border-bottom: 2px solid #f4e733;
+    overflow-x: auto;
+    overflow-y: hidden;
     z-index: 1001;
-    overflow-y: auto;
   }
 
   #sideMenu a {
-    padding: 10px;
+    flex: 0 0 auto;
+    min-width: 100px;
+    padding: 8px 12px;
     font-size: 14px;
-    border-bottom: 1px solid #222;
+    border-bottom: none;
   }
 
   #sideMenu .sm-indicator { display: none; }
@@ -1536,7 +1538,7 @@ window.addEventListener('resize', updateHeaderHeight);
 
   function applyMode(){
     const scrolled     = (window.pageYOffset || document.documentElement.scrollTop) > 200;
-    const shouldTopNav = scrolled;
+    const shouldTopNav = isMobile() || scrolled;
 
     if (shouldTopNav){
       sideMenu.classList.add('top-nav');
