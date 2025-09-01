@@ -1172,40 +1172,27 @@ header {
   }
 }
 
-/* شريط side-menu كـ Top Nav في الموبايل */
 @media (max-width: 768px){
-  /* نجبره يكون سطر علوي */
+  /* side-menu كسطر تحتي */
   .side-menu{
-    position: fixed;
+    position: sticky;
+    top: var(--headerH,72px);
     right: 0; left: 0;
-    top: calc(var(--headerH,72px) + env(safe-area-inset-top));
     width: 100%;
-    margin: 0 auto;
     transform: none;
+    margin: 0 auto;
     border-radius: 0 0 14px 14px;
     padding: 10px 8px;
     border: 0;
     border-bottom: 2px solid #f4e733;
     flex-direction: row;
-    justify-content: center;
     gap: 8px;
-    max-height: none;
-    overflow-x: auto;   /* سحب أفقي لو الروابط كثيرة */
-    overflow-y: hidden;
+    overflow-x: auto;
     z-index: 1002;
-  }
-  .side-menu a{
-    flex: 0 0 auto;
-    min-width: 120px;
-    white-space: nowrap;
+    background: linear-gradient(180deg, rgba(0,0,0,.96), rgba(0,0,0,.96));
   }
   .side-menu .sm-indicator{ display: none; }
-
   body.with-top-nav{ padding-top: var(--headerH,72px) !important; }
-}
-
-@media (max-width: 768px){
-  .mobile-nav, .nav-links{ display: none !important; } /* نخلي الاعتماد على side-menu فقط */
 }
 
   </style>
