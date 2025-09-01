@@ -1439,6 +1439,7 @@ header {
 (function () {
   const nav = document.getElementById('navLinks');
   const btn = document.querySelector('.menu-toggle');
+  const sideMenu = document.getElementById('sideMenu');
   if (!nav || !btn) return;
 
   function setOpen(open){
@@ -1446,7 +1447,17 @@ header {
     document.body.classList.toggle('no-scroll', open);
     btn.innerHTML = open ? '✕' : '☰';
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+    if (sideMenu){
+      if (open){
+        sideMenu.dataset.prevDisplay = sideMenu.style.display || '';
+        sideMenu.style.display = 'none';
+      } else {
+        sideMenu.style.display = sideMenu.dataset.prevDisplay || '';
+      }
+    }
   }
+
   const isOpen = () => nav.classList.contains('show');
 
   window.toggleMenu = () => setOpen(!isOpen());
@@ -1461,7 +1472,7 @@ header {
   });
 
   window.addEventListener('resize', ()=>{
-    if (window.innerWidth >= 769) setOpen(false);
+    if (window.innerWidth >= 769) setOpen(false); // restores sideMenu for desktop
   });
 })();
 
