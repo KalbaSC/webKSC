@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">   
-  <title>المركز الإعلامي</title>
+  <title>الأخبار</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
   <style>
@@ -113,131 +113,6 @@
       cursor: pointer;
       padding: 5px;
     }
-
-    .section { 
-      padding: 40px 0; 
-      scroll-margin-top: 110px; 
-      display: none;
-    }
-    
-    .section.active {
-      display: block;
-      animation: fadeIn 0.5s ease;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    .side-menu {
-      position: fixed;
-      top: 50vh;
-      transform: translateY(-50%);
-      right: 12px;                
-      width: 120px;
-      padding: 16px 14px;
-      border-radius: 18px;
-      border: 1.8px solid #f4e733;
-      background: linear-gradient(180deg, rgba(0,0,0,.88), rgba(0,0,0,.92));
-      backdrop-filter: blur(6px);
-      box-shadow: 0 10px 35px rgba(0,0,0,.45), 0 0 0 1px rgba(244,231,51,.08) inset;
-      display: flex; 
-      flex-direction: column; 
-      gap: 10px;
-      z-index: 1000;
-      max-height: calc(100vh - var(--headerH, 72px) - 32px);
-      overflow: auto;
-      overscroll-behavior: contain;
-    }
-    
-    .side-menu::-webkit-scrollbar { 
-      display: none; 
-    }
-    
-    .side-menu::after {
-      content: ""; 
-      position: absolute; 
-      inset: -2px; 
-      border-radius: 20px;
-      pointer-events: none;
-      box-shadow: 0 0 25px rgba(244,231,51,.18);
-    }
-    
-    .side-menu a {
-      --i: 0;
-      position: relative;
-      display: flex; 
-      align-items: center; 
-      justify-content: center;
-      padding: 12px 14px; 
-      border-radius: 12px;
-      font-weight: 800; 
-      letter-spacing: .15px; 
-      font-size: 14px;
-      color: #fff; 
-      text-decoration: none; 
-      text-align: center;
-      background: radial-gradient(100% 100% at 50% 0%, rgba(255,255,255,.04), rgba(0,0,0,.28));
-      border: 1px solid rgba(255,255,255,.08);
-      box-shadow: 0 4px 12px rgba(0,0,0,.25);
-      transition: transform .25s ease, box-shadow .25s ease, color .25s ease, border-color .25s ease;
-      isolation: isolate;
-      overflow: hidden;
-      animation: sm-pop .45s cubic-bezier(.2,.9,.2,1) both;
-      animation-delay: calc(var(--i) * 70ms);
-    }
-    
-    .side-menu a::before {
-      content: ""; 
-      position: absolute; 
-      inset: -1px; 
-      border-radius: 12px;
-      background: radial-gradient(120px 120px at var(--mx,50%) var(--my,50%), rgba(244,231,51,.18), transparent 50%);
-      opacity: 0; 
-      transition: opacity .25s ease;
-    }
-    
-    .side-menu a:hover {
-      transform: translateX(-4px);
-      border-color: rgba(244,231,51,.5);
-      box-shadow: 0 10px 24px rgba(244,231,51,.18), 0 0 0 1px rgba(244,231,51,.22) inset;
-      color: #f4e733;
-    }
-    
-    .side-menu a:hover::before { 
-      opacity: 1; 
-    }
-    
-    .side-menu a:active { 
-      transform: translateX(-2px) translateY(1px); 
-    }
-    
-    .side-menu a.active {
-      color: #0a0a0a;
-      background: linear-gradient(180deg,#f4e733,#c9b812);
-      border-color: #000;
-      box-shadow: 0 10px 28px rgba(244,231,51,.35), 0 0 0 1px rgba(0,0,0,.6) inset;
-    }
-    
-    .side-menu .sm-indicator {
-      position: absolute; 
-      right: 100%; 
-      top: 0;
-      width: 4px; 
-      height: 40px; 
-      border-radius: 6px;
-      background: linear-gradient(180deg,#f4e733,#fff17a);
-      box-shadow: 0 0 14px rgba(244,231,51,.55);
-      transform: translateX(8px);
-      transition: top .35s cubic-bezier(.2,.9,.2,1), height .35s;
-    }
-    
-    @keyframes sm-pop {
-      0% { transform: translateX(12px); opacity: 0; }
-      100% { transform: translateX(0); opacity: 1; }
-    }
-
     footer {
       background-color: #000;
       color: white;
@@ -553,48 +428,7 @@
       align-items: center;
       justify-content: center;
     }
-	 
-   
-    .side-menu.top-nav {
-      position: fixed;
-      right: 0; 
-      left: 0;
-      top: calc(var(--headerH, 72px) + env(safe-area-inset-top));
-      width: 88%;
-      max-width: 1170px;
-      margin: 0 auto;           
-      z-index: 1002;
-      border-radius: 0 0 14px 14px;
-      padding: 10px 8px;
-      border: 0;
-      border-bottom: 2px solid #f4e733;
-      flex-direction: row;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-    
-    .side-menu.top-nav.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .side-menu.top-nav a {
-      flex: 0 1 auto;
-      min-width: 120px;
-      white-space: nowrap;
-    }
-    
-    .side-menu.top-nav .sm-indicator { 
-      display: none; 
-    }
-    
-body.with-top-nav {
-  padding-top: 0 !important;
-}
- 
+	  
 @media (max-width: 600px) {
   #chat-box .chat-header { display:flex !important; }
   #inner-input-bar.active { display:flex !important; }
@@ -643,7 +477,6 @@ body.with-top-nav {
     height: 50px !important;
   }
 }	  
-
 @media (max-width: 768px) {
   #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
   #inner-input-bar.active { display:flex !important; }
@@ -673,8 +506,20 @@ body.with-top-nav {
   .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
 	
   #chat-box[style*="display: none"] { pointer-events: none; }
-
+   .nav-links { pointer-events: none; }
+   .nav-links.show { pointer-events: auto; }
+	
+  .nav-links {
+    position: fixed; top: 0; right: -100%;
+    width: 78%; height: 100vh; padding: 70px 20px;
+    background: #000; border-left: 2px solid #f4e733;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: right .3s ease;
+    z-index: 1000;
+  }
   .mobile-nav { display: block !important; }	
+  .nav-links.show { right: 0; }
+  .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
 
   body { background-attachment: scroll !important; }
 
@@ -735,6 +580,12 @@ header {
   margin: 0 !important;
 }
 
+.header-right .divider {
+  display: inline-block !important;
+  height: 40px !important;
+  margin-inline: 8px !important;           
+}
+
 .mobile-nav .menu-toggle {
   padding: 0 !important;
   width: 36px !important;
@@ -758,6 +609,31 @@ header {
   .header-info .english-name {
     font-size: 12px !important;
     color: #f4e733;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    height: 100vh;
+    background: #000;
+    border-left: 2px solid #f4e733;
+    padding: 60px 20px 20px;
+    flex-direction: column;
+    gap: 15px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+
+  .nav-links.show {
+    right: 0;
+  }
+
+  .nav-links a {
+    padding: 12px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #222;
   }
 
   footer {
@@ -824,7 +700,7 @@ header {
     0%, 80% { opacity: 1; visibility: visible; }
     100% { opacity: 0; visibility: hidden; }
   }
-	}
+	}	
   
 @media (max-width: 600px) {
   #chat-box .chat-header { display:flex !important; }
@@ -840,119 +716,6 @@ header {
     font-size: 14px !important;
   }
 }
-
-@media (max-width: 768px){
-  .mobile-nav { display: block !important; }
-  .menu-toggle {
-    display: grid !important; place-items: center !important;
-    width: 36px !important; height: 36px !important; line-height: 1 !important;
-    background: none; border: 0; color: #f4e733;
-  }
-
-  header, footer { width: 100% !important; padding: 12px 16px !important; }
-  .header-right { gap: 6px !important; align-items: center !important; }
-  .header-right img.logo { height: 40px !important; }
-  .header-right .divider { display: none !important; }
-  .header-info{
-    display: flex !important; flex-direction: column !important;
-    gap: 6px !important; text-align: center !important; align-items: center !important;
-  }
-  .header-info .arabic-name { font-size: 14px !important; }
-  .header-info .english-name { font-size: 12px !important; color: #f4e733 !important; }
-}
-
-@media (max-width: 768px){
-  .mobile-nav { display: block !important; }
-  .menu-toggle{
-    display: grid !important; place-items: center !important;
-    width: 36px !important; height: 36px !important; line-height: 1 !important;
-    background: none; border: 0; color: #f4e733;
-  }
-  header, footer { width: 100% !important; padding: 12px 16px !important; }
-  .header-right { gap: 6px !important; align-items: center !important; }
-  .header-right img.logo { height: 40px !important; }
-  .header-right .divider { display: none !important; }
-  .header-info{
-    display: flex !important; flex-direction: column !important;
-    gap: 6px !important; text-align: center !important; align-items: center !important;
-  }
-  .header-info .arabic-name { font-size: 14px !important; }
-  .header-info .english-name { font-size: 12px !important; color: #f4e733 !important; }
-}
-
-@media (max-width: 768px){
-  .side-menu.top-nav{
-    position: fixed;
-    top: var(--headerH,72px);
-    right: 0; left: 0;
-    width: 100% !important;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap !important;
-    gap: 10px;
-    padding: 10px 8px;
-    background: rgba(0,0,0,0.95);
-    border: 0;
-    border-bottom: 2px solid #f4e733;
-    border-radius: 0 0 14px 14px;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch;
-    z-index: 1002;
-  }
-  .side-menu.top-nav a{
-    flex: 0 0 auto;
-    white-space: nowrap;
-    min-width: max(110px, fit-content);
-    padding: 10px 12px;
-    border-bottom: none;
-  }
-  .side-menu .sm-indicator{ display: none !important; }
-  body.with-top-nav { padding-top: 0 !important; }
-}
-@media (max-width: 768px){
-  .nav-links{
-    position: fixed;
-    top: 0; right: -100%;
-    height: 100vh; width: 78%;
-    padding: 60px 20px 20px;
-    background: #000; border-left: 2px solid #f4e733;
-    display: flex; flex-direction: column; gap: 15px;
-    transition: right .3s ease; z-index: 1100;
-  }
-  .nav-links.show{ right: 0; }
-  .nav-links a{ padding: 12px 0; font-size: 16px; border-bottom: 1px solid #222; }
-  body.no-scroll{ overflow: hidden !important; position: relative !important; }
-  body.no-scroll::after{ content:""; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:1050; }
-}
-
-
-/* ==== FIX: Mobile top-nav exact like index ==== */
-@media (max-width: 768px){
-  .side-menu.top-nav{
-    position: fixed;
-    top: var(--headerH,72px);
-    right: 0; left: 0;
-    width: 100% !important;   /* لا 88% */
-    margin: 0 !important;
-    padding: 10px 8px;
-    border: 0;
-    border-bottom: 2px solid #f4e733;
-    border-radius: 0 0 14px 14px;
-    background: rgba(0,0,0,0.95);
-    display: flex; flex-direction: row; gap: 10px;
-    overflow-x: auto !important; overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch;
-    z-index: 1002;
-  }
-  .side-menu.top-nav a{
-    flex: 0 0 auto; white-space: nowrap;
-    min-width: 120px; padding: 10px 12px; border-bottom: none;
-  }
-  .side-menu .sm-indicator{ display: none !important; }
-}
-/* يمنع أي نسخة قديمة تعمل 88% أو هوامش على الموبايل */
-.side-menu.top-nav{ width: 100% !important; margin: 0 !important; }
 
   </style>
 </head>
@@ -972,7 +735,7 @@ header {
   </div>
   <nav class="nav-links" id="navLinks">
     <a href="index.html">الرئيسية</a>
-    <a href="news.html">المركز الإعلامي</a>
+    <a href="news.html">الأخبار</a>
     <a href="sports.html">الألعاب الرياضية</a>
     <a href="register.html">التسجيل</a>
     <a href="evaluate.html">بوابة المدربين</a>
@@ -980,22 +743,7 @@ header {
   </nav>
 </header>
 	
-<div id="sideMenu" class="side-menu">
-  <a href="#" data-target="news" class="active">الأخبار</a>
-  <a href="#" data-target="pictures">مكتب الصور</a>
-</div>
-
-
-<section id="news" class="section active" style="padding:30px">
-  <h2>📢 آخر الأخبار</h2>
-  <p>تغطية آخر المباريات والأنشطة الرياضية للنادي.</p>
-</section>
-
-<section id="pictures" class="section" style="padding:30px; display:none">
-  <h2>🖼️ مكتب الصور</h2>
-  <p>ألبومات وصور النادي (ضعِ الشبكة/المعرض هنا).</p>
-</section>
-
+<section style='padding: 30px;'><h2>📢 آخر الأخبار</h2><p>تغطية آخر المباريات والأنشطة الرياضية للنادي.</p></section>
 <script>
 (function(){
   let tooltipDismissed = false;
@@ -1051,137 +799,43 @@ header {
     }
   });
 })();
+
 	
-(function () {
-  const nav = document.getElementById('navLinks');
-  const btn = document.querySelector('.menu-toggle');
-  const sideMenu = document.getElementById('sideMenu');
-  if (!nav || !btn) return;
-
-  function setOpen(open){
-    nav.classList.toggle('show', open);
-    document.body.classList.toggle('no-scroll', open);
-    btn.innerHTML = open ? '✕' : '☰';
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-
-if (sideMenu){
-  const isMobile = window.innerWidth < 769;
-  if (open && isMobile){
-    sideMenu.dataset.prevDisplay = sideMenu.style.display || '';
-    sideMenu.style.display = 'none';
-  } else if (!open) {
-    sideMenu.style.display = sideMenu.dataset.prevDisplay || '';
+function toggleMenu() {
+  const navLinks = document.getElementById('navLinks');
+  const body = document.body;
+  
+  navLinks.classList.toggle('show');
+  body.classList.toggle('no-scroll');
+  
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (navLinks.classList.contains('show')) {
+    menuToggle.innerHTML = '✕';
+  } else {
+    menuToggle.innerHTML = '☰';
   }
 }
-  }
 
-  const isOpen = () => nav.classList.contains('show');
-  window.toggleMenu = () => setOpen(!isOpen());
-
-  document.addEventListener('click', (e)=>{
-    if (!isOpen()) return;
-    if (!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
-  });
-
-  nav.addEventListener('click', (e)=>{
-    if (e.target.closest('a') && window.innerWidth < 769) setOpen(false);
-  });
-
-  window.addEventListener('resize', ()=>{
-    if (window.innerWidth >= 769) setOpen(false);
-  });
-})();
-	
-function updateHeaderHeight(){
-  const header = document.querySelector('header');
-  if (header){
-    const h = header.offsetHeight || 72;
-    document.documentElement.style.setProperty('--headerH', `${h}px`);
-  }
-}
-window.addEventListener('load', updateHeaderHeight);
-window.addEventListener('resize', updateHeaderHeight);
-
-const navLinks  = document.getElementById('navLinks');
-const toggleBtn = document.querySelector('.menu-toggle');
-const sideMenu  = document.getElementById('sideMenu');
-
-function setBodyScrollLocked(locked){
-  document.body.classList.toggle('no-scroll', locked);
-}
-
-function toggleMenu(open){
-  const willOpen = (typeof open === 'boolean') ? open : !navLinks.classList.contains('show');
-  navLinks.classList.toggle('show', willOpen);
-  setBodyScrollLocked(willOpen);
-  if (toggleBtn){
-    toggleBtn.innerHTML = willOpen ? '✕' : '☰';
-    toggleBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-  }
-  if (sideMenu && window.innerWidth < 769){
-    sideMenu.style.display = willOpen ? 'none' : '';
-  }
-}
-window.toggleMenu = toggleMenu;
-
-document.addEventListener('click', (e)=>{
-  if (!navLinks || !toggleBtn) return;
-  const clickOutside = !navLinks.contains(e.target) && !toggleBtn.contains(e.target);
-  if (clickOutside && navLinks.classList.contains('show')) toggleMenu(false);
-});
-
-document.querySelectorAll('#navLinks a').forEach(a=>{
-  a.addEventListener('click', ()=>{ if (window.innerWidth < 769) toggleMenu(false); });
-});
-
-function syncSideMenuMode(){
-  if (!sideMenu) return;
-  if (window.innerWidth < 769){
-    sideMenu.classList.add('top-nav');
-    document.body.classList.add('with-top-nav');
-  }else{
-    sideMenu.classList.remove('top-nav');
-    sideMenu.style.display = '';
-    document.body.classList.remove('with-top-nav');
-  }
-}
-window.addEventListener('load',  syncSideMenuMode);
-window.addEventListener('resize', syncSideMenuMode);
-
-
-(function(){
-  // Tab switcher للأخبار/مكتب الصور
-  function showSection(id){
-    // أظهر القسم المطلوب وأخفِ الباقي
-    document.querySelectorAll('.section').forEach(sec=>{
-      sec.classList.toggle('active', sec.id === id);
-    });
-    // فعل الزر النشط في السايد-منيو
-    document.querySelectorAll('#sideMenu a').forEach(a=>{
-      const target = a.getAttribute('data-target') || /'(.*?)'/.exec(a.getAttribute('onclick')||'')?.[1];
-      a.classList.toggle('active', target === id);
-    });
-    // عند الموبايل: إذا القائمة الجانبية تحولت top-nav، تأكد أنها ظاهرة
-    const sideMenu = document.getElementById('sideMenu');
-    if (sideMenu && window.innerWidth < 769){ sideMenu.style.display = ''; }
-  }
-  window.showSection = showSection;
-
-  // اربطي النقرات بدون تحديث الصفحة
-  document.addEventListener('click', (e)=>{
-    const a = e.target.closest('#sideMenu a');
-    if (!a) return;
-    const target = a.dataset.target || /'(.*?)'/.exec(a.getAttribute('onclick')||'')?.[1];
-    if (target){
-      e.preventDefault();
-      showSection(target);
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) {
+      toggleMenu();
     }
   });
+});
 
-  // افتحي “الأخبار” افتراضياً
-  window.addEventListener('DOMContentLoaded', ()=>{ showSection('news'); });
-})();
-
+window.addEventListener('resize', function() {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const body = document.body;
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    navLinks.classList.remove('show');
+    body.classList.remove('no-scroll');
+    menuToggle.innerHTML = '☰';
+  }
+});
+	
 </script>
 	
 <div class="chatbot">
@@ -1677,7 +1331,7 @@ window.addEventListener('DOMContentLoaded', () => {
   <div class="footer-column">
    <h3 style="color:#f4e733; font-size:14px; font-weight:700;">روابط سريعة</h3>
     <a href="index.html" style="color: #FFFFFF; font-size: 12px;">الرئيسية</a>
-    <a href="news.html" style="color: #FFFFFF; font-size: 12px;">المركز الإعلامي</a>
+    <a href="news.html" style="color: #FFFFFF; font-size: 12px;">الأخبار</a>
     <a href="sports.html" style="color: #FFFFFF; font-size: 12px;">الألعاب الرياضية</a>
     <a href="evaluate.html" style="color: #FFFFFF; font-size: 12px;">بوابة المدربين</a>
     <a href="register.html" style="color: #FFFFFF; font-size: 12px;">التسجيل</a>
@@ -1745,6 +1399,21 @@ window.addEventListener('DOMContentLoaded', () => {
 </footer>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+	<script>
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navLinks = document.getElementById('navLinks');
+
+  function toggleMenu() {
+    navLinks.classList.toggle('show');
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+      navLinks.classList.remove('show');
+    }
+  });
+</script>
 	
 </body>
 </html>
