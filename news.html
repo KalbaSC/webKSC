@@ -926,6 +926,34 @@ header {
   body.no-scroll::after{ content:""; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:1050; }
 }
 
+
+/* ==== FIX: Mobile top-nav exact like index ==== */
+@media (max-width: 768px){
+  .side-menu.top-nav{
+    position: fixed;
+    top: var(--headerH,72px);
+    right: 0; left: 0;
+    width: 100% !important;   /* لا 88% */
+    margin: 0 !important;
+    padding: 10px 8px;
+    border: 0;
+    border-bottom: 2px solid #f4e733;
+    border-radius: 0 0 14px 14px;
+    background: rgba(0,0,0,0.95);
+    display: flex; flex-direction: row; gap: 10px;
+    overflow-x: auto !important; overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1002;
+  }
+  .side-menu.top-nav a{
+    flex: 0 0 auto; white-space: nowrap;
+    min-width: 120px; padding: 10px 12px; border-bottom: none;
+  }
+  .side-menu .sm-indicator{ display: none !important; }
+}
+/* يمنع أي نسخة قديمة تعمل 88% أو هوامش على الموبايل */
+.side-menu.top-nav{ width: 100% !important; margin: 0 !important; }
+
   </style>
 </head>
 <body>
@@ -952,14 +980,22 @@ header {
   </nav>
 </header>
 	
-
 <div id="sideMenu" class="side-menu">
-  <a href="javascript:void(0)" onclick="showSection('news')">الأخبار</a>
-  <a href="javascript:void(0)" onclick="showSection('pictures')">مكتب الصور</a>
+  <a href="#" data-target="news" class="active">الأخبار</a>
+  <a href="#" data-target="pictures">مكتب الصور</a>
 </div>
 
 
-<section style='padding: 30px;'><h2>📢 آخر الأخبار</h2><p>تغطية آخر المباريات والأنشطة الرياضية للنادي.</p></section>
+<section id="news" class="section active" style="padding:30px">
+  <h2>📢 آخر الأخبار</h2>
+  <p>تغطية آخر المباريات والأنشطة الرياضية للنادي.</p>
+</section>
+
+<section id="pictures" class="section" style="padding:30px; display:none">
+  <h2>🖼️ مكتب الصور</h2>
+  <p>ألبومات وصور النادي (ضعِ الشبكة/المعرض هنا).</p>
+</section>
+
 <script>
 (function(){
   let tooltipDismissed = false;
@@ -1111,6 +1147,41 @@ function syncSideMenuMode(){
 }
 window.addEventListener('load',  syncSideMenuMode);
 window.addEventListener('resize', syncSideMenuMode);
+
+
+(function(){
+  // Tab switcher للأخبار/مكتب الصور
+  function showSection(id){
+    // أظهر القسم المطلوب وأخفِ الباقي
+    document.querySelectorAll('.section').forEach(sec=>{
+      sec.classList.toggle('active', sec.id === id);
+    });
+    // فعل الزر النشط في السايد-منيو
+    document.querySelectorAll('#sideMenu a').forEach(a=>{
+      const target = a.getAttribute('data-target') || /'(.*?)'/.exec(a.getAttribute('onclick')||'')?.[1];
+      a.classList.toggle('active', target === id);
+    });
+    // عند الموبايل: إذا القائمة الجانبية تحولت top-nav، تأكد أنها ظاهرة
+    const sideMenu = document.getElementById('sideMenu');
+    if (sideMenu && window.innerWidth < 769){ sideMenu.style.display = ''; }
+  }
+  window.showSection = showSection;
+
+  // اربطي النقرات بدون تحديث الصفحة
+  document.addEventListener('click', (e)=>{
+    const a = e.target.closest('#sideMenu a');
+    if (!a) return;
+    const target = a.dataset.target || /'(.*?)'/.exec(a.getAttribute('onclick')||'')?.[1];
+    if (target){
+      e.preventDefault();
+      showSection(target);
+    }
+  });
+
+  // افتحي “الأخبار” افتراضياً
+  window.addEventListener('DOMContentLoaded', ()=>{ showSection('news'); });
+})();
+
 </script>
 	
 <div class="chatbot">
