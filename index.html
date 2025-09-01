@@ -1012,6 +1012,54 @@ body.with-top-nav {
   .nav-links.show { display: flex; }
 }
 
+/* === MOBILE POLISH PATCH (add at the end of your CSS) === */
+@media (max-width: 768px){
+
+  /* 1) Use the full screen width on phones (no narrow gutter) */
+  header, footer { width: 100% !important; padding-inline: 12px !important; }
+  .carousel-container,
+  .info-container { width: 100% !important; margin: 20px auto !important; }
+
+  /* 2) Reduce carousel height + keep arrows/caption tidy on phones */
+  .carousel-container { height: 58vh !important; max-height: 520px !important; }
+  .caption { padding: 10px 12px !important; font-size: 13px !important; }
+  .prev, .next { padding: 8px !important; font-size: 18px !important; top: calc(50% - 12px) !important; }
+
+  /* 3) Side tabs row spacing (the pills under the header) */
+  .side-menu.top-nav { gap: 6px !important; padding: 8px 10px !important; }
+  .side-menu.top-nav a { min-width: 108px !important; padding: 8px 12px !important; font-size: 13px !important; }
+
+  /* 4) Ensure content doesn’t hide under the sticky top-nav (when it appears) */
+  body.with-top-nav { padding-top: calc(var(--headerH,72px) + var(--topNavH,56px)) !important; }
+  /* When you purposely disabled it earlier, re-enable now so sections sit below the tabs */
+  
+  /* 5) Off-canvas menu sits above everything & prevents background scroll */
+  .nav-links { z-index: 1100 !important; }
+  body.no-scroll { overflow: hidden; position: relative; }
+  body.no-scroll::after{
+    content:""; position: fixed; inset:0; background: rgba(0,0,0,.4); z-index: 1000;
+  }
+
+  /* 6) Header micro-spacing (logos, names, hamburger) */
+  .header-right { gap: 8px !important; align-items: center !important; }
+  .header-right img.logo { height: 40px !important; }
+  .header-right .divider { height: 40px !important; margin-inline: 6px !important; }
+  .header-info { gap: 4px !important; }
+  .header-info .arabic-name { font-size: 14px !important; }
+  .header-info .english-name { font-size: 12px !important; color: #f4e733 !important; }
+  .menu-toggle { width: 36px !important; height: 36px !important; display: grid !important; place-items: center !important; }
+
+  /* 7) Footer: tighter spacing and smaller textarea */
+  footer { gap: 20px !important; }
+  footer textarea { height: 120px !important; }
+
+  /* 8) Kill accidental horizontal scroll on small screens */
+  html, body { overflow-x: hidden !important; }
+}
+
+/* Bonus: ensure the pills row never overlaps the carousel during the transition */
+.side-menu.top-nav { transition: transform .25s ease, opacity .25s ease; }
+
   </style>
 </head>
 <body>
