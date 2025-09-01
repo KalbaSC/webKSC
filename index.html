@@ -5,7 +5,7 @@
   <title>نادي كلباء الرياضي الثقافي</title> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
+
    <style>  
     @font-face {
       font-family: 'NotoKufiArabic';
@@ -13,14 +13,14 @@
       font-weight: normal;
       font-style: normal;
     }
-    
+
     @font-face {
       font-family: 'NotoKufiArabic';
       src: url('NotoKufiArabic-Light.ttf') format('truetype');
       font-weight: 300;
       font-style: normal;
     }
-    
+
     body {
       font-family: 'NotoKufiArabic', sans-serif;
       background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
@@ -30,7 +30,7 @@
       padding: 0;
       direction: rtl;
     }
-    
+
 header {
   background-color: #111;
   padding: 16px 5%;
@@ -119,7 +119,7 @@ body.no-scroll { overflow: hidden; }
       background: transparent;
       padding: 40px 0;
     }
-     
+
     .carousel-container {
       width: 88%;
       max-width: 1170px;
@@ -132,7 +132,7 @@ body.no-scroll { overflow: hidden; }
       border-radius: 16px;
       overflow: hidden;            
     }
-    
+
     .carousel-slide {
       display: none;
       position: absolute; 
@@ -141,14 +141,14 @@ body.no-scroll { overflow: hidden; }
       width: 100%; 
       height: 100%;
     }
-    
+
     .carousel-slide img {
       width: 100%; 
       height: 100%;
       object-fit: cover;
       border-radius: 0;            
     }
-    
+
     .caption {
       position: absolute; 
       left: 0; 
@@ -163,7 +163,7 @@ body.no-scroll { overflow: hidden; }
       overflow: hidden;
       z-index: 2;
     }
-    
+
     .prev, .next {
       cursor: pointer;
       position: absolute; 
@@ -178,29 +178,29 @@ body.no-scroll { overflow: hidden; }
       transition: .3s;
       z-index: 3;                  
     }
-    
+
     .prev:hover, .next:hover { 
       background-color: #f4e733; 
       color: #000; 
     }
-    
+
     .prev { 
       left: 10px; 
     }
-    
+
     .next { 
       right: 10px; 
     }
-    
+
     .fade {
       animation: fade 1s ease-in-out;
     }
-    
+
     @keyframes fade {
       from { opacity: 0.4; }
       to { opacity: 1; }
     }
-    
+
     .info-container {
       width: 88%;           
       max-width: 1170px;
@@ -213,35 +213,35 @@ body.no-scroll { overflow: hidden; }
       position: relative;
       z-index: 1;
     }
-    
+
     .info-container h2 { 
       color: #f4e733; 
       margin: 0 0 12px; 
       font-size: 22px; 
     }
-    
+
     .info-container p, .info-container li { 
       color: #eee; 
       line-height: 1.9; 
       font-size: 16px; 
     }
-    
+
     .section { 
       padding: 40px 0; 
       scroll-margin-top: 110px; 
       display: none;
     }
-    
+
     .section.active {
       display: block;
       animation: fadeIn 0.5s ease;
     }
-    
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-    
+
     .side-menu {
       position: fixed;
       top: 50vh;
@@ -262,11 +262,11 @@ body.no-scroll { overflow: hidden; }
       overflow: auto;
       overscroll-behavior: contain;
     }
-    
+
     .side-menu::-webkit-scrollbar { 
       display: none; 
     }
-    
+
     .side-menu::after {
       content: ""; 
       position: absolute; 
@@ -275,7 +275,7 @@ body.no-scroll { overflow: hidden; }
       pointer-events: none;
       box-shadow: 0 0 25px rgba(244,231,51,.18);
     }
-    
+
     .side-menu a {
       --i: 0;
       position: relative;
@@ -299,7 +299,7 @@ body.no-scroll { overflow: hidden; }
       animation: sm-pop .45s cubic-bezier(.2,.9,.2,1) both;
       animation-delay: calc(var(--i) * 70ms);
     }
-    
+
     .side-menu a::before {
       content: ""; 
       position: absolute; 
@@ -309,29 +309,29 @@ body.no-scroll { overflow: hidden; }
       opacity: 0; 
       transition: opacity .25s ease;
     }
-    
+
     .side-menu a:hover {
       transform: translateX(-4px);
       border-color: rgba(244,231,51,.5);
       box-shadow: 0 10px 24px rgba(244,231,51,.18), 0 0 0 1px rgba(244,231,51,.22) inset;
       color: #f4e733;
     }
-    
+
     .side-menu a:hover::before { 
       opacity: 1; 
     }
-    
+
     .side-menu a:active { 
       transform: translateX(-2px) translateY(1px); 
     }
-    
+
     .side-menu a.active {
       color: #0a0a0a;
       background: linear-gradient(180deg,#f4e733,#c9b812);
       border-color: #000;
       box-shadow: 0 10px 28px rgba(244,231,51,.35), 0 0 0 1px rgba(0,0,0,.6) inset;
     }
-    
+
     .side-menu .sm-indicator {
       position: absolute; 
       right: 100%; 
@@ -344,18 +344,18 @@ body.no-scroll { overflow: hidden; }
       transform: translateX(8px);
       transition: top .35s cubic-bezier(.2,.9,.2,1), height .35s;
     }
-    
+
     @keyframes sm-pop {
       0% { transform: translateX(12px); opacity: 0; }
       100% { transform: translateX(0); opacity: 1; }
     }
-    
+
     .org-structure {
       padding: 20px;
       font-family: 'NotoKufiArabic', sans-serif;
       text-align: center;
     }
-    
+
     .org-level {
       margin-bottom: 40px;
       position: relative;
@@ -363,7 +363,7 @@ body.no-scroll { overflow: hidden; }
       flex-direction: column;
       align-items: center;
     }
-    
+
     .org-title {
       color: #f4e733;
       font-size: 24px;
@@ -374,7 +374,7 @@ body.no-scroll { overflow: hidden; }
       font-weight: bold;
       text-align: center;
     }
-    
+
     .org-row {
       display: flex;
       flex-wrap: wrap;
@@ -384,7 +384,7 @@ body.no-scroll { overflow: hidden; }
       justify-content: center;
       width: 100%;
     }
-    
+
     .org-item {
       background: rgba(255, 255, 255, 0.05);
       padding: 20px;
@@ -396,18 +396,18 @@ body.no-scroll { overflow: hidden; }
       z-index: 2;
       transition: all 0.3s ease;
     }
-    
+
     .org-item:hover {
       transform: translateY(-5px);
       box-shadow: 0 5px 15px rgba(244, 231, 51, 0.3);
     }
-    
+
     .org-connector-line {
       position: absolute;
       background: #f4e733;
       z-index: 1;
     }
-    
+
     .connector-vertical {
       width: 3px;
       height: 40px;
@@ -415,14 +415,14 @@ body.no-scroll { overflow: hidden; }
       left: 50%;
       transform: translateX(-50%);
     }
-    
+
     .connector-horizontal {
       height: 3px;
       width: 80%;
       top: -20px;
       left: 10%;
     }
-    
+
     .connector-arrow {
       position: absolute;
       top: -25px;
@@ -432,7 +432,7 @@ body.no-scroll { overflow: hidden; }
       font-size: 20px;
       font-weight: bold;
     }
-    
+
     .org-group {
       display: flex;
       flex-direction: column;
@@ -440,7 +440,7 @@ body.no-scroll { overflow: hidden; }
       position: relative;
       padding-top: 30px;
     }
-    
+
     .org-group::before {
       content: "";
       position: absolute;
@@ -451,7 +451,7 @@ body.no-scroll { overflow: hidden; }
       height: 20px;
       background: #f4e733;
     }
-    
+
     .org-subgroup {
       display: flex;
       flex-wrap: wrap;
@@ -460,7 +460,7 @@ body.no-scroll { overflow: hidden; }
       position: relative;
       padding-top: 20px;
     }
-    
+
     .org-subgroup::before {
       content: "";
       position: absolute;
@@ -470,12 +470,12 @@ body.no-scroll { overflow: hidden; }
       height: 2px;
       background: #f4e733;
     }
-    
+
     .org-connector {
       position: relative;
       margin: 15px 0;
     }
-    
+
     .org-connector::before {
       content: "";
       position: absolute;
@@ -486,7 +486,7 @@ body.no-scroll { overflow: hidden; }
       height: 10px;
       background: #f4e733;
     }
-    
+
     footer {
       background-color: #000;
       color: white;
@@ -502,12 +502,12 @@ body.no-scroll { overflow: hidden; }
       border-top: 3px solid #f4e733;
       text-align: right;
     }
-    
+
     .footer-column {
       flex: 1;
       min-width: 250px;
     }
-    
+
     .footer-bottom {
       width: 100%;
       text-align: center;
@@ -517,7 +517,7 @@ body.no-scroll { overflow: hidden; }
       font-size: 14px;
       margin-top: 30px;
     }
-    
+
     .footer-column a {
       color: #ccc;
       text-decoration: none;
@@ -525,31 +525,31 @@ body.no-scroll { overflow: hidden; }
       margin-bottom: 8px;
       transition: color 0.3s;
     }
-    
+
     .footer-column a:hover {
       color: #f4e733;
     }
-    
+
     .social-icons {
       display: flex;
       gap: 15px;
       margin-top: 15px;
     }
-    
+
     .social-icons a {
       color: white;
       font-size: 20px;
       transition: color 0.3s;
     }
-    
+
     .social-icons a:hover {
       color: #f4e733;
     }
-    
+
     footer form {
       margin-top: 15px;
     }
-    
+
     footer textarea {
       width: 100%;
       height: 150px;
@@ -560,7 +560,7 @@ body.no-scroll { overflow: hidden; }
       border: 1px solid #444;
       resize: vertical;
     }
-    
+
     footer button[type="submit"] {
       background-color: #f4e733;
       padding: 10px 20px;
@@ -571,11 +571,11 @@ body.no-scroll { overflow: hidden; }
       margin-top: 10px;
       transition: background-color 0.3s;
     }
-    
+
     footer button[type="submit"]:hover {
       background-color: #d8cf2e;
     }
-    
+
     #chat-box {
       position: fixed;
       bottom: 90px;
@@ -598,7 +598,7 @@ body.no-scroll { overflow: hidden; }
       overflow-y: auto;
       max-height: 90vh;
     }
-    
+
     .chat-header {
       display: flex;
       justify-content: flex-start;
@@ -607,21 +607,21 @@ body.no-scroll { overflow: hidden; }
       background: #f4e733;
       border-radius: 12px 12px 0 0;
     }
-    
+
     .chat-header span {
       font-size: 18px;
       font-weight: bold;
       color: #000;
       cursor: pointer;
     }
-    
+
     .chat-body {
       flex: 1;
       overflow-y: auto;
       padding: 10px;
       max-height: 450px;
     }
-    
+
     .chat-footer {
       display: flex;
       align-items: center;
@@ -630,7 +630,7 @@ body.no-scroll { overflow: hidden; }
       background: white;
       gap: 10px;
     }
-    
+
     .chat-footer input {
       flex: 1;
       padding: 10px;
@@ -638,7 +638,7 @@ body.no-scroll { overflow: hidden; }
       border: 1px solid #ccc;
       font-size: 15px;
     }
-    
+
     .chat-footer button {
       background: #f4e733;
       border: none;
@@ -650,33 +650,33 @@ body.no-scroll { overflow: hidden; }
       justify-content: center;
       cursor: pointer;
     }
-    
+
     #chat-box::-webkit-scrollbar {
       width: 8px;
       border-radius: 12px;
     }
-    
+
     #chat-box::-webkit-scrollbar-track {
       background: transparent;
       border-radius: 12px;
     }
-    
+
     #chat-box::-webkit-scrollbar-thumb {
       background-color: rgba(0, 0, 0, 0.3);
       border-radius: 12px;
     }
-    
+
     .message-wrapper {
       display: flex;
       align-items: flex-start;
       gap: 10px;
       margin: 10px;
     }
-    
+
     .message-wrapper.user {
       flex-direction: row-reverse;
     }
-    
+
     .avatar {
       width: 36px;
       height: 36px;
@@ -685,7 +685,7 @@ body.no-scroll { overflow: hidden; }
       border-radius: 50%;
       background-color: #ddd;
     }
-    
+
     .content {
       background-color: #f4e733;
       padding: 10px;
@@ -693,12 +693,12 @@ body.no-scroll { overflow: hidden; }
       max-width: 75%;
       font-size: 16px;
     }
-    
+
     .message-wrapper.bot .content {
       background-color: #eee;
       color: #000;
     }
-    
+
     .button-container {
       display: flex;
       flex-wrap: wrap;
@@ -706,7 +706,7 @@ body.no-scroll { overflow: hidden; }
       gap: 10px;
       margin-top: 20px;
     }
-    
+
     .chat-btn {
       background-color: #f4e733;
       color: #000;
@@ -718,31 +718,31 @@ body.no-scroll { overflow: hidden; }
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
       transition: background-color 0.3s;
     }
-    
+
     .chat-btn:hover {
       background-color: #d8cf2e;
     }
-    
+
     .typing-dots span {
       animation: blink 1s infinite;
       font-weight: bold;
       font-size: 24px;
       margin: 0 1px;
     }
-    
+
     .typing-dots span:nth-child(2) {
       animation-delay: 0.2s;
     }
-    
+
     .typing-dots span:nth-child(3) {
       animation-delay: 0.4s;
     }
-    
+
     @keyframes blink {
       0%, 100% { opacity: 0.2; }
       50% { opacity: 1; }
     }
-    
+
     #chat-wrapper {
       position: fixed;
       bottom: 20px;
@@ -753,7 +753,7 @@ body.no-scroll { overflow: hidden; }
       align-items: flex-end;
       gap: 10px;
     }
-    
+
     #chat-tooltip {
       background: white;
       color: black;
@@ -774,7 +774,7 @@ body.no-scroll { overflow: hidden; }
       z-index: 9999;
       line-height: 1.4;
     }
-    
+
     #chat-toggle {
       position: relative;
       background-color: transparent;
@@ -786,7 +786,7 @@ body.no-scroll { overflow: hidden; }
       cursor: pointer;
       padding: 0;
     }
-    
+
     #chat-badge {
       position: absolute;
       top: -5px;
@@ -802,7 +802,7 @@ body.no-scroll { overflow: hidden; }
       align-items: center;
       justify-content: center;
     }
-    
+
     .side-menu.top-nav {
       position: fixed;
       right: 0; 
@@ -823,178 +823,52 @@ body.no-scroll { overflow: hidden; }
       overflow: hidden;
       box-sizing: border-box;
     }
-    
+
     .side-menu.top-nav.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     .side-menu.top-nav a {
       flex: 0 1 auto;
       min-width: 120px;
       white-space: nowrap;
     }
-    
+
     .side-menu.top-nav .sm-indicator { 
       display: none; 
     }
-    
+
     body.with-top-nav { 
       padding-top: calc(var(--headerH,72px) + var(--topNavH,56px)); 
     }
 
-@media (max-width: 768px){
+	@media (max-width: 768px) {
   .mobile-nav { display: block; }
-  .menu-toggle { 
-    display: block;
-    padding: 0 !important; width: 36px !important; height: 36px !important;
-    display: grid !important; place-items: center !important; line-height: 1 !important; margin: 0 !important;
-  }
+  .menu-toggle { display: block; }
 
   .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    height: 100vh;
-    background: #000;
-    border-left: 2px solid #f4e733;
-    padding: 60px 20px 20px;
+    display: none;
     flex-direction: column;
-    gap: 15px;
-    transition: right 0.3s ease;
-    z-index: 1000;
+    background: rgba(0,0,0,0.95);
+    position: absolute;
+    top: var(--headerH, 72px);
+    right: 0;
+    width: 100%;
+    padding: 20px;
   }
-  .nav-links.show { right: 0; }
-
-  .nav-links a {
-    padding: 12px 0;
-    font-size: 16px;
-    border-bottom: 1px solid #222;
-  }
-
-  .header-right .divider {
-    display: inline-block !important;
-    height: 40px !important;
-    margin-inline: 8px !important;
-  }
-
+  .nav-links.show { display: flex; }
+   header, footer { width: 100% !important; padding: 12px 16px !important; }
   .header-right { gap: 6px !important; align-items: center !important; }
-  .header-right img.logo { height: 40px !important; margin: 0 !important; }
-
+  .header-right img.logo { height: 40px !important; }
+  .header-right .divider { display: none !important; }
   .header-info {
     display: flex !important; flex-direction: column !important; gap: 6px !important;
     text-align: center !important; align-items: center !important;
-  }
-  .header-info .arabic-name { font-size: 14px !important; }
-  .header-info .english-name { font-size: 12px !important; color: #f4e733; }
-
-  header, footer { width: 100% !important; padding: 12px 16px !important; }
-
-body.with-top-nav {
-  padding-top: 0 !important;
 }
-
-  .side-menu.top-nav{
-    position: fixed;
-    top: calc(var(--headerH, 72px) + env(safe-area-inset-top));
-    right: 0; left: 0;
-    width: 100%;
-    z-index: 1002;
-    background: rgba(0,0,0,.92);
-    backdrop-filter: blur(6px);
-    border-bottom: 2px solid #f4e733;
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    gap: 8px;
-    padding: 10px 12px;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .side-menu.top-nav::-webkit-scrollbar{ display:none; }
-  .side-menu.top-nav{ scrollbar-width: none; -ms-overflow-style: none; }
-
-  .side-menu.top-nav::before,
-  .side-menu.top-nav::after{
-    content:"";
-    position:absolute; top:0; bottom:0; width:24px; pointer-events:none;
-  }
-  .side-menu.top-nav::before{
-    right:0;
-    background: linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,.9));
-  }
-  .side-menu.top-nav::after{
-    left:0;
-    background: linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,.9));
-  }
-
-  .side-menu.top-nav a{
-    position: relative;
-    scroll-snap-align: start;
-    white-space: nowrap;
-
-    min-width: 110px;
-    padding: 10px 12px;
-    font-size: 13px;
-    border-radius: 999px;
-
-    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.24));
-    border: 1px solid rgba(255,255,255,.08);
-    box-shadow: 0 4px 12px rgba(0,0,0,.25);
-    color: #fff;
-  }
-
-  .side-menu.top-nav a:hover{
-    color: #f4e733;
-    border-color: rgba(244,231,51,.5);
-    box-shadow: 0 10px 24px rgba(244,231,51,.18), 0 0 0 1px rgba(244,231,51,.22) inset;
-    transform: translateY(-1px);
-  }
-
-  .side-menu.top-nav a.active{
-    color:#0a0a0a;
-    background: linear-gradient(180deg,#f4e733,#c9b812);
-    border-color:#000;
-    box-shadow: 0 10px 28px rgba(244,231,51,.35), 0 0 0 1px rgba(0,0,0,.6) inset;
-  }
-
-  .side-menu.top-nav a.active::after{
-    content:"";
-    position:absolute;
-    left:12px; right:12px; bottom:-8px;
-    height:3px; border-radius:3px;
-    background: linear-gradient(90deg,#f4e733,#fff381);
-  }
-
-  .side-menu.top-nav .sm-indicator{ display:none; }
 }
-
-.main-nav {
-  display: flex;
-  justify-content: center;  
-  gap: 42px;                 
-  padding: 0;
-  margin: 0;
-  direction: rtl;            
-}
-.main-nav a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 18px 0;
-  transition: color .2s;
-}
-
-.main-nav a:hover {
-  color: #f4e733; 
-}
-
-.mobile-nav { display: none; }
+body.with-top-nav { padding-top: 0 !important; }
+body.no-scroll { overflow:hidden; }
   </style>
 </head>
 <body>
@@ -1002,7 +876,7 @@ body.with-top-nav {
   <div class="mobile-nav">
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   </div>
-  
+
   <div class="header-right">
     <img src="Picture3.png" alt="شعار الشارقة" class="logo">
     <div class="divider"></div>
@@ -1012,7 +886,7 @@ body.with-top-nav {
       <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
     </div>
   </div>
-  
+
   <nav class="nav-links" id="navLinks">
     <a href="#home" onclick="showSection('home')">الرئيسية</a>
     <a href="news.html">الأخبار</a>
@@ -1030,7 +904,7 @@ body.with-top-nav {
   <a href="javascript:void(0)" onclick="showSection('board')">مجلس الإدارة</a>
   <a href="javascript:void(0)" onclick="showSection('orgstructure')">الهيكل التنظيمي</a>	
 </div>
-  
+
 <div class="hero-wrapper">    
   <section id="home" class="hero-carousel">
     <div class="carousel-container">
@@ -1055,7 +929,7 @@ body.with-top-nav {
       <a class="next" onclick="plusSlides(1)">&#10094;</a>
     </div>
   </section>
-	
+
 <section id="history" class="section">
   <div class="info-container">
     <h2>لمحة تاريخية</h2>
@@ -1101,7 +975,7 @@ body.with-top-nav {
 <section id="orgstructure" class="section">
   <div class="info-container">
     <h2>الهيكل التنظيمي</h2>
-    
+
     <div class="org-structure">
 
 	  <div class="org-level">
@@ -1119,7 +993,7 @@ body.with-top-nav {
           </div>
         </div>
       </div>
-      
+
       <div class="org-level">
         <div class="org-connector-line connector-horizontal"></div>
         <h3 class="org-title">مجلس الإدارة</h3>
@@ -1146,7 +1020,7 @@ body.with-top-nav {
           </div>
         </div>
       </div>
-      
+
       <div class="org-level">
         <div class="org-connector-line connector-horizontal"></div>
         <h3 class="org-title">المدير العام</h3>
@@ -1156,7 +1030,7 @@ body.with-top-nav {
             مكتب المدير العام
           </div>
         </div>
-        
+
         <div class="org-row">
           <div class="org-item">
             إدارة النتائج المالية
@@ -1166,7 +1040,7 @@ body.with-top-nav {
           </div>
         </div>
       </div>
-      
+
       <div class="org-level">
         <div class="org-connector-line connector-horizontal"></div>
         <h3 class="org-title">القطاعات</h3>
@@ -1185,7 +1059,7 @@ body.with-top-nav {
           </div>
         </div>
       </div>
-      
+
       <div class="org-level">
         <div class="org-connector-line connector-horizontal"></div>
         <h3 class="org-title">قطاع الخدمات المساندة</h3>
@@ -1201,7 +1075,7 @@ body.with-top-nav {
           </div>
         </div>
       </div>
-      
+
       <div class="org-level">
         <div class="org-connector-line connector-horizontal"></div>
         <h3 class="org-title">قطاع الخدمات الإعلامية</h3>
@@ -1221,8 +1095,33 @@ body.with-top-nav {
   </div>
 </section>
 </div>	
-	
+
 <script>
+function toggleMenu() {
+  const navLinks = document.getElementById('navLinks');
+  const body = document.body;
+  navLinks.classList.toggle('show');
+  body.classList.toggle('no-scroll');
+  const menuToggle = document.querySelector('.menu-toggle');
+  menuToggle.innerHTML = navLinks.classList.contains('show') ? '✕' : '☰';
+}
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) toggleMenu();
+  });
+});
+
+window.addEventListener('resize', function () {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const menuToggle = document.querySelector('.menu-toggle');
+    navLinks.classList.remove('show');
+    document.body.classList.remove('no-scroll');
+    menuToggle.innerHTML = '☰';
+  }
+});
+
 (function () {
   const nav = document.getElementById('navLinks');
   const btn = document.querySelector('.menu-toggle');
@@ -1564,7 +1463,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
 let userName = '';
-  
+
 function showMainButtons() {
   const buttonsWrapper = document.createElement("div");
   buttonsWrapper.className = "button-container";
@@ -1687,7 +1586,7 @@ inputDiv.innerHTML = `
   addMessage(`${name}`, true);
   userName = name;
   document.getElementById("nameInputWrapper").remove();
-  
+
   setTimeout(() => {
     addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
     showMainButtons();
@@ -1698,7 +1597,7 @@ inputDiv.innerHTML = `
 	  }}, 500);
     }
  }
-  
+
 function submitUserMessage() {
     const input = document.getElementById("userMessage");
     const msg = input.value.trim();
@@ -1730,9 +1629,9 @@ input.value = '';
 
     }
   }
-  
+
  function handleTeamOption(type) {
- 
+
   const lastWrappers = document.querySelectorAll('.message-wrapper.bot');
   const last = lastWrappers[lastWrappers.length - 1];
   if (last) last.remove();
@@ -1807,7 +1706,7 @@ input.value = '';
       tooltipDismissed = true;
     }
   }
-  
+
   document.addEventListener('DOMContentLoaded', function() {
     const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
     if (tooltipCloseBtn) {
@@ -1820,7 +1719,7 @@ input.value = '';
       });
     }
   });
-	
+
   function reply(option) {
 
     let userText = '';
@@ -1938,7 +1837,7 @@ function showContactOptions() {
     }, 1000);
   }, 1000);
 }
-	
+
 document.addEventListener("keydown", function (e) {
   const nameInput = document.getElementById("nameInput");
   if (nameInput && document.activeElement === nameInput && e.key === "Enter") {
@@ -1959,14 +1858,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </script>
 </div>
-	
+
 <footer>
   <div class="footer-column">
     <h3 style="color: #f4e733; font-size: 14px;">تواصل معنا</strong></h3>
     <p><a href="mailto:info@ksc.shj.ae" style="color: #FFFFFF; font-size: 12px;">info@ksc.shj.ae</a></p>
     <p><a href="tel:+971092777873" style="color: #FFFFFF; font-size: 12px;">092777873</a></p>
   </div>
-	
+
   <div class="footer-column">
     <h3 style="color: #f4e733; font-size: 14px;">روابط سريعة</strong></h3>
     <a href="index.html" style="color: #FFFFFF; font-size: 12px;">الرئيسية</a>
@@ -2010,7 +1909,7 @@ window.addEventListener('DOMContentLoaded', () => {
     form.addEventListener("submit", function () {
       submitted = true;
       confirmationMessage.textContent = "جارٍ الإرسال...";
-      
+
       setTimeout(function () {
         if (submitted) {
           confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
@@ -2029,9 +1928,9 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 </script>
   </div>
-	  
+
   </div>
-	
+
   <div class="footer-bottom">
     © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
   </div>
