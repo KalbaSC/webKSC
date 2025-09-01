@@ -847,9 +847,7 @@
       padding-top: calc(var(--headerH,72px) + var(--topNavH,56px)); 
     }
 
-.no-scroll {
-  overflow: hidden;
-}
+.no-scroll { overflow: hidden; }
 
 @media (max-width: 768px){
 
@@ -1001,6 +999,26 @@ body.with-top-nav {
 .main-nav a:hover {
   color: #f4e733; 
 }
+
+.mobile-nav { display: none; }
+.menu-toggle { display: none; font-size: 24px; background:none; border:none; color:#f4e733; }
+
+@media (max-width: 768px) {
+  .mobile-nav { display: block; }
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: rgba(0,0,0,0.95);
+    position: absolute;
+    top: var(--headerH, 72px);
+    right: 0;
+    width: 100%;
+    padding: 20px;
+  }
+  .nav-links.show { display: flex; }
+}
+
   </style>
 </head>
 <body>
@@ -1229,6 +1247,35 @@ body.with-top-nav {
 </div>	
 	
 <script>
+(function () {
+  const nav = document.getElementById('navLinks');
+  const btn = document.querySelector('.menu-toggle');
+  if (!nav || !btn) return;
+
+  function setOpen(open){
+    nav.classList.toggle('show', open);
+    document.body.classList.toggle('no-scroll', open);
+    btn.innerHTML = open ? '✕' : '☰';
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  const isOpen = () => nav.classList.contains('show');
+
+  window.toggleMenu = () => setOpen(!isOpen());
+
+  document.addEventListener('click', (e)=>{
+    if (!isOpen()) return;
+    if (!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+  });
+
+  nav.addEventListener('click', (e)=>{
+    if (e.target.closest('a') && window.innerWidth < 769) setOpen(false);
+  });
+
+  window.addEventListener('resize', ()=>{
+    if (window.innerWidth >= 769) setOpen(false);
+  });
+})();
+
 function updateHeaderHeight() {
   const header = document.querySelector('header');
   if (!header) return;
@@ -1238,47 +1285,6 @@ function updateHeaderHeight() {
 window.addEventListener('load', updateHeaderHeight);
 window.addEventListener('resize', updateHeaderHeight);
 
-(function () {
-  const navLinks   = document.getElementById('navLinks');
-  const body       = document.body;
-  const toggleBtn  = document.querySelector('.menu-toggle');
-
-  if (!navLinks || !toggleBtn) return;
-
-  function setMenuVisual(isOpen) {
-    navLinks.classList.toggle('show', isOpen);
-    body.classList.toggle('no-scroll', isOpen);
-    toggleBtn.innerHTML = isOpen ? '✕' : '☰';
-    toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  }
-
-  function isOpen() { return navLinks.classList.contains('show'); }
-
-  function toggleMenu(force) {
-    const next = (typeof force === 'boolean') ? force : !isOpen();
-    setMenuVisual(next);
-  }
-
-  window.toggleMenu = toggleMenu;
-
-  toggleBtn.addEventListener('click', () => toggleMenu());
-
-  document.addEventListener('click', (e) => {
-    if (!isOpen()) return;
-    const clickedInsideMenu = navLinks.contains(e.target) || toggleBtn.contains(e.target);
-    if (!clickedInsideMenu) toggleMenu(false);
-  });
-
-  document.addEventListener('click', (e) => {
-    const a = e.target.closest('#navLinks a, .nav-links a');
-    if (!a) return;
-    if (window.innerWidth < 769) toggleMenu(false);
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 769) toggleMenu(false);
-  });
-})();
 
 (function(){
   let tooltipDismissed = false;
