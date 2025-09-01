@@ -643,6 +643,7 @@ body.with-top-nav {
     height: 50px !important;
   }
 }	  
+
 @media (max-width: 768px) {
   #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
   #inner-input-bar.active { display:flex !important; }
@@ -823,7 +824,7 @@ header {
     0%, 80% { opacity: 1; visibility: visible; }
     100% { opacity: 0; visibility: hidden; }
   }
-	}	
+	}
   
 @media (max-width: 600px) {
   #chat-box .chat-header { display:flex !important; }
@@ -867,40 +868,6 @@ header {
     width: 36px !important; height: 36px !important; line-height: 1 !important;
     background: none; border: 0; color: #f4e733;
   }
-
-  .nav-links{
-    position: fixed;
-    top: 0;
-    right: -100%;
-    height: 100vh;
-    width: 78%;
-    padding: 60px 20px 20px;
-    background: #000;
-    border-left: 2px solid #f4e733;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    transition: right .3s ease;
-    z-index: 1100;
-  }
-  .nav-links.show{ right: 0; }
-  .nav-links a{
-    padding: 12px 0;
-    font-size: 16px;
-    border-bottom: 1px solid #222;
-    color: #f4e733;
-    text-decoration: none;
-    font-weight: 700;
-  }
-
-  body.no-scroll{ overflow: hidden !important; position: relative !important; }
-  body.no-scroll::after{
-    content: "";
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,.45);
-    z-index: 1050;
-  }
-
   header, footer { width: 100% !important; padding: 12px 16px !important; }
   .header-right { gap: 6px !important; align-items: center !important; }
   .header-right img.logo { height: 40px !important; }
@@ -913,7 +880,51 @@ header {
   .header-info .english-name { font-size: 12px !important; color: #f4e733 !important; }
 }
 
-body.no-scroll { display: none !important; }
+@media (max-width: 768px){
+  .side-menu.top-nav{
+    position: fixed;
+    top: var(--headerH,72px);
+    right: 0; left: 0;
+    width: 100% !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap !important;
+    gap: 10px;
+    padding: 10px 8px;
+    background: rgba(0,0,0,0.95);
+    border: 0;
+    border-bottom: 2px solid #f4e733;
+    border-radius: 0 0 14px 14px;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1002;
+  }
+  .side-menu.top-nav a{
+    flex: 0 0 auto;
+    white-space: nowrap;
+    min-width: max(110px, fit-content);
+    padding: 10px 12px;
+    border-bottom: none;
+  }
+  .side-menu .sm-indicator{ display: none !important; }
+  body.with-top-nav { padding-top: 0 !important; }
+}
+@media (max-width: 768px){
+  .nav-links{
+    position: fixed;
+    top: 0; right: -100%;
+    height: 100vh; width: 78%;
+    padding: 60px 20px 20px;
+    background: #000; border-left: 2px solid #f4e733;
+    display: flex; flex-direction: column; gap: 15px;
+    transition: right .3s ease; z-index: 1100;
+  }
+  .nav-links.show{ right: 0; }
+  .nav-links a{ padding: 12px 0; font-size: 16px; border-bottom: 1px solid #222; }
+  body.no-scroll{ overflow: hidden !important; position: relative !important; }
+  body.no-scroll::after{ content:""; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:1050; }
+}
 
   </style>
 </head>
@@ -1045,6 +1056,61 @@ if (sideMenu){
   });
 })();
 	
+function updateHeaderHeight(){
+  const header = document.querySelector('header');
+  if (header){
+    const h = header.offsetHeight || 72;
+    document.documentElement.style.setProperty('--headerH', `${h}px`);
+  }
+}
+window.addEventListener('load', updateHeaderHeight);
+window.addEventListener('resize', updateHeaderHeight);
+
+const navLinks  = document.getElementById('navLinks');
+const toggleBtn = document.querySelector('.menu-toggle');
+const sideMenu  = document.getElementById('sideMenu');
+
+function setBodyScrollLocked(locked){
+  document.body.classList.toggle('no-scroll', locked);
+}
+
+function toggleMenu(open){
+  const willOpen = (typeof open === 'boolean') ? open : !navLinks.classList.contains('show');
+  navLinks.classList.toggle('show', willOpen);
+  setBodyScrollLocked(willOpen);
+  if (toggleBtn){
+    toggleBtn.innerHTML = willOpen ? '✕' : '☰';
+    toggleBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  }
+  if (sideMenu && window.innerWidth < 769){
+    sideMenu.style.display = willOpen ? 'none' : '';
+  }
+}
+window.toggleMenu = toggleMenu;
+
+document.addEventListener('click', (e)=>{
+  if (!navLinks || !toggleBtn) return;
+  const clickOutside = !navLinks.contains(e.target) && !toggleBtn.contains(e.target);
+  if (clickOutside && navLinks.classList.contains('show')) toggleMenu(false);
+});
+
+document.querySelectorAll('#navLinks a').forEach(a=>{
+  a.addEventListener('click', ()=>{ if (window.innerWidth < 769) toggleMenu(false); });
+});
+
+function syncSideMenuMode(){
+  if (!sideMenu) return;
+  if (window.innerWidth < 769){
+    sideMenu.classList.add('top-nav');
+    document.body.classList.add('with-top-nav');
+  }else{
+    sideMenu.classList.remove('top-nav');
+    sideMenu.style.display = '';
+    document.body.classList.remove('with-top-nav');
+  }
+}
+window.addEventListener('load',  syncSideMenuMode);
+window.addEventListener('resize', syncSideMenuMode);
 </script>
 	
 <div class="chatbot">
