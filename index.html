@@ -1229,87 +1229,68 @@ body.with-top-nav {
 </div>	
 	
 <script>
-
 function updateHeaderHeight() {
   const header = document.querySelector('header');
-  if (header) {
-    const headerHeight = header.offsetHeight;
-    document.documentElement.style.setProperty('--headerH', `${headerHeight}px`);
-  }
+  if (!header) return;
+  const headerHeight = header.offsetHeight;
+  document.documentElement.style.setProperty('--headerH', `${headerHeight}px`);
 }
-
 window.addEventListener('load', updateHeaderHeight);
 window.addEventListener('resize', updateHeaderHeight);
 
-function toggleMenu() {
-  const navLinks = document.getElementById('navLinks');
-  const body = document.body;
-  
-  navLinks.classList.toggle('show');
-  body.classList.toggle('no-scroll');
-  
-  const menuToggle = document.querySelector('.menu-toggle');
-  if (navLinks.classList.contains('show')) {
-    menuToggle.innerHTML = '✕';
-  } else {
-    menuToggle.innerHTML = '☰';
+(function () {
+  const navLinks   = document.getElementById('navLinks');
+  const body       = document.body;
+  const toggleBtn  = document.querySelector('.menu-toggle');
+
+  if (!navLinks || !toggleBtn) return;
+
+  function setMenuVisual(isOpen) {
+    navLinks.classList.toggle('show', isOpen);
+    body.classList.toggle('no-scroll', isOpen);
+    toggleBtn.innerHTML = isOpen ? '✕' : '☰';
+    toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   }
-}
 
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    if (window.innerWidth < 769) {
-      toggleMenu();
-    }
-  });
-});
+  function isOpen() { return navLinks.classList.contains('show'); }
 
-window.addEventListener('resize', function() {
-  if (window.innerWidth >= 769) {
-    const navLinks = document.getElementById('navLinks');
-    const body = document.body;
-    const menuToggle = document.querySelector('.menu-toggle');
-    
-    navLinks.classList.remove('show');
-    body.classList.remove('no-scroll');
-    menuToggle.innerHTML = '☰';
+  function toggleMenu(force) {
+    const next = (typeof force === 'boolean') ? force : !isOpen();
+    setMenuVisual(next);
   }
-});
 
-(function(){
-  const toggleBtn = document.querySelector('.menu-toggle');
-  const navLinks  = document.getElementById('navLinks');
-  if (!toggleBtn || !navLinks) return;
+  window.toggleMenu = toggleMenu;
 
-  window.toggleMenu = function(){
-  navLinks.classList.toggle('show');
-}
+  toggleBtn.addEventListener('click', () => toggleMenu());
 
-  toggleBtn.addEventListener('click', toggleMenu);
-
-  document.addEventListener('click', (e)=>{
-    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)){
-      navLinks.classList.remove('show');
-    }
+  document.addEventListener('click', (e) => {
+    if (!isOpen()) return;
+    const clickedInsideMenu = navLinks.contains(e.target) || toggleBtn.contains(e.target);
+    if (!clickedInsideMenu) toggleMenu(false);
   });
 
-  document.querySelectorAll('#navLinks a, .nav-links a').forEach(a=>{
-    a.addEventListener('click', ()=>{
-      if (window.innerWidth < 769) toggleMenu();
-    });
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('#navLinks a, .nav-links a');
+    if (!a) return;
+    if (window.innerWidth < 769) toggleMenu(false);
   });
 
-  window.addEventListener('resize', ()=>{
-    if (window.innerWidth >= 769){
-      document.body.classList.remove('no-scroll');
-      navLinks.classList.remove('show');
-      toggleBtn.innerHTML = '☰';
-    }
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 769) toggleMenu(false);
   });
 })();
 
 (function(){
   let tooltipDismissed = false;
+
+  function dismissTooltip(){
+    const tooltip = document.getElementById('chat-tooltip');
+    if (tooltip){
+      tooltip.style.display = 'none';
+      tooltipDismissed = true;
+    }
+  }
+  window.dismissTooltip = dismissTooltip;
 
   window.toggleChat = function(){
     const chatBox  = document.getElementById('chat-box');
@@ -1331,7 +1312,7 @@ window.addEventListener('resize', function() {
         chatBox.style.opacity   = '1';
         chatBox.style.transform = 'translateY(0)';
       });
-      if (!alreadyStarted) startChat && startChat();
+      if (typeof startChat === 'function' && !alreadyStarted) startChat();
     } else {
       chatBox.style.opacity   = '0';
       chatBox.style.transform = 'translateY(30px)';
@@ -1342,15 +1323,6 @@ window.addEventListener('resize', function() {
       }, 500);
     }
   };
-
-  function dismissTooltip(){
-    const tooltip = document.getElementById('chat-tooltip');
-    if (tooltip){
-      tooltip.style.display = 'none';
-      tooltipDismissed = true;
-    }
-  }
-  window.dismissTooltip = dismissTooltip;
 
   document.addEventListener('DOMContentLoaded', ()=>{
     const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
@@ -1380,7 +1352,6 @@ window.addEventListener('resize', function() {
 
     if (shouldTopNav){
       sideMenu.classList.add('top-nav');
-      sideMenu.style.top = '';
       document.body.classList.add('with-top-nav');
 
       requestAnimationFrame(()=>{
@@ -1392,7 +1363,6 @@ window.addEventListener('resize', function() {
       sideMenu.classList.remove('visible', 'top-nav');
       document.body.classList.remove('with-top-nav');
       document.documentElement.style.removeProperty('--topNavH');
-      sideMenu.style.top = '';
     }
   }
 
@@ -1411,10 +1381,9 @@ window.addEventListener('resize', function() {
     indicator.style.height = Math.min(44, r.height) + 'px';
   }
   window.moveIndicatorTo = moveIndicatorTo;
-	
-  document.querySelectorAll('#sideMenu a').forEach((el,i)=>{
-    el.style.setProperty('--i', i);
-  });
+
+  document.querySelectorAll('#sideMenu a').forEach((el,i)=> el.style.setProperty('--i', i));
+
   sideMenu.addEventListener('pointermove', (e)=>{
     const t = e.target.closest('a'); if(!t) return;
     const r = t.getBoundingClientRect();
@@ -1449,7 +1418,6 @@ window.addEventListener('resize', function() {
     const active = sideMenu.querySelector('a.active') || sideMenu.querySelector('a');
     if(active) moveIndicatorTo(active);
   });
-
 })();
 
 (function(){
@@ -1506,35 +1474,26 @@ window.showSection = function(sectionId){
   }
 };
 </script>
-	
-<div class="chatbot">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <script>
 let slideIndex = 0;
-showSlides();
-
-function plusSlides(n) {
-  slideIndex += n;
-  showSlides();
-}
-
 function showSlides() {
-  let slides = document.getElementsByClassName("carousel-slide");
-  if (slideIndex >= slides.length) slideIndex = 0;
-  if (slideIndex < 0) slideIndex = slides.length - 1;
+  const slides = document.getElementsByClassName("carousel-slide");
+  const len = slides.length;
+  if (len === 0) return; // guard: no slides yet
 
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
+  if (slideIndex >= len) slideIndex = 0;
+  if (slideIndex < 0)    slideIndex = len - 1;
 
+  for (let i = 0; i < len; i++) slides[i].style.display = "none";
   slides[slideIndex].style.display = "block";
 }
+function plusSlides(n) { slideIndex += n; showSlides(); }
 
-setInterval(() => {
-  slideIndex++;
+document.addEventListener('DOMContentLoaded', () => {
   showSlides();
-}, 5000);
-	
+  setInterval(() => { slideIndex++; showSlides(); }, 5000);
+});
 </script>
 
 <div id="chat-box">
