@@ -716,7 +716,7 @@ header {
     font-size: 14px !important;
   }
 }
-
+body.no-scroll { overflow: hidden; }
   </style>
 </head>
 <body>
@@ -799,42 +799,45 @@ header {
     }
   });
 })();
-
 	
-function toggleMenu() {
-  const navLinks = document.getElementById('navLinks');
-  const body = document.body;
-  
-  navLinks.classList.toggle('show');
-  body.classList.toggle('no-scroll');
-  
-  const menuToggle = document.querySelector('.menu-toggle');
-  if (navLinks.classList.contains('show')) {
-    menuToggle.innerHTML = '✕';
-  } else {
-    menuToggle.innerHTML = '☰';
-  }
-}
+(function () {
+  const nav = document.getElementById('navLinks');
+  const btn = document.querySelector('.menu-toggle');
+  const sideMenu = document.getElementById('sideMenu');
+  if (!nav || !btn) return;
 
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    if (window.innerWidth < 769) {
-      toggleMenu();
+  function setOpen(open){
+    nav.classList.toggle('show', open);
+    document.body.classList.toggle('no-scroll', open);
+    btn.innerHTML = open ? '✕' : '☰';
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+    if (sideMenu){
+      if (open){
+        sideMenu.dataset.prevDisplay = sideMenu.style.display || '';
+        sideMenu.style.display = 'none';
+      } else {
+        sideMenu.style.display = sideMenu.dataset.prevDisplay || '';
+      }
     }
-  });
-});
-
-window.addEventListener('resize', function() {
-  if (window.innerWidth >= 769) {
-    const navLinks = document.getElementById('navLinks');
-    const body = document.body;
-    const menuToggle = document.querySelector('.menu-toggle');
-    
-    navLinks.classList.remove('show');
-    body.classList.remove('no-scroll');
-    menuToggle.innerHTML = '☰';
   }
-});
+
+  const isOpen = () => nav.classList.contains('show');
+  window.toggleMenu = () => setOpen(!isOpen());
+
+  document.addEventListener('click', (e)=>{
+    if (!isOpen()) return;
+    if (!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+  });
+
+  nav.addEventListener('click', (e)=>{
+    if (e.target.closest('a') && window.innerWidth < 769) setOpen(false);
+  });
+
+  window.addEventListener('resize', ()=>{
+    if (window.innerWidth >= 769) setOpen(false);
+  });
+})();
 	
 </script>
 	
@@ -1399,21 +1402,6 @@ window.addEventListener('DOMContentLoaded', () => {
 </footer>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-	<script>
-  const toggleBtn = document.querySelector('.menu-toggle');
-  const navLinks = document.getElementById('navLinks');
-
-  function toggleMenu() {
-    navLinks.classList.toggle('show');
-  }
-
-  document.addEventListener('click', function (e) {
-    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
-      navLinks.classList.remove('show');
-    }
-  });
-</script>
 	
 </body>
 </html>
