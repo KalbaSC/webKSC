@@ -843,162 +843,11 @@ body.no-scroll { overflow: hidden; }
       padding-top: calc(var(--headerH,72px) + var(--topNavH,56px)); 
     }
 
-@media (max-width: 768px){
-  .mobile-nav { display: block; }
-  .menu-toggle { 
-    display: block;
-    padding: 0 !important; width: 36px !important; height: 36px !important;
-    display: grid !important; place-items: center !important; line-height: 1 !important; margin: 0 !important;
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    height: 100vh;
-    background: #000;
-    border-left: 2px solid #f4e733;
-    padding: 60px 20px 20px;
-    flex-direction: column;
-    gap: 15px;
-    transition: right 0.3s ease;
-    z-index: 1000;
-  }
-  .nav-links.show { right: 0; }
-
-  .nav-links a {
-    padding: 12px 0;
-    font-size: 16px;
-    border-bottom: 1px solid #222;
-  }
-
-  .header-right .divider {
-    display: inline-block !important;
-    height: 40px !important;
-    margin-inline: 8px !important;
-  }
-
-  .header-right { gap: 6px !important; align-items: center !important; }
-  .header-right img.logo { height: 40px !important; margin: 0 !important; }
-
-  .header-info {
-    display: flex !important; flex-direction: column !important; gap: 6px !important;
-    text-align: center !important; align-items: center !important;
-  }
-  .header-info .arabic-name { font-size: 14px !important; }
-  .header-info .english-name { font-size: 12px !important; color: #f4e733; }
-
-  header, footer { width: 100% !important; padding: 12px 16px !important; }
-
-body.with-top-nav {
-  padding-top: 0 !important;
-}
-
-  .side-menu.top-nav{
-    position: fixed;
-    top: calc(var(--headerH, 72px) + env(safe-area-inset-top));
-    right: 0; left: 0;
-    width: 100%;
-    z-index: 1002;
-    background: rgba(0,0,0,.92);
-    backdrop-filter: blur(6px);
-    border-bottom: 2px solid #f4e733;
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    gap: 8px;
-    padding: 10px 12px;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .side-menu.top-nav::-webkit-scrollbar{ display:none; }
-  .side-menu.top-nav{ scrollbar-width: none; -ms-overflow-style: none; }
-
-  .side-menu.top-nav::before,
-  .side-menu.top-nav::after{
-    content:"";
-    position:absolute; top:0; bottom:0; width:24px; pointer-events:none;
-  }
-  .side-menu.top-nav::before{
-    right:0;
-    background: linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,.9));
-  }
-  .side-menu.top-nav::after{
-    left:0;
-    background: linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,.9));
-  }
-
-  .side-menu.top-nav a{
-    position: relative;
-    scroll-snap-align: start;
-    white-space: nowrap;
-
-    min-width: 110px;
-    padding: 10px 12px;
-    font-size: 13px;
-    border-radius: 999px;
-
-    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.24));
-    border: 1px solid rgba(255,255,255,.08);
-    box-shadow: 0 4px 12px rgba(0,0,0,.25);
-    color: #fff;
-  }
-
-  .side-menu.top-nav a:hover{
-    color: #f4e733;
-    border-color: rgba(244,231,51,.5);
-    box-shadow: 0 10px 24px rgba(244,231,51,.18), 0 0 0 1px rgba(244,231,51,.22) inset;
-    transform: translateY(-1px);
-  }
-
-  .side-menu.top-nav a.active{
-    color:#0a0a0a;
-    background: linear-gradient(180deg,#f4e733,#c9b812);
-    border-color:#000;
-    box-shadow: 0 10px 28px rgba(244,231,51,.35), 0 0 0 1px rgba(0,0,0,.6) inset;
-  }
-
-  .side-menu.top-nav a.active::after{
-    content:"";
-    position:absolute;
-    left:12px; right:12px; bottom:-8px;
-    height:3px; border-radius:3px;
-    background: linear-gradient(90deg,#f4e733,#fff381);
-  }
-
-  .side-menu.top-nav .sm-indicator{ display:none; }
-}
-
-.main-nav {
-  display: flex;
-  justify-content: center;  
-  gap: 42px;                 
-  padding: 0;
-  margin: 0;
-  direction: rtl;            
-}
-.main-nav a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 18px 0;
-  transition: color .2s;
-}
-
-.main-nav a:hover {
-  color: #f4e733; 
-}
-
-.mobile-nav { display: none; }
-
+/* === Mobile header/menu — same as news.html === */
 @media (max-width: 768px) {
   .mobile-nav { display: block; }
   .menu-toggle { display: block; }
+
   .nav-links {
     display: none;
     flex-direction: column;
@@ -1010,56 +859,23 @@ body.with-top-nav {
     padding: 20px;
   }
   .nav-links.show { display: flex; }
-}
 
-/* === MOBILE POLISH PATCH (add at the end of your CSS) === */
-@media (max-width: 768px){
+  /* Same mobile sizing as news.html */
+  header, footer { width: 100% !important; padding: 12px 16px !important; }
 
-  /* 1) Use the full screen width on phones (no narrow gutter) */
-  header, footer { width: 100% !important; padding-inline: 12px !important; }
-  .carousel-container,
-  .info-container { width: 100% !important; margin: 20px auto !important; }
-
-  /* 2) Reduce carousel height + keep arrows/caption tidy on phones */
-  .carousel-container { height: 58vh !important; max-height: 520px !important; }
-  .caption { padding: 10px 12px !important; font-size: 13px !important; }
-  .prev, .next { padding: 8px !important; font-size: 18px !important; top: calc(50% - 12px) !important; }
-
-  /* 3) Side tabs row spacing (the pills under the header) */
-  .side-menu.top-nav { gap: 6px !important; padding: 8px 10px !important; }
-  .side-menu.top-nav a { min-width: 108px !important; padding: 8px 12px !important; font-size: 13px !important; }
-
-  /* 4) Ensure content doesn’t hide under the sticky top-nav (when it appears) */
-  body.with-top-nav { padding-top: calc(var(--headerH,72px) + var(--topNavH,56px)) !important; }
-  /* When you purposely disabled it earlier, re-enable now so sections sit below the tabs */
-  
-  /* 5) Off-canvas menu sits above everything & prevents background scroll */
-  .nav-links { z-index: 1100 !important; }
-  body.no-scroll { overflow: hidden; position: relative; }
-  body.no-scroll::after{
-    content:""; position: fixed; inset:0; background: rgba(0,0,0,.4); z-index: 1000;
-  }
-
-  /* 6) Header micro-spacing (logos, names, hamburger) */
-  .header-right { gap: 8px !important; align-items: center !important; }
+  .header-right { gap: 6px !important; align-items: center !important; }
   .header-right img.logo { height: 40px !important; }
-  .header-right .divider { height: 40px !important; margin-inline: 6px !important; }
-  .header-info { gap: 4px !important; }
+  .header-right .divider { display: none !important; } /* news.html hides it on mobile */
+
+  .header-info {
+    display: flex !important; flex-direction: column !important; gap: 6px !important;
+    text-align: center !important; align-items: center !important;
+  }
   .header-info .arabic-name { font-size: 14px !important; }
   .header-info .english-name { font-size: 12px !important; color: #f4e733 !important; }
-  .menu-toggle { width: 36px !important; height: 36px !important; display: grid !important; place-items: center !important; }
-
-  /* 7) Footer: tighter spacing and smaller textarea */
-  footer { gap: 20px !important; }
-  footer textarea { height: 120px !important; }
-
-  /* 8) Kill accidental horizontal scroll on small screens */
-  html, body { overflow-x: hidden !important; }
 }
-
-/* Bonus: ensure the pills row never overlaps the carousel during the transition */
-.side-menu.top-nav { transition: transform .25s ease, opacity .25s ease; }
-
+body.with-top-nav { padding-top: 0 !important; }
+body.no-scroll { overflow:hidden; }
   </style>
 </head>
 <body>
@@ -1288,6 +1104,31 @@ body.with-top-nav {
 </div>	
 	
 <script>
+function toggleMenu() {
+  const navLinks = document.getElementById('navLinks');
+  const body = document.body;
+  navLinks.classList.toggle('show');
+  body.classList.toggle('no-scroll');
+  const menuToggle = document.querySelector('.menu-toggle');
+  menuToggle.innerHTML = navLinks.classList.contains('show') ? '✕' : '☰';
+}
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) toggleMenu();
+  });
+});
+
+window.addEventListener('resize', function () {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const menuToggle = document.querySelector('.menu-toggle');
+    navLinks.classList.remove('show');
+    document.body.classList.remove('no-scroll');
+    menuToggle.innerHTML = '☰';
+  }
+});
+
 (function () {
   const nav = document.getElementById('navLinks');
   const btn = document.querySelector('.menu-toggle');
