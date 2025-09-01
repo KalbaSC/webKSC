@@ -1173,33 +1173,38 @@ header {
 }
 
 @media (max-width: 768px){
-  #sideMenu {
+  .side-menu.top-nav{
     position: fixed;
     top: var(--headerH,72px);
     right: 0; left: 0;
-    width: 100%;
-    height: auto;
-    padding: 10px;
+    width: 100% !important;
+
+    display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 12px;
+    flex-wrap: nowrap !important;
+    gap: 10px;
+
+    padding: 10px 8px;
     background: rgba(0,0,0,0.95);
-    border: none;
+    border: 0;
     border-bottom: 2px solid #f4e733;
-    overflow-x: auto;
-    overflow-y: hidden;
-    z-index: 1001;
+    border-radius: 0 0 14px 14px;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1002;
   }
 
-  #sideMenu a {
+  .side-menu.top-nav a{
     flex: 0 0 auto;
-    min-width: 100px;
-    padding: 8px 12px;
-    font-size: 14px;
+    white-space: nowrap;
+    min-width: max(110px, fit-content);
+    padding: 10px 12px;
     border-bottom: none;
   }
 
-  #sideMenu .sm-indicator { display: none; }
+  .side-menu .sm-indicator{ display: none !important; }
    body.with-top-nav {padding-top: 0 !important;}
 }
 
