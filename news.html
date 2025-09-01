@@ -723,39 +723,6 @@ header {
     background: none; border: 0; color: #f4e733;
   }
 
-  .nav-links{
-    position: fixed;
-    top: 0;
-    right: -100%;
-    height: 100vh;
-    width: 78%;
-    padding: 60px 20px 20px;
-    background: #000;
-    border-left: 2px solid #f4e733;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    transition: right .3s ease;
-    z-index: 1100;
-  }
-  .nav-links.show{ right: 0; }
-  .nav-links a{
-    padding: 12px 0;
-    font-size: 16px;
-    border-bottom: 1px solid #222;
-    color: #f4e733;
-    text-decoration: none;
-    font-weight: 700;
-  }
-
-  body.no-scroll{ overflow: hidden !important; position: relative !important; }
-  body.no-scroll::after{
-    content:"";
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,.45);
-    z-index: 1050;
-  }
-
   header, footer { width: 100% !important; padding: 12px 16px !important; }
   .header-right { gap: 6px !important; align-items: center !important; }
   .header-right img.logo { height: 40px !important; }
