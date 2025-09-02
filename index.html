@@ -1775,21 +1775,15 @@ window.showSection = function(sectionId){
   requestAnimationFrame(moveIndicator);
 })();
 
-(function(){
-  const root = document.documentElement;
-  const baseWidth = 1440;
-
-  function resizePage() {
-    const scale = window.innerWidth / baseWidth;
-    root.style.transform = `scale(${scale})`;
-    root.style.transformOrigin = "top center";
-    root.style.width = baseWidth + "px";
-    root.style.margin = "0 auto";
+function checkMobileView() {
+  const isMobile = window.innerWidth <= 768;
+  const btn = document.querySelector('button[onclick="toggleHiddenColumns()"]');
+  if (btn) {
+    btn.style.display = isMobile ? 'none' : 'inline-block';
   }
-
-  window.addEventListener("resize", resizePage);
-  resizePage();
-})();
+}
+window.addEventListener('load', checkMobileView);
+window.addEventListener('resize', checkMobileView);
 
 </script>
 
