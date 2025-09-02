@@ -1234,7 +1234,9 @@ header {
   .side-menu .sm-indicator{ display: none !important; }
    body.with-top-nav {padding-top: 0 !important;}
 }
-
+#navLinks.show-inline {
+  display: flex !important;
+}
   </style>
 </head>
 <body>
@@ -1785,26 +1787,25 @@ function checkMobileView() {
 window.addEventListener('load', checkMobileView);
 window.addEventListener('resize', checkMobileView);
 
-
-function checkTabletView() {
+function checkView() {
   const navLinks = document.getElementById('navLinks');
   const toggleBtn = document.querySelector('.menu-toggle');
-
   if (!navLinks || !toggleBtn) return;
 
-  const isTabletOrMobile = window.innerWidth <= 1024;
+  const isDesktop = window.innerWidth > 1200;
 
-  if (isTabletOrMobile) {
-    navLinks.classList.remove('show-inline'); 
-    toggleBtn.style.display = 'block';
-  } else {
-    navLinks.classList.add('show-inline'); 
+  if (isDesktop) {
+    navLinks.classList.add('show-inline');
     toggleBtn.style.display = 'none';
+  } else {
+    navLinks.classList.remove('show-inline');
+    toggleBtn.style.display = 'block';
   }
 }
 
-window.addEventListener('load', checkTabletView);
-window.addEventListener('resize', checkTabletView);
+window.addEventListener('load', checkView);
+window.addEventListener('resize', checkView);
+
 </script>
 
 <script>
