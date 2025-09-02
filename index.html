@@ -1189,18 +1189,15 @@ header {
     top: var(--headerH,72px);
     right: 0; left: 0;
     width: 100% !important;
-
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap !important;
-    gap: 10px;
-
-    padding: 10px 8px;
+    gap: 6px;
+    padding: 6px 4px;
     background: rgba(0,0,0,0.95);
     border: 0;
     border-bottom: 2px solid #f4e733;
-    border-radius: 0 0 14px 14px;
-
+    border-radius: 0 0 10px 10px;
     overflow-x: auto !important;
     overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch;
@@ -1210,13 +1207,14 @@ header {
   .side-menu.top-nav a{
     flex: 0 0 auto;
     white-space: nowrap;
-    min-width: max(110px, fit-content);
-    padding: 10px 12px;
+    min-width: 80px;
+    padding: 6px 8px;
+    font-size: 13px;
     border-bottom: none;
   }
 
   .side-menu .sm-indicator{ display: none !important; }
-   body.with-top-nav {padding-top: 0 !important;}
+  body.with-top-nav {padding-top: 0 !important;}
 }
 
   </style>
