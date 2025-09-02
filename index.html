@@ -812,59 +812,32 @@ body.no-scroll { overflow: hidden; }
       max-width: 1170px;
       margin: 0 auto;           
       z-index: 1002;
-
-  	  display: flex;
-  	  flex-direction: row;
- 	  flex-wrap: nowrap;
-	  gap: 8px;
-	  padding: 10px 8px;
-
-      background: rgba(0,0,0,0.95);
+      border-radius: 0 0 14px 14px;
+      padding: 10px 8px;
       border: 0;
       border-bottom: 2px solid #f4e733;
-      border-radius: 0 0 14px 14px;
-
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      touch-action: pan-x;
-      overscroll-behavior-inline: contain;
-
-     scroll-snap-type: x proximity;
-     scrollbar-width: none; 
+      flex-direction: row;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      overflow: hidden;
+      box-sizing: border-box;
     }
     
-.side-menu.top-nav {
-  position: relative;
-}
-
-.side-menu.top-nav .sm-indicator {
-  position: absolute;
-  bottom: 0;
-  height: 3px;
-  background: #f4e733;
-  border-radius: 2px;
-  width: 0;
-  transform: translateX(0);
-  transition: transform 260ms cubic-bezier(.2,.8,.2,1),
-              width 260ms cubic-bezier(.2,.8,.2,1);
-  pointer-events: none;
-}
-
     .side-menu.top-nav.visible {
       opacity: 1;
       transform: translateY(0);
     }
     
-.side-menu.top-nav a {
-  flex: 0 0 auto;
-  min-width: 120px;
-  white-space: nowrap;
-  scroll-snap-align: center;
-}
-
-    .side-menu.top-nav::-webkit-scrollbar { display: none; }   
-    .side-menu.top-nav .sm-indicator { display: none; }
+    .side-menu.top-nav a {
+      flex: 0 1 auto;
+      min-width: 120px;
+      white-space: nowrap;
+    }
+    
+    .side-menu.top-nav .sm-indicator { 
+      display: none; 
+    }
     
 body.with-top-nav {
   padding-top: 0 !important;
@@ -1706,75 +1679,6 @@ window.showSection = function(sectionId){
     });
   }
 };
-
-(function(){
-  const el = document.getElementById('sideMenu');
-  if (!el) return;
-
-  el.addEventListener('wheel', (e)=>{
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      el.scrollLeft += e.deltaY;
-      e.preventDefault();
-    }
-  }, { passive:false });
-
-  let isDown = false, startX = 0, startLeft = 0;
-  el.addEventListener('mousedown', (e)=>{
-    isDown = true; startX = e.pageX; startLeft = el.scrollLeft; el.classList.add('grabbing');
-  });
-  window.addEventListener('mouseup', ()=>{ isDown = false; el.classList.remove('grabbing'); });
-  window.addEventListener('mousemove', (e)=>{
-    if (!isDown) return;
-    const dx = e.pageX - startX;
-    el.scrollLeft = startLeft - dx;
-  });
-})();
-
-
-(function(){
-  const menu  = document.getElementById('sideMenu');
-  if (!menu) return;
-
-  const links = Array.from(menu.querySelectorAll('a[role="tab"]'));
-  let indicator = menu.querySelector('.sm-indicator');
-  if (!indicator) {
-    indicator = document.createElement('span');
-    indicator.className = 'sm-indicator';
-    menu.appendChild(indicator);
-  }
-
-  function moveIndicator() {
-    const active = menu.querySelector('a.active') || links.find(a => a.getAttribute('aria-selected') === 'true') || links[0];
-    if (!active) return;
-
-    const cs = getComputedStyle(menu);
-    const padLeft = parseFloat(cs.paddingLeft) || 0;
-
-    const x = active.offsetLeft - padLeft;
-    const w = active.offsetWidth;
-
-    indicator.style.width = w + 'px';
-    indicator.style.transform = `translateX(${x}px)`;
-  }
-
-  function setActive(el) {
-    links.forEach(a => {
-      const on = a === el;
-      a.classList.toggle('active', on);
-      a.setAttribute('aria-selected', on ? 'true' : 'false');
-    });
-    moveIndicator();
-  }
-
-  links.forEach(a => {
-    a.addEventListener('click', () => setActive(a));
-  });
-
-  menu.addEventListener('scroll', moveIndicator, { passive: true });
-  window.addEventListener('resize', moveIndicator);
-  requestAnimationFrame(moveIndicator);
-})();
-
 </script>
 
 <script>
@@ -1782,7 +1686,8 @@ let slideIndex = 0;
 function showSlides() {
   const slides = document.getElementsByClassName("carousel-slide");
   const len = slides.length;
-  if (len === 0) return;
+  if (len === 0) return; // guard: no slides yet
+
   if (slideIndex >= len) slideIndex = 0;
   if (slideIndex < 0)    slideIndex = len - 1;
 
