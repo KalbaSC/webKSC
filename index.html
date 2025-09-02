@@ -835,7 +835,7 @@ body.no-scroll { overflow: hidden; }
     }
     
 .side-menu.top-nav {
-  position: relative; /* needed for the indicator */
+  position: relative;
 }
 
 .side-menu.top-nav .sm-indicator {
@@ -1774,35 +1774,6 @@ window.showSection = function(sectionId){
   window.addEventListener('resize', moveIndicator);
   requestAnimationFrame(moveIndicator);
 })();
-
-function checkMobileView() {
-  const isMobile = window.innerWidth <= 768;
-  const btn = document.querySelector('button[onclick="toggleHiddenColumns()"]');
-  if (btn) {
-    btn.style.display = isMobile ? 'none' : 'inline-block';
-  }
-}
-window.addEventListener('load', checkMobileView);
-window.addEventListener('resize', checkMobileView);
-
-function checkView() {
-  const navLinks = document.getElementById('navLinks');
-  const toggleBtn = document.querySelector('.menu-toggle');
-  if (!navLinks || !toggleBtn) return;
-
-  const isDesktop = window.innerWidth > 1200;
-
-  if (isDesktop) {
-    navLinks.classList.add('show-inline');
-    toggleBtn.style.display = 'none';
-  } else {
-    navLinks.classList.remove('show-inline');
-    toggleBtn.style.display = 'block';
-  }
-}
-
-window.addEventListener('load', checkView);
-window.addEventListener('resize', checkView);
 
 </script>
 
