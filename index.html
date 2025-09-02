@@ -820,13 +820,22 @@ body.no-scroll { overflow: hidden; }
       justify-content: center;
       gap: 8px;
       flex-wrap: nowrap;
-      overflow: auto;
+      overflow-x: auto;
+	  overflow-y: hidden;
       box-sizing: border-box;
       touch-action: pan-x;
 	  overscroll-behavior-inline: contain;
 	  -webkit-overflow-scrolling: touch;
+
     }
     
+	.side-menu.top-nav a {
+     flex: 0 0 auto;
+     min-width: 120px;
+     white-space: nowrap;
+     scroll-snap-align: center;
+    }
+
     .side-menu.top-nav.visible {
       opacity: 1;
       transform: translateY(0);
