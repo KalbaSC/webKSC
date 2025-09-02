@@ -834,6 +834,23 @@ body.no-scroll { overflow: hidden; }
      scrollbar-width: none; 
     }
     
+.side-menu.top-nav {
+  position: relative; /* needed for the indicator */
+}
+
+.side-menu.top-nav .sm-indicator {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background: #f4e733;
+  border-radius: 2px;
+  width: 0;
+  transform: translateX(0);
+  transition: transform 260ms cubic-bezier(.2,.8,.2,1),
+              width 260ms cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+}
+
     .side-menu.top-nav.visible {
       opacity: 1;
       transform: translateY(0);
@@ -1694,16 +1711,13 @@ window.showSection = function(sectionId){
   const el = document.getElementById('sideMenu');
   if (!el) return;
 
-  // تحويل عجلة الماوس (عمودي) إلى تمرير أفقي سلس
   el.addEventListener('wheel', (e)=>{
-    // لو فيه سكرول أفقي فعلي
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
       el.scrollLeft += e.deltaY;
       e.preventDefault();
     }
   }, { passive:false });
 
-  // سحب بالماوس (دراغ) — يفيد على الدِّسك توب
   let isDown = false, startX = 0, startLeft = 0;
   el.addEventListener('mousedown', (e)=>{
     isDown = true; startX = e.pageX; startLeft = el.scrollLeft; el.classList.add('grabbing');
@@ -1716,6 +1730,51 @@ window.showSection = function(sectionId){
   });
 })();
 
+
+(function(){
+  const menu  = document.getElementById('sideMenu');
+  if (!menu) return;
+
+  const links = Array.from(menu.querySelectorAll('a[role="tab"]'));
+  let indicator = menu.querySelector('.sm-indicator');
+  if (!indicator) {
+    indicator = document.createElement('span');
+    indicator.className = 'sm-indicator';
+    menu.appendChild(indicator);
+  }
+
+  function moveIndicator() {
+    const active = menu.querySelector('a.active') || links.find(a => a.getAttribute('aria-selected') === 'true') || links[0];
+    if (!active) return;
+
+    const cs = getComputedStyle(menu);
+    const padLeft = parseFloat(cs.paddingLeft) || 0;
+
+    const x = active.offsetLeft - padLeft;
+    const w = active.offsetWidth;
+
+    indicator.style.width = w + 'px';
+    indicator.style.transform = `translateX(${x}px)`;
+  }
+
+  function setActive(el) {
+    links.forEach(a => {
+      const on = a === el;
+      a.classList.toggle('active', on);
+      a.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    moveIndicator();
+  }
+
+  links.forEach(a => {
+    a.addEventListener('click', () => setActive(a));
+  });
+
+  menu.addEventListener('scroll', moveIndicator, { passive: true });
+  window.addEventListener('resize', moveIndicator);
+  requestAnimationFrame(moveIndicator);
+})();
+
 </script>
 
 <script>
@@ -1723,8 +1782,7 @@ let slideIndex = 0;
 function showSlides() {
   const slides = document.getElementsByClassName("carousel-slide");
   const len = slides.length;
-  if (len === 0) return; // guard: no slides yet
-
+  if (len === 0) return;
   if (slideIndex >= len) slideIndex = 0;
   if (slideIndex < 0)    slideIndex = len - 1;
 
