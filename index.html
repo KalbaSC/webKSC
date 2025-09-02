@@ -1775,6 +1775,22 @@ window.showSection = function(sectionId){
   requestAnimationFrame(moveIndicator);
 })();
 
+(function(){
+  const root = document.documentElement;
+  const baseWidth = 1440;
+
+  function resizePage() {
+    const scale = window.innerWidth / baseWidth;
+    root.style.transform = `scale(${scale})`;
+    root.style.transformOrigin = "top center";
+    root.style.width = baseWidth + "px";
+    root.style.margin = "0 auto";
+  }
+
+  window.addEventListener("resize", resizePage);
+  resizePage();
+})();
+
 </script>
 
 <script>
