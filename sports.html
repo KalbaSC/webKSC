@@ -1132,38 +1132,6 @@ header {
   body.with-top-nav {padding-top: 0 !important;}
 }
 
-.side-menu{
-  position:fixed; top:calc(var(--headerH,72px) + 10px); right:5%;
-  width:230px; display:flex; flex-direction:column; gap:10px;
-  background:rgba(0,0,0,.9); border:2px solid #f4e733; border-radius:16px;
-  padding:12px; z-index:1002; max-height:calc(100vh - var(--headerH,72px) - 32px); overflow:auto
-}
-.side-menu a{
-  display:block; text-align:center; text-decoration:none; color:#fff;
-  padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.08);
-  background:radial-gradient(100% 100% at 50% 0%,rgba(255,255,255,.04),rgba(0,0,0,.28));
-  font-weight:700
-}
-.side-menu a.active{ color:#0a0a0a; background:linear-gradient(180deg,#f4e733,#c9b812); border-color:#000 }
-.side-menu a.back{ background:#111; border:1px dashed #f4e733; font-weight:800 }
-
-body.with-sidebar .main-wrap{ padding-right:calc(230px + 5% + 16px) }
-
-.section{ display:none; padding:40px 0; scroll-margin-top:calc(var(--headerH,72px) + 12px) }
-.section.active{ display:block }
-.section .info-container{
-  width:88%; max-width:1170px; margin:0 auto; background:#000; color:#eee;
-  border:2px solid #f4e733; border-radius:16px; padding:28px
-}
-
-/* Mobile: sidebar becomes horizontal bar */
-@media (max-width:900px){
-  .side-menu{ position:sticky; top:var(--headerH,72px); right:auto; left:auto; width:auto;
-              flex-direction:row; overflow-x:auto; overflow-y:hidden; border-radius:0 0 14px 14px }
-  body.with-sidebar .main-wrap{ padding-right:0 }
-  .side-menu a{ white-space:nowrap; min-width:120px }
-  .side-menu a.back{ order:-1 } /* back button first on mobile */
-}
   </style>
 </head>
 <body>
@@ -1222,27 +1190,21 @@ body.with-sidebar .main-wrap{ padding-right:calc(230px + 5% + 16px) }
     individual: ['chess','taekwondo','judo','karate','cycling','athletics','pentathlon','badminton']
   };
 
-  // Start state: two options only
   function resetCategories(){
     const side = document.getElementById('sideMenu');
     const sportsBlock = document.getElementById('sideMenuSports');
-    // show only category buttons
     side.querySelectorAll('a[data-mode="category"]').forEach(a=>a.style.display='');
     sportsBlock.style.display='none';
     document.body.classList.add('with-sidebar');
-    // hide any active section
     document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   }
 
-  // When clicking الألعاب الجماعية أو الألعاب الفردية
   function pickCategory(cat){
     const side = document.getElementById('sideMenu');
     const sportsBlock = document.getElementById('sideMenuSports');
 
-    // hide the two category buttons
     side.querySelectorAll('a[data-mode="category"]').forEach(a=>a.style.display='none');
 
-    // show only the sports of that category
     sportsBlock.style.display = 'flex';
     sportsBlock.querySelectorAll('a[data-target]').forEach(a=>{
       const ok = a.getAttribute('data-cat') === cat;
@@ -1252,12 +1214,10 @@ body.with-sidebar .main-wrap{ padding-right:calc(230px + 5% + 16px) }
 
     document.body.classList.add('with-sidebar');
 
-    // auto open first sport
     const first = GROUPS[cat][0];
     if (first) showSection(first);
   }
 
-  // Show a sport section + highlight in sidebar
   function showSection(id){
     document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
     const el = document.getElementById(id);
@@ -1271,9 +1231,8 @@ body.with-sidebar .main-wrap{ padding-right:calc(230px + 5% + 16px) }
     if (id && location.hash !== '#'+id) history.replaceState(null,'','#'+id);
   }
 
-  // Deep link: sports.html#basketball
   window.addEventListener('DOMContentLoaded', ()=>{
-    document.body.classList.add('with-sidebar'); // reserve space for sidebar
+    document.body.classList.add('with-sidebar');
     const hash = (location.hash||'').slice(1);
     if (!hash) return resetCategories();
 
