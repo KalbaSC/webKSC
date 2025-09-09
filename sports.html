@@ -1132,6 +1132,9 @@ header {
   body.with-top-nav {padding-top: 0 !important;}
 }
 
+body.with-sidebar .main-wrap {
+  padding-right: 160px;
+}
   </style>
 </head>
 <body>
@@ -1402,7 +1405,7 @@ window.addEventListener('resize', updateHeaderHeight);
     t.style.setProperty('--my', (e.clientY - r.top)  + 'px');
   });
 
-  const sections = ['history','president','vice','board','orgstructure']
+  const sections = Array.from(document.querySelectorAll('.section'));
     .map(id => document.getElementById(id)).filter(Boolean);
 
   const obs = new IntersectionObserver((entries)=>{
