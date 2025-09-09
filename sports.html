@@ -113,91 +113,6 @@ header {
 
 body.no-scroll { overflow: hidden; }
 
-    .hero-carousel {
-      width: 100%;
-      display: flex;  
-      justify-content: center;
-      align-items: center;
-      background: transparent;
-      padding: 40px 0;
-    }
-     
-    .carousel-container {
-      width: 88%;
-      max-width: 1170px;
-      margin: 40px auto;       
-      position: relative;
-      z-index: 1;
-      height: 520px;
-      background: #000;
-      border: 2px solid #f4e733;
-      border-radius: 16px;
-      overflow: hidden;            
-    }
-    
-    .carousel-slide {
-      display: none;
-      position: absolute; 
-      top: 0; 
-      left: 0;
-      width: 100%; 
-      height: 100%;
-    }
-    
-    .carousel-slide img {
-      width: 100%; 
-      height: 100%;
-      object-fit: cover;
-      border-radius: 0;            
-    }
-    
-    .caption {
-      position: absolute; 
-      left: 0; 
-      right: 0; 
-      bottom: 0;
-      padding: 15px 20px;
-      background: rgba(0, 0, 0, 0.7);
-      color: #fff; 
-      text-align: right;
-      height: auto;                 
-      border-radius: 0;           
-      overflow: hidden;
-      z-index: 2;
-    }
-    
-    .prev, .next {
-      cursor: pointer;
-      position: absolute; 
-      top: 50%;
-      transform: translateY(-50%);
-      padding: 12px;
-      color: #fff; 
-      font-size: 22px;
-      background-color: rgba(0,0,0,0.5);
-      border-radius: 10px;
-      user-select: none;
-      transition: .3s;
-      z-index: 3;                  
-    }
-    
-    .prev:hover, .next:hover { 
-      background-color: #f4e733; 
-      color: #000; 
-    }
-    
-    .prev { 
-      left: 10px; 
-    }
-    
-    .next { 
-      right: 10px; 
-    }
-    
-    .fade {
-      animation: fade 1s ease-in-out;
-    }
-    
     @keyframes fade {
       from { opacity: 0.4; }
       to { opacity: 1; }
@@ -1249,7 +1164,7 @@ header {
 <div id="categories" class="category-grid">
   <div class="category-box" onclick="showCategory('individual')">
     🎯 <h2>الألعاب الفردية</h2>
-    <p>الشطرنج، التايكوندو، الجودو، الكاراتيه، الدراجات، العاب القوى، الخماسي الحديث، الريشة الطائرة</p>
+    <p>الشطرنج، التايكوندو، الجودو، الكاراتيه، الدراجات، ألعاب القوى، الخماسي الحديث، الريشة الطائرة</p>
   </div>
   <div class="category-box" onclick="showCategory('team')">
     🏆 <h2>الألعاب الجماعية</h2>
@@ -1257,148 +1172,79 @@ header {
   </div>
 </div>
 
-<div id="individual-menu" class="side-menu">
-  <a href="#chess" data-target="chess" onclick="showSection('chess','individual-menu')">الشطرنج</a>
-  <a href="#taekwondo" data-target="taekwondo" onclick="showSection('taekwondo','individual-menu')">التايكوندو</a>
-  <a href="#judo" data-target="judo" onclick="showSection('judo','individual-menu')">الجودو</a>
-  <a href="#karate" data-target="karate" onclick="showSection('karate','individual-menu')">الكاراتيه</a>
-  <a href="#cycling" data-target="cycling" onclick="showSection('cycling','individual-menu')">الدراجات</a>
-  <a href="#athletics" data-target="athletics" onclick="showSection('athletics','individual-menu')">العاب القوى</a>
-  <a href="#pentathlon" data-target="pentathlon" onclick="showSection('pentathlon','individual-menu')">الخماسي الحديث</a>
-  <a href="#badminton" data-target="badminton" onclick="showSection('badminton','individual-menu')">الريشة الطائرة</a>
-</div>
+<nav id="sportsTopNav" class="side-menu top-nav" style="display:none"></nav>
 
-<!-- Team sports menu -->
-<div id="team-menu" class="side-menu">
-  <a href="#volleyball" data-target="volleyball" onclick="showSection('volleyball','team-menu')">كرة الطائرة</a>
-  <a href="#basketball" data-target="basketball" onclick="showSection('basketball','team-menu')">كرة السلة</a>
-  <a href="#handball" data-target="handball" onclick="showSection('handball','team-menu')">كرة اليد</a>
-  <a href="#futsal" data-target="futsal" onclick="showSection('futsal','team-menu')">كرة قدم الصالات</a>
-</div>
-
-<!-- Sections (examples) -->
 <section id="chess" class="section"><div class="info-container"><h2>الشطرنج</h2><p>تفاصيل لعبة الشطرنج…</p></div></section>
 <section id="taekwondo" class="section"><div class="info-container"><h2>التايكوندو</h2><p>تفاصيل لعبة التايكوندو…</p></div></section>
+<section id="judo" class="section"><div class="info-container"><h2>الجودو</h2><p>تفاصيل لعبة الجودو…</p></div></section>
+<section id="karate" class="section"><div class="info-container"><h2>الكاراتيه</h2><p>تفاصيل لعبة الكاراتيه…</p></div></section>
+<section id="cycling" class="section"><div class="info-container"><h2>الدراجات</h2><p>تفاصيل رياضة الدراجات…</p></div></section>
+<section id="athletics" class="section"><div class="info-container"><h2>ألعاب القوى</h2><p>تفاصيل ألعاب القوى…</p></div></section>
+<section id="pentathlon" class="section"><div class="info-container"><h2>الخماسي الحديث</h2><p>تفاصيل الخماسي الحديث…</p></div></section>
+<section id="badminton" class="section"><div class="info-container"><h2>الريشة الطائرة</h2><p>تفاصيل الريشة الطائرة…</p></div></section>
+
 <section id="volleyball" class="section"><div class="info-container"><h2>كرة الطائرة</h2><p>تفاصيل كرة الطائرة…</p></div></section>
 <section id="basketball" class="section"><div class="info-container"><h2>كرة السلة</h2><p>تفاصيل كرة السلة…</p></div></section>
+<section id="handball" class="section"><div class="info-container"><h2>كرة اليد</h2><p>تفاصيل كرة اليد…</p></div></section>
+<section id="futsal" class="section"><div class="info-container"><h2>كرة قدم الصالات</h2><p>تفاصيل كرة قدم الصالات…</p></div></section>
 
-<div class="hero-wrapper">
-
-  <section id="sports" class="hero-carousel">
-    <div id="hero-deck" class="hero-carousel"></div>
-  </section>
-
-  <section id="sports-home" class="section active">
-    <div class="info-container">
-      <h2>الألعاب الرياضية</h2>
-      <div class="info-grid">
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('chess')">الشطرنج</div>
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('taekwondo')">التايكوندو</div>
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('judo')">الجودو</div>
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('karate')">الكاراتيه</div>
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('cycling')">الدراجات</div>
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('athletics')">العاب القوى</div>
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('modern-pentathlon')">الخماسي الحديث</div>
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('badminton')">الريشة الطائرة</div>
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('volleyball')">كرة الطائرة</div>
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('basketball')">كرة السلة</div>
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('handball')">كرة اليد</div>
-        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('futsal')">كرة قدم الصالات</div>
-      </div>
-    </div>
-  </section>
-
-
-  <section id="chess" class="section" aria-labelledby="h-chess">
-    <div class="info-container">
-      <h2 id="h-chess">الشطرنج</h2>
-      <p>أهداف اللعبة، مواعيد التدريبات، الفئات السنية، المدربون، وآخر النتائج.</p>
-      <div class="tag">الفئات: U10 / U14 / ناشئين</div>
-      <div class="tag">الأيام: الإثنين – الخميس</div>
-      <div class="tag">المكان: صالة الألعاب الداخلية</div>
-    </div>
-  </section>
-
-  <section id="taekwondo" class="section" aria-labelledby="h-taekwondo">
-    <div class="info-container">
-      <h2 id="h-taekwondo">التايكوندو</h2>
-      <p>خطة التدريب، اختبارات الأحزمة، المشاركة في البطولات، متطلبات التسجيل.</p>
-    </div>
-  </section>
-
-  <section id="judo" class="section" aria-labelledby="h-judo">
-    <div class="info-container">
-      <h2 id="h-judo">الجودو</h2>
-      <p>برنامج اللياقة والمهارات، معسكرات خارجية، جدول المنافسات.</p>
-    </div>
-  </section>
-
-  <section id="karate" class="section" aria-labelledby="h-karate">
-    <div class="info-container">
-      <h2 id="h-karate">الكاراتيه</h2>
-      <p>كاتا وقتال، المستويات والفئات، تعليمات السلامة والمعدات المطلوبة.</p>
-    </div>
-  </section>
-
-  <section id="cycling" class="section" aria-labelledby="h-cycling">
-    <div class="info-container">
-      <h2 id="h-cycling">الدراجات</h2>
-      <p>جولات الطريق، سباقات الزمن، صيانة الدراجة، نقاط التجمع والمسارات.</p>
-    </div>
-  </section>
-
-  <section id="athletics" class="section" aria-labelledby="h-athletics">
-    <div class="info-container">
-      <h2 id="h-athletics">العاب القوى</h2>
-      <p>عدو وحواجز، رمي، قفز، برامج الإعداد الفني والبدني.</p>
-    </div>
-  </section>
-
-  <section id="modern-pentathlon" class="section" aria-labelledby="h-penta">
-    <div class="info-container">
-      <h2 id="h-penta">الخماسي الحديث</h2>
-      <p>السباحة، السلاح، الفروسية، الجري والرماية – متطلبات الانضمام.</p>
-    </div>
-  </section>
-
-  <section id="badminton" class="section" aria-labelledby="h-badminton">
-    <div class="info-container">
-      <h2 id="h-badminton">الريشة الطائرة</h2>
-      <p>جداول التدريب، الفئات العمرية، القوانين المختصرة للمبتدئين.</p>
-    </div>
-  </section>
-
-  <section id="volleyball" class="section" aria-labelledby="h-volleyball">
-    <div class="info-container">
-      <h2 id="h-volleyball">كرة الطائرة</h2>
-      <p>الفريق الأول والفئات السنية، مواعيد المباريات والتجارب المفتوحة.</p>
-    </div>
-  </section>
-
-  <section id="basketball" class="section" aria-labelledby="h-basketball">
-    <div class="info-container">
-      <h2 id="h-basketball">كرة السلة</h2>
-      <p>مراكز اللعب، برامج المهارات، مسابقات المدارس والشراكات.</p>
-    </div>
-  </section>
-
-  <section id="handball" class="section" aria-labelledby="h-handball">
-    <div class="info-container">
-      <h2 id="h-handball">كرة اليد</h2>
-      <p>الفريق، أجهزة فنية، تقويم البطولات المحلية.</p>
-    </div>
-  </section>
-
-  <section id="futsal" class="section" aria-labelledby="h-futsal">
-    <div class="info-container">
-      <h2 id="h-futsal">كرة قدم الصالات</h2>
-      <p>فريق الصالات، أماكن التدريب الداخلية، لوائح المشاركة.</p>
-    </div>
-  </section>
-
-</div>
-	
 <script>
+
+  const SPORTS = {
+    individual: [
+      {id:'chess',label:'الشطرنج'},
+      {id:'taekwondo',label:'التايكوندو'},
+      {id:'judo',label:'الجودو'},
+      {id:'karate',label:'الكاراتيه'},
+      {id:'cycling',label:'الدراجات'},
+      {id:'athletics',label:'ألعاب القوى'},
+      {id:'pentathlon',label:'الخماسي الحديث'},
+      {id:'badminton',label:'الريشة الطائرة'},
+    ],
+    team: [
+      {id:'volleyball',label:'كرة الطائرة'},
+      {id:'basketball',label:'كرة السلة'},
+      {id:'handball',label:'كرة اليد'},
+      {id:'futsal',label:'كرة قدم الصالات'},
+    ]
+  };
+
+  function showCategory(type){
+    const cats = document.getElementById('categories');
+    if (cats) cats.style.display = 'none';
+    const topNav = document.getElementById('sportsTopNav');
+    if (!topNav) return;
+    topNav.innerHTML = SPORTS[type].map(s =>
+      `<a href="#${s.id}" data-target="${s.id}" onclick="showSection('${s.id}')">${s.label}</a>`
+    ).join('');
+    topNav.style.display = 'flex';
+
+    if (SPORTS[type][0]) showSection(SPORTS[type][0].id);
+  }
+
+  function showSection(id){
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    const el = document.getElementById(id);
+    if (el) el.classList.add('active');
+
+    document.querySelectorAll('#sportsTopNav a').forEach(a => a.classList.remove('active'));
+    const link = document.querySelector(`#sportsTopNav a[data-target="${id}"]`);
+    if (link) link.classList.add('active');
+
+    if (id && location.hash !== '#'+id) history.replaceState(null,'','#'+id);
+  }
+
+  window.addEventListener('DOMContentLoaded', ()=>{
+    const hash = (location.hash||'').replace('#','');
+    if (!hash) return;
+
+    const inIndividual = SPORTS.individual.some(s=>s.id===hash);
+    const inTeam = SPORTS.team.some(s=>s.id===hash);
+
+    if (inIndividual) { showCategory('individual'); showSection(hash); }
+    if (inTeam)       { showCategory('team');       showSection(hash); }
+  });
+
 (function () {
   const nav = document.getElementById('navLinks');
   const btn = document.querySelector('.menu-toggle');
