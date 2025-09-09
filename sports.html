@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#000000">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
-  <style>  
+   <style>  
     @font-face {
       font-family: 'NotoKufiArabic';
       src: url('NotoKufiArabic.ttf') format('truetype');
@@ -32,87 +32,172 @@
       direction: rtl;
     }
     
-    header {
-      background-color: #111;
-      padding: 16px 5%;
-      margin: 0 auto;
-      width: 90%;
-      display: flex;
+header {
+  background-color: #111;
+  padding: 16px 5%;
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid #f4e733;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+  flex-wrap: wrap;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+  min-width: 0;
+}
+
+.header-right img.logo {
+  height: 70px;
+  object-fit: contain;
+}
+
+.header-right .divider {
+  width: 1.5px;
+  height: 65px;
+  background-color: #f4e733;
+}
+
+.header-info {
+  text-align: right;
+  min-width: 0;
+}
+
+.header-info .arabic-name {
+  font-weight: bold;
+  font-size: 18px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.header-info .english-name {
+  font-size: 16px;
+  color: #f4e733;
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 70px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: #f4e733;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover { color: #fff; }
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #f4e733;
+  cursor: pointer;
+  padding: 5px;
+}
+
+body.no-scroll { overflow: hidden; }
+
+    .hero-carousel {
+      width: 100%;
+      display: flex;  
+      justify-content: center;
       align-items: center;
-      justify-content: space-between;
-      border-bottom: 3px solid #f4e733;
-      position: sticky;
-      top: 0;
-      z-index: 1001;
-      flex-wrap: wrap;
+      background: transparent;
+      padding: 40px 0;
     }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      flex: 1;
-      min-width: 0;
+     
+    .carousel-container {
+      width: 88%;
+      max-width: 1170px;
+      margin: 40px auto;       
+      position: relative;
+      z-index: 1;
+      height: 520px;
+      background: #000;
+      border: 2px solid #f4e733;
+      border-radius: 16px;
+      overflow: hidden;            
     }
-
-    .header-right img.logo {
-      height: 70px;
-      object-fit: contain;
-    }
-
-    .header-right .divider {
-      width: 1.5px;
-      height: 65px;
-      background-color: #f4e733;
-    }
-
-    .header-info {
-      text-align: right;
-      min-width: 0;
-    }
-
-    .header-info .arabic-name {
-      font-weight: bold;
-      font-size: 18px;
-      color: #FFFFFF;
-      margin: 0;
-    }
-
-    .header-info .english-name {
-      font-size: 16px;
-      color: #f4e733;
-      margin: 0;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 70px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      color: #f4e733;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-      transition: color 0.3s;
-      white-space: nowrap;
-    }
-
-    .nav-links a:hover { color: #fff; }
-
-    .menu-toggle {
+    
+    .carousel-slide {
       display: none;
-      font-size: 24px;
-      background: none;
-      border: none;
-      color: #f4e733;
-      cursor: pointer;
-      padding: 5px;
+      position: absolute; 
+      top: 0; 
+      left: 0;
+      width: 100%; 
+      height: 100%;
     }
-
-    body.no-scroll { overflow: hidden; }
-
+    
+    .carousel-slide img {
+      width: 100%; 
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0;            
+    }
+    
+    .caption {
+      position: absolute; 
+      left: 0; 
+      right: 0; 
+      bottom: 0;
+      padding: 15px 20px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff; 
+      text-align: right;
+      height: auto;                 
+      border-radius: 0;           
+      overflow: hidden;
+      z-index: 2;
+    }
+    
+    .prev, .next {
+      cursor: pointer;
+      position: absolute; 
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 12px;
+      color: #fff; 
+      font-size: 22px;
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 10px;
+      user-select: none;
+      transition: .3s;
+      z-index: 3;                  
+    }
+    
+    .prev:hover, .next:hover { 
+      background-color: #f4e733; 
+      color: #000; 
+    }
+    
+    .prev { 
+      left: 10px; 
+    }
+    
+    .next { 
+      right: 10px; 
+    }
+    
+    .fade {
+      animation: fade 1s ease-in-out;
+    }
+    
     @keyframes fade {
       from { opacity: 0.4; }
       to { opacity: 1; }
@@ -738,16 +823,16 @@
       gap: 8px;
       flex-wrap: nowrap;
       overflow-x: auto;
-      overflow-y: hidden;
+	  overflow-y: hidden;
       box-sizing: border-box;
-      -webkit-overflow-scrolling: touch;
+	  -webkit-overflow-scrolling: touch;
     }
     
-    .side-menu.top-nav a {
-      flex: 0 0 auto;
-      min-width: 120px;
-      white-space: nowrap;
-      scroll-snap-align: center;
+	.side-menu.top-nav a {
+     flex: 0 0 auto;
+     min-width: 120px;
+     white-space: nowrap;
+     scroll-snap-align: center;
     }
 
     .side-menu.top-nav.visible {
@@ -765,375 +850,373 @@
       display: none; 
     }
     
-    body.with-top-nav {
-      padding-top: 0 !important;
-    }
+body.with-top-nav {
+  padding-top: 0 !important;
+}
 
-    .main-nav {
-      display: flex;
-      justify-content: center;  
-      gap: 42px;                 
-      padding: 0;
-      margin: 0;
-      direction: rtl;            
-    }
-    .main-nav a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: 700;
-      font-size: 16px;
-      padding: 18px 0;
-      transition: color .2s;
-    }
+.main-nav {
+  display: flex;
+  justify-content: center;  
+  gap: 42px;                 
+  padding: 0;
+  margin: 0;
+  direction: rtl;            
+}
+.main-nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 18px 0;
+  transition: color .2s;
+}
 
-    .main-nav a:hover {
-      color: #f4e733; 
-    }
+.main-nav a:hover {
+  color: #f4e733; 
+}
 
-    .mobile-nav { display: none; }
+.mobile-nav { display: none; }
 
-    @media (max-width: 600px) {
-      #chat-box .chat-header { display:flex !important; }
-      #inner-input-bar.active { display:flex !important; }
-      
-      #chat-tooltip {
-        font-size: 12px !important;
-        padding: 8px 10px !important;
-        right: 8px !important;
-        bottom: 60px !important;
-      }
-      .chat-body {
-        flex: 1;
-        overflow-y: auto !important;
-        padding: 10px !important;
-      }
 
-      .chat-footer input {
-        font-size: 14px !important;
-        padding: 6px !important;
-      }
+@media (max-width: 600px) {
+  #chat-box .chat-header { display:flex !important; }
+  #inner-input-bar.active { display:flex !important; }
+  
+  #chat-tooltip {
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+    right: 8px !important;
+    bottom: 60px !important;
+  }
+.chat-body {
+    flex: 1;
+    overflow-y: auto !important;
+    padding: 10px !important;
+  }
 
-      .chat-footer button {
-        width: 34px !important;
-        height: 34px !important;
-      }
+  .chat-footer input {
+    font-size: 14px !important;
+    padding: 6px !important;
+  }
 
-      .chat-btn {
-        font-size: 14px !important;
-        padding: 10px 14px !important;
-      }
+  .chat-footer button {
+    width: 34px !important;
+    height: 34px !important;
+  }
 
-      .content {
-        font-size: 15px !important;
-      }
+  .chat-btn {
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+  }
 
-      .message-wrapper {
-        margin: 6px !important;
-        gap: 8px !important;
-      }
+  .content {
+    font-size: 15px !important;
+  }
 
-      header h1 {
-        font-size: 18px !important;
-      }
+  .message-wrapper {
+    margin: 6px !important;
+    gap: 8px !important;
+  }
 
-      header img {
-        height: 50px !important;
-      }
-    }
+  header h1 {
+    font-size: 18px !important;
+  }
 
-    @media (max-width: 768px) {
-      #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
-      #inner-input-bar.active { display:flex !important; }
-      
-      #chat-box {
-        width: 94% !important;
-        right: 3% !important;
-        height: 460px !important;
-        max-height: 70vh !important;
-      }
-      
-      #chat-box.open {
-        display: flex !important;
-        flex-direction: column !important;
-      }
-      
-      .chat-body {
-        max-height: 55vh !important;
-        overflow-y: auto !important;
-      }
-      *, *::before, *::after { box-sizing: border-box; }
+  header img {
+    height: 50px !important;
+  }
+}
 
-      img, video, iframe { max-width: 100%; height: auto; }
+@media (max-width: 768px) {
+  #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
+  #inner-input-bar.active { display:flex !important; }
+  
+  #chat-box {
+    width: 94% !important;
+    right: 3% !important;
+    height: 460px !important;
+    max-height: 70vh !important;
+  }
+	
+  #chat-box.open {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+	
+  .chat-body {
+    max-height: 55vh !important;
+    overflow-y: auto !important;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
 
-      :where(p, h1, h2, h3, h4, h5, h6, a, li, td) { overflow-wrap: anywhere; }
-      
-      .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
-      
-      #chat-box[style*="display: none"] { pointer-events: none; }
-      .nav-links { pointer-events: none; }
-      .nav-links.show { pointer-events: auto; }
-      
-      .nav-links {
-        position: fixed; top: 0; right: -100%;
-        width: 78%; height: 100vh; padding: 70px 20px;
-        background: #000; border-left: 2px solid #f4e733;
-        display: flex; flex-direction: column; gap: 10px;
-        transition: right .3s ease;
-        z-index: 1000;
-      }
-      .mobile-nav { display: block !important; }	
-      .nav-links.show { right: 0; }
-      .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
+  img, video, iframe { max-width: 100%; height: auto; }
 
-      body { background-attachment: scroll !important; }
+  :where(p, h1, h2, h3, h4, h5, h6, a, li, td) { overflow-wrap: anywhere; }
+	
+  .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
+	
+  #chat-box[style*="display: none"] { pointer-events: none; }
+   .nav-links { pointer-events: none; }
+   .nav-links.show { pointer-events: auto; }
+	
+  .nav-links {
+    position: fixed; top: 0; right: -100%;
+    width: 78%; height: 100vh; padding: 70px 20px;
+    background: #000; border-left: 2px solid #f4e733;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: right .3s ease;
+    z-index: 1000;
+  }
+  .mobile-nav { display: block !important; }	
+  .nav-links.show { right: 0; }
+  .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
 
-      .header-info .arabic-name,
-      .header-info .english-name {
-        white-space: nowrap;        
-        line-height: 1.2;
-      }
+  body { background-attachment: scroll !important; }
 
-      .header-right { gap: 6px !important; }
-      .header-right img.logo { height: 40px !important; }
-      .header-right .divider { display: none !important; }	
-      .header-right { flex-direction: row !important; align-items: center !important; gap: 2px !important; }
-      
-      .header-info {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;  
-        text-align: center !important;   
-        gap: 6px !important;             
-      }
-      
-      .header-info .arabic-name,
-      .header-info .english-name { white-space: nowrap; line-height: 1.2; font-size: 12px !important; }
-      
-      #chat-box {
-        position: fixed; right: 20px; bottom: 90px;
-        width: 360px; max-width: 90%; max-height: 85vh;
-        display: none;
-        flex-direction: column; overflow: hidden; z-index: 9999;
-      }
-      .footer-column { min-width: 0 !important; width: 100% !important; }
-      .footer-column h3 { font-size: 16px !important; margin-bottom: 10px; }
-      .footer-column a { font-size: 14px !important; }
-      textarea { width: 100% !important; height: 120px !important; }
-      button[type="submit"] { width: 100% !important; }
-      header, footer { padding: 12px 16px !important; }
+  .header-info .arabic-name,
+  .header-info .english-name {
+    white-space: nowrap;        
+    line-height: 1.2;
+  }
 
-      header, footer {
-        width: 100% !important;
-        padding: 12px 16px !important;
-      }
+  .header-right { gap: 6px !important; }
+  .header-right img.logo { height: 40px !important; }
+  .header-right .divider { display: none !important; }	
+  .header-right { flex-direction: row !important; align-items: center !important; gap: 2px !important; }
+	
+.header-info {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;  
+  text-align: center !important;   
+  gap: 6px !important;             
+}
+	
+  .header-info .arabic-name,
+  .header-info .english-name { white-space: nowrap; line-height: 1.2; font-size: 12px !important; }
+	
+  #chat-box {
+    position: fixed; right: 20px; bottom: 90px;
+    width: 360px; max-width: 90%; max-height: 85vh;
+    display: none;
+    flex-direction: column; overflow: hidden; z-index: 9999;
+  }
+  .footer-column { min-width: 0 !important; width: 100% !important; }
+  .footer-column h3 { font-size: 16px !important; margin-bottom: 10px; }
+  .footer-column a { font-size: 14px !important; }
+  textarea { width: 100% !important; height: 120px !important; }
+  button[type="submit"] { width: 100% !important; }
+  header, footer { padding: 12px 16px !important; }
 
-      .nav-links { gap: 12px !important; flex-wrap: wrap; }
-      .nav-links a { font-size: 14px !important; }
-      
-      header { 
-        padding-inline: 16px !important;           
-      }
+  header, footer {
+    width: 100% !important;
+    padding: 12px 16px !important;
+  }
 
-      .header-right {
-        gap: 8px !important;                        
-        align-items: center !important;
-      }
+  .nav-links { gap: 12px !important; flex-wrap: wrap; }
+  .nav-links a { font-size: 14px !important; }
+	
+header { 
+  padding-inline: 16px !important;           
+}
 
-      .header-right img.logo {
-        height: 40px !important;
-        margin: 0 !important;
-      }
+.header-right {
+  gap: 8px !important;                        
+  align-items: center !important;
+}
 
-      .header-right .divider {
-        display: inline-block !important;
-        height: 40px !important;
-        margin-inline: 8px !important;           
-      }
+.header-right img.logo {
+  height: 40px !important;
+  margin: 0 !important;
+}
 
-      .mobile-nav .menu-toggle {
-        padding: 0 !important;
-        width: 36px !important;
-        height: 36px !important;
-        display: grid !important;
-        place-items: center !important;
-        line-height: 1 !important;
-        margin: 0 !important;
-      }
-      
-      .header-info {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 6px !important;          
-      }
+.header-right .divider {
+  display: inline-block !important;
+  height: 40px !important;
+  margin-inline: 8px !important;           
+}
 
-      .header-info .arabic-name {
-        font-size: 14px !important;
-      }
+.mobile-nav .menu-toggle {
+  padding: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: grid !important;
+  place-items: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+	
+  .header-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;          
+  }
 
-      .header-info .english-name {
-        font-size: 12px !important;
-        color: #f4e733;
-      }
+  .header-info .arabic-name {
+    font-size: 14px !important;
+  }
 
-      .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 75%;
-        height: 100vh;
-        background: #000;
-        border-left: 2px solid #f4e733;
-        padding: 60px 20px 20px;
-        flex-direction: column;
-        gap: 15px;
-        transition: right 0.3s ease;
-        z-index: 1000;
-      }
+  .header-info .english-name {
+    font-size: 12px !important;
+    color: #f4e733;
+  }
 
-      .nav-links.show {
-        right: 0;
-      }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    height: 100vh;
+    background: #000;
+    border-left: 2px solid #f4e733;
+    padding: 60px 20px 20px;
+    flex-direction: column;
+    gap: 15px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
 
-      .nav-links a {
-        padding: 12px 0;
-        font-size: 16px;
-        border-bottom: 1px solid #222;
-      }
+  .nav-links.show {
+    right: 0;
+  }
 
-      footer {
-        padding: 20px 15px !important;
-        width: 100% !important;
-        flex-direction: column;
-        gap: 20px;
-      }
+  .nav-links a {
+    padding: 12px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #222;
+  }
 
-      .footer-column {
-        width: 90%;
-        min-width: auto;
-      }
+  footer {
+    padding: 20px 15px !important;
+    width: 100% !important;
+    flex-direction: column;
+    gap: 20px;
+  }
 
-      .footer-column h3 {
-        font-size: 16px !important;
-        margin-bottom: 10px;
-      }
+  .footer-column {
+    width: 90%;
+    min-width: auto;
+  }
 
-      .footer-column a {
-        font-size: 14px !important;
-      }
+  .footer-column h3 {
+    font-size: 16px !important;
+    margin-bottom: 10px;
+  }
 
-      .social-icons {
-        justify-content: flex-start;
-        gap: 15px;
-      }
+  .footer-column a {
+    font-size: 14px !important;
+  }
 
-      .footer-bottom {
-        margin-top: 20px;
-        padding-top: 15px;
-        font-size: 12px;
-      }
+  .social-icons {
+    justify-content: flex-start;
+    gap: 15px;
+  }
 
-      textarea {
-        height: 120px !important;
-      }
+  .footer-bottom {
+    margin-top: 20px;
+    padding-top: 15px;
+    font-size: 12px;
+  }
 
-      button[type="submit"] {
-        width: 100% !important;
-      }
-      footer button[type="submit"] {
-        background-color: #f4e733 !important;
-        color: #000 !important;
-      }
+  textarea {
+    height: 120px !important;
+  }
 
-      #chat-box {
-        width: 94% !important;
-        right: 3% !important;
-        height: 460px !important;
-        max-height: 70vh !important;
-      }
+  button[type="submit"] {
+    width: 100% !important;
+  }
+  footer button[type="submit"] {
+    background-color: #f4e733 !important;
+    color: #000 !important;
+  }
 
-      .chat-body {
-        max-height: 55vh !important;
-      }
+  #chat-box {
+    width: 94% !important;
+    right: 3% !important;
+    height: 460px !important;
+    max-height: 70vh !important;
+  }
 
-      @keyframes tooltip-pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.03); }
-      }
+  .chat-body {
+    max-height: 55vh !important;
+  }
 
-      @keyframes tooltip-fade {
-        0%, 80% { opacity: 1; visibility: visible; }
-        100% { opacity: 0; visibility: hidden; }
-      }
-    }	
+  @keyframes tooltip-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
 
-    @media (max-width: 768px) {
-      .mobile-nav { display: block; }
-      .menu-toggle { display: block; }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background: rgba(0,0,0,0.95);
-        position: absolute;
-        top: var(--headerH, 72px);
-        right: 0;
-        width: 100%;
-        padding: 20px;
-      }
-      .nav-links.show { display: flex; }
-    }
+  @keyframes tooltip-fade {
+    0%, 80% { opacity: 1; visibility: visible; }
+    100% { opacity: 0; visibility: hidden; }
+  }
+	}	
 
-    @media (max-width: 600px) {
-      #chat-box .chat-header { display:flex !important; }
-      #inner-input-bar.active { display:flex !important; }
-      
-      #chat-tooltip {
-        font-size: 12px !important;
-        padding: 8px 10px !important;
-        right: 8px !important;
-        bottom: 80px !important;
-      }
-      #chat-tooltip span:last-child {
-        font-size: 14px !important;
-      }
-    }
+@media (max-width: 768px) {
+  .mobile-nav { display: block; }
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: rgba(0,0,0,0.95);
+    position: absolute;
+    top: var(--headerH, 72px);
+    right: 0;
+    width: 100%;
+    padding: 20px;
+  }
+  .nav-links.show { display: flex; }
+}
 
-    @media (max-width: 768px){
-      .side-menu.top-nav{
-        position: fixed;
-        top: var(--headerH,72px);
-        right: 0; left: 0;
-        width: 100% !important;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap !important;
-        gap: 6px;
-        padding: 6px 4px;
-        background: rgba(0,0,0,0.95);
-        border: 0;
-        border-bottom: 2px solid #f4e733;
-        border-radius: 0 0 10px 10px;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        -webkit-overflow-scrolling: touch;
-        z-index: 1002;
-      }
+@media (max-width: 600px) {
+  #chat-box .chat-header { display:flex !important; }
+  #inner-input-bar.active { display:flex !important; }
+  
+  #chat-tooltip {
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+    right: 8px !important;
+    bottom: 80px !important;
+  }
+  #chat-tooltip span:last-child {
+    font-size: 14px !important;
+  }
+}
 
-      .side-menu.top-nav a{
-        flex: 0 0 auto;
-        white-space: nowrap;
-        min-width: 80px;
-        padding: 6px 8px;
-        font-size: 13px;
-        border-bottom: none;
-      }
+@media (max-width: 768px){
+  .side-menu.top-nav{
+    position: fixed;
+    top: var(--headerH,72px);
+    right: 0; left: 0;
+    width: 100% !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap !important;
+    gap: 6px;
+    padding: 6px 4px;
+    background: rgba(0,0,0,0.95);
+    border: 0;
+    border-bottom: 2px solid #f4e733;
+    border-radius: 0 0 10px 10px;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1002;
+  }
 
-      .side-menu .sm-indicator{ display: none !important; }
-      body.with-top-nav {padding-top: 0 !important;}
-    }
+  .side-menu.top-nav a{
+    flex: 0 0 auto;
+    white-space: nowrap;
+    min-width: 80px;
+    padding: 6px 8px;
+    font-size: 13px;
+    border-bottom: none;
+  }
 
-    body.with-sidebar .main-wrap {
-      padding-right: 160px;
-    }
+  .side-menu .sm-indicator{ display: none !important; }
+  body.with-top-nav {padding-top: 0 !important;}
+}
+
   </style>
 </head>
 <body>
@@ -1163,431 +1246,985 @@
   </nav>
 </header>
 
-<nav id="sideMenu" class="side-menu">
-  <a data-mode="category" data-cat="team" href="javascript:void(0)" onclick="pickCategory('team')">الألعاب الجماعية</a>
-  <a data-mode="category" data-cat="individual" href="javascript:void(0)" onclick="pickCategory('individual')">الألعاب الفردية</a>
-  <a data-mode="category" data-cat="water" href="javascript:void(0)" onclick="pickCategory('water')">الألعاب المائية</a>
-  <a data-mode="category" data-cat="other" href="javascript:void(0)" onclick="pickCategory('other')">ألعاب أخرى</a>
-  <a data-mode="category" data-cat="history" href="javascript:void(0)" onclick="pickCategory('history')">تاريخ النادي</a>
-  <a data-mode="category" data-cat="org" href="javascript:void(0)" onclick="pickCategory('org')">الهيكل التنظيمي</a>
-  <div class="sm-indicator"></div>
-</nav>
-
-<div class="main-wrap">
-  <div class="info-container">
-    <h2>مرحباً بكم في قسم الألعاب الرياضية</h2>
-    <p>يقدم نادي كلباء الرياضي الثقافي مجموعة متنوعة من الألعاب الرياضية التي تناسب جميع الأعمار والمستويات. سواء كنت مبتدئاً أو محترفاً، ستجد لدينا البرامج والمرافق المناسبة لممارسة رياضتك المفضلة.</p>
+<div id="categories" class="category-grid">
+  <div class="category-box" onclick="showCategory('individual')">
+    🎯 <h2>الألعاب الفردية</h2>
+    <p>الشطرنج، التايكوندو، الجودو، الكاراتيه، الدراجات، العاب القوى، الخماسي الحديث، الريشة الطائرة</p>
   </div>
+  <div class="category-box" onclick="showCategory('team')">
+    🏆 <h2>الألعاب الجماعية</h2>
+    <p>كرة الطائرة، كرة السلة، كرة اليد، كرة قدم الصالات</p>
+  </div>
+</div>
 
-  <section id="team" class="section">
-    <div class="info-container">
-      <h2>الألعاب الجماعية</h2>
-      <p>تعتبر الألعاب الجماعية من أهم الأنشطة التي يقدمها النادي، حيث تعزز روح الفريق والتعاون بين الأعضاء:</p>
-      <ul>
-        <li><strong>كرة القدم:</strong> تضم فرقاً للشباب والناشئين والكبار، مع مدربين متخصصين وملاعب عشبية حديثة.</li>
-        <li><strong>كرة اليد:</strong> فريق متميز يحقق إنجازات على مستوى الدولة.</li>
-        <li><strong>كرة السلة:</strong> برامج تدريبية للشباب والكبار، مع ملاعب داخلية مجهزة.</li>
-        <li><strong>كرة الطائرة:</strong> تدريبات منتظمة ومسابقات دورية.</li>
-      </ul>
-    </div>
+<div id="individual-menu" class="side-menu">
+  <a href="#chess" data-target="chess" onclick="showSection('chess','individual-menu')">الشطرنج</a>
+  <a href="#taekwondo" data-target="taekwondo" onclick="showSection('taekwondo','individual-menu')">التايكوندو</a>
+  <a href="#judo" data-target="judo" onclick="showSection('judo','individual-menu')">الجودو</a>
+  <a href="#karate" data-target="karate" onclick="showSection('karate','individual-menu')">الكاراتيه</a>
+  <a href="#cycling" data-target="cycling" onclick="showSection('cycling','individual-menu')">الدراجات</a>
+  <a href="#athletics" data-target="athletics" onclick="showSection('athletics','individual-menu')">العاب القوى</a>
+  <a href="#pentathlon" data-target="pentathlon" onclick="showSection('pentathlon','individual-menu')">الخماسي الحديث</a>
+  <a href="#badminton" data-target="badminton" onclick="showSection('badminton','individual-menu')">الريشة الطائرة</a>
+</div>
+
+<!-- Team sports menu -->
+<div id="team-menu" class="side-menu">
+  <a href="#volleyball" data-target="volleyball" onclick="showSection('volleyball','team-menu')">كرة الطائرة</a>
+  <a href="#basketball" data-target="basketball" onclick="showSection('basketball','team-menu')">كرة السلة</a>
+  <a href="#handball" data-target="handball" onclick="showSection('handball','team-menu')">كرة اليد</a>
+  <a href="#futsal" data-target="futsal" onclick="showSection('futsal','team-menu')">كرة قدم الصالات</a>
+</div>
+
+<!-- Sections (examples) -->
+<section id="chess" class="section"><div class="info-container"><h2>الشطرنج</h2><p>تفاصيل لعبة الشطرنج…</p></div></section>
+<section id="taekwondo" class="section"><div class="info-container"><h2>التايكوندو</h2><p>تفاصيل لعبة التايكوندو…</p></div></section>
+<section id="volleyball" class="section"><div class="info-container"><h2>كرة الطائرة</h2><p>تفاصيل كرة الطائرة…</p></div></section>
+<section id="basketball" class="section"><div class="info-container"><h2>كرة السلة</h2><p>تفاصيل كرة السلة…</p></div></section>
+
+<div class="hero-wrapper">
+
+  <section id="sports" class="hero-carousel">
+    <div id="hero-deck" class="hero-carousel"></div>
   </section>
 
-  <section id="individual" class="section">
+  <section id="sports-home" class="section active">
     <div class="info-container">
-      <h2>الألعاب الفردية</h2>
-      <p>نوفر مجموعة من الألعاب الفردية التي تساعد على تطوير المهارات الشخصية واللياقة البدنية:</p>
-      <ul>
-        <li><strong>التنس الأرضي:</strong> ملاعب مظللة ومدربين معتمدين لجميع المستويات.</li>
-        <li><strong>تنس الطاولة:</strong> قاعة مجهزة بأفضل المعدات ومسابقات دورية.</li>
-        <li><strong>الجمباز:</strong> برامج للأطفال والشباب لتنمية المرونة والتوازن.</li>
-        <li><strong>المبارزة:</strong> رياضة نخبوية يقدمها النادي بمدربين متخصصين.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="water" class="section">
-    <div class="info-container">
-      <h2>الألعاب المائية</h2>
-      <p>بفضل موقعنا الساحلي، نقدم مجموعة مميزة من الألعاب المائية:</p>
-      <ul>
-        <li><strong>السباحة:</strong> مسبح أولمبي معتمد مع مدربين معتمدين ودروس للجميع.</li>
-        <li><strong>التجديف:</strong> فرق تنافسية وبرامج ترفيهية في مياه الخليج.</li>
-        <li><strong>الرياضات المائية:</strong> زوارق ورياضات مائية متنوعة.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="other" class="section">
-    <div class="info-container">
-      <h2>ألعاب أخرى</h2>
-      <p>إضافة إلى الرياضات التقليدية، نقدم أنشطة رياضية متنوعة:</p>
-      <ul>
-        <li><strong>الرماية:</strong> نادي رماية مجهز بأحدث التقنيات ومدربين متخصصين.</li>
-        <li><strong>الفروسية:</strong> إسطبلات مجهزة وبرامج تعليمية للفروسية.</li>
-        <li><strong>الرياضات التقليدية:</strong> نحافظ على التراث من خلال رياضات مثل الصيد بالصقور.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="history" class="section">
-    <div class="info-container">
-      <h2>تاريخ النادي</h2>
-      <p>تأسس نادي كلباء الرياضي الثقافي في عام 1974، ويمثل أحد أبرز المؤسسات الرياضية والثقافية في إمارة الشارقة. على مر السنين، أصبح النادي منارة للرياضة والثقافة في منطقة كلباء، وساهم في اكتشاف وتطوير العديد من المواهب الرياضية التي مثلت الإمارات على المستويات المحلية والخليجية والعربية.</p>
-      <p>يضم النادي العديد من المرافق الرياضية المتطورة، بما في ذلك الملعب الرئيسي، والصالات المغطاة، وحمام السباحة، وملاعب التنس، وغيرها من المرافق التي تلبي احتياجات الأعضاء من مختلف الفئات العمرية.</p>
-    </div>
-  </section>
-
-  <section id="org" class="section">
-    <div class="info-container">
-      <h2>الهيكل التنظيمي</h2>
-      <div class="org-structure">
-        <div class="org-level">
-          <h3 class="org-title">الإدارة العليا</h3>
-          <div class="org-row">
-            <div class="org-item">
-              <h4>رئيس النادي</h4>
-              <p>سعادة / أحمد بن عبدالله القصير</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="org-level">
-          <h3 class="org-title">نواب الرئيس</h3>
-          <div class="org-row">
-            <div class="org-item">
-              <h4>نائب الرئيس</h4>
-              <p>سعادة / محمد بن سعيد الغفلي</p>
-            </div>
-            <div class="org-item">
-              <h4>نائب الرئيس</h4>
-              <p>سعادة / خالد بن أحمد السويدي</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="org-level">
-          <h3 class="org-title">أمناء الصندوق</h3>
-          <div class="org-row">
-            <div class="org-item">
-              <h4>أمين الصندوق</h4>
-              <p>سعادة / علي بن راشد النعيمي</p>
-            </div>
-            <div class="org-item">
-              <h4>نائب أمين الصندوق</h4>
-              <p>سعادة / سيف بن حمد الشامسي</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="org-level">
-          <h3 class="org-title">رؤساء الأقسام</h3>
-          <div class="org-row">
-            <div class="org-item">
-              <h4>رئيس قسم كرة القدم</h4>
-              <p>الأستاذ / سالم بن علي الكعبي</p>
-            </div>
-            <div class="org-item">
-              <h4>رئيس قسم كرة اليد</h4>
-              <p>الأستاذ / ناصر بن أحمد الظاهري</p>
-            </div>
-            <div class="org-item">
-              <h4>رئيس قسم السباحة</h4>
-              <p>الأستاذة / فاطمة بنت محمد الخاطري</p>
-            </div>
-            <div class="org-item">
-              <h4>رئيس قسم الثقافة والفنون</h4>
-              <p>الدكتور / عبدالله بن سليم الشامسي</p>
-            </div>
-          </div>
-        </div>
+      <h2>الألعاب الرياضية</h2>
+      <div class="info-grid">
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('chess')">الشطرنج</div>
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('taekwondo')">التايكوندو</div>
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('judo')">الجودو</div>
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('karate')">الكاراتيه</div>
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('cycling')">الدراجات</div>
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('athletics')">العاب القوى</div>
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('modern-pentathlon')">الخماسي الحديث</div>
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('badminton')">الريشة الطائرة</div>
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('volleyball')">كرة الطائرة</div>
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('basketball')">كرة السلة</div>
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('handball')">كرة اليد</div>
+        <div class="info-box" role="button" tabindex="0" onclick="gotoSport('futsal')">كرة قدم الصالات</div>
       </div>
     </div>
   </section>
-</div>
 
-<footer>
-  <div class="footer-column">
-    <h3>روابط سريعة</h3>
-    <a href="index.html">الرئيسية</a>
-    <a href="news.html">الأخبار</a>
-    <a href="sports.html">الألعاب الرياضية</a>
-    <a href="register.html">التسجيل</a>
-    <a href="evaluate.html">بوابة المدربين</a>
-    <a href="contact.html">اتصل بنا</a>
-  </div>
 
-  <div class="footer-column">
-    <h3>اتصل بنا</h3>
-    <p>كلباء، الشارقة، الإمارات العربية المتحدة</p>
-    <p>هاتف: 5555 333 9 971+</p>
-    <p>بريد إلكتروني: info@kalba-club.ae</p>
-    <div class="social-icons">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-youtube"></i></a>
+  <section id="chess" class="section" aria-labelledby="h-chess">
+    <div class="info-container">
+      <h2 id="h-chess">الشطرنج</h2>
+      <p>أهداف اللعبة، مواعيد التدريبات، الفئات السنية، المدربون، وآخر النتائج.</p>
+      <div class="tag">الفئات: U10 / U14 / ناشئين</div>
+      <div class="tag">الأيام: الإثنين – الخميس</div>
+      <div class="tag">المكان: صالة الألعاب الداخلية</div>
     </div>
-  </div>
+  </section>
 
-  <div class="footer-column">
-    <h3>ساعات العمل</h3>
-    <p>السبت - الخميس: 8 صباحاً - 10 مساءً</p>
-    <p>الجمعة: 4 مساءً - 10 مساءً</p>
-    <p>الصالة الرياضية: 24/7</p>
-  </div>
+  <section id="taekwondo" class="section" aria-labelledby="h-taekwondo">
+    <div class="info-container">
+      <h2 id="h-taekwondo">التايكوندو</h2>
+      <p>خطة التدريب، اختبارات الأحزمة، المشاركة في البطولات، متطلبات التسجيل.</p>
+    </div>
+  </section>
 
-  <div class="footer-column">
-    <h3>اشترك في النشرة الإخبارية</h3>
-    <form>
-      <textarea placeholder="أدscribe بريدك الإلكتروني للاشتراك في النشرة الإخبارية"></textarea>
-      <button type="submit">اشترك الآن</button>
-    </form>
-  </div>
+  <section id="judo" class="section" aria-labelledby="h-judo">
+    <div class="info-container">
+      <h2 id="h-judo">الجودو</h2>
+      <p>برنامج اللياقة والمهارات، معسكرات خارجية، جدول المنافسات.</p>
+    </div>
+  </section>
 
-  <div class="footer-bottom">
-    <p>© 2023 نادي كلباء الرياضي الثقافي. جميع الحقوق محفوظة.</p>
-  </div>
-</footer>
+  <section id="karate" class="section" aria-labelledby="h-karate">
+    <div class="info-container">
+      <h2 id="h-karate">الكاراتيه</h2>
+      <p>كاتا وقتال، المستويات والفئات، تعليمات السلامة والمعدات المطلوبة.</p>
+    </div>
+  </section>
 
-<div id="chat-wrapper">
-  <div id="chat-tooltip" style="display: none;">
-    <span>مرحباً! كيف يمكنني مساعدتك اليوم؟</span>
-    <span onclick="hideTooltip()" style="cursor:pointer; font-weight:bold;">✕</span>
-  </div>
-  <button id="chat-toggle" onclick="toggleChat()">
-    <div id="chat-badge" style="display: none;">1</div>
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 12H8.01M12 12H12.01M16 12H16.01M21 12C21 16.4183 16.9706 20 12 20C10.4607 20 9.01172 19.6565 7.74467 19.0511L3 20L4.39499 16.28C3.51156 15.0423 3 13.5743 3 12C3 7.58172 7.02944 4 12 4C16.9706 4 21 7.58172 21 12Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-    </svg>
-  </button>
+  <section id="cycling" class="section" aria-labelledby="h-cycling">
+    <div class="info-container">
+      <h2 id="h-cycling">الدراجات</h2>
+      <p>جولات الطريق، سباقات الزمن، صيانة الدراجة، نقاط التجمع والمسارات.</p>
+    </div>
+  </section>
+
+  <section id="athletics" class="section" aria-labelledby="h-athletics">
+    <div class="info-container">
+      <h2 id="h-athletics">العاب القوى</h2>
+      <p>عدو وحواجز، رمي، قفز، برامج الإعداد الفني والبدني.</p>
+    </div>
+  </section>
+
+  <section id="modern-pentathlon" class="section" aria-labelledby="h-penta">
+    <div class="info-container">
+      <h2 id="h-penta">الخماسي الحديث</h2>
+      <p>السباحة، السلاح، الفروسية، الجري والرماية – متطلبات الانضمام.</p>
+    </div>
+  </section>
+
+  <section id="badminton" class="section" aria-labelledby="h-badminton">
+    <div class="info-container">
+      <h2 id="h-badminton">الريشة الطائرة</h2>
+      <p>جداول التدريب، الفئات العمرية، القوانين المختصرة للمبتدئين.</p>
+    </div>
+  </section>
+
+  <section id="volleyball" class="section" aria-labelledby="h-volleyball">
+    <div class="info-container">
+      <h2 id="h-volleyball">كرة الطائرة</h2>
+      <p>الفريق الأول والفئات السنية، مواعيد المباريات والتجارب المفتوحة.</p>
+    </div>
+  </section>
+
+  <section id="basketball" class="section" aria-labelledby="h-basketball">
+    <div class="info-container">
+      <h2 id="h-basketball">كرة السلة</h2>
+      <p>مراكز اللعب، برامج المهارات، مسابقات المدارس والشراكات.</p>
+    </div>
+  </section>
+
+  <section id="handball" class="section" aria-labelledby="h-handball">
+    <div class="info-container">
+      <h2 id="h-handball">كرة اليد</h2>
+      <p>الفريق، أجهزة فنية، تقويم البطولات المحلية.</p>
+    </div>
+  </section>
+
+  <section id="futsal" class="section" aria-labelledby="h-futsal">
+    <div class="info-container">
+      <h2 id="h-futsal">كرة قدم الصالات</h2>
+      <p>فريق الصالات، أماكن التدريب الداخلية، لوائح المشاركة.</p>
+    </div>
+  </section>
+
 </div>
+	
+<script>
+(function () {
+  const nav = document.getElementById('navLinks');
+  const btn = document.querySelector('.menu-toggle');
+  const sideMenu = document.getElementById('sideMenu');
+  if (!nav || !btn) return;
+
+  function setOpen(open){
+    nav.classList.toggle('show', open);
+    document.body.classList.toggle('no-scroll', open);
+    btn.innerHTML = open ? '✕' : '☰';
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+    if (sideMenu){
+      if (open){
+        sideMenu.dataset.prevDisplay = sideMenu.style.display || '';
+        sideMenu.style.display = 'none';
+      } else {
+        sideMenu.style.display = sideMenu.dataset.prevDisplay || '';
+      }
+    }
+  }
+
+  const isOpen = () => nav.classList.contains('show');
+
+  window.toggleMenu = () => setOpen(!isOpen());
+
+  document.addEventListener('click', (e)=>{
+    if (!isOpen()) return;
+    if (!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+  });
+
+  nav.addEventListener('click', (e)=>{
+    if (e.target.closest('a') && window.innerWidth < 769) setOpen(false);
+  });
+
+  window.addEventListener('resize', ()=>{
+    if (window.innerWidth >= 769) setOpen(false);
+  });
+})();
+
+function updateHeaderHeight() {
+  const header = document.querySelector('header');
+  if (!header) return;
+  const headerHeight = header.offsetHeight;
+  document.documentElement.style.setProperty('--headerH', `${headerHeight}px`);
+}
+window.addEventListener('load', updateHeaderHeight);
+window.addEventListener('resize', updateHeaderHeight);
+
+
+(function(){
+  let tooltipDismissed = false;
+
+  function dismissTooltip(){
+    const tooltip = document.getElementById('chat-tooltip');
+    if (tooltip){
+      tooltip.style.display = 'none';
+      tooltipDismissed = true;
+    }
+  }
+  window.dismissTooltip = dismissTooltip;
+
+  window.toggleChat = function(){
+    const chatBox  = document.getElementById('chat-box');
+    const badge    = document.getElementById('chat-badge');
+    const tooltip  = document.getElementById('chat-tooltip');
+    if (!chatBox) return;
+
+    if (typeof dismissTooltip === 'function') dismissTooltip();
+
+    const alreadyStarted = !!chatBox.querySelector('.message-wrapper');
+    const isHidden = getComputedStyle(chatBox).display === 'none';
+
+    if (isHidden){
+      chatBox.style.display = 'flex';
+      chatBox.classList.add('open');
+      if (badge)   badge.style.display = 'none';
+      if (tooltip) tooltip.style.display = 'none';
+      requestAnimationFrame(()=>{
+        chatBox.style.opacity   = '1';
+        chatBox.style.transform = 'translateY(0)';
+      });
+      if (typeof startChat === 'function' && !alreadyStarted) startChat();
+    } else {
+      chatBox.style.opacity   = '0';
+      chatBox.style.transform = 'translateY(30px)';
+      setTimeout(()=>{
+        chatBox.classList.remove('open');
+        chatBox.style.display = 'none';
+        if (badge) badge.style.display = 'flex';
+      }, 500);
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
+    if (tooltipCloseBtn) tooltipCloseBtn.addEventListener('click', dismissTooltip);
+
+    const chatInput = document.getElementById('userMessage');
+    if (chatInput){
+      chatInput.addEventListener('focus', function(){ this.style.pointerEvents = 'auto'; });
+    }
+  });
+})();
+
+(function(){
+  const sideMenu = document.getElementById('sideMenu');
+  const header   = document.querySelector('header');
+  if (!sideMenu) return;
+
+  function setHeaderH(){
+    const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
+    document.documentElement.style.setProperty('--headerH', h + 'px');
+  }
+  const isMobile = ()=> window.innerWidth <= 768;
+
+  function applyMode(){
+    const scrolled     = (window.pageYOffset || document.documentElement.scrollTop) > 200;
+    const shouldTopNav = isMobile() || scrolled;
+
+    if (shouldTopNav){
+      sideMenu.classList.add('top-nav');
+      document.body.classList.add('with-top-nav');
+
+      requestAnimationFrame(()=>{
+        const h = Math.ceil(sideMenu.getBoundingClientRect().height || 56);
+        document.documentElement.style.setProperty('--topNavH', h + 'px');
+        sideMenu.classList.add('visible');
+      });
+    } else {
+      sideMenu.classList.remove('visible', 'top-nav');
+      document.body.classList.remove('with-top-nav');
+      document.documentElement.style.removeProperty('--topNavH');
+    }
+  }
+
+  window.addEventListener('load',  ()=>{ setHeaderH(); applyMode(); });
+  window.addEventListener('resize',()=>{ setHeaderH(); applyMode(); });
+  window.addEventListener('scroll', applyMode, { passive:true });
+
+  const indicator = document.createElement('span');
+  indicator.className = 'sm-indicator';
+  sideMenu.appendChild(indicator);
+
+  function moveIndicatorTo(link){
+    const r  = link.getBoundingClientRect();
+    const mr = sideMenu.getBoundingClientRect();
+    indicator.style.top    = (r.top - mr.top + (r.height - 40)/2) + 'px';
+    indicator.style.height = Math.min(44, r.height) + 'px';
+  }
+  window.moveIndicatorTo = moveIndicatorTo;
+
+  document.querySelectorAll('#sideMenu a').forEach((el,i)=> el.style.setProperty('--i', i));
+
+  sideMenu.addEventListener('pointermove', (e)=>{
+    const t = e.target.closest('a'); if(!t) return;
+    const r = t.getBoundingClientRect();
+    t.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    t.style.setProperty('--my', (e.clientY - r.top)  + 'px');
+  });
+
+  const sections = ['history','president','vice','board','orgstructure']
+    .map(id => document.getElementById(id)).filter(Boolean);
+
+  const obs = new IntersectionObserver((entries)=>{
+    const visible = entries.filter(e=>e.isIntersecting)
+                           .sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if(!visible) return;
+    const id = visible.target.id;
+    const link = Array.from(sideMenu.querySelectorAll('a'))
+      .find(a => a.onclick?.toString().includes(id));
+    if(link){
+      sideMenu.querySelectorAll('a').forEach(a=>a.classList.remove('active'));
+      link.classList.add('active');
+      moveIndicatorTo(link);
+    }
+  },{ rootMargin:"-20% 0px -60% 0px", threshold:[0.2,0.4,0.6,0.8] });
+
+  sections.forEach(sec => obs.observe(sec));
+
+  window.addEventListener('load', ()=>{
+    const first = sideMenu.querySelector('a');
+    if(first){ first.classList.add('active'); moveIndicatorTo(first); }
+  });
+  window.addEventListener('resize', ()=>{
+    const active = sideMenu.querySelector('a.active') || sideMenu.querySelector('a');
+    if(active) moveIndicatorTo(active);
+  });
+})();
+
+(function(){
+  const sideMenu = document.getElementById('sideMenu');
+  if (!sideMenu) return;
+
+  function centerActiveTab(link){
+    try{
+      link.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+    }catch(e){}
+  }
+
+  function updateAria(){
+    sideMenu.querySelectorAll('a').forEach(a=>{
+      a.setAttribute('role','tab');
+      a.setAttribute('aria-selected', a.classList.contains('active') ? 'true' : 'false');
+    });
+    sideMenu.setAttribute('role','tablist');
+    sideMenu.setAttribute('aria-label','روابط داخل الصفحة');
+  }
+
+  const origMove = window.moveIndicatorTo;
+  window.moveIndicatorTo = function(link){
+    if (typeof origMove === 'function') origMove(link);
+    centerActiveTab(link);
+    updateAria();
+  };
+
+  sideMenu.addEventListener('click', (e)=>{
+    const a = e.target.closest('a'); if(!a) return;
+    setTimeout(()=>{ centerActiveTab(a); updateAria(); }, 50);
+  });
+
+  window.addEventListener('load', updateAria);
+})();
+
+window.showSection = function(sectionId){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  if (sectionId && sectionId !== '#'){
+    const t = document.getElementById(sectionId);
+    if (t){
+      t.classList.add('active');
+      setTimeout(()=> t.scrollIntoView({behavior:'smooth'}), 100);
+    }
+  }
+  const sideMenu = document.getElementById('sideMenu');
+  if (sideMenu){
+    sideMenu.querySelectorAll('a').forEach(link=>{
+      link.classList.remove('active');
+      if (sectionId && link.onclick && link.onclick.toString().includes(sectionId)){
+        link.classList.add('active');
+      }
+    });
+  }
+};
+</script>
+
+<script>
+let slideIndex = 0;
+function showSlides() {
+  const slides = document.getElementsByClassName("carousel-slide");
+  const len = slides.length;
+  if (len === 0) return; // guard: no slides yet
+
+  if (slideIndex >= len) slideIndex = 0;
+  if (slideIndex < 0)    slideIndex = len - 1;
+
+  for (let i = 0; i < len; i++) slides[i].style.display = "none";
+  slides[slideIndex].style.display = "block";
+}
+function plusSlides(n) { slideIndex += n; showSlides(); }
+
+document.addEventListener('DOMContentLoaded', () => {
+  showSlides();
+  setInterval(() => { slideIndex++; showSlides(); }, 5000);
+});
+</script>
 
 <div id="chat-box">
   <div class="chat-header">
-    <span onclick="toggleChat()">✕</span>
+<span onclick="toggleChat()">✕</span>
   </div>
+
   <div class="chat-body" id="chat-body">
-    <div class="message-wrapper bot">
-      <div class="avatar" style="background-image: url('chatbot-avatar.png')"></div>
-      <div class="content">
-        <p>مرحباً! أنا مساعد النادي الافتراضي. كيف يمكنني مساعدتك اليوم؟</p>
-      </div>
-    </div>
   </div>
+
   <div class="chat-footer" id="inner-input-bar" style="display: none;">
-    <input type="text" id="user-input" placeholder="اكتب رسالتك هنا...">
-    <button onclick="sendMessage()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M22 2L11 13" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    <input id="userMessage" type="text" placeholder="اكتب شيئًا...">
+    <button onclick="submitUserMessage()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="20" height="20">
+        <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
       </svg>
     </button>
   </div>
-  <div class="button-container" id="button-container">
-    <button class="chat-btn" onclick="quickResponse('أريد معرفة المزيد عن أنشطة النادي')">أنشطة النادي</button>
-    <button class="chat-btn" onclick="quickResponse('أرغب في الاستفسار عن الاشتراكات')">الاشتراكات</button>
-    <button class="chat-btn" onclick="quickResponse('أحتاج معلومات عن أوقات التدريب')">أوقات التدريب</button>
-  </div>
+</div>
+
+<div id="chat-wrapper" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+">
+
+<div id="chat-tooltip" style="
+  background: white;
+  color: black;
+  padding: 10px 14px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-weight: bold;
+  font-size: 14px;
+  max-width: 260px;
+  direction: rtl;
+  text-align: right;
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 9999;
+  line-height: 1.4;
+  white-space: nowrap;  
+">
+  <span>مرحباً بك في نادي كلباء الرياضي الثقافي</span>
+  <span onclick="dismissTooltip()" style="cursor:pointer; font-weight:bold; color: red; line-height: 1; ">✕</span>
+</div>
+
+  <button id="chat-toggle" onclick="toggleChat()" style="
+    position: relative;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    padding: 0;
+  ">
+    <img src="logo.png" alt="Chat Logo" style="width: 100%; height: 100%; border-radius: 50%;">
+    <span id="chat-badge" style="
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      background: red;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    ">1</span>
+  </button>
 </div>
 
 <script>
-  // Initialize variables
-  let currentCategory = null;
-  let chatHistory = [];
+let userName = '';
   
-  // Function to show a specific section
-  function showSection(sectionId) {
-    // Hide all sections
-    document.querySelectorAll('.section').forEach(section => {
-      section.classList.remove('active');
-    });
-    
-    // Show the selected section
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-      targetSection.classList.add('active');
-      
-      // Update active menu item
-      document.querySelectorAll('.side-menu a').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('data-cat') === sectionId) {
-          link.classList.add('active');
-        }
-      });
-    }
+function showMainButtons() {
+  const buttonsWrapper = document.createElement("div");
+  buttonsWrapper.className = "button-container";
+
+  const buttons = [
+    { label: "مواعيد التدريبات", action: () => reply('training') },
+    { label: "التسجيل في النادي", action: () => reply('register') },
+    { label: "معلومات عن الرياضات", action: () => reply('teams') },
+    { label: "تواصل معنا", action: () => showContactMain() },
+    { label: "🔁 إعادة المحادثة", action: () => startChat() },
+  ];
+
+  buttons.forEach(btn => {
+    const el = document.createElement("button");
+    el.className = "chat-btn";
+    el.innerText = btn.label;
+    el.onclick = btn.action;
+    buttonsWrapper.appendChild(el);
+  });
+
+  const wrapper = document.createElement("div");
+  wrapper.className = 'message-wrapper bot';
+
+  const avatar = document.createElement("div");
+  avatar.className = 'avatar';
+  avatar.style.backgroundImage = "url('bot-icon.png')";
+
+  const bubble = document.createElement("div");
+  bubble.className = 'content';
+  bubble.appendChild(buttonsWrapper);
+
+  wrapper.appendChild(avatar);
+  wrapper.appendChild(bubble);
+
+  const chatBody = document.getElementById("chat-body");
+  chatBody.appendChild(wrapper);
+  wrapper.scrollIntoView({ behavior: "smooth" });
+}
+
+function addMessage(content, isUser = false) {
+  const chatBody = document.getElementById('chat-body');
+  if (!chatBody) {
+    console.warn("chat-body not found when adding message.");
+    return;
   }
-  
-  // Function to handle category selection
-  function pickCategory(category) {
-    currentCategory = category;
-    showSection(category);
-    
-    // Scroll to top of the section
-    const section = document.getElementById(category);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 100,
-        behavior: 'smooth'
-      });
-    }
-  }
-  
-  // Function to toggle chat visibility
-  function toggleChat() {
-    const chatBox = document.getElementById('chat-box');
-    const chatTooltip = document.getElementById('chat-tooltip');
-    const inputBar = document.getElementById('inner-input-bar');
-    const buttonContainer = document.getElementById('button-container');
-    
-    if (chatBox.style.display === 'flex') {
-      chatBox.style.display = 'none';
-      chatTooltip.style.display = 'none';
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'message-wrapper ' + (isUser ? 'user' : 'bot');
+
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar';
+  avatar.style.backgroundImage = `url('${isUser ? 'user-icon.png' : 'bot-icon.png'}')`;
+
+  const bubble = document.createElement('div');
+  bubble.className = 'content';
+  bubble.innerHTML = content;
+
+  wrapper.appendChild(avatar);
+  wrapper.appendChild(bubble);
+  chatBody.appendChild(wrapper);
+
+  setTimeout(() => {
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }, 100);
+}
+
+function clearChat() {
+  const chatBody = document.getElementById('chat-body');
+  if (chatBody) chatBody.innerHTML = ''; 
+
+  const buttons = document.getElementById("main-buttons");
+  const inputBar = document.getElementById("inner-input-bar");
+     if (inputBar) {
+          inputBar.classList.remove("active");   
+          inputBar.style.display = "none";       
+       }
+  if (buttons) buttons.style.display = "none";
+  if (inputBar) inputBar.style.display = "none";
+}
+
+function startChat(retries = 0) {
+  const chatBody = document.getElementById("chat-body");
+
+  if (!chatBody) {
+    if (retries < 10) {
+      console.warn("⏳ Waiting for chat-body... Retry:", retries + 1);
+      return setTimeout(() => startChat(retries + 1), 150);
     } else {
-      chatBox.style.display = 'flex';
-      chatBox.style.opacity = '1';
-      chatBox.style.transform = 'translateY(0)';
-      chatTooltip.style.display = 'none';
-      inputBar.style.display = 'flex';
-      buttonContainer.style.display = 'flex';
+      console.error("❌ chat-body not found after retries.");
+      return;
+    }
+  }
+
+  clearChat();
+
+  addMessage("مرحباً بك في نادي كلباء الرياضي الثقافي! 👋 ما اسمك؟", false);
+
+  const inputDiv = document.createElement("div");
+  inputDiv.id = "nameInputWrapper";
+  inputDiv.style.marginTop = "10px";
+inputDiv.innerHTML = `
+  <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
+    <input id="nameInput" type="text" placeholder="اكتب اسمك هنا..." 
+           style="padding:10px; font-size:16px; flex: 1; border-radius:5px; border:1px solid #ccc;">
+    <button onclick="submitName()" 
+            style="padding:10px 15px; background:#f4e733; font-weight:bold; border:none; border-radius:5px;">
+      إرسال
+    </button>
+  </div>
+`;
+  chatBody.appendChild(inputDiv);
+}
+
+ function submitName() {
+  const input = document.getElementById("nameInput");
+
+  const name = input.value.trim();
+
+  if (name) {
+  addMessage(`${name}`, true);
+  userName = name;
+  document.getElementById("nameInputWrapper").remove();
+  
+  setTimeout(() => {
+    addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
+    showMainButtons();
+    const inputBar = document.getElementById("inner-input-bar");
+  if (inputBar) {
+         inputBar.classList.add("active");   
+	     inputBar.style.display = "flex";
+	  }}, 500);
+    }
+ }
+  
+function submitUserMessage() {
+    const input = document.getElementById("userMessage");
+    const msg = input.value.trim();
+    if (msg) {
+      addMessage(msg, true);
+
+
+    fetch('https://script.google.com/macros/s/AKfycbxTb9_7bVSNPqkErv5NFNpMk55MdVkzfdMxrRGSaeIeKl-Shv3WP82UybUX8IEzPVGw/exec', {
+  method: 'POST',
+  mode: 'no-cors',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name: userName, message: msg })
+})
+
+.finally(() => {
+  addMessage("شكراً على تواصلك، سيتم الرد عليك في أقرب وقت.", false);
+    setTimeout(() => {
+      const html = `
+        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+          <button type="button" class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+        </div>
+         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+      `;
+      addMessage(html, false);
+    }, 1000);	
+    });
+input.value = '';
+
     }
   }
   
-  // Function to hide the tooltip
-  function hideTooltip() {
-    document.getElementById('chat-tooltip').style.display = 'none';
-  }
-  
-  // Function to send a message
-  function sendMessage() {
-    const userInput = document.getElementById('user-input');
-    const message = userInput.value.trim();
-    
-    if (message) {
-      addMessageToChat(message, 'user');
-      userInput.value = '';
-      
-      // Simulate bot response after a short delay
+ function handleTeamOption(type) {
+ 
+  const lastWrappers = document.querySelectorAll('.message-wrapper.bot');
+  const last = lastWrappers[lastWrappers.length - 1];
+  if (last) last.remove();
+
+  addMessage(type === 'individual' ? "🎯 الألعاب الفردية" : "🏃‍♂️ الألعاب الجماعية", true);
+
+  const sportsList = (type === "individual") ? [
+    { name: "الشطرنج", info: "رياضة ذهنية تساعد على التركيز والتخطيط." },
+    { name: "الجودو", info: "فن قتالي ياباني يعتمد على التوازن والرمي." },
+    { name: "الكاراتيه", info: "فن قتالي يركز على الضربات واللياقة." },
+    { name: "التايكوندو", info: "رياضة كورية تعتمد على الركلات العالية." },
+    { name: "الدراجات", info: "رياضة تعتمد على التحمل والسرعة." },
+    { name: "ألعاب القوى", info: "تضم الجري، الرمي، الوثب، والمشي." },
+    { name: "الخماسي الحديث", info: "تشمل السباحة، الرماية، الفروسية، الجري، والمبارزة." },
+    { name: "الريشة الطائرة", info: "رياضة سريعة تتطلب رد فعل سريع ومهارة." }
+  ] : [
+    { name: "كرة الطائرة", info: "لعبة جماعية تعتمد على التمريرات والضربات الساحقة." },
+    { name: "كرة السلة", info: "رياضة تتطلب دقة تصويب وسرعة حركة." },
+    { name: "كرة اليد", info: "رياضة جماعية تتميز بالسرعة والتعاون." },
+    { name: "كرة قدم الصالات", info: "نسخة داخلية من كرة القدم تُلعب في صالات مغلقة." }
+  ];
+
+
+  const wrapper = document.createElement("div");
+  wrapper.className = 'message-wrapper bot';
+
+  const avatar = document.createElement("div");
+  avatar.className = 'avatar';
+  avatar.style.backgroundImage = "url('bot-icon.png')";
+
+  const bubble = document.createElement("div");
+  bubble.className = 'content';
+
+  const buttonsWrapper = document.createElement("div");
+  buttonsWrapper.className = "button-container";  
+  buttonsWrapper.style.marginTop = "10px";
+
+  sportsList.forEach(sport => {
+    const btn = document.createElement("button");
+    btn.className = "chat-btn";
+    btn.innerText = sport.name;
+    btn.onclick = () => {
+      addMessage(sport.name, true);
+      addMessage(sport.info, false);
       setTimeout(() => {
-        respondToMessage(message);
-      }, 1000);
+    const html = `
+  <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+  <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+    <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+  </div>
+   <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+`;
+    addMessage(html, false);
+  }, 1000);   
+};
+    buttonsWrapper.appendChild(btn);
+  });
+
+  bubble.appendChild(buttonsWrapper);
+  wrapper.appendChild(avatar);
+  wrapper.appendChild(bubble);
+
+  const chatBox = document.getElementById("chat-body");
+  chatBox.appendChild(wrapper);
+  wrapper.scrollIntoView({ behavior: "smooth" });
+}
+
+  function dismissTooltip() {
+    const tooltip = document.getElementById('chat-tooltip');
+    if (tooltip) {
+      tooltip.style.display = 'none';
+      tooltipDismissed = true;
     }
   }
   
-  // Function to add a message to the chat
-  function addMessageToChat(message, sender) {
-    const chatBody = document.getElementById('chat-body');
-    const messageWrapper = document.createElement('div');
-    messageWrapper.classList.add('message-wrapper', sender);
-    
-    const avatar = document.createElement('div');
-    avatar.classList.add('avatar');
-    avatar.style.backgroundImage = sender === 'user' ? 
-      'url("user-avatar.png")' : 'url("chatbot-avatar.png")';
-    
-    const content = document.createElement('div');
-    content.classList.add('content');
-    
-    const messageText = document.createElement('p');
-    messageText.textContent = message;
-    
-    content.appendChild(messageText);
-    messageWrapper.appendChild(avatar);
-    messageWrapper.appendChild(content);
-    
-    chatBody.appendChild(messageWrapper);
-    chatBody.scrollTop = chatBody.scrollHeight;
-    
-    // Add to chat history
-    chatHistory.push({ sender, message });
-  }
-  
-  // Function to simulate a bot response
-  function respondToMessage(message) {
-    let response = '';
-    
-    if (message.includes('نادي') || message.includes('نشاط') || message.includes('أنشطة')) {
-      response = 'يقدم نادي كلباء مجموعة متنوعة من الأنشطة الرياضية والثقافية. هل تريد معرفة المزيد عن الألعاب الجماعية، الفردية، المائية أم الأخرى؟';
-    } else if (message.includes('اشتراك') || message.includes('عضوية') || message.includes('سعر')) {
-      response = 'لدينا عدة أنواع من الاشتراكات: شهرية (300 درهم)، ربع سنوية (800 درهم)، سنوية (2500 درهم). هل تريد التفاصيل؟';
-    } else if (message.includes('تدريب') || message.includes('وقت') || message.includes('موعد')) {
-      response = 'أوقات التدريب تختلف حسب النشاط. معظم الأنشطة تكون من الساعة 4 عصراً إلى 10 مساءً خلال أيام الأسبوع، ومن 8 صباحاً إلى 12 ظهراً خلال عطلة نهاية الأسبوع.';
-    } else if (message.includes('كرة قدم')) {
-      response = 'كرة القدم من أبرز أنشطتنا. لدينا فرق للناشئين والشباب والكبار. التدريبات تكون أيام الأحد والثلاث والخميس من 5 إلى 7 مساءً.';
-    } else if (message.includes('سباحة')) {
-      response = 'دورات السباحة متاحة لجميع الأعمار. لدينا مدربون معتمدون وحمام سباحة أولمقي. أوقات الدورات: صباحية ومسائية.';
-    } else {
-      response = 'شكراً لاستفسارك. كيف يمكنني مساعدتك بشكل أفضل؟ هل تريد معلومات عن الأنشطة، الاشتراكات، أو شيء آخر؟';
-    }
-    
-    // Simulate typing
-    const chatBody = document.getElementById('chat-body');
-    const typingIndicator = document.createElement('div');
-    typingIndicator.classList.add('message-wrapper', 'bot');
-    typingIndicator.innerHTML = `
-      <div class="avatar" style="background-image: url('chatbot-avatar.png')"></div>
-      <div class="content typing-dots">
-        <span>.</span><span>.</span><span>.</span>
-      </div>
-    `;
-    
-    chatBody.appendChild(typingIndicator);
-    chatBody.scrollTop = chatBody.scrollHeight;
-    
-    // Remove typing indicator and show response after delay
-    setTimeout(() => {
-      chatBody.removeChild(typingIndicator);
-      addMessageToChat(response, 'bot');
-    }, 1500);
-  }
-  
-  // Function for quick responses from buttons
-  function quickResponse(message) {
-    addMessageToChat(message, 'user');
-    
-    // Simulate bot response after a short delay
-    setTimeout(() => {
-      respondToMessage(message);
-    }, 1000);
-  }
-  
-  // Function to toggle mobile menu
-  function toggleMenu() {
-    const navLinks = document.getElementById('navLinks');
-    navLinks.classList.toggle('show');
-    document.body.classList.toggle('no-scroll');
-  }
-  
-  // Initialize the page
   document.addEventListener('DOMContentLoaded', function() {
-    // Show the first category by default
-    pickCategory('team');
-    
-    // Show tooltip after a delay
-    setTimeout(() => {
-      const tooltip = document.getElementById('chat-tooltip');
-      if (tooltip) {
-        tooltip.style.display = 'flex';
-        tooltip.style.animation = 'tooltip-pulse 2s infinite, tooltip-fade 8s forwards';
-      }
-    }, 5000);
-    
-    // Handle menu clicks for mobile
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', function() {
-        if (window.innerWidth <= 768) {
-          toggleMenu();
-        }
+    const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
+    if (tooltipCloseBtn) {
+      tooltipCloseBtn.addEventListener('click', dismissTooltip);
+    }
+    const chatInput = document.getElementById('userMessage');
+    if (chatInput) {
+      chatInput.addEventListener('focus', function() {
+        this.style.pointerEvents = 'auto';
       });
+    }
+  });
+	
+  function reply(option) {
+
+    let userText = '';
+    if (option === 'training') userText = 'مواعيد التدريبات';
+    else if (option === 'register') userText = 'التسجيل في النادي';
+    else if (option === 'teams') userText = 'معلومات عن الرياضات';
+
+    addMessage(userText, true); 
+    addMessage(`<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`, false);
+
+    setTimeout(() => {
+const typingDots = document.querySelector('.typing-dots');
+if (typingDots) {
+  const bubble = typingDots.closest('.message-wrapper');
+  if (bubble) bubble.remove();
+}
+
+      if (option === 'teams') {
+const html = `
+  <p style="font-weight: bold; text-align: center;">اختر نوع الرياضة:</p>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 10px;">
+    <button class="chat-btn" onclick="handleTeamOption('individual')">🎯 الألعاب الفردية</button>
+    <button class="chat-btn" onclick="handleTeamOption('group')">🏃‍♂️ الألعاب الجماعية</button>
+  </div>
+`;
+  addMessage(html, false);
+}
+ else if (option === 'training') {
+        addMessage("تُقام التدريبات من يوم السبت إلى الخميس من الساعة 5 مساءً وحتى الساعة 8 مساءً.", false);
+      } else if (option === 'register') {
+        addMessage("للتسجيل، يرجى التواصل مع إداري اللعبة المعنية من خلال الأرقام التالية:", false);
+      }
+
+           if (option !== 'teams') {
+        setTimeout(() => {
+  const html =` 
+    <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+    <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+      <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+    </div>
+    <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+  `;
+  addMessage(html, false);
+}, 1000);
+
+      }
+
+    }, 1000);
+  } 
+
+function showContactMain() {
+  addMessage("تواصل معنا", true);
+  addMessage(`<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`, false);
+
+  setTimeout(() => {
+    const typingDots = document.querySelector('.typing-dots');
+    if (typingDots) {
+      const bubble = typingDots.closest('.message-wrapper');
+      if (bubble) bubble.remove();
+    }
+
+    addMessage(`
+      يمكنك التواصل معنا عبر البريد الإلكتروني: 
+      <a href="mailto:info@ksc.shj.ae" style="color:blue;">info@ksc.shj.ae</a><br><br>
+      أو استخدام أي من وسائل التواصل الاجتماعي التالية:
+      <div style="margin-top: 15px; text-align: center;">
+        <!-- social icons -->
+      </div>
+      <br>
+      <p style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">
+        إذا كنت بحاجة إلى مساعدة مباشرة، يمكنك التواصل مع السكرتير:
+      </p>
+      <button onclick="showContactOptions()" 
+        style="margin-top:5px; padding:16px 28px; font-size:18px; background:#f4e733; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
+        تواصل مع السكرتير
+      </button>
+    `, false);
+
+    setTimeout(() => {
+      const html = `
+        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+          <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+        </div>
+         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+      `;
+      addMessage(html, false);
+    }, 1000);
+  }, 1000);
+}
+
+function showContactOptions() {
+  addMessage("تواصل مع السكرتير", true);
+  addMessage(`<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`, false);
+
+  setTimeout(() => {
+    const typingDots = document.querySelector('.typing-dots');
+    if (typingDots) {
+      const bubble = typingDots.closest('.message-wrapper');
+      if (bubble) bubble.remove();
+    }
+
+    addMessage(`يرجى زيارة بطاقة السكرتير عبر 
+      <a href="https://kalbasc.github.io/sameh/Business%20E-Card.html" target="_blank" style="color:blue;">هذا الرابط</a>.`, false);
+
+    setTimeout(() => {
+      const html = `
+        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
+        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
+          <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+        </div>
+         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
+      `;
+      addMessage(html, false);
+    }, 1000);
+  }, 1000);
+}
+	
+document.addEventListener("keydown", function (e) {
+  const nameInput = document.getElementById("nameInput");
+  if (nameInput && document.activeElement === nameInput && e.key === "Enter") {
+    submitName();
+  }
+});
+
+document.addEventListener("keydown", function (e) {
+  const msgInput = document.getElementById("userMessage");
+  if (msgInput && document.activeElement === msgInput && e.key === "Enter") {
+    submitUserMessage();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  startChat();
+});
+
+</script>
+</div>
+	
+<footer>
+  <div class="footer-column">
+    <h3 style="color: #f4e733; font-size: 14px;">تواصل معنا</strong></h3>
+    <p><a href="mailto:info@ksc.shj.ae" style="color: #FFFFFF; font-size: 12px;">info@ksc.shj.ae</a></p>
+    <p><a href="tel:+971092777873" style="color: #FFFFFF; font-size: 12px;">092777873</a></p>
+  </div>
+	
+  <div class="footer-column">
+    <h3 style="color: #f4e733; font-size: 14px;">روابط سريعة</strong></h3>
+    <a href="index.html" style="color: #FFFFFF; font-size: 12px;">الرئيسية</a>
+    <a href="news.html" style="color: #FFFFFF; font-size: 12px;">الأخبار</a>
+    <a href="sports.html" style="color: #FFFFFF; font-size: 12px;">الألعاب الرياضية</a>
+    <a href="evaluate.html" style="color: #FFFFFF; font-size: 12px;">بوابة المدربين</a>
+    <a href="register.html" style="color: #FFFFFF; font-size: 12px;">التسجيل</a>
+    <a href="contact.html" style="color: #FFFFFF; font-size: 12px;">اتصل بنا</a>
+  </div>
+
+  <div class="footer-column">
+    <h3 style="color: #f4e733; font-size: 14px;">تابعنا</strong></h3>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/kalbasc/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com/Kalba_sc?mx=2" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+	    <div>
+    <h3 style="color: #f4e733; font-size: 14px;">أرسل ملاحظاتك أو اقتراحاتك</strong></h3>
+<form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+  <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
+  <br><br>
+ <button type="submit" style="background-color: #f4e733; padding: 10px 20px; border: none; border-radius: 10px; cursor:pointer;">إرسال</button>
+</form>
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const confirmationMessage = document.createElement("div");
+    confirmationMessage.style.marginTop = "15px";
+    confirmationMessage.style.color = "#00ff88";
+    confirmationMessage.style.fontWeight = "bold";
+    form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
+
+    let submitted = false;
+
+    form.addEventListener("submit", function () {
+      submitted = true;
+      confirmationMessage.textContent = "جارٍ الإرسال...";
+      
+      setTimeout(function () {
+        if (submitted) {
+          confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
+          form.reset();
+          submitted = false;
+        }
+      }, 2000); 
     });
-    
-    // Handle enter key in chat input
-    document.getElementById('user-input').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        sendMessage();
+
+    window.addEventListener("error", function () {
+      if (submitted) {
+        confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
+        submitted = false;
       }
     });
   });
 </script>
+  </div>
+	  
+  </div>
+	
+  <div class="footer-bottom">
+    © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
+  </div>
+</footer>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </body>
 </html>
