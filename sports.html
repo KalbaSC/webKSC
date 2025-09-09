@@ -1132,6 +1132,38 @@ header {
   body.with-top-nav {padding-top: 0 !important;}
 }
 
+.side-menu{
+  position:fixed; top:calc(var(--headerH,72px) + 10px); right:5%;
+  width:230px; display:flex; flex-direction:column; gap:10px;
+  background:rgba(0,0,0,.9); border:2px solid #f4e733; border-radius:16px;
+  padding:12px; z-index:1002; max-height:calc(100vh - var(--headerH,72px) - 32px); overflow:auto
+}
+.side-menu a{
+  display:block; text-align:center; text-decoration:none; color:#fff;
+  padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.08);
+  background:radial-gradient(100% 100% at 50% 0%,rgba(255,255,255,.04),rgba(0,0,0,.28));
+  font-weight:700
+}
+.side-menu a.active{ color:#0a0a0a; background:linear-gradient(180deg,#f4e733,#c9b812); border-color:#000 }
+.side-menu a.back{ background:#111; border:1px dashed #f4e733; font-weight:800 }
+
+body.with-sidebar .main-wrap{ padding-right:calc(230px + 5% + 16px) }
+
+.section{ display:none; padding:40px 0; scroll-margin-top:calc(var(--headerH,72px) + 12px) }
+.section.active{ display:block }
+.section .info-container{
+  width:88%; max-width:1170px; margin:0 auto; background:#000; color:#eee;
+  border:2px solid #f4e733; border-radius:16px; padding:28px
+}
+
+/* Mobile: sidebar becomes horizontal bar */
+@media (max-width:900px){
+  .side-menu{ position:sticky; top:var(--headerH,72px); right:auto; left:auto; width:auto;
+              flex-direction:row; overflow-x:auto; overflow-y:hidden; border-radius:0 0 14px 14px }
+  body.with-sidebar .main-wrap{ padding-right:0 }
+  .side-menu a{ white-space:nowrap; min-width:120px }
+  .side-menu a.back{ order:-1 } /* back button first on mobile */
+}
   </style>
 </head>
 <body>
@@ -1160,89 +1192,94 @@ header {
     <a href="contact.html">اتصل بنا</a>
   </nav>
 </header>
+<nav id="sideMenu" class="side-menu">
+  <a data-mode="category" data-cat="team"       href="javascript:void(0)" onclick="pickCategory('team')">الألعاب الجماعية</a>
+  <a data-mode="category" data-cat="individual" href="javascript:void(0)" onclick="pickCategory('individual')">الألعاب الفردية</a>
 
-<div id="categories" class="category-grid">
-  <div class="category-box" onclick="showCategory('individual')">
-    🎯 <h2>الألعاب الفردية</h2>
-    <p>الشطرنج، التايكوندو، الجودو، الكاراتيه، الدراجات، ألعاب القوى، الخماسي الحديث، الريشة الطائرة</p>
+  <div id="sideMenuSports" style="display:none">
+    <a data-cat="team"       data-target="volleyball" href="#volleyball" onclick="showSection('volleyball')">كرة الطائرة</a>
+    <a data-cat="team"       data-target="basketball" href="#basketball" onclick="showSection('basketball')">كرة السلة</a>
+    <a data-cat="team"       data-target="handball"   href="#handball"   onclick="showSection('handball')">كرة اليد</a>
+    <a data-cat="team"       data-target="futsal"     href="#futsal"     onclick="showSection('futsal')">كرة قدم الصالات</a>
+
+    <a data-cat="individual" data-target="chess"      href="#chess"      onclick="showSection('chess')">الشطرنج</a>
+    <a data-cat="individual" data-target="taekwondo"  href="#taekwondo"  onclick="showSection('taekwondo')">التايكوندو</a>
+    <a data-cat="individual" data-target="judo"       href="#judo"       onclick="showSection('judo')">الجودو</a>
+    <a data-cat="individual" data-target="karate"     href="#karate"     onclick="showSection('karate')">الكاراتيه</a>
+    <a data-cat="individual" data-target="cycling"    href="#cycling"    onclick="showSection('cycling')">الدراجات</a>
+    <a data-cat="individual" data-target="athletics"  href="#athletics"  onclick="showSection('athletics')">ألعاب القوى</a>
+    <a data-cat="individual" data-target="pentathlon" href="#pentathlon" onclick="showSection('pentathlon')">الخماسي الحديث</a>
+    <a data-cat="individual" data-target="badminton"  href="#badminton"  onclick="showSection('badminton')">الريشة الطائرة</a>
+
+    <a id="backToCats" class="back" href="javascript:void(0)" onclick="resetCategories()">◀ الرجوع للتصنيفات</a>
   </div>
-  <div class="category-box" onclick="showCategory('team')">
-    🏆 <h2>الألعاب الجماعية</h2>
-    <p>كرة الطائرة، كرة السلة، كرة اليد، كرة قدم الصالات</p>
-  </div>
+</nav>
+<div class="main-wrap">
 </div>
-
-<nav id="sportsTopNav" class="side-menu top-nav" style="display:none"></nav>
-
-<section id="chess" class="section"><div class="info-container"><h2>الشطرنج</h2><p>تفاصيل لعبة الشطرنج…</p></div></section>
-<section id="taekwondo" class="section"><div class="info-container"><h2>التايكوندو</h2><p>تفاصيل لعبة التايكوندو…</p></div></section>
-<section id="judo" class="section"><div class="info-container"><h2>الجودو</h2><p>تفاصيل لعبة الجودو…</p></div></section>
-<section id="karate" class="section"><div class="info-container"><h2>الكاراتيه</h2><p>تفاصيل لعبة الكاراتيه…</p></div></section>
-<section id="cycling" class="section"><div class="info-container"><h2>الدراجات</h2><p>تفاصيل رياضة الدراجات…</p></div></section>
-<section id="athletics" class="section"><div class="info-container"><h2>ألعاب القوى</h2><p>تفاصيل ألعاب القوى…</p></div></section>
-<section id="pentathlon" class="section"><div class="info-container"><h2>الخماسي الحديث</h2><p>تفاصيل الخماسي الحديث…</p></div></section>
-<section id="badminton" class="section"><div class="info-container"><h2>الريشة الطائرة</h2><p>تفاصيل الريشة الطائرة…</p></div></section>
-
-<section id="volleyball" class="section"><div class="info-container"><h2>كرة الطائرة</h2><p>تفاصيل كرة الطائرة…</p></div></section>
-<section id="basketball" class="section"><div class="info-container"><h2>كرة السلة</h2><p>تفاصيل كرة السلة…</p></div></section>
-<section id="handball" class="section"><div class="info-container"><h2>كرة اليد</h2><p>تفاصيل كرة اليد…</p></div></section>
-<section id="futsal" class="section"><div class="info-container"><h2>كرة قدم الصالات</h2><p>تفاصيل كرة قدم الصالات…</p></div></section>
-
 <script>
-
-  const SPORTS = {
-    individual: [
-      {id:'chess',label:'الشطرنج'},
-      {id:'taekwondo',label:'التايكوندو'},
-      {id:'judo',label:'الجودو'},
-      {id:'karate',label:'الكاراتيه'},
-      {id:'cycling',label:'الدراجات'},
-      {id:'athletics',label:'ألعاب القوى'},
-      {id:'pentathlon',label:'الخماسي الحديث'},
-      {id:'badminton',label:'الريشة الطائرة'},
-    ],
-    team: [
-      {id:'volleyball',label:'كرة الطائرة'},
-      {id:'basketball',label:'كرة السلة'},
-      {id:'handball',label:'كرة اليد'},
-      {id:'futsal',label:'كرة قدم الصالات'},
-    ]
+  const GROUPS = {
+    team:       ['volleyball','basketball','handball','futsal'],
+    individual: ['chess','taekwondo','judo','karate','cycling','athletics','pentathlon','badminton']
   };
 
-  function showCategory(type){
-    const cats = document.getElementById('categories');
-    if (cats) cats.style.display = 'none';
-    const topNav = document.getElementById('sportsTopNav');
-    if (!topNav) return;
-    topNav.innerHTML = SPORTS[type].map(s =>
-      `<a href="#${s.id}" data-target="${s.id}" onclick="showSection('${s.id}')">${s.label}</a>`
-    ).join('');
-    topNav.style.display = 'flex';
-
-    if (SPORTS[type][0]) showSection(SPORTS[type][0].id);
+  // Start state: two options only
+  function resetCategories(){
+    const side = document.getElementById('sideMenu');
+    const sportsBlock = document.getElementById('sideMenuSports');
+    // show only category buttons
+    side.querySelectorAll('a[data-mode="category"]').forEach(a=>a.style.display='');
+    sportsBlock.style.display='none';
+    document.body.classList.add('with-sidebar');
+    // hide any active section
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   }
 
+  // When clicking الألعاب الجماعية أو الألعاب الفردية
+  function pickCategory(cat){
+    const side = document.getElementById('sideMenu');
+    const sportsBlock = document.getElementById('sideMenuSports');
+
+    // hide the two category buttons
+    side.querySelectorAll('a[data-mode="category"]').forEach(a=>a.style.display='none');
+
+    // show only the sports of that category
+    sportsBlock.style.display = 'flex';
+    sportsBlock.querySelectorAll('a[data-target]').forEach(a=>{
+      const ok = a.getAttribute('data-cat') === cat;
+      a.style.display = ok ? '' : 'none';
+      a.classList.remove('active');
+    });
+
+    document.body.classList.add('with-sidebar');
+
+    // auto open first sport
+    const first = GROUPS[cat][0];
+    if (first) showSection(first);
+  }
+
+  // Show a sport section + highlight in sidebar
   function showSection(id){
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
     const el = document.getElementById(id);
     if (el) el.classList.add('active');
 
-    document.querySelectorAll('#sportsTopNav a').forEach(a => a.classList.remove('active'));
-    const link = document.querySelector(`#sportsTopNav a[data-target="${id}"]`);
+    const side = document.getElementById('sideMenu');
+    side.querySelectorAll('a[data-target]').forEach(a=>a.classList.remove('active'));
+    const link = side.querySelector(`a[data-target="${id}"]`);
     if (link) link.classList.add('active');
 
     if (id && location.hash !== '#'+id) history.replaceState(null,'','#'+id);
   }
 
+  // Deep link: sports.html#basketball
   window.addEventListener('DOMContentLoaded', ()=>{
-    const hash = (location.hash||'').replace('#','');
-    if (!hash) return;
+    document.body.classList.add('with-sidebar'); // reserve space for sidebar
+    const hash = (location.hash||'').slice(1);
+    if (!hash) return resetCategories();
 
-    const inIndividual = SPORTS.individual.some(s=>s.id===hash);
-    const inTeam = SPORTS.team.some(s=>s.id===hash);
-
-    if (inIndividual) { showCategory('individual'); showSection(hash); }
-    if (inTeam)       { showCategory('team');       showSection(hash); }
+    const cat = Object.keys(GROUPS).find(k=>GROUPS[k].includes(hash));
+    if (cat){ pickCategory(cat); showSection(hash); }
+    else { resetCategories(); }
   });
 
 (function () {
@@ -1488,27 +1525,6 @@ window.showSection = function(sectionId){
     });
   }
 };
-</script>
-
-<script>
-let slideIndex = 0;
-function showSlides() {
-  const slides = document.getElementsByClassName("carousel-slide");
-  const len = slides.length;
-  if (len === 0) return; // guard: no slides yet
-
-  if (slideIndex >= len) slideIndex = 0;
-  if (slideIndex < 0)    slideIndex = len - 1;
-
-  for (let i = 0; i < len; i++) slides[i].style.display = "none";
-  slides[slideIndex].style.display = "block";
-}
-function plusSlides(n) { slideIndex += n; showSlides(); }
-
-document.addEventListener('DOMContentLoaded', () => {
-  showSlides();
-  setInterval(() => { slideIndex++; showSlides(); }, 5000);
-});
 </script>
 
 <div id="chat-box">
