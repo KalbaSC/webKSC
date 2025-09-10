@@ -753,8 +753,6 @@ body.no-scroll { overflow: hidden; }
     .side-menu.top-nav .sm-indicator { 
       display: none; 
     }
-    
-body.with-top-nav { padding-top: 0 !important; }
 
 .main-nav {
   display: flex;
@@ -2861,8 +2859,8 @@ window.showSection = function(sectionId){
 
   window.backToMainMenu = function(){
     document.getElementById('individual-sports').style.display = 'none';
-    document.getElementById('team-sports').style.display       = 'none';
-    document.getElementById('sideMenu').style.display          = 'flex';
+    document.getElementById('team-sports').style.display = 'none';
+    document.getElementById('sideMenu').style.display = 'flex';
 
     applyTopNav();
   };
