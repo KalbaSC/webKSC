@@ -2808,64 +2808,98 @@ window.showSection = function(sectionId){
 
 <script>
 (function(){
-  const menus  = Array.from(document.querySelectorAll('.side-menu')); // main + sub menus
-  const header = document.querySelector('header');
+  const sideMenu = document.getElementById('sideMenu');
+  const header   = document.querySelector('header');
 
   function setHeaderH(){
     const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
     document.documentElement.style.setProperty('--headerH', h + 'px');
   }
-  const isMobile = () => window.innerWidth <= 768;
-  const scrolled = () => (window.pageYOffset || document.documentElement.scrollTop) > 200;
-
-  function visibleMenus(){
-    return menus.filter(m => getComputedStyle(m).display !== 'none');
+  function setTopNavH(){
+    const h = Math.ceil(sideMenu.getBoundingClientRect().height || 56);
+    document.documentElement.style.setProperty('--topNavH', h + 'px');
   }
+  const isMobile = ()=> innerWidth <= 768;
+  const scrolled = ()=> (pageYOffset || document.documentElement.scrollTop) > 200;
 
   function applyTopNav(){
-    const shouldTopNav = isMobile() || scrolled();
-
-    menus.forEach(m => m.classList.remove('top-nav','visible'));
-    document.body.classList.remove('with-top-nav');
-
-    if (shouldTopNav){
-      const vis = visibleMenus();
-      if (vis.length){
-        vis.forEach(m => m.classList.add('top-nav','visible'));
-        requestAnimationFrame(()=>{
-          const h = Math.ceil(vis[0].getBoundingClientRect().height || 56);
-          document.documentElement.style.setProperty('--topNavH', h + 'px');
-          document.body.classList.add('with-top-nav');
-        });
-      }
+    const should = isMobile() || scrolled();
+    if (should){
+      sideMenu.classList.add('top-nav');
+      document.body.classList.add('with-top-nav');
+      requestAnimationFrame(setTopNavH);
+    } else {
+      sideMenu.classList.remove('top-nav');
+      document.body.classList.remove('with-top-nav');
     }
   }
 
-  window.__applyTopNav = applyTopNav;
+  const indicator = document.createElement('span');
+  indicator.className = 'sm-indicator';
+  sideMenu.appendChild(indicator);
 
-  window.addEventListener('load',  ()=>{ setHeaderH(); applyTopNav(); });
-  window.addEventListener('resize',()=>{ setHeaderH(); applyTopNav(); });
+  function moveIndicatorTo(link){
+    const r  = link.getBoundingClientRect();
+    const mr = sideMenu.getBoundingClientRect();
+    indicator.style.top    = (r.top - mr.top + (r.height - 40)/2) + 'px';
+    indicator.style.height = Math.min(44, r.height) + 'px';
+  }
+  sideMenu.addEventListener('pointermove', (e)=>{
+    const t = e.target.closest('a'); if(!t) return;
+    const r = t.getBoundingClientRect();
+    t.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    t.style.setProperty('--my', (e.clientY - r.top)  + 'px');
+  });
+
+  function replaceLinks(fragment){
+    const keep = new Set(['btn-individual','btn-team']);
+    const nodes = Array.from(sideMenu.querySelectorAll('a')).filter(a => !keep.has(a.id));
+    nodes.forEach(n => n.remove());
+    sideMenu.insertBefore(fragment, indicator);
+    const first = sideMenu.querySelector('a:not(#btn-individual):not(#btn-team)');
+    if (first){
+      sideMenu.querySelectorAll('a').forEach(a=>a.classList.remove('active'));
+      first.classList.add('active');
+      moveIndicatorTo(first);
+    }
+    applyTopNav();
+  }
+
+  window.loadMenu = function(which){
+    const tpl = document.getElementById(which === 'individual' ? 'tpl-individual' : 'tpl-team');
+    const fragment = document.createDocumentFragment();
+    fragment.append(...tpl.content.cloneNode(true).children);
+    const back = document.createElement('a');
+    back.href = '#'; back.textContent = 'رجوع';
+    back.onclick = (e)=>{ e.preventDefault(); resetMenu(); };
+    fragment.append(back);
+    replaceLinks(fragment);
+  };
+
+  function resetMenu(){
+    const keep = new Set(['btn-individual','btn-team']);
+    Array.from(sideMenu.querySelectorAll('a')).forEach(a=>{
+      if (!keep.has(a.id)) a.remove();
+    });
+    sideMenu.querySelectorAll('a').forEach(a=>a.classList.remove('active'));
+    moveIndicatorTo(document.getElementById('btn-individual'));
+    applyTopNav();
+  }
+
+  sideMenu.addEventListener('click',(e)=>{
+    const a = e.target.closest('a'); if(!a) return;
+    if (a.id !== 'btn-individual' && a.id !== 'btn-team'){
+      sideMenu.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
+      a.classList.add('active');
+      moveIndicatorTo(a);
+    }
+  });
+
+  window.addEventListener('load',  ()=>{ setHeaderH(); applyTopNav(); setTopNavH();
+    const first = sideMenu.querySelector('#btn-individual'); if(first) moveIndicatorTo(first);
+  });
+  window.addEventListener('resize',()=>{ setHeaderH(); applyTopNav(); setTopNavH(); });
   window.addEventListener('scroll', applyTopNav, { passive:true });
-
-  window.showCategory = function(category){
-    const main = document.getElementById('sideMenu');
-    const ind  = document.getElementById('individual-sports');
-    const team = document.getElementById('team-sports');
-
-    main.style.display = 'none';
-    ind.style.display  = (category === 'individual') ? 'flex' : 'none';
-    team.style.display = (category === 'team')       ? 'flex' : 'none';
-
-    applyTopNav();
-  };
-
-  window.backToMainMenu = function(){
-    document.getElementById('individual-sports').style.display = 'none';
-    document.getElementById('team-sports').style.display = 'none';
-    document.getElementById('sideMenu').style.display = 'flex';
-
-    applyTopNav();
-  };
 })();
 </script>
 
