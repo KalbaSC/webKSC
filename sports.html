@@ -158,7 +158,6 @@ body.no-scroll { overflow: hidden; }
       position: sticky;
       top: calc(var(--headerH, 72px) + 16px);
 	  align-self: start;	
-      transform: translateY(-50%);
       right: 12px;                
       width: 120px;
       padding: 16px 14px;
@@ -1906,7 +1905,7 @@ window.showSection = function(sectionId){
 
   function applyMode(){
     const scrolled = (window.pageYOffset || document.documentElement.scrollTop) > 200;
-    const shouldTopNav = isMobile() || scrolled || footerVisible;
+	const shouldTopNav = isMobile() || footerVisible;
 
     menus.forEach(m => m.classList.remove('top-nav', 'visible'));
     document.body.classList.toggle('with-top-nav', shouldTopNav);
