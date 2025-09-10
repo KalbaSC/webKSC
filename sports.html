@@ -2570,10 +2570,80 @@ window.showSection = function(sectionId){
   });
 })();
 
+
+(function(){
+  const sideMenu = document.getElementById('sideMenu');
+  if (!sideMenu) return;
+
+  function centerActiveTab(link){
+    try{
+      link.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+    }catch(e){}
+  }
+
+  function updateAria(){
+    sideMenu.querySelectorAll('a').forEach(a=>{
+      a.setAttribute('role','tab');
+      a.setAttribute('aria-selected', a.classList.contains('active') ? 'true' : 'false');
+    });
+    sideMenu.setAttribute('role','tablist');
+    sideMenu.setAttribute('aria-label','روابط داخل الصفحة');
+  }
+
+  sideMenu.addEventListener('pointermove', (e)=>{
+    const t = e.target.closest('a'); if(!t) return;
+    const r = t.getBoundingClientRect();
+    t.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    t.style.setProperty('--my', (e.clientY - r.top)  + 'px');
+  });
+
+  const indicator = document.createElement('span');
+  indicator.className = 'sm-indicator';
+  sideMenu.appendChild(indicator);
+
+  function moveIndicatorTo(link){
+    const r  = link.getBoundingClientRect();
+    const mr = sideMenu.getBoundingClientRect();
+    indicator.style.top    = (r.top - mr.top + (r.height - 40)/2) + 'px';
+    indicator.style.height = Math.min(44, r.height) + 'px';
+  }
+  window.moveIndicatorTo = moveIndicatorTo;
+
+  window.addEventListener('load', ()=>{
+    const first = sideMenu.querySelector('a');
+    if(first){ first.classList.add('active'); moveIndicatorTo(first); centerActiveTab(first); updateAria(); }
+  });
+  window.addEventListener('resize', ()=>{
+    const active = sideMenu.querySelector('a.active') || sideMenu.querySelector('a');
+    if(active) moveIndicatorTo(active);
+  });
+
+  sideMenu.addEventListener('click', (e)=>{
+    const a = e.target.closest('a'); if(!a) return;
+    setTimeout(()=>{ centerActiveTab(a); updateAria(); }, 50);
+  });
+
+  const sectionIds = Array.from(document.querySelectorAll('.section[id]')).map(s=>s.id);
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  if (sections.length){
+    const obs = new IntersectionObserver((entries)=>{
+      const visible = entries.filter(e=>e.isIntersecting)
+                             .sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(!visible) return;
+      const id = visible.target.id;
+      const link = Array.from(sideMenu.querySelectorAll('a'))
+        .find(a => a.onclick && a.onclick.toString().includes(id));
+      if(link){
+        sideMenu.querySelectorAll('a').forEach(a=>a.classList.remove('active'));
+        link.classList.add('active');
+        moveIndicatorTo(link);
+        updateAria();
+      }
+    }, { rootMargin:"-20% 0px -60% 0px", threshold:[0.2,0.4,0.6,0.8] });
+    sections.forEach(sec => obs.observe(sec));
+  }
+})();
 </script>
-
-<!-- باقي الكود الخاص بالشات والفوتر يبقى كما هو -->
-
 <div id="chat-box">
   <div class="chat-header">
 <span onclick="toggleChat()">✕</span>
@@ -2657,10 +2727,6 @@ window.showSection = function(sectionId){
     ">1</span>
   </button>
 </div>
-
-<script>
-// كود الجافاسكريبت الخاص بالشات يبقى كما هو
-</script>
 	
 <footer>
   <div class="footer-column">
