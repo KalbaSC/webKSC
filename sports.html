@@ -1652,10 +1652,12 @@ header {
   position: fixed !important;
   top: calc(var(--headerH, 72px) + 16px) !important;
   right: clamp(12px, 5%, 80px) !important;
-  display: flex !important;
   z-index: 1001 !important;
 }
+#sideMenu { display: flex; }
+#individual-sports, #team-sports { display: none; }
 
+body.with-top-nav { padding-top: var(--topNavH, 0); }
 .menu-sub { display: none; }
 
   </style>
@@ -2126,26 +2128,6 @@ window.showSection = function(sectionId){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <script>
-function showCategory(category) {
-  const main = document.getElementById('sideMenu');
-  const ind  = document.getElementById('individual-sports');
-  const team = document.getElementById('team-sports');
-
-  main.style.display = 'none';
-  ind.style.display  = (category === 'individual') ? 'flex' : 'none';
-  team.style.display = (category === 'team')       ? 'flex' : 'none';
-
-  if (window.__applyTopNav) window.__applyTopNav();
-}
-
-function backToMainMenu() {
-  document.getElementById('individual-sports').style.display = 'none';
-  document.getElementById('team-sports').style.display       = 'none';
-  document.getElementById('sideMenu').style.display          = 'flex';
-
-  if (window.__applyTopNav) window.__applyTopNav();
-}
-
 (function(){
   const header = document.querySelector('header');
   const footer = document.querySelector('footer');
@@ -2209,7 +2191,15 @@ function showCategory(category) {
 
   main.style.display = 'none';
   ind.style.display  = (category === 'individual') ? 'flex' : 'none';
-  team.style.display = (category === 'team') ? 'flex' : 'none';
+  team.style.display = (category === 'team')       ? 'flex' : 'none';
+
+  if (window.__applyTopNav) window.__applyTopNav();
+}
+
+function backToMainMenu() {
+  document.getElementById('individual-sports').style.display = 'none';
+  document.getElementById('team-sports').style.display       = 'none';
+  document.getElementById('sideMenu').style.display          = 'flex';
 
   if (window.__applyTopNav) window.__applyTopNav();
 }
@@ -2221,6 +2211,65 @@ function backToMainMenu() {
 
   if (window.__applyTopNav) window.__applyTopNav();
 }
+
+(function(){
+  const header = document.querySelector('header');
+  const footer = document.querySelector('footer');
+  const root   = document.getElementById('sideMenu');
+  const ind    = document.getElementById('individual-sports');
+  const team   = document.getElementById('team-sports');
+  const menus  = [root, ind, team].filter(Boolean);
+  if (!menus.length) return;
+
+  const isMobile = () => window.innerWidth <= 768;
+
+  function initVisibility(){
+    if (root) root.style.display = 'flex';
+    if (ind)  ind.style.display  = 'none';
+    if (team) team.style.display = 'none';
+  }
+
+  function setHeaderH(){
+    const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
+    document.documentElement.style.setProperty('--headerH', h + 'px');
+  }
+
+  function visibleMenu(){
+    return menus.find(m => getComputedStyle(m).display !== 'none') || root || menus[0];
+  }
+
+  let footerVisible = false;
+  const obs = new IntersectionObserver(entries=>{
+    footerVisible = entries.some(e => e.isIntersecting && e.intersectionRatio >= 0.35);
+    applyMode();
+  }, { threshold:[0,0.35], rootMargin: "0px 0px -20%" });
+  if (footer) obs.observe(footer);
+
+  function applyMode(){
+    const shouldTopNav = isMobile() || footerVisible;
+
+    menus.forEach(m => m.classList.remove('top-nav','visible'));
+    document.body.classList.toggle('with-top-nav', shouldTopNav);
+
+    const m = visibleMenu();
+    if (shouldTopNav){
+      m.classList.add('top-nav');
+      requestAnimationFrame(()=>{
+        const h = Math.ceil(m.getBoundingClientRect().height || 56);
+        document.documentElement.style.setProperty('--topNavH', h + 'px');
+        m.classList.add('visible');
+      });
+    } else {
+      document.documentElement.style.removeProperty('--topNavH');
+    }
+  }
+
+  window.__applyTopNav = applyMode;
+
+  window.addEventListener('load',  ()=>{ initVisibility(); setHeaderH(); applyMode(); });
+  window.addEventListener('resize',()=>{ setHeaderH(); applyMode(); });
+  window.addEventListener('scroll', applyMode, { passive:true });
+})();
 </script>
 
 </body>
