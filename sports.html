@@ -107,7 +107,7 @@
     .side-menu.top-nav{
       position:fixed;
       right:0; left:0;
-      top:calc(var(--headerH,72px));
+      top: calc(var(--headerH,72px) + 16px); right: clamp(12px, 5%, 80px);
       width:min(88%, 1170px);
       margin:0 auto;
       padding:10px 8px;
@@ -343,6 +343,39 @@
   window.addEventListener('resize',() => { setHeaderH(); applyMode(); });
   window.addEventListener('scroll', applyMode, { passive:true });
 })();
+
+function showCategory(category) {
+  const root = document.getElementById('sideMenu');
+  const ind  = document.getElementById('individual-sports');
+  const team = document.getElementById('team-sports');
+  if (!root || !ind || !team) return;
+
+  root.style.display = 'none';
+  ind.style.display  = (category === 'individual') ? 'flex' : 'none';
+  team.style.display = (category === 'team')       ? 'flex' : 'none';
+
+  if (window.__applyTopNav) window.__applyTopNav();
+}
+
+function backToMainMenu() {
+  const root = document.getElementById('sideMenu');
+  const ind  = document.getElementById('individual-sports');
+  const team = document.getElementById('team-sports');
+  if (!root || !ind || !team) return;
+
+  ind.style.display  = 'none';
+  team.style.display = 'none';
+  root.style.display = 'flex';
+
+  if (window.__applyTopNav) window.__applyTopNav();
+}
+
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const t = document.getElementById(id);
+  if (t){ t.classList.add('active'); setTimeout(()=>t.scrollIntoView({behavior:'smooth'}), 100); }
+}
+
 </script>
 
 </body>
