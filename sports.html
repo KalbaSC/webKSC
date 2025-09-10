@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
-    /* -------- Fonts -------- */
     @font-face {
       font-family: 'NotoKufiArabic';
       src: url('NotoKufiArabic.ttf') format('truetype');
@@ -20,7 +19,6 @@
       font-weight: 300; font-style: normal;
     }
 
-    /* -------- Base -------- */
     :root { --headerH: 72px; --topNavH: 0px; }
     * { box-sizing: border-box; }
     body{
@@ -33,7 +31,6 @@
       direction: rtl;
     }
 
-    /* -------- Header (keep your layout) -------- */
     header{
       background:#111;
       padding:16px 5%;
@@ -56,7 +53,6 @@
     .menu-toggle{ display:none; font-size:24px; background:none; border:0; color:#f4e733; cursor:pointer; padding:5px; }
     body.no-scroll{ overflow:hidden; }
 
-    /* -------- Content containers -------- */
     .section{ padding:0 0 40px; scroll-margin-top:110px; display:none; }
     .section.active{ display:block; animation:fadeIn .5s ease; }
     @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
@@ -69,12 +65,10 @@
     .info-container h2{ color:#f4e733; margin:0 0 12px; font-size:22px; }
     .info-container p, .info-container li{ color:#eee; line-height:1.9; font-size:16px; }
 
-    /* remove any accidental top gap on this page */
     .hero-wrapper{ margin-top:0 !important; }
     .hero-wrapper > .section:first-child{ padding-top:0 !important; }
     .hero-wrapper > .section:first-child .info-container{ margin-top:0 !important; }
 
-    /* -------- Side menu (default = fixed on the right) -------- */
     .side-menu{
       position:fixed;
       top:calc(var(--headerH,72px) + 16px);
@@ -107,11 +101,9 @@
     .side-menu a:hover{ transform:translateX(-4px); border-color:rgba(244,231,51,.5); color:#f4e733; }
     .side-menu a.active{ color:#0a0a0a; background:linear-gradient(180deg,#f4e733,#c9b812); border-color:#000; box-shadow:0 10px 28px rgba(244,231,51,.35), 0 0 0 1px rgba(0,0,0,.6) inset; }
 
-    /* show only the root menu by default; sub menus swap in place */
     #sideMenu{ display:flex; }
     #individual-sports, #team-sports{ display:none; }
 
-    /* -------- Top-nav look (only at footer or on mobile) -------- */
     .side-menu.top-nav{
       position:fixed;
       right:0; left:0;
@@ -129,7 +121,6 @@
     .side-menu.top-nav a{ flex:0 0 auto; min-width:120px; white-space:nowrap; }
     body.with-top-nav{ padding-top:var(--topNavH,0); }
 
-    /* -------- Footer (unchanged layout) -------- */
     footer{
       background:#000; color:#fff; padding:30px 5%;
       margin:0 auto; width:90%;
@@ -144,7 +135,6 @@
     .social-icons a{ color:#fff; font-size:20px; }
     .social-icons a:hover{ color:#f4e733; }
 
-    /* -------- Mobile header/menu -------- */
     @media (max-width:768px){
       .menu-toggle{ display:block; }
       .mobile-nav{ display:block; }
@@ -171,7 +161,6 @@
 
 <body>
 
-  <!-- Header -->
   <header>
     <div class="mobile-nav">
       <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -197,7 +186,6 @@
     </nav>
   </header>
 
-  <!-- Side menus (same box, we just swap which one is shown) -->
   <nav id="sideMenu" class="side-menu menu-root">
     <a href="javascript:void(0)" onclick="showCategory('individual')">ألعاب فردية</a>
     <a href="javascript:void(0)" onclick="showCategory('team')">ألعاب جماعية</a>
@@ -223,7 +211,6 @@
     <a href="javascript:void(0)" onclick="backToMainMenu()">← العودة</a>
   </nav>
 
-  <!-- Content -->
   <div class="hero-wrapper">
     <section id="sports-home" class="section active">
       <div class="info-container">
@@ -232,7 +219,6 @@
       </div>
     </section>
 
-    <!-- مثال للأقسام (أبقِ أقسامك كما هي) -->
     <section id="chess" class="section"><div class="info-container"><h2>الشطرنج</h2><p>تفاصيل …</p></div></section>
     <section id="taekwondo" class="section"><div class="info-container"><h2>التايكوندو</h2><p>تفاصيل …</p></div></section>
     <section id="judo" class="section"><div class="info-container"><h2>الجودو</h2><p>تفاصيل …</p></div></section>
@@ -248,7 +234,6 @@
     <section id="futsal" class="section"><div class="info-container"><h2>كرة قدم الصالات</h2><p>تفاصيل …</p></div></section>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-column">
       <h3 style="color:#f4e733; font-size:14px;">تواصل معنا</h3>
@@ -289,117 +274,76 @@
     <div class="footer-bottom">© 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة</div>
   </footer>
 
-  <!-- Header mobile toggle -->
-  <script>
-    (function(){
-      const nav = document.getElementById('navLinks');
-      const btn = document.querySelector('.menu-toggle');
-      const sideMenu = document.getElementById('sideMenu');
-      if(!nav || !btn) return;
+<script>
+(function(){
+  const header = document.querySelector('header');
+  const menus  = Array.from(document.querySelectorAll('nav.side-menu')).filter(Boolean);
+  if (!menus.length) return;
 
-      function setOpen(open){
-        nav.classList.toggle('show', open);
-        document.body.classList.toggle('no-scroll', open);
-        btn.innerHTML = open ? '✕' : '☰';
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  const isMobile = () => window.innerWidth <= 768;
 
-        if(sideMenu){
-          if(open){
-            sideMenu.dataset.prevDisplay = sideMenu.style.display || '';
-            sideMenu.style.display = 'none';
-          }else{
-            sideMenu.style.display = sideMenu.dataset.prevDisplay || '';
-          }
-        }
+  function setHeaderH(){
+    const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
+    document.documentElement.style.setProperty('--headerH', h + 'px');
+  }
+  function visibleMenu(){
+    return menus.find(m => getComputedStyle(m).display !== 'none') || menus[0];
+  }
+
+  const ENTER_OFFSET = 400;
+  const EXIT_OFFSET  = 550;
+
+  let mode = 'side';
+  let rafPending = false;
+
+  function distanceFromBottom(){
+    const y   = window.pageYOffset || document.documentElement.scrollTop;
+    const doc = document.documentElement.scrollHeight;
+    const vh  = window.innerHeight;
+    return doc - (y + vh);
+  }
+
+  function shouldBeTop(){
+    if (isMobile()) return true;
+    const gap = distanceFromBottom();
+    if (mode === 'side') return gap <= ENTER_OFFSET;
+    return gap <= EXIT_OFFSET;
+  }
+
+  function applyMode(){
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      rafPending = false;
+
+      const wantTop = shouldBeTop();
+      const nextMode = wantTop ? 'top' : 'side';
+      if (nextMode === mode) return;
+
+      mode = nextMode;
+
+      menus.forEach(m => m.classList.remove('top-nav','visible'));
+      document.body.classList.toggle('with-top-nav', mode === 'top');
+
+      const m = visibleMenu();
+      if (mode === 'top'){
+        m.classList.add('top-nav');
+        const h = Math.ceil(m.getBoundingClientRect().height || 56);
+        document.documentElement.style.setProperty('--topNavH', h + 'px');
+        m.classList.add('visible');
+      } else {
+        document.documentElement.style.removeProperty('--topNavH');
       }
-      const isOpen = () => nav.classList.contains('show');
-      window.toggleMenu = () => setOpen(!isOpen());
+    });
+  }
 
-      document.addEventListener('click', (e)=>{
-        if(!isOpen()) return;
-        if(!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
-      });
-      nav.addEventListener('click', (e)=>{
-        if(e.target.closest('a') && window.innerWidth < 769) setOpen(false);
-      });
-      window.addEventListener('resize', ()=>{ if(window.innerWidth >= 769) setOpen(false); });
-    })();
-  </script>
+  window.__applyTopNav = applyMode;
 
-  <!-- Section show helpers -->
-  <script>
-    function showCategory(category){
-      const main = document.getElementById('sideMenu');
-      const ind  = document.getElementById('individual-sports');
-      const team = document.getElementById('team-sports');
-      main.style.display = 'none';
-      ind.style.display  = (category === 'individual') ? 'flex' : 'none';
-      team.style.display = (category === 'team') ? 'flex' : 'none';
-      if(window.__applyTopNav) window.__applyTopNav();
-    }
-    function backToMainMenu(){
-      document.getElementById('individual-sports').style.display = 'none';
-      document.getElementById('team-sports').style.display = 'none';
-      document.getElementById('sideMenu').style.display = 'flex';
-      if(window.__applyTopNav) window.__applyTopNav();
-    }
-    window.showSection = function(id){
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      const t = document.getElementById(id);
-      if(t){ t.classList.add('active'); setTimeout(() => t.scrollIntoView({behavior:'smooth'}), 100); }
-    };
-  </script>
+  window.addEventListener('load',  () => { setHeaderH(); applyMode(); });
+  window.addEventListener('resize',() => { setHeaderH(); applyMode(); });
+  window.addEventListener('scroll', applyMode, { passive:true });
+})();
+</script>
 
-  <!-- Unified: side menu mode (right vs top-nav) -->
-  <script>
-    (function(){
-      const header = document.querySelector('header');
-      const footer = document.querySelector('footer');
-      const menus  = Array.from(document.querySelectorAll('nav.side-menu'));
-      if(!menus.length) return;
-
-      const isMobile = () => window.innerWidth <= 768;
-
-      function setHeaderH(){
-        const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
-        document.documentElement.style.setProperty('--headerH', h + 'px');
-      }
-      function visibleMenu(){
-        return menus.find(m => getComputedStyle(m).display !== 'none') || menus[0];
-      }
-
-      // Only switch when a decent part of the footer is visible (or on mobile)
-      let footerVisible = false;
-      const obs = new IntersectionObserver(entries=>{
-        footerVisible = entries.some(e => e.isIntersecting && e.intersectionRatio >= 0.35);
-        applyMode();
-      }, { threshold:[0, 0.35], rootMargin:"0px 0px -20%" });
-      if(footer) obs.observe(footer);
-
-      function applyMode(){
-        const shouldTopNav = isMobile() || footerVisible;
-
-        menus.forEach(m => m.classList.remove('top-nav','visible'));
-        document.body.classList.toggle('with-top-nav', shouldTopNav);
-
-        const m = visibleMenu();
-        if(shouldTopNav){
-          m.classList.add('top-nav');
-          requestAnimationFrame(()=>{
-            const h = Math.ceil(m.getBoundingClientRect().height || 56);
-            document.documentElement.style.setProperty('--topNavH', h + 'px');
-            m.classList.add('visible');
-          });
-        }else{
-          document.documentElement.style.removeProperty('--topNavH');
-        }
-      }
-
-      window.__applyTopNav = applyMode;
-      window.addEventListener('load',  ()=>{ setHeaderH(); applyMode(); });
-      window.addEventListener('resize',()=>{ setHeaderH(); applyMode(); });
-      window.addEventListener('scroll', applyMode, { passive:true });
-    })();
-  </script>
 </body>
 </html>
