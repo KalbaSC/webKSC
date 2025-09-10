@@ -720,7 +720,7 @@ body.no-scroll { overflow: hidden; }
 .side-menu.top-nav {
   position: fixed;
   right: 0; left: 0;
-  top: calc(var(--headerH,72px) + env(safe-area-inset-top));
+  top: calc(var(--headerH,72px));
   width: min(88%, 1170px);
   margin: 0 auto;
   z-index: 1002;
@@ -728,12 +728,11 @@ body.no-scroll { overflow: hidden; }
   padding: 10px 8px;
   border: 0;
   border-bottom: 2px solid #f4e733;
-
+  border-radius: 0 0 14px 14px;
+  gap: 8px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap !important;
-  gap: 8px;
-
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -753,6 +752,8 @@ body.no-scroll { overflow: hidden; }
   transform: translateY(0);
 }
 .side-menu.top-nav .sm-indicator { display: none; }
+
+body.with-top-nav { padding-top: var(--topNavH, 0); }
 
 .menu-sub { display: none; }
 
@@ -1643,6 +1644,20 @@ header {
   }
 }
 
+.hero-wrapper { margin-top: 0 !important; }
+.hero-wrapper > .section:first-child { padding-top: 0 !important; }
+.hero-wrapper > .section:first-child .info-container { margin-top: 0 !important; }
+
+.side-menu {
+  position: fixed !important;
+  top: calc(var(--headerH, 72px) + 16px) !important;
+  right: clamp(12px, 5%, 80px) !important;
+  display: flex !important;
+  z-index: 1001 !important;
+}
+
+.menu-sub { display: none; }
+
   </style>
 </head>
 <body>
@@ -1834,15 +1849,6 @@ header {
     if (window.innerWidth >= 769) setOpen(false);
   });
 })();
-
-function updateHeaderHeight() {
-  const header = document.querySelector('header');
-  if (!header) return;
-  const headerHeight = header.offsetHeight;
-  document.documentElement.style.setProperty('--headerH', `${headerHeight}px`);
-}
-window.addEventListener('load', updateHeaderHeight);
-window.addEventListener('resize', updateHeaderHeight);
 
 function showCategory(category) {
   const main = document.getElementById('sideMenu');
@@ -2120,171 +2126,101 @@ window.showSection = function(sectionId){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <script>
+function showCategory(category) {
+  const main = document.getElementById('sideMenu');
+  const ind  = document.getElementById('individual-sports');
+  const team = document.getElementById('team-sports');
+
+  main.style.display = 'none';
+  ind.style.display  = (category === 'individual') ? 'flex' : 'none';
+  team.style.display = (category === 'team')       ? 'flex' : 'none';
+
+  if (window.__applyTopNav) window.__applyTopNav();
+}
+
+function backToMainMenu() {
+  document.getElementById('individual-sports').style.display = 'none';
+  document.getElementById('team-sports').style.display       = 'none';
+  document.getElementById('sideMenu').style.display          = 'flex';
+
+  if (window.__applyTopNav) window.__applyTopNav();
+}
+
 (function(){
   const header = document.querySelector('header');
-  const menus  = {
-    root: document.getElementById('sideMenu'),
-    individual: document.getElementById('individual-sports'),
-    team: document.getElementById('team-sports')
-  };
+  const footer = document.querySelector('footer');
+  const menus  = Array.from(document.querySelectorAll('nav.side-menu'));
+  if (!menus.length) return;
+
+  const isMobile = () => window.innerWidth <= 768;
 
   function setHeaderH(){
     const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
     document.documentElement.style.setProperty('--headerH', h + 'px');
   }
-  const isMobile = () => innerWidth <= 768;
-  const scrolled = () => (pageYOffset || document.documentElement.scrollTop) > 200;
 
   function visibleMenu(){
-    const list = [menus.individual, menus.team, menus.root].filter(Boolean);
-    return list.find(m => m.style.display !== 'none' && getComputedStyle(m).display !== 'none') || menus.root;
+    return menus.find(m => getComputedStyle(m).display !== 'none') || menus[0];
   }
-
-  function ensureIndicator(menu){
-    if (!menu) return;
-    if (!menu.querySelector('.sm-indicator')){
-      const ind = document.createElement('span');
-      ind.className = 'sm-indicator';
-      menu.appendChild(ind);
-    }
-  }
-
-  function moveIndicatorTo(menu, link){
-    const ind = menu.querySelector('.sm-indicator');
-    if (!ind || !link) return;
-    const r  = link.getBoundingClientRect();
-    const mr = menu.getBoundingClientRect();
-    ind.style.top    = (r.top - mr.top + (r.height - 40)/2) + 'px';
-    ind.style.height = Math.min(44, r.height) + 'px';
-  }
-
-  function attachHover(menu){
-    if (!menu || menu.__hoverAttached) return;
-    menu.addEventListener('pointermove', (e)=>{
-      const t = e.target.closest('a'); if(!t) return;
-      const r = t.getBoundingClientRect();
-      t.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-      t.style.setProperty('--my', (e.clientY - r.top)  + 'px');
-    });
-    menu.__hoverAttached = true;
-  }
-
-  function applyTopNavAcrossMenus(){
-    const vm = visibleMenu();
-    const shouldTop = isMobile() || scrolled();
-
-    [menus.root, menus.individual, menus.team].forEach(m=>{
-      if (!m) return;
-      m.classList.remove('is-topnav');
-    });
-    document.body.classList.remove('with-top-nav');
-
-    if (shouldTop && vm){
-      vm.classList.add('is-topnav');
-      requestAnimationFrame(()=>{
-        const h = Math.ceil(vm.getBoundingClientRect().height || 56);
-        document.documentElement.style.setProperty('--topNavH', h + 'px');
-        document.body.classList.add('with-top-nav');
-      });
-    }
-  }
-
-  function initMenu(menu){
-    if (!menu || menu.__inited) return;
-    ensureIndicator(menu);
-    attachHover(menu);
-    menu.addEventListener('click', (e)=>{
-      const a = e.target.closest('a'); if(!a) return;
-      menu.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
-      a.classList.add('active');
-      moveIndicatorTo(menu, a);
-    });
-    const first = menu.querySelector('a');
-    if (first){ first.classList.add('active'); moveIndicatorTo(menu, first); }
-    menu.__inited = true;
-  }
-
-  [menus.root, menus.individual, menus.team].forEach(initMenu);
-
-  window.showCategory = function(cat){
-    if (cat === 'individual'){
-      menus.root.style.display = 'none';
-      menus.team.style.display = 'none';
-      menus.individual.style.display = 'flex';
-      initMenu(menus.individual);
-    } else if (cat === 'team'){
-      menus.root.style.display = 'none';
-      menus.individual.style.display = 'none';
-      menus.team.style.display = 'flex';
-      initMenu(menus.team);
-    }
-    applyTopNavAcrossMenus();
-  };
-
-  window.backToMainMenu = function(){
-    menus.individual.style.display = 'none';
-    menus.team.style.display = 'none';
-    menus.root.style.display = 'flex';
-    applyTopNavAcrossMenus();
-  };
-
-  window.addEventListener('load',  ()=>{ setHeaderH(); applyTopNavAcrossMenus(); });
-  window.addEventListener('resize',()=>{ setHeaderH(); applyTopNavAcrossMenus(); });
-  window.addEventListener('scroll', applyTopNavAcrossMenus, { passive:true });
-})();
-
-(function(){
-  const header = document.querySelector('header');
-  const topNav = document.querySelector('.side-menu.top-nav');
-
-  function setVars(){
-    const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
-    document.documentElement.style.setProperty('--headerH', h + 'px');
-    if (topNav) {
-      const th = Math.ceil(topNav.getBoundingClientRect().height || 56);
-      document.documentElement.style.setProperty('--topNavH', th + 'px');
-    }
-  }
-
-  window.addEventListener('load', setVars);
-  window.addEventListener('resize', setVars);
-})();
-
-(function(){
-  const menu   = document.getElementById('sideMenu');      // or the currently visible menu
-  const footer = document.querySelector('footer');
-
-  if (!menu) return;
 
   let footerVisible = false;
-  if (footer) {
-    new IntersectionObserver(es => {
-      footerVisible = es.some(e => e.isIntersecting);
-      applyMode();
-    }, {threshold: [0, 0.01]}).observe(footer);
-  }
+  const footObs = new IntersectionObserver(entries=>{
+    footerVisible = entries.some(e => e.isIntersecting && e.intersectionRatio >= 0.35);
+    applyMode();
+  }, { threshold:[0,0.35], rootMargin:"0px 0px -20%" });
+  if (footer) footObs.observe(footer);
 
   function applyMode(){
-    const scrolled = (window.pageYOffset || document.documentElement.scrollTop) > 200;
-    const shouldTop = scrolled || footerVisible || window.innerWidth <= 768;
+    const shouldTopNav = isMobile() || footerVisible;
 
-    menu.classList.toggle('top-nav', shouldTop);
-    document.body.classList.toggle('with-top-nav', shouldTop);
+    menus.forEach(m => m.classList.remove('top-nav', 'visible'));
+    document.body.classList.toggle('with-top-nav', shouldTopNav);
 
-    if (shouldTop) {
+    const m = visibleMenu();
+    if (shouldTopNav){
+      m.classList.add('top-nav');
       requestAnimationFrame(()=>{
-        const th = Math.ceil(menu.getBoundingClientRect().height || 56);
-        document.documentElement.style.setProperty('--topNavH', th + 'px');
+        const h = Math.ceil(m.getBoundingClientRect().height || 56);
+        document.documentElement.style.setProperty('--topNavH', h + 'px');
+        m.classList.add('visible');
       });
     } else {
       document.documentElement.style.removeProperty('--topNavH');
     }
   }
 
-  window.addEventListener('load',  applyMode, {once:true});
-  window.addEventListener('scroll', applyMode, {passive:true});
-  window.addEventListener('resize', applyMode);
+  const rootMenu = document.getElementById('sideMenu');
+  if (rootMenu && !rootMenu.querySelector('.sm-indicator')) {
+    const ind = document.createElement('span');
+    ind.className = 'sm-indicator';
+    rootMenu.appendChild(ind);
+  }
+
+  window.__applyTopNav = applyMode;
+  window.addEventListener('load',  ()=>{ setHeaderH(); applyMode(); });
+  window.addEventListener('resize',()=>{ setHeaderH(); applyMode(); });
+  window.addEventListener('scroll', applyMode, { passive:true });
 })();
+
+function showCategory(category) {
+  const main = document.getElementById('sideMenu');
+  const ind  = document.getElementById('individual-sports');
+  const team = document.getElementById('team-sports');
+
+  main.style.display = 'none';
+  ind.style.display  = (category === 'individual') ? 'flex' : 'none';
+  team.style.display = (category === 'team') ? 'flex' : 'none';
+
+  if (window.__applyTopNav) window.__applyTopNav();
+}
+
+function backToMainMenu() {
+  document.getElementById('individual-sports').style.display = 'none';
+  document.getElementById('team-sports').style.display = 'none';
+  document.getElementById('sideMenu').style.display = 'flex';
+
+  if (window.__applyTopNav) window.__applyTopNav();
+}
 </script>
 
 </body>
