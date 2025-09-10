@@ -257,6 +257,8 @@ body.no-scroll { overflow: hidden; }
       transition: top .35s cubic-bezier(.2,.9,.2,1), height .35s;
     }
     
+	body.with-top-nav { padding-top: calc(var(--topNavH, 64px) + 8px) !important; }
+
     @keyframes sm-pop {
       0% { transform: translateX(12px); opacity: 0; }
       100% { transform: translateX(0); opacity: 1; }
