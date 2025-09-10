@@ -2276,6 +2276,10 @@ header {
   }
 }
 
+@media (max-width: 768px){
+  body.with-top-nav { padding-top: calc(var(--topNavH, 0px) + 6px); }
+}
+
   </style>
 </head>
 <body>
@@ -2478,19 +2482,23 @@ window.addEventListener('load', updateHeaderHeight);
 window.addEventListener('resize', updateHeaderHeight);
 
 function showCategory(category) {
-  document.getElementById('sideMenu').style.display = 'none';
-  
-  if (category === 'individual') {
-    document.getElementById('individual-sports').style.display = 'flex';
-  } else if (category === 'team') {
-    document.getElementById('team-sports').style.display = 'flex';
-  }
+  const main = document.getElementById('sideMenu');
+  const ind  = document.getElementById('individual-sports');
+  const team = document.getElementById('team-sports');
+
+  main.style.display = 'none';
+  ind.style.display  = (category === 'individual') ? 'flex' : 'none';
+  team.style.display = (category === 'team')       ? 'flex' : 'none';
+
+  if (window.__applyTopNav) window.__applyTopNav();
 }
 
 function backToMainMenu() {
   document.getElementById('individual-sports').style.display = 'none';
-  document.getElementById('team-sports').style.display = 'none';
-  document.getElementById('sideMenu').style.display = 'flex';
+  document.getElementById('team-sports').style.display       = 'none';
+  document.getElementById('sideMenu').style.display          = 'flex';
+
+  if (window.__applyTopNav) window.__applyTopNav();
 }
 
 window.showSection = function(sectionId){
@@ -2805,6 +2813,51 @@ window.showSection = function(sectionId){
 </footer>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script>
+(function(){
+  const menus  = Array.from(document.querySelectorAll('.side-menu'));
+  const header = document.querySelector('header');
+
+  function setHeaderH(){
+    const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
+    document.documentElement.style.setProperty('--headerH', h + 'px');
+  }
+  const isMobile = ()=> window.innerWidth <= 768;
+
+  function visibleMenus(){
+    return menus.filter(m => getComputedStyle(m).display !== 'none');
+  }
+
+  function applyTopNav(){
+    const scrolled     = (window.pageYOffset || document.documentElement.scrollTop) > 200;
+    const shouldTopNav = isMobile() || scrolled;
+
+    visibleMenus().forEach(menu=>{
+      if (shouldTopNav){
+        menu.classList.add('top-nav', 'visible');
+        document.body.classList.add('with-top-nav');
+
+        requestAnimationFrame(()=>{
+          const h = Math.ceil(menu.getBoundingClientRect().height || 56);
+          document.documentElement.style.setProperty('--topNavH', h + 'px');
+        });
+      } else {
+        menu.classList.remove('visible','top-nav');
+        if (!document.querySelector('.side-menu.top-nav')){
+          document.body.classList.remove('with-top-nav');
+          document.documentElement.style.removeProperty('--topNavH');
+        }
+      }
+    });
+  }
+
+  window.__applyTopNav = applyTopNav;   // expose so we can call it after toggling
+  window.addEventListener('load',  ()=>{ setHeaderH(); applyTopNav(); });
+  window.addEventListener('resize',()=>{ setHeaderH(); applyTopNav(); });
+  window.addEventListener('scroll', applyTopNav, { passive:true });
+})();
+</script>
 
 </body>
 </html>
