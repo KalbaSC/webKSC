@@ -32,18 +32,15 @@
     }
     
 header {
-  background-color: #111;
-  padding: 16px 5%;
-  margin: 0 auto;
-  width: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 3px solid #f4e733;
-  position: sticky;
-  top: 0;
-  z-index: 1001;
-  flex-wrap: wrap;
+  background-color:#111;
+  padding:16px 5%;
+  margin:0 auto;
+  width:90%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:3px solid #f4e733;
+  position:sticky; top:0; z-index:1001; flex-wrap:wrap;
 }
 
 .header-right {
@@ -287,21 +284,12 @@ header, footer { box-sizing: content-box; }
     .register-page .sp-8 { height: 8px; }
     .register-page .sp-16 { height: 16px; }
 
-    footer {
-      background-color: #000;
-      color: white;
-      padding: 30px 5%;
-      margin: 0 auto;	
-      width: 90%;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 40px;
-      direction: rtl;
-      border-top: 3px solid #f4e733;
-      text-align: right;
-    }
+footer{
+  background:#000; color:#fff;
+  padding:30px 5%; margin:0 auto; width:90%;
+  display:flex; justify-content:space-between; align-items:flex-start;
+  flex-wrap:wrap; gap:40px; border-top:3px solid #f4e733; text-align:right;
+}
     
     .footer-column {
       flex: 1;
@@ -385,11 +373,12 @@ header, footer { box-sizing: content-box; }
         max-width: 93%;
       }
 
-      body {
-        overflow-x: hidden;  
-        background: url('phonebkg.jpg') no-repeat top left fixed;
-        background-size: 250%;
-      }
+  body {
+    overflow-x: hidden;
+    background: url('phonebkg.jpg') no-repeat top left fixed;
+    background-size: 250%;
+    background-attachment: scroll !important;
+  }
       
       .header-right img.logo {
         height: 50px !important;
@@ -844,7 +833,11 @@ header, footer { box-sizing: content-box; }
   .nav-links.show { right: 0; }
   .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
 
-  body { background-attachment: scroll !important; }
+  body { 
+  background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: scroll !important; 
+  }
 
   .header-info .arabic-name,
   .header-info .english-name {
@@ -1026,19 +1019,24 @@ header {
 	}	
 
 @media (max-width: 768px) {
-  .mobile-nav { display: block; }
-  .menu-toggle { display: block; }
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background: rgba(0,0,0,0.95);
-    position: absolute;
-    top: var(--headerH, 72px);
-    right: 0;
-    width: 100%;
-    padding: 20px;
+  .mobile-nav{display:block}
+  .menu-toggle{display:block}
+  .nav-links{
+    position:fixed; top:0; right:-100%;
+    width:78%; height:100vh; padding:70px 20px;
+    background:#000; border-left:2px solid #f4e733;
+    display:flex; flex-direction:column; gap:10px;
+    transition:right .3s ease; z-index:1000;
   }
-  .nav-links.show { display: flex; }
+  .nav-links.show{ right:0; }
+  body {
+    overflow-x: hidden;
+    background: url('phonebkg.jpg') no-repeat top left fixed;
+    background-size: 250%;
+    background-attachment: scroll !important;
+  }
+  footer{ padding:20px 15px !important; width:100% !important; flex-direction:column; gap:20px; }
+  .footer-column{ width:90%; min-width:auto; }
 }
 
 @media (max-width: 600px) {
