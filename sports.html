@@ -228,6 +228,44 @@ body.no-scroll { overflow: hidden; }
       font-size: 16px; 
     }
     
+.sports-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.sport-card{
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid #f4e733;
+  border-radius: 14px;
+  padding: 18px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  color: #fff;
+}
+
+.sport-card i{
+  font-size: 36px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.sport-card h3{
+  margin: 0;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.sport-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(244,231,51,.18);
+  border-color: #fff17a;
+}
+
     .section { 
       padding: 40px 0; 
       scroll-margin-top: 110px; 
@@ -840,12 +878,6 @@ body.no-scroll { overflow: hidden; }
       transform: translateY(0);
     }
     
-    .side-menu.top-nav a {
-      flex: 0 1 auto;
-      min-width: 120px;
-      white-space: nowrap;
-    }
-    
     .side-menu.top-nav .sm-indicator { 
       display: none; 
     }
@@ -1237,7 +1269,7 @@ header {
   <nav class="nav-links" id="navLinks">
     <a href="#home" onclick="showSection('home')">الرئيسية</a>
     <a href="news.html">الأخبار</a>
-    <a href="#sports" onclick="showSection('sports')">الألعاب الرياضية</a>
+    <a href="#sports-home" onclick="showSection('sports-home')">الألعاب الرياضية</a>
     <a href="register.html">التسجيل</a>
     <a href="evaluate.html">بوابة المدربين</a>
     <a href="contact.html">اتصل بنا</a>
@@ -1607,26 +1639,6 @@ window.addEventListener('resize', updateHeaderHeight);
 
   window.addEventListener('load', updateAria);
 })();
-
-window.showSection = function(sectionId){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  if (sectionId && sectionId !== '#'){
-    const t = document.getElementById(sectionId);
-    if (t){
-      t.classList.add('active');
-      setTimeout(()=> t.scrollIntoView({behavior:'smooth'}), 100);
-    }
-  }
-  const sideMenu = document.getElementById('sideMenu');
-  if (sideMenu){
-    sideMenu.querySelectorAll('a').forEach(link=>{
-      link.classList.remove('active');
-      if (sectionId && link.onclick && link.onclick.toString().includes(sectionId)){
-        link.classList.add('active');
-      }
-    });
-  }
-};
 </script>
 
 <script>
