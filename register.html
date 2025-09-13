@@ -1710,69 +1710,57 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.querySelector('.menu-toggle');
   const navLinks = document.getElementById('navLinks');
 
-    function toggleSubMenu(menuId) {
-      document.querySelectorAll('.submenu').forEach(menu => {
-        if (menu.id !== `${menuId}-submenu`) {
-          menu.style.display = 'none';
+  (function () {
+    const nav = document.getElementById('navLinks');
+    const btn = document.querySelector('.menu-toggle');
+    const sideMenu = document.getElementById('sideMenu');
+    if (!nav || !btn) return;
+
+    function setOpen(open){
+      nav.classList.toggle('show', open);
+      document.body.classList.toggle('no-scroll', open);
+      btn.innerHTML = open ? '✕' : '☰';
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (sideMenu){
+        if (open){
+          sideMenu.dataset.prevDisplay = sideMenu.style.display || '';
+          sideMenu.style.display = 'none';
+        } else {
+          sideMenu.style.display = sideMenu.dataset.prevDisplay || '';
         }
-      });
-      
-      const submenu = document.getElementById(`${menuId}-submenu`);
-      if (submenu) {
-        submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-      }
-      
-      showSection(menuId);
-    }
-
-(function () {
-  const nav = document.getElementById('navLinks');
-  const btn = document.querySelector('.menu-toggle');
-  const sideMenu = document.getElementById('sideMenu');
-  if (!nav || !btn) return;
-
-  function setOpen(open){
-    nav.classList.toggle('show', open);
-    document.body.classList.toggle('no-scroll', open);
-    btn.innerHTML = open ? '✕' : '☰';
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-
-    if (sideMenu){
-      if (open){
-        sideMenu.dataset.prevDisplay = sideMenu.style.display || '';
-        sideMenu.style.display = 'none';
-      } else {
-        sideMenu.style.display = sideMenu.dataset.prevDisplay || '';
       }
     }
-  }
+    const isOpen = () => nav.classList.contains('show');
+    window.toggleMenu = () => setOpen(!isOpen());
+    document.addEventListener('click', (e)=>{
+      if (!isOpen()) return;
+      if (!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+    });
+    nav.addEventListener('click', (e)=>{
+      if (e.target.closest('a') && window.innerWidth < 769) setOpen(false);
+    });
+    window.addEventListener('resize', ()=>{
+      if (window.innerWidth >= 769) setOpen(false);
+    });
+  })();
 
-  const isOpen = () => nav.classList.contains('show');
-
-  window.toggleMenu = () => setOpen(!isOpen());
-
-  document.addEventListener('click', (e)=>{
-    if (!isOpen()) return;
-    if (!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
-  });
-
-  nav.addEventListener('click', (e)=>{
-    if (e.target.closest('a') && window.innerWidth < 769) setOpen(false);
-  });
-
-  window.addEventListener('resize', ()=>{
-    if (window.innerWidth >= 769) setOpen(false);
-  });
-})();
+  const PAGES = {
+    'tab-camp'   : 'https://example.com/register/form.html',
+    'tab-scan'   : 'https://example.com/register/scanner.html',
+    'tab-reports': 'https://example.com/register/reports.html'
+  };
 
   function ensureSrc(id) {
-    const el = document.getElementById(id);
-    if (el && !el.src) el.src = PAGES[id];
+    const el  = document.getElementById(id);
+    const url = PAGES && PAGES[id];
+    if (!el || !url) return;
+    if (!el.src) el.src = url;
   }
 
   function activateTab(id) {
     document.querySelectorAll('.reg-tab-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.target === id);
+      btn.setAttribute('aria-selected', btn.dataset.target === id ? 'true' : 'false');
     });
     document.querySelectorAll('.reg-frame').forEach(frame => {
       frame.style.display = (frame.id === id) ? 'block' : 'none';
@@ -1785,7 +1773,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener('DOMContentLoaded', () => {
-    ensureSrc('tab-camp');
+    activateTab('tab-camp');
   });
 </script>
 
