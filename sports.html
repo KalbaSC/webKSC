@@ -604,1539 +604,681 @@ body.no-scroll { overflow: hidden; }
     .chat-header {
       display: flex;
       justify-content: flex-start;
-      padding: 12px 15px;
-      border-bottom: 1px solid #ccc;
-      background: #f4e733;
-      border-radius: 12px 12px 0 0;
-    }
-    
-    .chat-header span {
-      font-size: 18px;
-      font-weight: bold;
-      color: #000;
-      cursor: pointer;
-    }
-    
-    .chat-body {
-      flex: 1;
-      overflow-y: auto;
-      padding: 10px;
-      max-height: 450px;
-    }
-    
-    .chat-footer {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border-top: 1px solid #ccc;
-      background: white;
-      gap: 10px;
-    }
-    
-    .chat-footer input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 20px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-    }
-    
-    .chat-footer button {
-      background: #f4e733;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-    
-    #chat-box::-webkit-scrollbar {
-      width: 8px;
-      border-radius: 12px;
-    }
-    
-    #chat-box::-webkit-scrollbar-track {
-      background: transparent;
-      border-radius: 12px;
-    }
-    
-    #chat-box::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.3);
-      border-radius: 12px;
-    }
-    
-    .message-wrapper {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin: 10px;
-    }
-    
-    .message-wrapper.user {
-      flex-direction: row-reverse;
-    }
-    
-    .avatar {
-      width: 36px;
-      height: 36px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 50%;
-      background-color: #ddd;
-    }
-    
-    .content {
+      padding: 12px 16px;
       background-color: #f4e733;
-      padding: 10px;
-      border-radius: 10px;
-      max-width: 75%;
+      color: black;
+      border-radius: 12px 12px 0 0;
+      font-weight: bold;
       font-size: 16px;
     }
     
-    .message-wrapper.bot .content {
-      background-color: #eee;
-      color: #000;
+    .chat-messages {
+      padding: 16px;
+      flex-grow: 1;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+      color: black;
+      font-size: 14px;
     }
     
-    .button-container {
+    .chat-input {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
+      padding: 12px;
+      background-color: #eee;
+      border-radius: 0 0 12px 12px;
     }
     
-    .chat-btn {
+    .chat-input input {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-right: 8px;
+      font-size: 14px;
+    }
+    
+    .chat-input button {
       background-color: #f4e733;
-      color: #000;
+      color: black;
       border: none;
-      border-radius: 5px;
       padding: 10px 16px;
-      font-weight: bold;
+      border-radius: 6px;
       cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s;
-    }
-    
-    .chat-btn:hover {
-      background-color: #d8cf2e;
-    }
-    
-    .typing-dots span {
-      animation: blink 1s infinite;
       font-weight: bold;
-      font-size: 24px;
-      margin: 0 1px;
+      font-size: 14px;
     }
     
-    .typing-dots span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-    
-    .typing-dots span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-    
-    @keyframes blink {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 1; }
-    }
-    
-    #chat-wrapper {
+    #chat-button {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-    }
-    
-    #chat-tooltip {
-      background: white;
+      background-color: #f4e733;
       color: black;
-      padding: 10px 14px;
-      border-radius: 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      font-weight: bold;
-      font-size: 14px;
-      max-width: 260px;
-      direction: rtl;
-      text-align: right;
-      position: absolute;
-      bottom: 80px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      z-index: 9999;
-      line-height: 1.4;
-    }
-    
-    #chat-toggle {
-      position: relative;
-      background-color: transparent;
-      border: none;
       border-radius: 50%;
       width: 60px;
       height: 60px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      cursor: pointer;
-      padding: 0;
-    }
-    
-    #chat-badge {
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      background: red;
-      color: white;
-      font-size: 12px;
-      font-weight: bold;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
       display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      z-index: 9999;
+      font-size: 24px;
     }
     
-    .side-menu.top-nav {
-      position: fixed;
-      right: 0; 
-      left: 0;
-      top: calc(var(--headerH, 72px) + env(safe-area-inset-top));
-      width: 88%;
-      max-width: 1170px;
-      margin: 0 auto;
-      z-index: 1002;
-      border-radius: 0 0 14px 14px;
-      padding: 10px 8px;
-      border: 0;
+    .chat-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      display: flex !important;
+    }
+    
+    .chat-hidden {
+      opacity: 0;
+      transform: translateY(30px);
+      display: none;
+    }
+    
+    .chat-message {
+      margin-bottom: 12px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+    
+    .user-message {
+      background-color: #f4e733;
+      color: black;
+      margin-left: auto;
+      text-align: left;
+    }
+    
+    .bot-message {
+      background-color: #e0e0e0;
+      color: black;
+      margin-right: auto;
+      text-align: right;
+    }
+    
+    .chat-timestamp {
+      font-size: 10px;
+      color: #666;
+      margin-top: 4px;
+      text-align: right;
+    }
+    
+    .user-message .chat-timestamp {
+      text-align: left;
+    }
+    
+    .chat-close {
+      margin-left: auto;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 10px 5%;
+        width: 90%;
+      }
+      
+      .header-right {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 15px;
+      }
+      
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+        gap: 20px;
+      }
+      
+      .carousel-container {
+        height: 300px;
+      }
+      
+      .info-container {
+        padding: 20px;
+      }
+      
+      .side-menu {
+        bottom: 0;
+        top: auto;
+        transform: none;
+        left: 0;
+        right: 0;
+        width: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        border-radius: 0;
+        padding: 10px;
+        max-height: 80px;
+      }
+      
+      .side-menu a {
+        min-width: 100px;
+      }
+      
+      .org-row {
+        flex-direction: column;
+      }
+      
+      .org-item {
+        width: 100%;
+      }
+      
+      footer {
+        flex-direction: column;
+        gap: 30px;
+      }
+      
+      .footer-column {
+        width: 100%;
+      }
+      
+      #chat-box {
+        width: 90%;
+        right: 5%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header-info .arabic-name {
+        font-size: 16px;
+      }
+      
+      .header-info .english-name {
+        font-size: 14px;
+      }
+      
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      .carousel-container {
+        height: 250px;
+      }
+      
+      .info-container {
+        padding: 15px;
+      }
+    }
+    
+    .section-title {
+      color: #f4e733;
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
       border-bottom: 2px solid #f4e733;
-      flex-direction: row;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-	  overflow-y: hidden;
-      box-sizing: border-box;
-	  -webkit-overflow-scrolling: touch;
     }
     
-	.side-menu.top-nav a {
-     flex: 0 0 auto;
-     min-width: 120px;
-     white-space: nowrap;
-     scroll-snap-align: center;
-    }
-
-    .side-menu.top-nav.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .sports-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
     }
     
-    .side-menu.top-nav a {
-      flex: 0 1 auto;
-      min-width: 120px;
-      white-space: nowrap;
+    .sport-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      border: 2px solid #f4e733;
+      transition: all 0.3s ease;
+      cursor: pointer;
     }
     
-    .side-menu.top-nav .sm-indicator { 
-      display: none; 
+    .sport-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(244, 231, 51, 0.3);
     }
     
-body.with-top-nav {
-  padding-top: 0 !important;
-}
-
-.main-nav {
-  display: flex;
-  justify-content: center;  
-  gap: 42px;                 
-  padding: 0;
-  margin: 0;
-  direction: rtl;            
-}
-.main-nav a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 18px 0;
-  transition: color .2s;
-}
-
-.main-nav a:hover {
-  color: #f4e733; 
-}
-
-.mobile-nav { display: none; }
-
-
-@media (max-width: 600px) {
-  #chat-box .chat-header { display:flex !important; }
-  #inner-input-bar.active { display:flex !important; }
-  
-  #chat-tooltip {
-    font-size: 12px !important;
-    padding: 8px 10px !important;
-    right: 8px !important;
-    bottom: 60px !important;
-  }
-.chat-body {
-    flex: 1;
-    overflow-y: auto !important;
-    padding: 10px !important;
-  }
-
-  .chat-footer input {
-    font-size: 14px !important;
-    padding: 6px !important;
-  }
-
-  .chat-footer button {
-    width: 34px !important;
-    height: 34px !important;
-  }
-
-  .chat-btn {
-    font-size: 14px !important;
-    padding: 10px 14px !important;
-  }
-
-  .content {
-    font-size: 15px !important;
-  }
-
-  .message-wrapper {
-    margin: 6px !important;
-    gap: 8px !important;
-  }
-
-  header h1 {
-    font-size: 18px !important;
-  }
-
-  header img {
-    height: 50px !important;
-  }
-}
-
-@media (max-width: 768px) {
-  #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
-  #inner-input-bar.active { display:flex !important; }
-  
-  #chat-box {
-    width: 94% !important;
-    right: 3% !important;
-    height: 460px !important;
-    max-height: 70vh !important;
-  }
-	
-  #chat-box.open {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-	
-  .chat-body {
-    max-height: 55vh !important;
-    overflow-y: auto !important;
-  }
-  *, *::before, *::after { box-sizing: border-box; }
-
-  img, video, iframe { max-width: 100%; height: auto; }
-
-  :where(p, h1, h2, h3, h4, h5, h6, a, li, td) { overflow-wrap: anywhere; }
-	
-  .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
-	
-  #chat-box[style*="display: none"] { pointer-events: none; }
-   .nav-links { pointer-events: none; }
-   .nav-links.show { pointer-events: auto; }
-	
-  .nav-links {
-    position: fixed; top: 0; right: -100%;
-    width: 78%; height: 100vh; padding: 70px 20px;
-    background: #000; border-left: 2px solid #f4e733;
-    display: flex; flex-direction: column; gap: 10px;
-    transition: right .3s ease;
-    z-index: 1000;
-  }
-  .mobile-nav { display: block !important; }	
-  .nav-links.show { right: 0; }
-  .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
-
-  body { background-attachment: scroll !important; }
-
-  .header-info .arabic-name,
-  .header-info .english-name {
-    white-space: nowrap;        
-    line-height: 1.2;
-  }
-
-  .header-right { gap: 6px !important; }
-  .header-right img.logo { height: 40px !important; }
-  .header-right .divider { display: none !important; }	
-  .header-right { flex-direction: row !important; align-items: center !important; gap: 2px !important; }
-	
-.header-info {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;  
-  text-align: center !important;   
-  gap: 6px !important;             
-}
-	
-  .header-info .arabic-name,
-  .header-info .english-name { white-space: nowrap; line-height: 1.2; font-size: 12px !important; }
-	
-  #chat-box {
-    position: fixed; right: 20px; bottom: 90px;
-    width: 360px; max-width: 90%; max-height: 85vh;
-    display: none;
-    flex-direction: column; overflow: hidden; z-index: 9999;
-  }
-  .footer-column { min-width: 0 !important; width: 100% !important; }
-  .footer-column h3 { font-size: 16px !important; margin-bottom: 10px; }
-  .footer-column a { font-size: 14px !important; }
-  textarea { width: 100% !important; height: 120px !important; }
-  button[type="submit"] { width: 100% !important; }
-  header, footer { padding: 12px 16px !important; }
-
-  header, footer {
-    width: 100% !important;
-    padding: 12px 16px !important;
-  }
-
-  .nav-links { gap: 12px !important; flex-wrap: wrap; }
-  .nav-links a { font-size: 14px !important; }
-	
-header { 
-  padding-inline: 16px !important;           
-}
-
-.header-right {
-  gap: 8px !important;                        
-  align-items: center !important;
-}
-
-.header-right img.logo {
-  height: 40px !important;
-  margin: 0 !important;
-}
-
-.header-right .divider {
-  display: inline-block !important;
-  height: 40px !important;
-  margin-inline: 8px !important;           
-}
-
-.mobile-nav .menu-toggle {
-  padding: 0 !important;
-  width: 36px !important;
-  height: 36px !important;
-  display: grid !important;
-  place-items: center !important;
-  line-height: 1 !important;
-  margin: 0 !important;
-}
-	
-  .header-info {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 6px !important;          
-  }
-
-  .header-info .arabic-name {
-    font-size: 14px !important;
-  }
-
-  .header-info .english-name {
-    font-size: 12px !important;
-    color: #f4e733;
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    height: 100vh;
-    background: #000;
-    border-left: 2px solid #f4e733;
-    padding: 60px 20px 20px;
-    flex-direction: column;
-    gap: 15px;
-    transition: right 0.3s ease;
-    z-index: 1000;
-  }
-
-  .nav-links.show {
-    right: 0;
-  }
-
-  .nav-links a {
-    padding: 12px 0;
-    font-size: 16px;
-    border-bottom: 1px solid #222;
-  }
-
-  footer {
-    padding: 20px 15px !important;
-    width: 100% !important;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .footer-column {
-    width: 90%;
-    min-width: auto;
-  }
-
-  .footer-column h3 {
-    font-size: 16px !important;
-    margin-bottom: 10px;
-  }
-
-  .footer-column a {
-    font-size: 14px !important;
-  }
-
-  .social-icons {
-    justify-content: flex-start;
-    gap: 15px;
-  }
-
-  .footer-bottom {
-    margin-top: 20px;
-    padding-top: 15px;
-    font-size: 12px;
-  }
-
-  textarea {
-    height: 120px !important;
-  }
-
-  button[type="submit"] {
-    width: 100% !important;
-  }
-  footer button[type="submit"] {
-    background-color: #f4e733 !important;
-    color: #000 !important;
-  }
-
-  #chat-box {
-    width: 94% !important;
-    right: 3% !important;
-    height: 460px !important;
-    max-height: 70vh !important;
-  }
-
-  .chat-body {
-    max-height: 55vh !important;
-  }
-
-  @keyframes tooltip-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-  }
-
-  @keyframes tooltip-fade {
-    0%, 80% { opacity: 1; visibility: visible; }
-    100% { opacity: 0; visibility: hidden; }
-  }
-	}	
-
-@media (max-width: 768px) {
-  .mobile-nav { display: block; }
-  .menu-toggle { display: block; }
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background: rgba(0,0,0,0.95);
-    position: absolute;
-    top: var(--headerH, 72px);
-    right: 0;
-    width: 100%;
-    padding: 20px;
-  }
-  .nav-links.show { display: flex; }
-}
-
-@media (max-width: 600px) {
-  #chat-box .chat-header { display:flex !important; }
-  #inner-input-bar.active { display:flex !important; }
-  
-  #chat-tooltip {
-    font-size: 12px !important;
-    padding: 8px 10px !important;
-    right: 8px !important;
-    bottom: 80px !important;
-  }
-  #chat-tooltip span:last-child {
-    font-size: 14px !important;
-  }
-}
-
-@media (max-width: 768px){
-  .side-menu.top-nav{
-    position: fixed;
-    top: var(--headerH,72px);
-    right: 0; left: 0;
-    width: 100% !important;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap !important;
-    gap: 6px;
-    padding: 6px 4px;
-    background: rgba(0,0,0,0.95);
-    border: 0;
-    border-bottom: 2px solid #f4e733;
-    border-radius: 0 0 10px 10px;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch;
-    z-index: 1002;
-  }
-
-  .side-menu.top-nav a{
-    flex: 0 0 auto;
-    white-space: nowrap;
-    min-width: 80px;
-    padding: 6px 8px;
-    font-size: 13px;
-    border-bottom: none;
-  }
-
-  .side-menu .sm-indicator{ display: none !important; }
-  body.with-top-nav {padding-top: 0 !important;}
-}
+    .sport-card i {
+      font-size: 40px;
+      color: #f4e733;
+      margin-bottom: 15px;
+    }
+    
+    .sport-card h3 {
+      color: #fff;
+      margin: 0;
+      font-size: 18px;
+    }
+    
+    .submenu {
+      display: none;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 15px;
+      border: 1px solid #f4e733;
+    }
+    
+    .submenu a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 0;
+      transition: color 0.3s;
+    }
+    
+    .submenu a:hover {
+      color: #f4e733;
+    }
+    
+    .back-button {
+      background: #f4e733;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 20px;
+      display: inline-block;
+    }
+    
+    .back-button:hover {
+      background: #d8cf2e;
+    }
   </style>
 </head>
 <body>
-<header>
-  <div class="mobile-nav">
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  </div>
-  
-  <div class="header-right">
-    <img src="Picture3.png" alt="شعار الشارقة" class="logo">
-    <div class="divider"></div>
-    <img src="logo.png" alt="شعار نادي كلباء" class="logo">
-    <div class="header-info">
-      <div class="arabic-name">نادي كلباء الرياضي الثقافي</div>
-      <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
-    </div>
-  </div>
-
-  <nav class="nav-links" id="navLinks">
-    <a href="#home" onclick="showSection('home')">الرئيسية</a>
-    <a href="news.html">الأخبار</a>
-    <a href="#sports" onclick="showSection('sports')">الألعاب الرياضية</a>
-    <a href="register.html">التسجيل</a>
-    <a href="evaluate.html">بوابة المدربين</a>
-    <a href="contact.html">اتصل بنا</a>
-  </nav>
-</header>
-
-<div id="sideMenu" class="side-menu">
-    <a href="javascript:void(0)" onclick="showCategory('individual')">ألعاب فردية</a>
-    <a href="javascript:void(0)" onclick="showCategory('team')">ألعاب جماعية</a>
-</div>
-
-  <nav id="individual-sports" class="side-menu menu-sub" style="display:none">
-    <a href="javascript:void(0)" onclick="showSection('chess')">الشطرنج</a>
-    <a href="javascript:void(0)" onclick="showSection('taekwondo')">التايكوندو</a>
-    <a href="javascript:void(0)" onclick="showSection('judo')">الجودو</a>
-    <a href="javascript:void(0)" onclick="showSection('karate')">الكاراتيه</a>
-    <a href="javascript:void(0)" onclick="showSection('cycling')">الدراجات</a>
-    <a href="javascript:void(0)" onclick="showSection('athletics')">العاب القوى</a>
-    <a href="javascript:void(0)" onclick="showSection('modern-pentathlon')">الخماسي الحديث</a>
-    <a href="javascript:void(0)" onclick="showSection('badminton')">الريشة الطائرة</a>
-    <a href="javascript:void(0)" onclick="backToMainMenu()">← العودة</a>
-  </nav>
-
-  <nav id="team-sports" class="side-menu menu-sub" style="display:none">
-    <a href="javascript:void(0)" onclick="showSection('volleyball')">كرة الطائرة</a>
-    <a href="javascript:void(0)" onclick="showSection('basketball')">كرة السلة</a>
-    <a href="javascript:void(0)" onclick="showSection('handball')">كرة اليد</a>
-    <a href="javascript:void(0)" onclick="showSection('futsal')">كرة قدم الصالات</a>
-    <a href="javascript:void(0)" onclick="backToMainMenu()">← العودة</a>
-  </nav>
-
-  <div class="hero-wrapper">
-    <section id="sports-home" class="section active">
-      <div class="info-container">
-        <h2>الألعاب الرياضية</h2>
-        <p>اختر من القائمة الجانبية نوع الرياضة التي تريد معرفة المزيد عنها</p>
+  <header>
+    <div class="header-right">
+      <img src="https://via.placeholder.com/70x70?text=Logo" alt="شعار النادي" class="logo">
+      <div class="divider"></div>
+      <div class="header-info">
+        <h1 class="arabic-name">نادي كلباء الرياضي الثقافي</h1>
+        <p class="english-name">Kalba Cultural Sports Club</p>
       </div>
-    </section>
-
-<section id="individual" class="section">
-  <div class="info-container">
-    <h2>ألعاب فردية</h2>
-    <p>
-1
-    </p>
-  </div>
-</section>
-
-<section id="team" class="section">
-  <div class="info-container">
-    <h2>ألعاب جماعية</h2>
-    <p>
-1
-    </p>
-  </div>
-</section>
-
-    <section id="chess" class="section"><div class="info-container"><h2>الشطرنج</h2><p>تفاصيل …</p></div></section>
-    <section id="taekwondo" class="section"><div class="info-container"><h2>التايكوندو</h2><p>تفاصيل …</p></div></section>
-    <section id="judo" class="section"><div class="info-container"><h2>الجودو</h2><p>تفاصيل …</p></div></section>
-    <section id="karate" class="section"><div class="info-container"><h2>الكاراتيه</h2><p>تفاصيل …</p></div></section>
-    <section id="cycling" class="section"><div class="info-container"><h2>الدراجات</h2><p>تفاصيل …</p></div></section>
-    <section id="athletics" class="section"><div class="info-container"><h2>العاب القوى</h2><p>تفاصيل …</p></div></section>
-    <section id="modern-pentathlon" class="section"><div class="info-container"><h2>الخماسي الحديث</h2><p>تفاصيل …</p></div></section>
-    <section id="badminton" class="section"><div class="info-container"><h2>الريشة الطائرة</h2><p>تفاصيل …</p></div></section>
-
-    <section id="volleyball" class="section"><div class="info-container"><h2>كرة الطائرة</h2><p>تفاصيل …</p></div></section>
-    <section id="basketball" class="section"><div class="info-container"><h2>كرة السلة</h2><p>تفاصيل …</p></div></section>
-    <section id="handball" class="section"><div class="info-container"><h2>كرة اليد</h2><p>تفاصيل …</p></div></section>
-    <section id="futsal" class="section"><div class="info-container"><h2>كرة قدم الصالات</h2><p>تفاصيل …</p></div></section>
-  </div>
-	
-<script>
-(function () {
-  const nav = document.getElementById('navLinks');
-  const btn = document.querySelector('.menu-toggle');
-  const sideMenu = document.getElementById('sideMenu');
-  if (!nav || !btn) return;
-
-  function setOpen(open){
-    nav.classList.toggle('show', open);
-    document.body.classList.toggle('no-scroll', open);
-    btn.innerHTML = open ? '✕' : '☰';
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-
-    if (sideMenu){
-      if (open){
-        sideMenu.dataset.prevDisplay = sideMenu.style.display || '';
-        sideMenu.style.display = 'none';
-      } else {
-        sideMenu.style.display = sideMenu.dataset.prevDisplay || '';
-      }
-    }
-  }
-
-  const isOpen = () => nav.classList.contains('show');
-
-  window.toggleMenu = () => setOpen(!isOpen());
-
-  document.addEventListener('click', (e)=>{
-    if (!isOpen()) return;
-    if (!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
-  });
-
-  nav.addEventListener('click', (e)=>{
-    if (e.target.closest('a') && window.innerWidth < 769) setOpen(false);
-  });
-
-  window.addEventListener('resize', ()=>{
-    if (window.innerWidth >= 769) setOpen(false);
-  });
-})();
-
-function updateHeaderHeight() {
-  const header = document.querySelector('header');
-  if (!header) return;
-  const headerHeight = header.offsetHeight;
-  document.documentElement.style.setProperty('--headerH', `${headerHeight}px`);
-}
-window.addEventListener('load', updateHeaderHeight);
-window.addEventListener('resize', updateHeaderHeight);
-
-
-(function(){
-  let tooltipDismissed = false;
-
-  function dismissTooltip(){
-    const tooltip = document.getElementById('chat-tooltip');
-    if (tooltip){
-      tooltip.style.display = 'none';
-      tooltipDismissed = true;
-    }
-  }
-  window.dismissTooltip = dismissTooltip;
-
-  window.toggleChat = function(){
-    const chatBox  = document.getElementById('chat-box');
-    const badge    = document.getElementById('chat-badge');
-    const tooltip  = document.getElementById('chat-tooltip');
-    if (!chatBox) return;
-
-    if (typeof dismissTooltip === 'function') dismissTooltip();
-
-    const alreadyStarted = !!chatBox.querySelector('.message-wrapper');
-    const isHidden = getComputedStyle(chatBox).display === 'none';
-
-    if (isHidden){
-      chatBox.style.display = 'flex';
-      chatBox.classList.add('open');
-      if (badge)   badge.style.display = 'none';
-      if (tooltip) tooltip.style.display = 'none';
-      requestAnimationFrame(()=>{
-        chatBox.style.opacity   = '1';
-        chatBox.style.transform = 'translateY(0)';
-      });
-      if (typeof startChat === 'function' && !alreadyStarted) startChat();
-    } else {
-      chatBox.style.opacity   = '0';
-      chatBox.style.transform = 'translateY(30px)';
-      setTimeout(()=>{
-        chatBox.classList.remove('open');
-        chatBox.style.display = 'none';
-        if (badge) badge.style.display = 'flex';
-      }, 500);
-    }
-  };
-
-  document.addEventListener('DOMContentLoaded', ()=>{
-    const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
-    if (tooltipCloseBtn) tooltipCloseBtn.addEventListener('click', dismissTooltip);
-
-    const chatInput = document.getElementById('userMessage');
-    if (chatInput){
-      chatInput.addEventListener('focus', function(){ this.style.pointerEvents = 'auto'; });
-    }
-  });
-})();
-
-(function(){
-  const sideMenu = document.getElementById('sideMenu');
-  const header   = document.querySelector('header');
-  if (!sideMenu) return;
-
-  function setHeaderH(){
-    const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
-    document.documentElement.style.setProperty('--headerH', h + 'px');
-  }
-  const isMobile = ()=> window.innerWidth <= 768;
-
-  function applyMode(){
-    const scrolled     = (window.pageYOffset || document.documentElement.scrollTop) > 200;
-    const shouldTopNav = isMobile() || scrolled;
-
-    if (shouldTopNav){
-      sideMenu.classList.add('top-nav');
-      document.body.classList.add('with-top-nav');
-
-      requestAnimationFrame(()=>{
-        const h = Math.ceil(sideMenu.getBoundingClientRect().height || 56);
-        document.documentElement.style.setProperty('--topNavH', h + 'px');
-        sideMenu.classList.add('visible');
-      });
-    } else {
-      sideMenu.classList.remove('visible', 'top-nav');
-      document.body.classList.remove('with-top-nav');
-      document.documentElement.style.removeProperty('--topNavH');
-    }
-  }
-
-  window.addEventListener('load',  ()=>{ setHeaderH(); applyMode(); });
-  window.addEventListener('resize',()=>{ setHeaderH(); applyMode(); });
-  window.addEventListener('scroll', applyMode, { passive:true });
-
-  const indicator = document.createElement('span');
-  indicator.className = 'sm-indicator';
-  sideMenu.appendChild(indicator);
-
-  function moveIndicatorTo(link){
-    const r  = link.getBoundingClientRect();
-    const mr = sideMenu.getBoundingClientRect();
-    indicator.style.top    = (r.top - mr.top + (r.height - 40)/2) + 'px';
-    indicator.style.height = Math.min(44, r.height) + 'px';
-  }
-  window.moveIndicatorTo = moveIndicatorTo;
-
-  document.querySelectorAll('#sideMenu a').forEach((el,i)=> el.style.setProperty('--i', i));
-
-  sideMenu.addEventListener('pointermove', (e)=>{
-    const t = e.target.closest('a'); if(!t) return;
-    const r = t.getBoundingClientRect();
-    t.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-    t.style.setProperty('--my', (e.clientY - r.top)  + 'px');
-  });
-
-  const sections = ['history','president','vice','board','orgstructure']
-    .map(id => document.getElementById(id)).filter(Boolean);
-
-  const obs = new IntersectionObserver((entries)=>{
-    const visible = entries.filter(e=>e.isIntersecting)
-                           .sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
-    if(!visible) return;
-    const id = visible.target.id;
-    const link = Array.from(sideMenu.querySelectorAll('a'))
-      .find(a => a.onclick?.toString().includes(id));
-    if(link){
-      sideMenu.querySelectorAll('a').forEach(a=>a.classList.remove('active'));
-      link.classList.add('active');
-      moveIndicatorTo(link);
-    }
-  },{ rootMargin:"-20% 0px -60% 0px", threshold:[0.2,0.4,0.6,0.8] });
-
-  sections.forEach(sec => obs.observe(sec));
-
-  window.addEventListener('load', ()=>{
-    const first = sideMenu.querySelector('a');
-    if(first){ first.classList.add('active'); moveIndicatorTo(first); }
-  });
-  window.addEventListener('resize', ()=>{
-    const active = sideMenu.querySelector('a.active') || sideMenu.querySelector('a');
-    if(active) moveIndicatorTo(active);
-  });
-})();
-
-(function(){
-  const sideMenu = document.getElementById('sideMenu');
-  if (!sideMenu) return;
-
-  function centerActiveTab(link){
-    try{
-      link.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
-    }catch(e){}
-  }
-
-  function updateAria(){
-    sideMenu.querySelectorAll('a').forEach(a=>{
-      a.setAttribute('role','tab');
-      a.setAttribute('aria-selected', a.classList.contains('active') ? 'true' : 'false');
-    });
-    sideMenu.setAttribute('role','tablist');
-    sideMenu.setAttribute('aria-label','روابط داخل الصفحة');
-  }
-
-  const origMove = window.moveIndicatorTo;
-  window.moveIndicatorTo = function(link){
-    if (typeof origMove === 'function') origMove(link);
-    centerActiveTab(link);
-    updateAria();
-  };
-
-  sideMenu.addEventListener('click', (e)=>{
-    const a = e.target.closest('a'); if(!a) return;
-    setTimeout(()=>{ centerActiveTab(a); updateAria(); }, 50);
-  });
-
-  window.addEventListener('load', updateAria);
-})();
-
-window.showSection = function(sectionId){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  if (sectionId && sectionId !== '#'){
-    const t = document.getElementById(sectionId);
-    if (t){
-      t.classList.add('active');
-      setTimeout(()=> t.scrollIntoView({behavior:'smooth'}), 100);
-    }
-  }
-  const sideMenu = document.getElementById('sideMenu');
-  if (sideMenu){
-    sideMenu.querySelectorAll('a').forEach(link=>{
-      link.classList.remove('active');
-      if (sectionId && link.onclick && link.onclick.toString().includes(sectionId)){
-        link.classList.add('active');
-      }
-    });
-  }
-};
-</script>
-
-<script>
-let slideIndex = 0;
-function showSlides() {
-  const slides = document.getElementsByClassName("carousel-slide");
-  const len = slides.length;
-  if (len === 0) return; // guard: no slides yet
-
-  if (slideIndex >= len) slideIndex = 0;
-  if (slideIndex < 0)    slideIndex = len - 1;
-
-  for (let i = 0; i < len; i++) slides[i].style.display = "none";
-  slides[slideIndex].style.display = "block";
-}
-function plusSlides(n) { slideIndex += n; showSlides(); }
-
-document.addEventListener('DOMContentLoaded', () => {
-  showSlides();
-  setInterval(() => { slideIndex++; showSlides(); }, 5000);
-});
-</script>
-
-<div id="chat-box">
-  <div class="chat-header">
-<span onclick="toggleChat()">✕</span>
-  </div>
-
-  <div class="chat-body" id="chat-body">
-  </div>
-
-  <div class="chat-footer" id="inner-input-bar" style="display: none;">
-    <input id="userMessage" type="text" placeholder="اكتب شيئًا...">
-    <button onclick="submitUserMessage()">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="20" height="20">
-        <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-      </svg>
-    </button>
-  </div>
-</div>
-
-<div id="chat-wrapper" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-">
-
-<div id="chat-tooltip" style="
-  background: white;
-  color: black;
-  padding: 10px 14px;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  font-weight: bold;
-  font-size: 14px;
-  max-width: 260px;
-  direction: rtl;
-  text-align: right;
-  position: absolute;
-  bottom: 80px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  z-index: 9999;
-  line-height: 1.4;
-  white-space: nowrap;  
-">
-  <span>مرحباً بك في نادي كلباء الرياضي الثقافي</span>
-  <span onclick="dismissTooltip()" style="cursor:pointer; font-weight:bold; color: red; line-height: 1; ">✕</span>
-</div>
-
-  <button id="chat-toggle" onclick="toggleChat()" style="
-    position: relative;
-    background-color: transparent;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    cursor: pointer;
-    padding: 0;
-  ">
-    <img src="logo.png" alt="Chat Logo" style="width: 100%; height: 100%; border-radius: 50%;">
-    <span id="chat-badge" style="
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      background: red;
-      color: white;
-      font-size: 12px;
-      font-weight: bold;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    ">1</span>
-  </button>
-</div>
-
-<script>
-let userName = '';
-  
-function showMainButtons() {
-  const buttonsWrapper = document.createElement("div");
-  buttonsWrapper.className = "button-container";
-
-  const buttons = [
-    { label: "مواعيد التدريبات", action: () => reply('training') },
-    { label: "التسجيل في النادي", action: () => reply('register') },
-    { label: "معلومات عن الرياضات", action: () => reply('teams') },
-    { label: "تواصل معنا", action: () => showContactMain() },
-    { label: "🔁 إعادة المحادثة", action: () => startChat() },
-  ];
-
-  buttons.forEach(btn => {
-    const el = document.createElement("button");
-    el.className = "chat-btn";
-    el.innerText = btn.label;
-    el.onclick = btn.action;
-    buttonsWrapper.appendChild(el);
-  });
-
-  const wrapper = document.createElement("div");
-  wrapper.className = 'message-wrapper bot';
-
-  const avatar = document.createElement("div");
-  avatar.className = 'avatar';
-  avatar.style.backgroundImage = "url('bot-icon.png')";
-
-  const bubble = document.createElement("div");
-  bubble.className = 'content';
-  bubble.appendChild(buttonsWrapper);
-
-  wrapper.appendChild(avatar);
-  wrapper.appendChild(bubble);
-
-  const chatBody = document.getElementById("chat-body");
-  chatBody.appendChild(wrapper);
-  wrapper.scrollIntoView({ behavior: "smooth" });
-}
-
-function addMessage(content, isUser = false) {
-  const chatBody = document.getElementById('chat-body');
-  if (!chatBody) {
-    console.warn("chat-body not found when adding message.");
-    return;
-  }
-
-  const wrapper = document.createElement('div');
-  wrapper.className = 'message-wrapper ' + (isUser ? 'user' : 'bot');
-
-  const avatar = document.createElement('div');
-  avatar.className = 'avatar';
-  avatar.style.backgroundImage = `url('${isUser ? 'user-icon.png' : 'bot-icon.png'}')`;
-
-  const bubble = document.createElement('div');
-  bubble.className = 'content';
-  bubble.innerHTML = content;
-
-  wrapper.appendChild(avatar);
-  wrapper.appendChild(bubble);
-  chatBody.appendChild(wrapper);
-
-  setTimeout(() => {
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }, 100);
-}
-
-function clearChat() {
-  const chatBody = document.getElementById('chat-body');
-  if (chatBody) chatBody.innerHTML = ''; 
-
-  const buttons = document.getElementById("main-buttons");
-  const inputBar = document.getElementById("inner-input-bar");
-     if (inputBar) {
-          inputBar.classList.remove("active");   
-          inputBar.style.display = "none";       
-       }
-  if (buttons) buttons.style.display = "none";
-  if (inputBar) inputBar.style.display = "none";
-}
-
-function startChat(retries = 0) {
-  const chatBody = document.getElementById("chat-body");
-
-  if (!chatBody) {
-    if (retries < 10) {
-      console.warn("⏳ Waiting for chat-body... Retry:", retries + 1);
-      return setTimeout(() => startChat(retries + 1), 150);
-    } else {
-      console.error("❌ chat-body not found after retries.");
-      return;
-    }
-  }
-
-  clearChat();
-
-  addMessage("مرحباً بك في نادي كلباء الرياضي الثقافي! 👋 ما اسمك؟", false);
-
-  const inputDiv = document.createElement("div");
-  inputDiv.id = "nameInputWrapper";
-  inputDiv.style.marginTop = "10px";
-inputDiv.innerHTML = `
-  <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
-    <input id="nameInput" type="text" placeholder="اكتب اسمك هنا..." 
-           style="padding:10px; font-size:16px; flex: 1; border-radius:5px; border:1px solid #ccc;">
-    <button onclick="submitName()" 
-            style="padding:10px 15px; background:#f4e733; font-weight:bold; border:none; border-radius:5px;">
-      إرسال
-    </button>
-  </div>
-`;
-  chatBody.appendChild(inputDiv);
-}
-
- function submitName() {
-  const input = document.getElementById("nameInput");
-
-  const name = input.value.trim();
-
-  if (name) {
-  addMessage(`${name}`, true);
-  userName = name;
-  document.getElementById("nameInputWrapper").remove();
-  
-  setTimeout(() => {
-    addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
-    showMainButtons();
-    const inputBar = document.getElementById("inner-input-bar");
-  if (inputBar) {
-         inputBar.classList.add("active");   
-	     inputBar.style.display = "flex";
-	  }}, 500);
-    }
- }
-  
-function submitUserMessage() {
-    const input = document.getElementById("userMessage");
-    const msg = input.value.trim();
-    if (msg) {
-      addMessage(msg, true);
-
-
-    fetch('https://script.google.com/macros/s/AKfycbxTb9_7bVSNPqkErv5NFNpMk55MdVkzfdMxrRGSaeIeKl-Shv3WP82UybUX8IEzPVGw/exec', {
-  method: 'POST',
-  mode: 'no-cors',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ name: userName, message: msg })
-})
-
-.finally(() => {
-  addMessage("شكراً على تواصلك، سيتم الرد عليك في أقرب وقت.", false);
-    setTimeout(() => {
-      const html = `
-        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
-        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
-          <button type="button" class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
-        </div>
-         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
-      `;
-      addMessage(html, false);
-    }, 1000);	
-    });
-input.value = '';
-
-    }
-  }
-  
- function handleTeamOption(type) {
- 
-  const lastWrappers = document.querySelectorAll('.message-wrapper.bot');
-  const last = lastWrappers[lastWrappers.length - 1];
-  if (last) last.remove();
-
-  addMessage(type === 'individual' ? "🎯 الألعاب الفردية" : "🏃‍♂️ الألعاب الجماعية", true);
-
-  const sportsList = (type === "individual") ? [
-    { name: "الشطرنج", info: "رياضة ذهنية تساعد على التركيز والتخطيط." },
-    { name: "الجودو", info: "فن قتالي ياباني يعتمد على التوازن والرمي." },
-    { name: "الكاراتيه", info: "فن قتالي يركز على الضربات واللياقة." },
-    { name: "التايكوندو", info: "رياضة كورية تعتمد على الركلات العالية." },
-    { name: "الدراجات", info: "رياضة تعتمد على التحمل والسرعة." },
-    { name: "ألعاب القوى", info: "تضم الجري، الرمي، الوثب، والمشي." },
-    { name: "الخماسي الحديث", info: "تشمل السباحة، الرماية، الفروسية، الجري، والمبارزة." },
-    { name: "الريشة الطائرة", info: "رياضة سريعة تتطلب رد فعل سريع ومهارة." }
-  ] : [
-    { name: "كرة الطائرة", info: "لعبة جماعية تعتمد على التمريرات والضربات الساحقة." },
-    { name: "كرة السلة", info: "رياضة تتطلب دقة تصويب وسرعة حركة." },
-    { name: "كرة اليد", info: "رياضة جماعية تتميز بالسرعة والتعاون." },
-    { name: "كرة قدم الصالات", info: "نسخة داخلية من كرة القدم تُلعب في صالات مغلقة." }
-  ];
-
-
-  const wrapper = document.createElement("div");
-  wrapper.className = 'message-wrapper bot';
-
-  const avatar = document.createElement("div");
-  avatar.className = 'avatar';
-  avatar.style.backgroundImage = "url('bot-icon.png')";
-
-  const bubble = document.createElement("div");
-  bubble.className = 'content';
-
-  const buttonsWrapper = document.createElement("div");
-  buttonsWrapper.className = "button-container";  
-  buttonsWrapper.style.marginTop = "10px";
-
-  sportsList.forEach(sport => {
-    const btn = document.createElement("button");
-    btn.className = "chat-btn";
-    btn.innerText = sport.name;
-    btn.onclick = () => {
-      addMessage(sport.name, true);
-      addMessage(sport.info, false);
-      setTimeout(() => {
-    const html = `
-  <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
-  <div style="display: flex; justify-content: center; margin: 0 0 10px;">
-    <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
-  </div>
-   <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
-`;
-    addMessage(html, false);
-  }, 1000);   
-};
-    buttonsWrapper.appendChild(btn);
-  });
-
-  bubble.appendChild(buttonsWrapper);
-  wrapper.appendChild(avatar);
-  wrapper.appendChild(bubble);
-
-  const chatBox = document.getElementById("chat-body");
-  chatBox.appendChild(wrapper);
-  wrapper.scrollIntoView({ behavior: "smooth" });
-}
-
-  function dismissTooltip() {
-    const tooltip = document.getElementById('chat-tooltip');
-    if (tooltip) {
-      tooltip.style.display = 'none';
-      tooltipDismissed = true;
-    }
-  }
-  
-  document.addEventListener('DOMContentLoaded', function() {
-    const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
-    if (tooltipCloseBtn) {
-      tooltipCloseBtn.addEventListener('click', dismissTooltip);
-    }
-    const chatInput = document.getElementById('userMessage');
-    if (chatInput) {
-      chatInput.addEventListener('focus', function() {
-        this.style.pointerEvents = 'auto';
-      });
-    }
-  });
-	
-  function reply(option) {
-
-    let userText = '';
-    if (option === 'training') userText = 'مواعيد التدريبات';
-    else if (option === 'register') userText = 'التسجيل في النادي';
-    else if (option === 'teams') userText = 'معلومات عن الرياضات';
-
-    addMessage(userText, true); 
-    addMessage(`<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`, false);
-
-    setTimeout(() => {
-const typingDots = document.querySelector('.typing-dots');
-if (typingDots) {
-  const bubble = typingDots.closest('.message-wrapper');
-  if (bubble) bubble.remove();
-}
-
-      if (option === 'teams') {
-const html = `
-  <p style="font-weight: bold; text-align: center;">اختر نوع الرياضة:</p>
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 10px;">
-    <button class="chat-btn" onclick="handleTeamOption('individual')">🎯 الألعاب الفردية</button>
-    <button class="chat-btn" onclick="handleTeamOption('group')">🏃‍♂️ الألعاب الجماعية</button>
-  </div>
-`;
-  addMessage(html, false);
-}
- else if (option === 'training') {
-        addMessage("تُقام التدريبات من يوم السبت إلى الخميس من الساعة 5 مساءً وحتى الساعة 8 مساءً.", false);
-      } else if (option === 'register') {
-        addMessage("للتسجيل، يرجى التواصل مع إداري اللعبة المعنية من خلال الأرقام التالية:", false);
-      }
-
-           if (option !== 'teams') {
-        setTimeout(() => {
-  const html =` 
-    <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
-    <div style="display: flex; justify-content: center; margin: 0 0 10px;">
-      <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
     </div>
-    <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
-  `;
-  addMessage(html, false);
-}, 1000);
+    <nav class="nav-links">
+      <a href="#home">الرئيسية</a>
+      <a href="#about">عن النادي</a>
+      <a href="#teams">الفرق</a>
+      <a href="#news">الأخبار</a>
+      <a href="#events">الفعاليات</a>
+      <a href="#contact">اتصل بنا</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
 
-      }
+  <div class="side-menu">
+    <a href="#home" class="active" onclick="showSection('home')">الرئيسية</a>
+    <a href="#about" onclick="showSection('about')">عن النادي</a>
+    <a href="#individual-sports" onclick="toggleSubMenu('individual-sports')">رياضات فردية</a>
+    <a href="#team-sports" onclick="toggleSubMenu('team-sports')">رياضات جماعية</a>
+    <a href="#teams" onclick="showSection('teams')">الفرق</a>
+    <a href="#news" onclick="showSection('news')">الأخبار</a>
+    <a href="#events" onclick="showSection('events')">الفعاليات</a>
+    <a href="#contact" onclick="showSection('contact')">اتصل بنا</a>
+  </div>
 
-    }, 1000);
-  } 
-
-function showContactMain() {
-  addMessage("تواصل معنا", true);
-  addMessage(`<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`, false);
-
-  setTimeout(() => {
-    const typingDots = document.querySelector('.typing-dots');
-    if (typingDots) {
-      const bubble = typingDots.closest('.message-wrapper');
-      if (bubble) bubble.remove();
-    }
-
-    addMessage(`
-      يمكنك التواصل معنا عبر البريد الإلكتروني: 
-      <a href="mailto:info@ksc.shj.ae" style="color:blue;">info@ksc.shj.ae</a><br><br>
-      أو استخدام أي من وسائل التواصل الاجتماعي التالية:
-      <div style="margin-top: 15px; text-align: center;">
-        <!-- social icons -->
+  <div class="hero-carousel">
+    <div class="carousel-container">
+      <div class="carousel-slide fade">
+        <img src="https://via.placeholder.com/1170x520/000000/f4e733?text=بطولة+نادي+كلباء" alt="بطولة نادي كلباء">
+        <div class="caption">
+          <h3>بطولة نادي كلباء السنوية</h3>
+          <p>انضم إلى أكبر الأحداث الرياضية في المنطقة</p>
+        </div>
       </div>
-      <br>
-      <p style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">
-        إذا كنت بحاجة إلى مساعدة مباشرة، يمكنك التواصل مع السكرتير:
-      </p>
-      <button onclick="showContactOptions()" 
-        style="margin-top:5px; padding:16px 28px; font-size:18px; background:#f4e733; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
-        تواصل مع السكرتير
-      </button>
-    `, false);
-
-    setTimeout(() => {
-      const html = `
-        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
-        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
-          <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+      <div class="carousel-slide fade">
+        <img src="https://via.placeholder.com/1170x520/000000/f4e733?text=منشآت+النادي" alt="منشآت النادي">
+        <div class="caption">
+          <h3>منشآت رياضية عالمية المستوى</h3>
+          <p>استمتع بأفضل المرافق الرياضية المتاحة</p>
         </div>
-         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
-      `;
-      addMessage(html, false);
-    }, 1000);
-  }, 1000);
-}
-
-function showContactOptions() {
-  addMessage("تواصل مع السكرتير", true);
-  addMessage(`<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`, false);
-
-  setTimeout(() => {
-    const typingDots = document.querySelector('.typing-dots');
-    if (typingDots) {
-      const bubble = typingDots.closest('.message-wrapper');
-      if (bubble) bubble.remove();
-    }
-
-    addMessage(`يرجى زيارة بطاقة السكرتير عبر 
-      <a href="https://kalbasc.github.io/sameh/Business%20E-Card.html" target="_blank" style="color:blue;">هذا الرابط</a>.`, false);
-
-    setTimeout(() => {
-      const html = `
-        <p style="font-weight:bold; text-align:right; margin: 0 0 10px;">هل يمكنني مساعدتك في شيء آخر؟</p>
-        <div style="display: flex; justify-content: center; margin: 0 0 10px;">
-          <button class="chat-btn" onclick="showMainButtons()">عرض الخيارات</button>
+      </div>
+      <div class="carousel-slide fade">
+        <img src="https://via.placeholder.com/1170x520/000000/f4e733?text=فريق+كرة+القدم" alt="فريق كرة القدم">
+        <div class="caption">
+          <h3>فريق كرة القدم يحقق الفوز</h3>
+          <p>تهانينا لفريقنا على الفوز في البطولة الأخيرة</p>
         </div>
-         <p style="text-align:right; margin: 0 0 10px;">كما يمكنك مشاركة أرائك أو أقتراحاتك أو كتابة استفسارك مع معلومات التواصل، وسيتم الرد عليك في أقرب وقت.</p>
-      `;
-      addMessage(html, false);
-    }, 1000);
-  }, 1000);
-}
-	
-document.addEventListener("keydown", function (e) {
-  const nameInput = document.getElementById("nameInput");
-  if (nameInput && document.activeElement === nameInput && e.key === "Enter") {
-    submitName();
-  }
-});
-
-document.addEventListener("keydown", function (e) {
-  const msgInput = document.getElementById("userMessage");
-  if (msgInput && document.activeElement === msgInput && e.key === "Enter") {
-    submitUserMessage();
-  }
-});
-
-window.addEventListener('DOMContentLoaded', () => {
-  startChat();
-});
-
-</script>
-</div>
-	
-<footer>
-  <div class="footer-column">
-    <h3 style="color: #f4e733; font-size: 14px;">تواصل معنا</strong></h3>
-    <p><a href="mailto:info@ksc.shj.ae" style="color: #FFFFFF; font-size: 12px;">info@ksc.shj.ae</a></p>
-    <p><a href="tel:+971092777873" style="color: #FFFFFF; font-size: 12px;">092777873</a></p>
-  </div>
-	
-  <div class="footer-column">
-    <h3 style="color: #f4e733; font-size: 14px;">روابط سريعة</strong></h3>
-    <a href="index.html" style="color: #FFFFFF; font-size: 12px;">الرئيسية</a>
-    <a href="news.html" style="color: #FFFFFF; font-size: 12px;">الأخبار</a>
-    <a href="sports.html" style="color: #FFFFFF; font-size: 12px;">الألعاب الرياضية</a>
-    <a href="evaluate.html" style="color: #FFFFFF; font-size: 12px;">بوابة المدربين</a>
-    <a href="register.html" style="color: #FFFFFF; font-size: 12px;">التسجيل</a>
-    <a href="contact.html" style="color: #FFFFFF; font-size: 12px;">اتصل بنا</a>
-  </div>
-
-  <div class="footer-column">
-    <h3 style="color: #f4e733; font-size: 14px;">تابعنا</strong></h3>
-    <div class="social-icons">
-      <a href="https://www.facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://www.instagram.com/kalbasc/" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://x.com/Kalba_sc?mx=2" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="https://www.youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </div>
+      <a class="prev" onclick="plusSlides(-1)">❮</a>
+      <a class="next" onclick="plusSlides(1)">❯</a>
     </div>
+  </div>
 
-	    <div>
-    <h3 style="color: #f4e733; font-size: 14px;">أرسل ملاحظاتك أو اقتراحاتك</strong></h3>
-<form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
-  <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
-  <br><br>
- <button type="submit" style="background-color: #f4e733; padding: 10px 20px; border: none; border-radius: 10px; cursor:pointer;">إرسال</button>
-</form>
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+  <div id="home" class="section active">
+    <div class="info-container">
+      <h2>مرحباً بكم في نادي كلباء الرياضي الثقافي</h2>
+      <p>نادي كلباء الرياضي الثقافي هو أحد أبرز الأندية في دولة الإمارات العربية المتحدة، حيث يقدم مجموعة متنوعة من الأنشطة الرياضية والثقافية لأفراد المجتمع. تأسس النادي بهدف نشر الثقافة الرياضية وتطوير المواهب الشابة في مختلف المجالات.</p>
+      <p>يضم النادي العديد من المرافق الحديثة والفرق الرياضية التنافسية التي تشارك في البطولات المحلية والدولية. كما ينظم النادي العديد من الفعاليات والأنشطة المجتمعية على مدار العام.</p>
+    </div>
+  </div>
 
- <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form");
-    const confirmationMessage = document.createElement("div");
-    confirmationMessage.style.marginTop = "15px";
-    confirmationMessage.style.color = "#00ff88";
-    confirmationMessage.style.fontWeight = "bold";
-    form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
+  <div id="about" class="section">
+    <div class="info-container">
+      <h2>عن النادي</h2>
+      <p>تأسس نادي كلباء الرياضي الثقافي في عام 1975، ويعد من أقدم الأندية في منطقة الشارقة. يهدف النادي إلى دعم وتطوير الرياضة والثقافة في المجتمع المحلي من خلال توفير بيئة مناسبة لممارسة مختلف الأنشطة.</p>
+      <p>يتميز النادي بمرافقه الحديثة التي تشمل ملاعب كرة القدم، وصالات رياضية مغلقة، ومسابح أولمبية، وملاعب للتنس، بالإضافة إلى مركز ثقافي يحتوي على مكتبة وقاعات للأنشطة الفنية والثقافية.</p>
+    </div>
+  </div>
 
-    let submitted = false;
+  <div id="individual-sports" class="section">
+    <div class="info-container">
+      <h2 class="section-title">الرياضات الفردية</h2>
+      <div class="sports-grid">
+        <div class="sport-card" onclick="showSport('chess')">
+          <i class="fas fa-chess"></i>
+          <h3>الشطرنج</h3>
+        </div>
+        <div class="sport-card" onclick="showSport('taekwondo')">
+          <i class="fas fa-fist-raised"></i>
+          <h3>التايكوندو</h3>
+        </div>
+        <div class="sport-card" onclick="showSport('judo')">
+          <i class="fas fa-wrestling"></i>
+          <h3>الجودو</h3>
+        </div>
+        <div class="sport-card" onclick="showSport('karate')">
+          <i class="fas fa-hand-rock"></i>
+          <h3>الكاراتيه</h3>
+        </div>
+        <div class="sport-card" onclick="showSport('cycling')">
+          <i class="fas fa-bicycle"></i>
+          <h3>الدراجات</h3>
+        </div>
+        <div class="sport-card" onclick="showSport('athletics')">
+          <i class="fas fa-running"></i>
+          <h3>ألعاب القوى</h3>
+        </div>
+        <div class="sport-card" onclick="showSport('modern-pentathlon')">
+          <i class="fas fa-medal"></i>
+          <h3>الخماسي الحديث</h3>
+        </div>
+        <div class="sport-card" onclick="showSport('badminton')">
+          <i class="fas fa-table-tennis"></i>
+          <h3>الريشة الطائرة</h3>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    form.addEventListener("submit", function () {
-      submitted = true;
-      confirmationMessage.textContent = "جارٍ الإرسال...";
+  <div id="team-sports" class="section">
+    <div class="info-container">
+      <h2 class="section-title">الرياضات الجماعية</h2>
+      <div class="sports-grid">
+        <div class="sport-card" onclick="showSport('volleyball')">
+          <i class="fas fa-volleyball-ball"></i>
+          <h3>كرة الطائرة</h3>
+        </div>
+        <div class="sport-card" onclick="showSport('basketball')">
+          <i class="fas fa-basketball-ball"></i>
+          <h3>كرة السلة</h3>
+        </div>
+        <div class="sport-card" onclick="showSport('handball')">
+          <i class="fas fa-hand-rock"></i>
+          <h3>كرة اليد</h3>
+        </div>
+        <div class="sport-card" onclick="showSport('futsal')">
+          <i class="fas fa-futbol"></i>
+          <h3>كرة قدم الصالات</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="teams" class="section">
+    <div class="info-container">
+      <h2>الفرق الرياضية</h2>
+      <p>يضم نادي كلباء الرياضي الثقافي العديد من الفرق الرياضية التي تتنافس في مختلف البطولات المحلية والدولية. تشمل هذه الفرق:</p>
+      <ul>
+        <li>فريق كرة القدم</li>
+        <li>فريق كرة السلة</li>
+        <li>فريق كرة اليد</li>
+        <li>فريق الكرة الطائرة</li>
+        <li>فريق التنس</li>
+        <li>فريق السباحة</li>
+        <li>فريق ألعاب القوى</li>
+      </ul>
+      <p>تحقق فرق النادي العديد من الإنجازات والبطولات على مستوى الدولة، مما يجعل النادي من الأندية الرائدة في المنطقة.</p>
+    </div>
+  </div>
+
+  <div id="news" class="section">
+    <div class="info-container">
+      <h2>أخبار النادي</h2>
+      <p>تابع آخر الأخبار والفعاليات التي ينظمها نادي كلباء الرياضي الثقافي:</p>
+      <ul>
+        <li>فوز فريق كرة القدم ببطولة الدوري المحلي</li>
+        <li>انطلاق دورة تدريبية جديدة في الفنون القتالية</li>
+        <li>تنظيم ماراثون كلباء السنوي للجري</li>
+        <li>افتتاح المسبح الأولمبي الجديد</li>
+        <li>توقيع اتفاقية شراكة مع نادي أوروبي مرموق</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="events" class="section">
+    <div class="info-container">
+      <h2>الفعاليات القادمة</h2>
+      <p>ينظم نادي كلباء الرياضي الثقافي العديد من الفعاليات على مدار العام، بما في ذلك:</p>
+      <ul>
+        <li>بطولة كرة القدم السنوية - 15 أكتوبر</li>
+        <li>ماراثون كلباء للجري - 5 نوفمبر</li>
+        <li>دورة تدريبية في التايكوندو - 20 نوفمبر</li>
+        <li>معرض الفنون والثقافة - 10 ديسمبر</li>
+        <li>حفل توزيع الجوائز السنوي - 30 ديسمبر</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="contact" class="section">
+    <div class="info-container">
+      <h2>اتصل بنا</h2>
+      <p>للاستفسارات أو المشاركة في أنشطة النادي، يمكنكم التواصل معنا عبر:</p>
+      <ul>
+        <li>الهاتف: 073445555</li>
+        <li>البريد الإلكتروني: info@kalbaclub.ae</li>
+        <li>العنوان: كلباء، الشارقة، الإمارات العربية المتحدة</li>
+        <li>مواعيد العمل: من الساعة 8 صباحاً حتى 10 مساءً</li>
+      </ul>
+      <p>يمكنكم أيضاً زيارة صفحتنا على وسائل التواصل الاجتماعي للاطلاع على آخر الأخبار والفعاليات.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-column">
+      <h3>عن النادي</h3>
+      <a href="#about">تاريخ النادي</a>
+      <a href="#teams">الفرق الرياضية</a>
+      <a href="#news">الإنجازات</a>
+    </div>
+    <div class="footer-column">
+      <h3>الرياضات</h3>
+      <a href="#individual-sports">الرياضات الفردية</a>
+      <a href="#team-sports">الرياضات الجماعية</a>
+      <a href="#events">الفعاليات</a>
+    </div>
+    <div class="footer-column">
+      <h3>وسائل التواصل</h3>
+      <p>هاتف: 073445555</p>
+      <p>بريد إلكتروني: info@kalbaclub.ae</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div class="footer-column">
+      <h3>اشترك في النشرة الإخبارية</h3>
+      <form>
+        <textarea placeholder="أرسل لنا رسالة..."></textarea>
+        <button type="submit">إرسال</button>
+      </form>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2023 نادي كلباء الرياضي الثقافي. جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <div id="chat-button">
+    <i class="fas fa-comments"></i>
+  </div>
+
+  <div id="chat-box" class="chat-hidden">
+    <div class="chat-header">
+      <span>الدعم الفوري</span>
+      <span class="chat-close" onclick="toggleChat()">✕</span>
+    </div>
+    <div class="chat-messages">
+      <div class="chat-message bot-message">
+        <div class="chat-text">مرحباً! كيف يمكنني مساعدتك اليوم؟</div>
+        <div class="chat-timestamp">الآن</div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" placeholder="اكتب رسالتك هنا...">
+      <button onclick="sendMessage()">إرسال</button>
+    </div>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
       
-      setTimeout(function () {
-        if (submitted) {
-          confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
-          form.reset();
-          submitted = false;
+      document.getElementById(sectionId).classList.add('active');
+      
+      document.querySelectorAll('.side-menu a').forEach(link => {
+        link.classList.remove('active');
+      });
+      
+      const activeLink = Array.from(document.querySelectorAll('.side-menu a')).find(link => {
+        return link.getAttribute('onclick')?.includes(sectionId) || link.getAttribute('href') === `#${sectionId}`;
+      });
+      
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+      
+      document.querySelectorAll('.submenu').forEach(menu => {
+        menu.style.display = 'none';
+      });
+    }
+    
+    function toggleSubMenu(menuId) {
+      document.querySelectorAll('.submenu').forEach(menu => {
+        if (menu.id !== `${menuId}-submenu`) {
+          menu.style.display = 'none';
         }
-      }, 2000); 
+      });
+      
+      const submenu = document.getElementById(`${menuId}-submenu`);
+      if (submenu) {
+        submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+      }
+      
+      showSection(menuId);
+    }
+    
+    function showSport(sportId) {
+      alert(`سيتم عرض معلومات عن: ${sportId}`);
+    }
+    
+    function backToMainMenu() {
+      showSection('home');
+    }
+    
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("carousel-slide");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slides[slideIndex-1].style.display = "block";
+    }
+    
+    setInterval(function() {
+      plusSlides(1);
+    }, 5000);
+    
+    function toggleChat() {
+      const chatBox = document.getElementById('chat-box');
+      chatBox.classList.toggle('chat-visible');
+      chatBox.classList.toggle('chat-hidden');
+    }
+    
+    function sendMessage() {
+      const input = document.querySelector('.chat-input input');
+      const message = input.value.trim();
+      
+      if (message !== '') {
+        const chatMessages = document.querySelector('.chat-messages');
+        
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.classList.add('chat-message', 'user-message');
+        userMessageDiv.innerHTML = `
+          <div class="chat-text">${message}</div>
+          <div class="chat-timestamp">الآن</div>
+        `;
+        chatMessages.appendChild(userMessageDiv);
+        
+        input.value = '';
+        
+        setTimeout(() => {
+          const botMessageDiv = document.createElement('div');
+          botMessageDiv.classList.add('chat-message', 'bot-message');
+          botMessageDiv.innerHTML = `
+            <div class="chat-text">شكراً على رسالتك. سوف يتم الرد عليك قريباً من قبل أحد ممثلينا.</div>
+            <div class="chat-timestamp">الآن</div>
+          `;
+          chatMessages.appendChild(botMessageDiv);
+          
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+        
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    }
+    
+    document.getElementById('chat-button').addEventListener('click', toggleChat);
+    
+    document.getElementById('menuToggle').addEventListener('click', function() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('show');
+      document.body.classList.toggle('no-scroll');
     });
-
-    window.addEventListener("error", function () {
-      if (submitted) {
-        confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
-        submitted = false;
+    
+    document.addEventListener('click', function(event) {
+      const chatBox = document.getElementById('chat-box');
+      const chatButton = document.getElementById('chat-button');
+      
+      if (!chatBox.contains(event.target) && event.target !== chatButton && !chatButton.contains(event.target)) {
+        if (chatBox.classList.contains('chat-visible')) {
+          toggleChat();
+        }
       }
     });
-  });
-</script>
-  </div>
-	  
-  </div>
-	
-  <div class="footer-bottom">
-    © 2025 نادي كلباء الرياضي الثقافي - جميع الحقوق محفوظة
-  </div>
-</footer>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  </script>
 </body>
 </html>
