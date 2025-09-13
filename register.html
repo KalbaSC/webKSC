@@ -102,14 +102,17 @@ header {
       display: none;
     }
 
-    .menu-toggle {
-      display: none;
-      font-size: 8px;
-      background: none;
-      border: none;
-      color: #f4e733;
-      cursor: pointer;
-    }
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #f4e733;
+  cursor: pointer;
+  padding: 5px;
+}
+
+body.no-scroll { overflow: hidden; }
 
     .container {
       display: grid;
@@ -397,50 +400,19 @@ header, footer { box-sizing: content-box; }
         width: 1.5px;
       }
 
-      .menu-toggle {
-        font-size: 35px;
-        margin-right: 10px;
-      }
+  .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
 
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: 200px;
-        background: #000;
-        border-left: 2px solid #f4e733;
-        padding: 40px 20px;
-        flex-direction: column;
-        z-index: 9999;
-        gap: 20px;
-        transition: transform 0.3s ease;
-        transform: translateX(100%);
-      }
-
-      .nav-links.show {
-        display: flex;
-        transform: translateX(0);
-      }
-
-      .header-info {
-        display: none;
-      }
-
-      .header-right {
-        flex: 1;
-        justify-content: center;
-      }
-        
-      .mobile-nav {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
+  .nav-links {
+    position: fixed; top: 0; right: -100%;
+    width: 78%; height: 100vh; padding: 70px 20px;
+    background: #000; border-left: 2px solid #f4e733;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: right .3s ease;
+    z-index: 1000;
+  }
+  .mobile-nav { display: block !important; }	
+  .nav-links.show { right: 0; }
+  .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
       .container {
         padding: 10px;
         margin: 15px auto;
@@ -451,6 +423,8 @@ header, footer { box-sizing: content-box; }
         flex-direction: column;
         border-bottom: none;
       }
+
+ body { background-attachment: scroll !important; }
 
       button, .btn, .nav-tabs button {
         min-height: 44px;
@@ -474,6 +448,40 @@ header, footer { box-sizing: content-box; }
       .scanner-placeholder {
         padding: 30px;
       }
+
+.mobile-nav .menu-toggle {
+  padding: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: grid !important;
+  place-items: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+	  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    height: 100vh;
+    background: #000;
+    border-left: 2px solid #f4e733;
+    padding: 60px 20px 20px;
+    flex-direction: column;
+    gap: 15px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+
+  .nav-links.show {
+    right: 0;
+  }
+
+  .nav-links a {
+    padding: 12px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #222;
+  }
     }
 
     @media (max-width: 480px) {
@@ -512,6 +520,7 @@ header, footer { box-sizing: content-box; }
       .scanner-placeholder i {
         font-size: 80px;
       }
+
     }
     #chat-box {
       position: fixed;
@@ -1054,6 +1063,7 @@ header {
   <div class="mobile-nav">
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   </div>
+
   <div class="header-right">
     <img src="Picture3.png" alt="شعار الشارقة" class="logo">
     <div class="divider"></div>
@@ -1084,7 +1094,6 @@ header {
       </div>
 
       <div class="reg-frames-wrap">
-        <!-- Lazy-loaded iframes -->
         <iframe id="tab-camp" class="reg-frame visible" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
         <iframe id="tab-scan" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
         <iframe id="tab-reports" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
@@ -1700,22 +1709,60 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.querySelector('.menu-toggle');
   const navLinks = document.getElementById('navLinks');
 
-  function toggleMenu() {
-    navLinks.classList.toggle('show');
+    function toggleSubMenu(menuId) {
+      document.querySelectorAll('.submenu').forEach(menu => {
+        if (menu.id !== `${menuId}-submenu`) {
+          menu.style.display = 'none';
+        }
+      });
+      
+      const submenu = document.getElementById(`${menuId}-submenu`);
+      if (submenu) {
+        submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+      }
+      
+      showSection(menuId);
+    }
+
+(function () {
+  const nav = document.getElementById('navLinks');
+  const btn = document.querySelector('.menu-toggle');
+  const sideMenu = document.getElementById('sideMenu');
+  if (!nav || !btn) return;
+
+  function setOpen(open){
+    nav.classList.toggle('show', open);
+    document.body.classList.toggle('no-scroll', open);
+    btn.innerHTML = open ? '✕' : '☰';
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+    if (sideMenu){
+      if (open){
+        sideMenu.dataset.prevDisplay = sideMenu.style.display || '';
+        sideMenu.style.display = 'none';
+      } else {
+        sideMenu.style.display = sideMenu.dataset.prevDisplay || '';
+      }
+    }
   }
 
-  document.addEventListener('click', function (e) {
-    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
-      navLinks.classList.remove('show');
-    }
+  const isOpen = () => nav.classList.contains('show');
+
+  window.toggleMenu = () => setOpen(!isOpen());
+
+  document.addEventListener('click', (e)=>{
+    if (!isOpen()) return;
+    if (!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
   });
 
-  const PAGES = {
-    "tab-camp": "camp.html",
-    "tab-scan": "AttendanceScan.html",
-    "tab-evaluate": "evaluate.html",
-    "tab-reports": "reports.html",
-  };
+  nav.addEventListener('click', (e)=>{
+    if (e.target.closest('a') && window.innerWidth < 769) setOpen(false);
+  });
+
+  window.addEventListener('resize', ()=>{
+    if (window.innerWidth >= 769) setOpen(false);
+  });
+})();
 
   function ensureSrc(id) {
     const el = document.getElementById(id);
