@@ -1651,6 +1651,74 @@ function toggleMenu() {
     nav.classList.add("show");
   }
 }
+
+const FRAME_SRC = {
+  "tab-camp":    "camp.html",
+  "tab-scan":    "AttendanceScan.html",
+  "tab-reports": "reports.html"
+};
+
+function initRegisterTabs(){
+  const buttons = document.querySelectorAll('.reg-tab-btn');
+  const frames  = document.querySelectorAll('.reg-frame');
+
+  function show(id){
+    buttons.forEach(b=>{
+      const active = b.dataset.target === id;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    frames.forEach(f=>{
+      const visible = f.id === id;
+      f.classList.toggle('visible', visible);
+    });
+
+    const f = document.getElementById(id);
+    if (f && !f.dataset.loaded){
+      const url = FRAME_SRC[id];
+      if (url){
+        f.src = url;
+
+        const timer = setTimeout(()=>{
+          try {
+            if (!f.contentDocument || !f.contentDocument.body || !f.contentDocument.body.childElementCount){
+              f.insertAdjacentHTML('afterend', `
+                <div style="background:#111;border-radius:0 0 10px 10px;padding:16px;color:#fff;text-align:center">
+                  تعذّر عرض الصفحة داخل الإطار.
+                  <a href="${url}" target="_blank" style="color:#f4e733;font-weight:700">افتحها في صفحة جديدة</a>
+                </div>
+              `);
+            }
+          } catch(e){
+            f.insertAdjacentHTML('afterend', `
+              <div style="background:#111;border-radius:0 0 10px 10px;padding:16px;color:#fff;text-align:center">
+                يتعذّر تضمين هذه الصفحة لأسباب تتعلق بالحماية.
+                <a href="${url}" target="_blank" style="color:#f4e733;font-weight:700">افتحها في صفحة جديدة</a>
+              </div>
+            `);
+          }
+        }, 2000);
+
+        f.addEventListener('load', ()=>{ clearTimeout(timer); }, { once:true });
+        f.dataset.loaded = "1";
+      }
+    }
+  }
+
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=> show(btn.dataset.target));
+  });
+
+  show('tab-camp');
+}
+
+function toggleMenu(){
+  const nav = document.getElementById('navLinks');
+  nav.classList.toggle('show');
+}
+
+document.addEventListener('DOMContentLoaded', initRegisterTabs);
 </script>
 
 </body>
