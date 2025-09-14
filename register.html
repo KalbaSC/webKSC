@@ -599,52 +599,7 @@ header, footer { box-sizing: content-box; }
       align-items: center;
       justify-content: center;
     }
-    
-    .side-menu.top-nav {
-      position: fixed;
-      right: 0; 
-      left: 0;
-      top: calc(var(--headerH, 72px) + env(safe-area-inset-top));
-      width: 88%;
-      max-width: 1170px;
-      margin: 0 auto;
-      z-index: 1002;
-      border-radius: 0 0 14px 14px;
-      padding: 10px 8px;
-      border: 0;
-      border-bottom: 2px solid #f4e733;
-      flex-direction: row;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-	  overflow-y: hidden;
-      box-sizing: border-box;
-	  -webkit-overflow-scrolling: touch;
-    }
-    
-	.side-menu.top-nav a {
-     flex: 0 0 auto;
-     min-width: 120px;
-     white-space: nowrap;
-     scroll-snap-align: center;
-    }
 
-    .side-menu.top-nav.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .side-menu.top-nav a {
-      flex: 0 1 auto;
-      min-width: 120px;
-      white-space: nowrap;
-    }
-    
-    .side-menu.top-nav .sm-indicator { 
-      display: none; 
-    }
-    
 body.with-top-nav {
   padding-top: 0 !important;
 }
@@ -753,15 +708,7 @@ body.with-top-nav {
   #chat-box[style*="display: none"] { pointer-events: none; }
    .nav-links { pointer-events: none; }
    .nav-links.show { pointer-events: auto; }
-	
-  .nav-links {
-    position: fixed; top: 0; right: -100%;
-    width: 78%; height: 100vh; padding: 70px 20px;
-    background: #000; border-left: 2px solid #f4e733;
-    display: flex; flex-direction: column; gap: 10px;
-    transition: right .3s ease;
-    z-index: 1000;
-  }
+
   .mobile-nav { display: block !important; }	
   .nav-links.show { right: 0; }
   .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
@@ -854,21 +801,6 @@ header {
   .header-info .english-name {
     font-size: 12px !important;
     color: #f4e733;
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    height: 100vh;
-    background: #000;
-    border-left: 2px solid #f4e733;
-    padding: 60px 20px 20px;
-    flex-direction: column;
-    gap: 15px;
-    transition: right 0.3s ease;
-    z-index: 1000;
   }
 
   .nav-links.show {
@@ -999,7 +931,7 @@ body{
     display:none !important;
     position:absolute !important;
     top:var(--headerH,72px) !important;
-    right:0 !important;
+    
     width:100% !important;
     flex-direction:column !important;
     background:rgba(0,0,0,.95) !important;
@@ -1017,7 +949,6 @@ body{
   .mobile-nav,.menu-toggle{ display:block !important; }
 
   #navLinks{
-    /* dropdown under header (like index) */
     position:absolute !important;
     top:var(--headerH,72px) !important;
     right:0 !important; left:0 !important;
@@ -1733,15 +1664,19 @@ function toggleMenu(){
 }
 
 document.addEventListener('DOMContentLoaded', initRegisterTabs);
+</script>
 
+<script>
 (function(){
   const header = document.querySelector('header');
+  const nav = document.getElementById('navLinks');
   function setHeaderH(){
-    const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
+    const h = Math.ceil(header?.getBoundingClientRect().height || 72);
     document.documentElement.style.setProperty('--headerH', h + 'px');
   }
   window.addEventListener('load', setHeaderH);
   window.addEventListener('resize', setHeaderH);
+  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('show')));
 })();
 </script>
 
