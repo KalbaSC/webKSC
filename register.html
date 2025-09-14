@@ -1774,15 +1774,12 @@ header {
   <h2 class="page-title">بوابة التسجيل والحضور والتقارير</h2>
 </div>
 
-<div class="register-choice">
-  <h2 class="choice-title">اختر نوع التسجيل</h2>
-  <div class="choice-grid">
-    <div class="choice-card">تسجيل عام</div>
-    <div class="choice-card">تسجيل الصيفي</div>
-  </div>
+<div class="choice-grid">
+  <div class="choice-card" data-type="general">تسجيل عام</div>
+  <div class="choice-card" data-type="summer">تسجيل الصيفي</div>
 </div>
 
-    <section class="register-panel">
+	<section class="register-panel tabs-container" id="tabs">
       <div class="reg-tabs" role="tablist">
         <button class="reg-tab-btn active" data-target="tab-camp" role="tab" aria-selected="true">نموذج التسجيل</button>
         <button class="reg-tab-btn" data-target="tab-scan" role="tab" aria-selected="false">ماسح QR للحضور</button>
@@ -2453,11 +2450,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const choiceCards   = document.querySelectorAll(".choice-card");
   const tabsContainer = document.querySelector(".tabs-container");
 
+  if (!tabsContainer) return;
+
   choiceCards.forEach(card => {
     card.addEventListener("click", () => {
-      if (card.textContent.includes("تسجيل الصيفي")) {
+      const t = card.dataset.type;
+      if (t === "summer") {
         tabsContainer.classList.add("show");
-        tabsContainer.scrollIntoView({ behavior: "smooth" });
+        tabsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
         tabsContainer.classList.remove("show");
       }
