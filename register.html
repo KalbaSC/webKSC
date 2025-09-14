@@ -1642,5 +1642,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<script>
+function toggleMenu() {
+  const nav = document.getElementById("navLinks");
+  if (nav.classList.contains("show")) {
+    nav.classList.remove("show");
+  } else {
+    nav.classList.add("show");
+  }
+}
+</script>
+
 </body>
 </html>
