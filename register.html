@@ -1697,6 +1697,42 @@ header {
   text-align: center;
 }
 
+.register-choice {
+  text-align: center;
+  margin: 40px auto 20px;
+}
+
+.choice-title {
+  color: var(--club-yellow);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.choice-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.choice-card {
+  background: #111;
+  border: 2px solid var(--club-yellow);
+  border-radius: 12px;
+  padding: 20px 40px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.choice-card:hover {
+  background: var(--club-yellow);
+  color: #000;
+}
+
   </style>
 </head>
 <body>
@@ -1729,6 +1765,14 @@ header {
 
 <div class="page-title-wrapper">
   <h2 class="page-title">بوابة التسجيل والحضور والتقارير</h2>
+</div>
+
+<div class="register-choice">
+  <h2 class="choice-title">اختر نوع التسجيل</h2>
+  <div class="choice-grid">
+    <div class="choice-card">تسجيل عام</div>
+    <div class="choice-card">تسجيل الصيفي</div>
+  </div>
 </div>
 
     <section class="register-panel">
