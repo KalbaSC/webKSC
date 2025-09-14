@@ -2409,28 +2409,6 @@ function initRegisterTabs(){
       const url = FRAME_SRC[id];
       if (url){
         f.src = url;
-
-        const timer = setTimeout(()=>{
-          try {
-            if (!f.contentDocument || !f.contentDocument.body || !f.contentDocument.body.childElementCount){
-              f.insertAdjacentHTML('afterend', `
-                <div style="background:#111;border-radius:0 0 10px 10px;padding:16px;color:#fff;text-align:center">
-                  تعذّر عرض الصفحة داخل الإطار.
-                  <a href="${url}" target="_blank" style="color:#f4e733;font-weight:700">افتحها في صفحة جديدة</a>
-                </div>
-              `);
-            }
-          } catch(e){
-            f.insertAdjacentHTML('afterend', `
-              <div style="background:#111;border-radius:0 0 10px 10px;padding:16px;color:#fff;text-align:center">
-                يتعذّر تضمين هذه الصفحة لأسباب تتعلق بالحماية.
-                <a href="${url}" target="_blank" style="color:#f4e733;font-weight:700">افتحها في صفحة جديدة</a>
-              </div>
-            `);
-          }
-        }, 2000);
-
-        f.addEventListener('load', ()=>{ clearTimeout(timer); }, { once:true });
         f.dataset.loaded = "1";
       }
     }
