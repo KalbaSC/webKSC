@@ -79,22 +79,6 @@ header {
   color: #f4e733;
   margin: 0;
 }
-    .nav-links {
-      display: flex;
-      gap: 70px;
-    }
-
-    .nav-links a {
-      color: #f4e733;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-      transition: color 1.5s;
-    }
-
-    .nav-links a:hover {
-      color: white;
-    }
 
     .mobile-nav {
       display: none;
@@ -365,21 +349,24 @@ footer{
     }
 
     @media (max-width: 768px) {
-      header {
-        padding: 10px 16px;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 93%;
-      }
+ 	  header {
+  		padding: 12px 16px !important;
+  		width: 100% !important;
+ 	 }
 
-  body {
-    overflow-x: hidden;
-    background: url('phonebkg.jpg') no-repeat top left fixed;
-    background-size: 250%;
-    background-attachment: scroll !important;
-  }
-      
+	  footer {
+  		padding: 20px 15px !important;
+  		width: 100% !important;
+  		flex-direction: column;
+  		gap: 20px;
+	 }
+
+	  body {
+  		background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+ 		background-size: cover;
+  		background-attachment: scroll !important;
+	  }      
+
       .header-right img.logo {
         height: 50px !important;
         max-height: 50px !important;
@@ -392,14 +379,6 @@ footer{
 
   .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
 
-  .nav-links {
-    position: fixed; top: 0; right: -100%;
-    width: 78%; height: 100vh; padding: 70px 20px;
-    background: #000; border-left: 2px solid #f4e733;
-    display: flex; flex-direction: column; gap: 10px;
-    transition: right .3s ease;
-    z-index: 1000;
-  }
   .mobile-nav { display: block !important; }	
   .nav-links.show { right: 0; }
   .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
@@ -448,20 +427,6 @@ footer{
   line-height: 1 !important;
   margin: 0 !important;
 }
-	  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    height: 100vh;
-    background: #000;
-    border-left: 2px solid #f4e733;
-    padding: 60px 20px 20px;
-    flex-direction: column;
-    gap: 15px;
-    transition: right 0.3s ease;
-    z-index: 1000;
-  }
 
   .nav-links.show {
     right: 0;
@@ -818,17 +783,9 @@ footer{
   .menu-toggle { display: inline-block; font-size: 24px; color: #f4e733; background: none; border: 0; cursor: pointer; }
 	
   #chat-box[style*="display: none"] { pointer-events: none; }
-   .nav-links { pointer-events: none; }
+
    .nav-links.show { pointer-events: auto; }
-	
-  .nav-links {
-    position: fixed; top: 0; right: -100%;
-    width: 78%; height: 100vh; padding: 70px 20px;
-    background: #000; border-left: 2px solid #f4e733;
-    display: flex; flex-direction: column; gap: 10px;
-    transition: right .3s ease;
-    z-index: 1000;
-  }
+
   .mobile-nav { display: block !important; }	
   .nav-links.show { right: 0; }
   .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
@@ -878,9 +835,6 @@ footer{
     width: 100% !important;
     padding: 12px 16px !important;
   }
-
-  .nav-links { gap: 12px !important; flex-wrap: wrap; }
-  .nav-links a { font-size: 14px !important; }
 	
 header { 
   padding-inline: 16px !important;           
@@ -925,31 +879,6 @@ header {
   .header-info .english-name {
     font-size: 12px !important;
     color: #f4e733;
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    height: 100vh;
-    background: #000;
-    border-left: 2px solid #f4e733;
-    padding: 60px 20px 20px;
-    flex-direction: column;
-    gap: 15px;
-    transition: right 0.3s ease;
-    z-index: 1000;
-  }
-
-  .nav-links.show {
-    right: 0;
-  }
-
-  .nav-links a {
-    padding: 12px 0;
-    font-size: 16px;
-    border-bottom: 1px solid #222;
   }
 
   footer {
@@ -1052,6 +981,22 @@ header {
   #chat-tooltip span:last-child {
     font-size: 14px !important;
   }
+}
+
+@media (max-width: 768px) {
+  .mobile-nav { display: block; }
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: rgba(0,0,0,0.95);
+    position: absolute;
+    top: var(--headerH, 72px);
+    right: 0;
+    width: 100%;
+    padding: 20px;
+  }
+  .nav-links.show { display: flex; }
 }
 
   </style>
