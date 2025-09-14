@@ -1740,6 +1740,20 @@ header {
   display: block;
 }
 
+.back-option {
+  display: none;
+  margin-top: 15px;
+  color: #f4e733;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.back-option:hover {
+  color: #fff;
+}
+
   </style>
 </head>
 <body>
@@ -1774,9 +1788,12 @@ header {
   <h2 class="page-title">بوابة التسجيل والحضور والتقارير</h2>
 </div>
 
-<div class="choice-grid">
-  <div class="choice-card" data-type="general">تسجيل عام</div>
-  <div class="choice-card" data-type="summer">تسجيل الصيفي</div>
+<div class="register-choice" id="registerChoice">
+  <div class="choice-grid">
+    <div class="choice-card" data-type="general">تسجيل عام</div>
+    <div class="choice-card" data-type="summer">تسجيل الصيفي</div>
+  </div>
+  <div class="back-option" id="backOption">⬅ العودة</div>
 </div>
 
 	<section class="register-panel tabs-container" id="tabs">
@@ -2447,21 +2464,30 @@ function toggleMenu(){
 })();
 
 document.addEventListener("DOMContentLoaded", () => {
-  const choiceCards   = document.querySelectorAll(".choice-card");
-  const tabsContainer = document.querySelector(".tabs-container");
+  const choiceGrid     = document.querySelector(".choice-grid");
+  const tabsContainer  = document.querySelector(".tabs-container");
+  const backOption     = document.getElementById("backOption");
 
-  if (!tabsContainer) return;
+  if (!choiceGrid || !tabsContainer) return;
 
-  choiceCards.forEach(card => {
+  choiceGrid.querySelectorAll(".choice-card").forEach(card => {
     card.addEventListener("click", () => {
-      const t = card.dataset.type;
-      if (t === "summer") {
+      if (card.dataset.type === "summer") {
         tabsContainer.classList.add("show");
+        choiceGrid.style.display = "none";
+        backOption.style.display = "block";
         tabsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
         tabsContainer.classList.remove("show");
       }
     });
+  });
+
+  backOption.addEventListener("click", () => {
+    tabsContainer.classList.remove("show");
+    choiceGrid.style.display = "flex";
+    backOption.style.display = "none";
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 });
 </script>
