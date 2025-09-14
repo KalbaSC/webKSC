@@ -1733,6 +1733,13 @@ header {
   color: #000;
 }
 
+.tabs-container {
+  display: none;
+}
+.tabs-container.show {
+  display: block;
+}
+
   </style>
 </head>
 <body>
@@ -2442,6 +2449,21 @@ function toggleMenu(){
   nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('show')));
 })();
 
+document.addEventListener("DOMContentLoaded", () => {
+  const choiceCards   = document.querySelectorAll(".choice-card");
+  const tabsContainer = document.querySelector(".tabs-container");
+
+  choiceCards.forEach(card => {
+    card.addEventListener("click", () => {
+      if (card.textContent.includes("تسجيل الصيفي")) {
+        tabsContainer.classList.add("show");
+        tabsContainer.scrollIntoView({ behavior: "smooth" });
+      } else {
+        tabsContainer.classList.remove("show");
+      }
+    });
+  });
+});
 </script>
 
 </body>
