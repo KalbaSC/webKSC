@@ -977,6 +977,40 @@ header {
     font-size: 14px !important;
   }
 }
+
+body{
+  background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed !important;
+  background-size: cover !important;
+}
+
+.register-page{ width:88% !important; max-width:1170px !important; margin:40px auto !important; padding:0 !important; }
+.register-panel{
+  background:#000 !important;
+  border:2px solid #f4e733 !important;
+  border-radius:16px !important;
+  padding:28px !important;
+  box-shadow:0 6px 20px rgba(0,0,0,.3) !important;
+}
+
+@media (max-width:768px){
+  .mobile-nav{ display:block !important; }
+  .menu-toggle{ display:block !important; }
+  .nav-links{
+    display:none !important;
+    position:absolute !important;
+    top:var(--headerH,72px) !important;
+    right:0 !important;
+    width:100% !important;
+    flex-direction:column !important;
+    background:rgba(0,0,0,.95) !important;
+    padding:20px !important;
+  }
+  .nav-links.show{ display:flex !important; }
+  .nav-links a{ padding:12px 0; border-bottom:1px solid #222; font-size:16px; }
+}
+
+.nav-links{ right:auto !important; left:auto !important; height:auto !important; }
+
   </style>
 </head>
 <body>
@@ -1663,6 +1697,16 @@ function toggleMenu(){
 }
 
 document.addEventListener('DOMContentLoaded', initRegisterTabs);
+
+(function(){
+  const header = document.querySelector('header');
+  function setHeaderH(){
+    const h = header ? Math.ceil(header.getBoundingClientRect().height) : 72;
+    document.documentElement.style.setProperty('--headerH', h + 'px');
+  }
+  window.addEventListener('load', setHeaderH);
+  window.addEventListener('resize', setHeaderH);
+})();
 </script>
 
 </body>
