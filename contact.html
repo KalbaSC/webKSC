@@ -1,102 +1,124 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="theme-color" content="#000000"> 
-  <title>تواصل معنا</title> 
+  <meta charset="UTF-8">   
+  <title>تواصل معنا</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
   <style>
-@font-face {
-  font-family: 'NotoKufiArabic';
-  src: url('NotoKufiArabic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'NotoKufiArabic';
-  src: url('NotoKufiArabic-Light.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-body {
-  font-family: 'NotoKufiArabic', sans-serif;
-  background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  margin: 0;
-  padding: 0;
-  direction: rtl;
-} 
-header {
-  background-color: #111;
-  padding: 16px 90px;
-  width: 88%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 3px solid #f4e733;
-}
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.header-right img.logo {
-  height: 70px;
-}
-.header-right .divider {
-  width: 1.5px;
-  height: 65px;
-  background-color: #f4e733;
-}
-
-.header-info {
-  text-align: right;
-}
-
-.header-info .arabic-name {
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.header-info .english-name {
-  font-size: 16px;
-  color: #f4e733;
-}
-
-.nav-links {
-  display: flex;
-  gap: 70px;
-}
-
-.nav-links a {
-  color: #f4e733;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-  transition: color 1.5s;
-}
-
-.nav-links a:hover {
-  color: white;
-}
-
-.mobile-nav {
-  display: none;
-}
-
-.menu-toggle {
-  display: none;
-  font-size: 8px;
-  background: none;
-  border: none;
-  color: #f4e733;
-  cursor: pointer;
-}
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic-Light.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    
+    body {
+      font-family: 'NotoKufiArabic', sans-serif;
+      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+    }
+    
+    header {
+      background-color: #111;
+      padding: 16px 5%;
+      margin: 0 auto;	
+      width: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #f4e733;
+      position: sticky;
+      top: 0; 
+      z-index: 1001;
+      flex-wrap: wrap;
+    }
+    
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .header-right img.logo {
+      height: 70px;
+      object-fit: contain;
+    }
+    
+    .header-right .divider {
+      width: 1.5px;
+      height: 65px;
+      background-color: #f4e733;
+    }
+    
+    .header-info {
+      text-align: right;
+      min-width: 0;
+    }
+    
+    .header-info .arabic-name {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 0;
+    }
+    
+    .header-info .english-name {
+      font-size: 16px;
+      color: #f4e733;
+      margin: 0;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 70px;
+      flex-wrap: wrap;
+    }
+    
+    .nav-links a {
+      color: #f4e733;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+    
+    .nav-links a:hover {
+      color: white;
+    }
+    
+    .mobile-nav {
+      display: none;
+    }
+    
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: #f4e733;
+      cursor: pointer;
+      padding: 5px;
+    }
     footer {
       background-color: #000;
       color: white;
-      padding: 16px 90px;
-	  width: 88%;
+      padding: 30px 5%;
+      margin: 0 auto;	
+      width: 90%;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -106,12 +128,12 @@ header {
       border-top: 3px solid #f4e733;
       text-align: right;
     }
-
+    
     .footer-column {
       flex: 1;
       min-width: 250px;
     }
-
+    
     .footer-bottom {
       width: 100%;
       text-align: center;
@@ -121,233 +143,188 @@ header {
       font-size: 14px;
       margin-top: 30px;
     }
-
+    
     .footer-column a {
       color: #ccc;
       text-decoration: none;
       display: block;
       margin-bottom: 8px;
+      transition: color 0.3s;
     }
-
+    
     .footer-column a:hover {
       color: #f4e733;
     }
-
+    
     .social-icons {
       display: flex;
       gap: 15px;
       margin-top: 15px;
     }
-
+    
     .social-icons a {
       color: white;
       font-size: 20px;
+      transition: color 0.3s;
     }
-	  
-body.no-scroll {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-}
-
-footer form,
-footer textarea,
-footer button {
-  position: relative;
-  z-index: 1; 
-}
-	  
-#chat-tooltip {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
-  max-width: calc(100vw - 40px);
-  overflow: hidden;
-}
-
-#chat-wrapper,
-#chat-box,
-#chat-tooltip,
-#chat-toggle,
-#chat-box *,
-.chat-btn,
-input,
-textarea,
-button {
-  pointer-events: auto;
-}
-
-#chat-tooltip span:last-child {
-  cursor: pointer;
-}	  
-	  
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-  40% {transform: translateY(-8px);}
-  60% {transform: translateY(-4px);}
-}
-
-    .typing-dots span {
-      animation: blink 1s infinite;
+    
+    .social-icons a:hover {
+      color: #f4e733;
+    }
+    
+    footer form {
+      margin-top: 15px;
+    }
+    
+    footer textarea {
+      width: 100%;
+      height: 150px;
+      background: #222;
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #444;
+      resize: vertical;
+    }
+    
+    footer button[type="submit"] {
+      background-color: #f4e733;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
       font-weight: bold;
-      font-size: 24px;
-      margin: 0 1px;
+      margin-top: 10px;
+      transition: background-color 0.3s;
     }
-
-    .typing-dots span:nth-child(2) {
-      animation-delay: 0.2s;
+    
+    footer button[type="submit"]:hover {
+      background-color: #d8cf2e;
     }
-    .typing-dots span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 1; }
-    }
-
-    @font-face {
-      font-family: 'NotoKufiArabic';
-      src: url('NotoKufiArabic.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-    body, .content, .chat-btn {
-      font-family: 'NotoKufiArabic', 'Cairo', sans-serif;
-    }
-
-    body {
-      background-color: #000;
-      margin: 0;
+	  
+    #chat-box {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background-color: white;
+      color: black;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       padding: 0;
+      max-width: 90%;
+      width: 360px;
+      min-height: 300px;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      display: none;
+      z-index: 9999;
+      overflow-y: auto;
+      max-height: 90vh;
     }
-
-#chat-box {
-  position: fixed;
-  bottom: 90px;
-  right: 20px;
-  background-color: white;
-  color: black;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  padding: 0;
-  max-width: 90%;
-  width: 360px;
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1.5s ease, transform 1.5s ease;
-  display: none;
-  z-index: 9999;
-  overflow-y: auto;
-  max-height: 90vh;
-}
-
-.chat-header {
-  display: flex;
-  justify-content: flex-start;
-  padding: 8px 10px;
-  border-bottom: 1px solid #ccc;
-}
-
-.chat-header span {
-  font-size: 18px;
-  font-weight: bold;
-  color: #888;
-  cursor: pointer;
-}
-
-.chat-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 10px;
-  max-height: 450px;
-}
-
-.chat-footer {
-  display: flex;
-  align-items: center;
-  padding: 6px 10px;
-  border-top: 1px solid #ccc;
-  background: white;
-gap: 10px;
-}
-
-.chat-footer input {
-  flex: 1;
-  padding: 8px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  font-size: 15px;
-}
-
-.chat-footer button {
-  background: #f4e733;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-#chat-box::-webkit-scrollbar {
-  width: 8px;
-  border-radius: 12px;
-}
-
-#chat-box::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 12px;
-}
-
-#chat-box::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 12px;
-}
-
-.message-wrapper {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin: 10px;
-}
-
-.message-wrapper.user {
-  flex-direction: row-reverse;
-}
-
-.avatar {
-  width: 36px;
-  height: 36px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 50%;
-}
-
-.content {
-  background-color: #f4e733;
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 75%;
-  font-size: 18px;
-}
-
+    
+    .chat-header {
+      display: flex;
+      justify-content: flex-start;
+      padding: 12px 15px;
+      border-bottom: 1px solid #ccc;
+      background: #f4e733;
+      border-radius: 12px 12px 0 0;
+    }
+    
+    .chat-header span {
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
+      cursor: pointer;
+    }
+    
+    .chat-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      max-height: 450px;
+    }
+    
+    .chat-footer {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-top: 1px solid #ccc;
+      background: white;
+      gap: 10px;
+    }
+    
+    .chat-footer input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+    
+    .chat-footer button {
+      background: #f4e733;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    
+    #chat-box::-webkit-scrollbar {
+      width: 8px;
+      border-radius: 12px;
+    }
+    
+    #chat-box::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 12px;
+    }
+    
+    #chat-box::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+    }
+    
+    .message-wrapper {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 10px;
+    }
+    
+    .message-wrapper.user {
+      flex-direction: row-reverse;
+    }
+    
+    .avatar {
+      width: 36px;
+      height: 36px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      background-color: #ddd;
+    }
+    
+    .content {
+      background-color: #f4e733;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 75%;
+      font-size: 16px;
+    }
+    
     .message-wrapper.bot .content {
       background-color: #eee;
+      color: #000;
     }
-
+    
     .button-container {
       display: flex;
       flex-wrap: wrap;
@@ -355,7 +332,7 @@ gap: 10px;
       gap: 10px;
       margin-top: 20px;
     }
-
+    
     .chat-btn {
       background-color: #f4e733;
       color: #000;
@@ -365,56 +342,103 @@ gap: 10px;
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
     }
-#chat-box {
-    display: block !important;
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-#chat-box .chat-header {
-    display: flex !important;
-}
-
-#inner-input-bar {
-    display: flex !important;
-}
-
-.dropdown { position: relative; display: inline-block; }
-.dropbtn { color:#f4e733; text-decoration:none; font-weight:bold; font-size:14px; }
-.dropdown-content {
-  display:none; position:absolute; background:#111; border:1px solid #f4e733;
-  border-radius:6px; min-width:180px; z-index:1000; text-align:right;
-}
-.dropdown-content a { display:block; padding:10px 16px; color:#f4e733; text-decoration:none; }
-.dropdown-content a:hover { background:#f4e733; color:#000; }
-.dropdown:hover .dropdown-content { display:block; }
-html { scroll-behavior:smooth; }
-.section { padding:40px 0; scroll-margin-top:110px; }
-
-.info-container{
-  width:1170px; max-width:100%;
-  border:2px solid #f4e733; border-radius:16px;
-  background:#000; margin:40px auto; padding:28px;
-  box-shadow:0 6px 20px rgba(0,0,0,.3);
-}
-.info-container h2{ color:#f4e733; margin:0 0 12px; font-size:22px; }
-.info-container p, .info-container li{ color:#eee; line-height:1.9; font-size:16px; }	
+    
+    .chat-btn:hover {
+      background-color: #d8cf2e;
+    }
+    
+    .typing-dots span {
+      animation: blink 1s infinite;
+      font-weight: bold;
+      font-size: 24px;
+      margin: 0 1px;
+    }
+    
+    .typing-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    .typing-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+    
+    #chat-wrapper {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    
+    #chat-tooltip {
+      background: white;
+      color: black;
+      padding: 10px 14px;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      font-weight: bold;
+      font-size: 14px;
+      max-width: 260px;
+      direction: rtl;
+      text-align: right;
+      position: absolute;
+      bottom: 80px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 9999;
+      line-height: 1.4;
+    }
+    
+    #chat-toggle {
+      position: relative;
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      padding: 0;
+    }
+    
+    #chat-badge {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      background: red;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 	  
 @media (max-width: 600px) {
-  #chat-box {
-    pointer-events: auto !important; 
-  }
+  #chat-box .chat-header { display:flex !important; }
+  #inner-input-bar.active { display:flex !important; }
   
-  #chat-box * {
-    pointer-events: auto !important;
+  #chat-tooltip {
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+    right: 8px !important;
+    bottom: 60px !important;
   }
-  
-  #chat-tooltip span:last-child {
-    cursor: pointer !important;
-    pointer-events: auto !important;
-  }
-
 .chat-body {
     flex: 1;
     overflow-y: auto !important;
@@ -452,39 +476,27 @@ html { scroll-behavior:smooth; }
   header img {
     height: 50px !important;
   }
-#chat-box {
-    display: block !important;
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-#chat-box .chat-header {
-    display: flex !important;
-}
-
-#inner-input-bar {
-    display: flex !important;
-}	
-}
-
-@media (max-width:768px){
-  .dropdown-content{ position:static; border:none; background:#000; }
-  .dropdown-content a{ border-bottom:1px solid #222; }
 }	  
-	  
 @media (max-width: 768px) {
+  #chat-box .chat-header { display:flex !important; padding: 8px 10px !important; }
+  #inner-input-bar.active { display:flex !important; }
+  
   #chat-box {
-    pointer-events: auto !important; 
+    width: 94% !important;
+    right: 3% !important;
+    height: 460px !important;
+    max-height: 70vh !important;
   }
-  
-  #chat-box * {
-    pointer-events: auto !important;
+	
+  #chat-box.open {
+    display: flex !important;
+    flex-direction: column !important;
   }
-  
-  #chat-tooltip span:last-child {
-    cursor: pointer !important;
-    pointer-events: auto !important;
-  }	
+	
+  .chat-body {
+    max-height: 55vh !important;
+    overflow-y: auto !important;
+  }
   *, *::before, *::after { box-sizing: border-box; }
 
   img, video, iframe { max-width: 100%; height: auto; }
@@ -508,8 +520,6 @@ html { scroll-behavior:smooth; }
   .mobile-nav { display: block !important; }	
   .nav-links.show { right: 0; }
   .nav-links a { padding: 12px 0; border-bottom: 1px solid #222; }
-
-  .carousel-container { height: 550px; }
 
   body { background-attachment: scroll !important; }
 
@@ -541,37 +551,6 @@ html { scroll-behavior:smooth; }
     display: none;
     flex-direction: column; overflow: hidden; z-index: 9999;
   }
-  .carousel-container { min-height: 340px; border-radius: 12px; }
-	
-  .caption {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    padding: 10px 12px !important;
-    white-space: normal !important;
-  }
-	
-  .prev, .next {
-    top: 50% !important;
-    bottom: auto !important;
-    transform: translateY(-50%);
-    font-size: 20px;
-    padding: 10px;
-    z-index: 2;               
-  }
-	
-  .caption { z-index: 1; }       
-	
-  .carousel-slide img{
-    object-fit: cover !important;      
-    object-position: 50% 50% !important; 
-    width: 100% !important;
-    height: 100% !important;
-    display: block;                      
-  }
-
   .footer-column { min-width: 0 !important; width: 100% !important; }
   .footer-column h3 { font-size: 16px !important; margin-bottom: 10px; }
   .footer-column a { font-size: 14px !important; }
@@ -721,58 +700,23 @@ header {
     0%, 80% { opacity: 1; visibility: visible; }
     100% { opacity: 0; visibility: hidden; }
   }
-#chat-box {
-    display: block !important;
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-#chat-box .chat-header {
-    display: flex !important;
-}
-
-#inner-input-bar {
-    display: flex !important;
-}	
 	}	
   
 @media (max-width: 600px) {
-  #chat-box {
-    pointer-events: auto !important; 
-  }
+  #chat-box .chat-header { display:flex !important; }
+  #inner-input-bar.active { display:flex !important; }
   
-  #chat-box * {
-    pointer-events: auto !important;
-  }
-  
-  #chat-tooltip span:last-child {
-    cursor: pointer !important;
-    pointer-events: auto !important;
-  }
-	
   #chat-tooltip {
     font-size: 12px !important;
     padding: 8px 10px !important;
     right: 8px !important;
-    bottom: 60px !important;
+    bottom: 80px !important;
   }
   #chat-tooltip span:last-child {
     font-size: 14px !important;
   }
-#chat-box {
-    display: block !important;
-    opacity: 1 !important;
-    transform: translateY(0) !important;
 }
 
-#chat-box .chat-header {
-    display: flex !important;
-}
-
-#inner-input-bar {
-    display: flex !important;
-}	
-}  
   </style>
 </head>
 <body>
@@ -790,15 +734,7 @@ header {
     </div>
   </div>
   <nav class="nav-links" id="navLinks">
-    <div class="dropdown">
-    <a href="#home" class="dropbtn">الرئيسية ▾</a>
-    <div class="dropdown-content">
-      <a href="#history">لمحة تاريخية</a>
-      <a href="#president">رئيس النادي</a>
-      <a href="#vice">نائب رئيس النادي</a>
-      <a href="#board">مجلس الإدارة</a>
-    </div>
-  </div>
+    <a href="index.html">الرئيسية</a>
     <a href="news.html">الأخبار</a>
     <a href="sports.html">الألعاب الرياضية</a>
     <a href="register.html">التسجيل</a>
@@ -806,7 +742,7 @@ header {
     <a href="contact.html">اتصل بنا</a>
   </nav>
 </header>
-
+	
 <section style='padding: 30px;'>
   <h2>📞 تواصل معنا</h2>
   <p>📧 البريد الإلكتروني: info@ittihadkalbafc.ae</p>
@@ -814,8 +750,102 @@ header {
   <p>📸 إنستغرام: <a href='https://instagram.com/kalbasc' target='_blank'>@kalbasc</a></p>
 </section>
 
+<script>
+(function(){
+  let tooltipDismissed = false;
+
+  window.toggleChat = function(){
+    const chatBox  = document.getElementById('chat-box');
+    const badge    = document.getElementById('chat-badge');
+    const tooltip  = document.getElementById('chat-tooltip');
+    if (!chatBox) return;
+
+    if (typeof dismissTooltip === 'function') dismissTooltip();
+
+    const alreadyStarted = !!chatBox.querySelector('.message-wrapper');
+    const isHidden = getComputedStyle(chatBox).display === 'none';
+
+    if (isHidden){
+      chatBox.style.display = 'flex';
+      chatBox.classList.add('open');
+      if (badge)   badge.style.display = 'none';
+      if (tooltip) tooltip.style.display = 'none';
+      requestAnimationFrame(()=>{
+        chatBox.style.opacity   = '1';
+        chatBox.style.transform = 'translateY(0)';
+      });
+      if (!alreadyStarted) startChat && startChat();
+    } else {
+      chatBox.style.opacity   = '0';
+      chatBox.style.transform = 'translateY(30px)';
+      setTimeout(()=>{
+        chatBox.classList.remove('open');
+        chatBox.style.display = 'none';
+        if (badge) badge.style.display = 'flex';
+      }, 500);
+    }
+  };
+
+  function dismissTooltip(){
+    const tooltip = document.getElementById('chat-tooltip');
+    if (tooltip){
+      tooltip.style.display = 'none';
+      tooltipDismissed = true;
+    }
+  }
+  window.dismissTooltip = dismissTooltip;
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const tooltipCloseBtn = document.querySelector('#chat-tooltip span:last-child');
+    if (tooltipCloseBtn) tooltipCloseBtn.addEventListener('click', dismissTooltip);
+
+    const chatInput = document.getElementById('userMessage');
+    if (chatInput){
+      chatInput.addEventListener('focus', function(){ this.style.pointerEvents = 'auto'; });
+    }
+  });
+})();
+
+	
+function toggleMenu() {
+  const navLinks = document.getElementById('navLinks');
+  const body = document.body;
+  
+  navLinks.classList.toggle('show');
+  body.classList.toggle('no-scroll');
+  
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (navLinks.classList.contains('show')) {
+    menuToggle.innerHTML = '✕';
+  } else {
+    menuToggle.innerHTML = '☰';
+  }
+}
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) {
+      toggleMenu();
+    }
+  });
+});
+
+window.addEventListener('resize', function() {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const body = document.body;
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    navLinks.classList.remove('show');
+    body.classList.remove('no-scroll');
+    menuToggle.innerHTML = '☰';
+  }
+});
+	
+</script>
 	
 <div class="chatbot">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <div id="chat-box">
   <div class="chat-header">
 <span onclick="toggleChat()">✕</span>
@@ -975,7 +1005,10 @@ function clearChat() {
 
   const buttons = document.getElementById("main-buttons");
   const inputBar = document.getElementById("inner-input-bar");
-
+     if (inputBar) {
+          inputBar.classList.remove("active");   
+          inputBar.style.display = "none";       
+       }
   if (buttons) buttons.style.display = "none";
   if (inputBar) inputBar.style.display = "none";
 }
@@ -1013,46 +1046,26 @@ inputDiv.innerHTML = `
   chatBody.appendChild(inputDiv);
 }
 
-function submitName() {
-  console.log("submitName function called"); 
-  
+ function submitName() {
   const input = document.getElementById("nameInput");
-  if (!input) {
-    console.error("Name input field not found!");
-    return;
-  }
 
   const name = input.value.trim();
-  console.log("Name entered:", name); 
 
   if (name) {
-    addMessage(`${name}`, true);
-    userName = name;
-    
-    const nameInputWrapper = document.getElementById("nameInputWrapper");
-    if (nameInputWrapper) {
-      nameInputWrapper.remove();
-      console.log("Name input wrapper removed"); 
+  addMessage(`${name}`, true);
+  userName = name;
+  document.getElementById("nameInputWrapper").remove();
+  
+  setTimeout(() => {
+    addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
+    showMainButtons();
+    const inputBar = document.getElementById("inner-input-bar");
+  if (inputBar) {
+         inputBar.classList.add("active");
+		 inputBar.style.display = "flex";   
+	  }}, 500);
     }
-    
-    setTimeout(() => {
-      addMessage(`مرحباً بك ${name}، كيف يمكننا مساعدتك؟`, false);
-      showMainButtons();
-      
-      const inputBar = document.getElementById("inner-input-bar");
-      console.log("Input bar element:", inputBar); 
-      
-      if (inputBar) {
-        inputBar.style.display = "flex";
-        console.log("Input bar should now be visible"); 
-      } else {
-        console.error("Input bar not found!");
-      }
-    }, 500);
-  } else {
-    console.log("No name entered"); 
-  }
-}
+ }
   
 function submitUserMessage() {
     const input = document.getElementById("userMessage");
@@ -1311,19 +1324,18 @@ document.addEventListener("keydown", function (e) {
 window.addEventListener('DOMContentLoaded', () => {
   startChat();
 });
-
 </script>
 </div>
 	
 <footer>
   <div class="footer-column">
-    <h3 style="color: #f4e733; font-size: 14px;">تواصل معنا</strong></h3>
+    <h3 style="color:#f4e733; font-size:14px; font-weight:700;">تواصل معنا</h3>
     <p><a href="mailto:info@ksc.shj.ae" style="color: #FFFFFF; font-size: 12px;">info@ksc.shj.ae</a></p>
     <p><a href="tel:+971092777873" style="color: #FFFFFF; font-size: 12px;">092777873</a></p>
   </div>
 	
   <div class="footer-column">
-    <h3 style="color: #f4e733; font-size: 14px;">روابط سريعة</strong></h3>
+   <h3 style="color:#f4e733; font-size:14px; font-weight:700;">روابط سريعة</h3>
     <a href="index.html" style="color: #FFFFFF; font-size: 12px;">الرئيسية</a>
     <a href="news.html" style="color: #FFFFFF; font-size: 12px;">الأخبار</a>
     <a href="sports.html" style="color: #FFFFFF; font-size: 12px;">الألعاب الرياضية</a>
@@ -1333,7 +1345,7 @@ window.addEventListener('DOMContentLoaded', () => {
   </div>
 
   <div class="footer-column">
-    <h3 style="color: #f4e733; font-size: 14px;">تابعنا</strong></h3>
+    <h3 style="color:#f4e733; font-size:14px; font-weight:700;">تابعنا</h3>
     <div class="social-icons">
       <a href="https://www.facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
       <a href="https://www.instagram.com/kalbasc/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -1343,7 +1355,7 @@ window.addEventListener('DOMContentLoaded', () => {
     </div>
 
 	    <div>
-<h3 style="color: #f4e733; font-size: 14px;">أرسل ملاحظاتك أو اقتراحاتك</strong></h3>
+    <h3 style="color:#f4e733; font-size:14px; font-weight:700;">أرسل ملاحظاتك أو اقتراحاتك</h3>
 <form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
   <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
   <br><br>
@@ -1394,7 +1406,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<script>
+	<script>
   const toggleBtn = document.querySelector('.menu-toggle');
   const navLinks = document.getElementById('navLinks');
 
@@ -1407,40 +1419,7 @@ window.addEventListener('DOMContentLoaded', () => {
       navLinks.classList.remove('show');
     }
   });
-
-let tooltipDismissed = false;
-
-function toggleChat() {
-  const chatBox = document.getElementById('chat-box');
-  const badge = document.getElementById('chat-badge');
-  const tooltip = document.getElementById('chat-tooltip');
-  const alreadyStarted = chatBox.querySelector('.message-wrapper') !== null;
-
-  if (typeof dismissTooltip === 'function') dismissTooltip();
-
-  if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-    chatBox.style.display = 'block';
-    badge.style.display = 'none';
-    tooltip.style.display = 'none';
-
-    setTimeout(() => {
-      chatBox.style.opacity = '1';
-      chatBox.style.transform = 'translateY(0)';
-
-      if (!alreadyStarted) {
-        startChat();
-      }
-    }, 50);
-  } else {
-    chatBox.style.opacity = '0';
-    chatBox.style.transform = 'translateY(30px)';
-    setTimeout(() => {
-      chatBox.style.display = 'none';
-      badge.style.display = 'flex';
-    }, 500);
-  }
-}	
 </script>
-
+	
 </body>
 </html>
