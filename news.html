@@ -511,7 +511,8 @@
    .nav-links.show { pointer-events: auto; }
 	
   .nav-links {
-    position: fixed; top: 0; right: -100%;
+    position: fixed; top: var(--headerH, 72px);
+ right: -100%;
     width: 78%; height: 100vh; padding: 70px 20px;
     background: #000; border-left: 2px solid #f4e733;
     display: flex; flex-direction: column; gap: 10px;
@@ -614,7 +615,7 @@ header {
 
   .nav-links {
     position: fixed;
-    top: 0;
+    top: var(--headerH, 72px);
     right: -100%;
     width: 75%;
     height: 100vh;
