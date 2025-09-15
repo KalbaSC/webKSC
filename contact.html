@@ -2619,19 +2619,50 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-	<script>
-  const toggleBtn = document.querySelector('.menu-toggle');
+<script>
+function toggleMenu() {
   const navLinks = document.getElementById('navLinks');
+  const body = document.body;
 
-  function toggleMenu() {
-    navLinks.classList.toggle('show');
+  navLinks.classList.toggle('show');
+  body.classList.toggle('no-scroll');
+
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (navLinks.classList.contains('show')) {
+    menuToggle.innerHTML = '✕';
+  } else {
+    menuToggle.innerHTML = '☰';
   }
+}
 
-  document.addEventListener('click', function (e) {
-    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
-      navLinks.classList.remove('show');
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) {
+      toggleMenu();
     }
   });
+});
+
+window.addEventListener('resize', function() {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const body = document.body;
+    const menuToggle = document.querySelector('.menu-toggle');
+
+    navLinks.classList.remove('show');
+    body.classList.remove('no-scroll');
+    if (menuToggle) menuToggle.innerHTML = '☰';
+  }
+});
+
+function updateHeaderHeight() {
+  const header = document.querySelector('header');
+  if (!header) return;
+  const headerHeight = header.offsetHeight;
+  document.documentElement.style.setProperty('--headerH', `${headerHeight}px`);
+}
+window.addEventListener('load', updateHeaderHeight);
+window.addEventListener('resize', updateHeaderHeight);
 </script>
 	
 </body>
