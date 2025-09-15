@@ -1930,28 +1930,77 @@ header {
   body.with-top-nav {padding-top: 0 !important;}
 }
 
-.container,
-.login-container,
-.info-container {
+/* unified containers */
+.container{
   width: 90%;
   max-width: 1170px;
-  margin: 40px auto;
+  margin: 30px auto;
   padding: 28px;
   background: #000;
   border: 2px solid #f4e733;
   border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
   color: #fff;
 }
 
-.container h2,
-.login-container h2,
-.info-container h2 {
-  color: #f4e733;
-  text-align: center;
-  margin-bottom: 20px;
+/* login card */
+.login-container{
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 28px;
+  background: #000;
+  border: 2px solid #f4e733;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(244,231,51,.25);
 }
 
+/* hide/show helper */
+.hidden{ display:none; }
+
+/* small banner under header (optional) */
+.welcome-banner{
+  margin: -4px 0 20px;
+  padding: 14px 16px;
+  background: rgba(244,231,51,.08);
+  border: 1px dashed #f4e733;
+  border-radius: 10px;
+  color: #fff;
+}
+
+/* tabs */
+.nav-tabs{
+  display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+  margin: 16px 0 20px;
+}
+.nav-tabs button{
+  background:#111; color:#fff; border:1px solid #333;
+  padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:700;
+}
+.nav-tabs button.active, .nav-tabs button:hover{
+  border-color:#f4e733; color:#000; background:#f4e733;
+}
+
+/* toolbar (counts + filters) */
+.toolbar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; flex-wrap:wrap; margin-bottom:20px;
+}
+.toolbar .stats{
+  display:flex; align-items:center; gap:10px;
+  color:#fff; font-weight:700;
+}
+.toolbar .filters{
+  display:flex; gap:15px; justify-content:center; flex-wrap:wrap;
+}
+.form-group{ display:flex; flex-direction:column; gap:6px; color:#fff; }
+
+/* responsive */
+@media (max-width:768px){
+  .container{ width:94%; margin:20px auto; padding:20px; }
+  .login-container{ margin:20px auto; padding:20px; }
+  .toolbar{ justify-content:center; }
+}
   </style>
 
 </head>
@@ -2015,24 +2064,22 @@ header {
       <button onclick="logout()">خروج</button>
     </div>
 
-    <div style="position: relative; width: 100%; padding-bottom: 20px;">
-      <div style="position: absolute; right: 0;">
-        <div id="playersCount">
-          <i class="fas fa-users"></i> عدد اللاعبين: 0
-        </div>
-      </div>
+<div class="toolbar">
+  <div class="stats">
+    <div id="playersCount"><i class="fas fa-users"></i> عدد اللاعبين: 0</div>
+  </div>
 
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <div class="form-group">
-          <label for="sessionDate">تاريخ الجلسة</label>
-          <input type="date" id="sessionDate">
-        </div>
-        <div class="form-group">
-          <label for="filterDate">تصفية حسب التاريخ</label>
-          <input type="date" id="filterDate" onchange="filterByDate()">
-        </div>
-      </div>
+  <div class="filters">
+    <div class="form-group">
+      <label for="sessionDate">تاريخ الجلسة</label>
+      <input type="date" id="sessionDate">
     </div>
+    <div class="form-group">
+      <label for="filterDate">تصفية حسب التاريخ</label>
+      <input type="date" id="filterDate" onchange="filterByDate()">
+    </div>
+  </div>
+</div>
 
     <div id="playersListTab">
       <h2 id="playersListHeader" style="color:#f4e733; text-align:center"></h2>
