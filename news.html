@@ -718,6 +718,35 @@ header {
   }
 }
 
+body.no-scroll { overflow: hidden; }
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #f4e733;
+  cursor: pointer;
+  padding: 5px;
+}
+
+@media (max-width: 768px){
+  .mobile-nav { display: block; }
+  .menu-toggle { display: block; }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: rgba(0,0,0,0.95);
+    position: absolute;
+    top: var(--headerH, 72px);
+    right: 0;
+    width: 100%;
+    padding: 20px;
+  }
+  .nav-links.show { display: flex; }
+}
+
   </style>
 </head>
 <body>
@@ -725,6 +754,7 @@ header {
   <div class="mobile-nav">
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   </div>
+
   <div class="header-right">
     <img src="Picture3.png" alt="شعار الشارقة" class="logo">
     <div class="divider"></div>
@@ -734,6 +764,7 @@ header {
       <div class="english-name">KALBA SPORTS & CULTURAL CLUB</div>
     </div>
   </div>
+
   <nav class="nav-links" id="navLinks">
     <a href="index.html">الرئيسية</a>
     <a href="news.html">الأخبار</a>
@@ -1401,19 +1432,41 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-	<script>
-  const toggleBtn = document.querySelector('.menu-toggle');
+<script>
+function toggleMenu() {
   const navLinks = document.getElementById('navLinks');
+  const body = document.body;
 
-  function toggleMenu() {
-    navLinks.classList.toggle('show');
+  navLinks.classList.toggle('show');
+  body.classList.toggle('no-scroll');
+
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (navLinks.classList.contains('show')) {
+    menuToggle.innerHTML = '✕';
+  } else {
+    menuToggle.innerHTML = '☰';
   }
+}
 
-  document.addEventListener('click', function (e) {
-    if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
-      navLinks.classList.remove('show');
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) {
+      toggleMenu();
     }
   });
+});
+
+window.addEventListener('resize', function() {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const body = document.body;
+    const menuToggle = document.querySelector('.menu-toggle');
+
+    navLinks.classList.remove('show');
+    body.classList.remove('no-scroll');
+    if (menuToggle) menuToggle.innerHTML = '☰';
+  }
+});
 </script>
 	
 </body>
