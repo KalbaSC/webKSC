@@ -1287,6 +1287,223 @@ header {
   }
 }
 
+    body {
+      font-family: 'NotoKufiArabic', sans-serif;
+      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+    }
+    
+    header {
+      background-color: #111;
+      padding: 16px 5%;
+      margin: 0 auto;	
+      width: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #f4e733;
+      position: sticky;
+      top: 0; 
+      z-index: 1001;
+      flex-wrap: wrap;
+    }
+    
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .header-right img.logo {
+      height: 70px;
+      object-fit: contain;
+    }
+    
+    .header-right .divider {
+      width: 1.5px;
+      height: 65px;
+      background-color: #f4e733;
+    }
+    
+    .header-info {
+      text-align: right;
+      min-width: 0;
+    }
+    
+    .header-info .arabic-name {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 0;
+    }
+    
+    .header-info .english-name {
+      font-size: 16px;
+      color: #f4e733;
+      margin: 0;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 70px;
+      flex-wrap: wrap;
+    }
+    
+    .nav-links a {
+      color: #f4e733;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+    
+    .nav-links a:hover {
+      color: white;
+    }
+    
+    .mobile-nav {
+      display: none;
+    }
+    
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: #f4e733;
+      cursor: pointer;
+      padding: 5px;
+    }
+    footer {
+      background-color: #000;
+      color: white;
+      padding: 30px 5%;
+      margin: 0 auto;	
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+      direction: rtl;
+      border-top: 3px solid #f4e733;
+      text-align: right;
+    }
+    
+    .footer-column {
+      flex: 1;
+      min-width: 250px;
+    }
+    
+    .footer-bottom {
+      width: 100%;
+      text-align: center;
+      padding-top: 15px;
+      border-top: 1px solid #444;
+      color: #888;
+      font-size: 14px;
+      margin-top: 30px;
+    }
+    
+    .footer-column a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      transition: color 0.3s;
+    }
+    
+    .footer-column a:hover {
+      color: #f4e733;
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .social-icons a {
+      color: white;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+    
+    .social-icons a:hover {
+      color: #f4e733;
+    }
+    
+    footer form {
+      margin-top: 15px;
+    }
+    
+    footer textarea {
+      width: 100%;
+      height: 150px;
+      background: #222;
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #444;
+      resize: vertical;
+    }
+    
+    footer button[type="submit"] {
+      background-color: #f4e733;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+    
+    footer button[type="submit"]:hover {
+      background-color: #d8cf2e;
+    }
+
+@media (max-width: 768px){
+  .side-menu.top-nav{
+    position: fixed;
+    top: var(--headerH,72px);
+    right: 0; left: 0;
+    width: 100% !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap !important;
+    gap: 6px;
+    padding: 6px 4px;
+    background: rgba(0,0,0,0.95);
+    border: 0;
+    border-bottom: 2px solid #f4e733;
+    border-radius: 0 0 10px 10px;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1002;
+  }
+
+  .side-menu.top-nav a{
+    flex: 0 0 auto;
+    white-space: nowrap;
+    min-width: 80px;
+    padding: 6px 8px;
+    font-size: 13px;
+    border-bottom: none;
+  }
+
+  .side-menu .sm-indicator{ display: none !important; }
+  body.with-top-nav {padding-top: 0 !important;}
+}
+
+
   </style>
 </head>
 <body>
@@ -3013,13 +3230,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <footer>
   <div class="footer-column">
-    <h3 style="color: #f4e733; font-size: 14px;">تواصل معنا</strong></h3>
+    <h3 style="color:#f4e733; font-size:14px; font-weight:700;">تواصل معنا</h3>
     <p><a href="mailto:info@ksc.shj.ae" style="color: #FFFFFF; font-size: 12px;">info@ksc.shj.ae</a></p>
     <p><a href="tel:+971092777873" style="color: #FFFFFF; font-size: 12px;">092777873</a></p>
   </div>
 	
   <div class="footer-column">
-    <h3 style="color: #f4e733; font-size: 14px;">روابط سريعة</strong></h3>
+   <h3 style="color:#f4e733; font-size:14px; font-weight:700;">روابط سريعة</h3>
     <a href="index.html" style="color: #FFFFFF; font-size: 12px;">الرئيسية</a>
     <a href="news.html" style="color: #FFFFFF; font-size: 12px;">الأخبار</a>
     <a href="sports.html" style="color: #FFFFFF; font-size: 12px;">الألعاب الرياضية</a>
@@ -3029,7 +3246,7 @@ window.addEventListener('DOMContentLoaded', () => {
   </div>
 
   <div class="footer-column">
-    <h3 style="color: #f4e733; font-size: 14px;">تابعنا</strong></h3>
+    <h3 style="color:#f4e733; font-size:14px; font-weight:700;">تابعنا</h3>
     <div class="social-icons">
       <a href="https://www.facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i></a>
       <a href="https://www.instagram.com/kalbasc/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -3038,7 +3255,7 @@ window.addEventListener('DOMContentLoaded', () => {
       <a href="https://www.tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i></a>
     </div>
 
-	 <div>
+	    <div>
     <h3 style="color:#f4e733; font-size:14px; font-weight:700;">أرسل ملاحظاتك أو اقتراحاتك</h3>
 <form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
   <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
@@ -3090,5 +3307,51 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<script>
+function toggleMenu() {
+  const navLinks = document.getElementById('navLinks');
+  const body = document.body;
+
+  navLinks.classList.toggle('show');
+  body.classList.toggle('no-scroll');
+
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (navLinks.classList.contains('show')) {
+    menuToggle.innerHTML = '✕';
+  } else {
+    menuToggle.innerHTML = '☰';
+  }
+}
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 769) {
+      toggleMenu();
+    }
+  });
+});
+
+window.addEventListener('resize', function() {
+  if (window.innerWidth >= 769) {
+    const navLinks = document.getElementById('navLinks');
+    const body = document.body;
+    const menuToggle = document.querySelector('.menu-toggle');
+
+    navLinks.classList.remove('show');
+    body.classList.remove('no-scroll');
+    if (menuToggle) menuToggle.innerHTML = '☰';
+  }
+});
+
+function updateHeaderHeight() {
+  const header = document.querySelector('header');
+  if (!header) return;
+  const headerHeight = header.offsetHeight;
+  document.documentElement.style.setProperty('--headerH', `${headerHeight}px`);
+}
+window.addEventListener('load', updateHeaderHeight);
+window.addEventListener('resize', updateHeaderHeight);
+</script>
+	
 </body>
 </html>
