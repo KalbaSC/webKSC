@@ -511,11 +511,17 @@
    .nav-links.show { pointer-events: auto; }
 	
   .nav-links {
-    position: fixed; top: var(--headerH, 72px);
- right: -100%;
-    width: 78%; height: 100vh; padding: 70px 20px;
-    background: #000; border-left: 2px solid #f4e733;
-    display: flex; flex-direction: column; gap: 10px;
+    position: fixed; 
+    top: calc(var(--headerH, 72px) - 3px);
+    right: -100%;
+    width: 78%; 
+    height: 100vh; 
+    padding: 70px 20px;
+    background: #000; 
+    border-left: 2px solid #f4e733;
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px;
     transition: right .3s ease;
     z-index: 1000;
   }
@@ -615,7 +621,7 @@ header {
 
   .nav-links {
     position: fixed;
-    top: var(--headerH, 72px);
+    top: calc(var(--headerH, 72px) - 3px);
     right: -100%;
     width: 75%;
     height: 100vh;
@@ -740,7 +746,7 @@ body.no-scroll { overflow: hidden; }
     flex-direction: column;
     background: rgba(0,0,0,0.95);
     position: absolute;
-    top: var(--headerH, 72px);
+    top: calc(var(--headerH, 72px) - 3px);
     right: 0;
     width: 100%;
     padding: 20px;
@@ -1468,6 +1474,15 @@ window.addEventListener('resize', function() {
     if (menuToggle) menuToggle.innerHTML = '☰';
   }
 });
+
+function updateHeaderHeight() {
+  const header = document.querySelector('header');
+  if (!header) return;
+  const headerHeight = header.offsetHeight;
+  document.documentElement.style.setProperty('--headerH', `${headerHeight}px`);
+}
+window.addEventListener('load', updateHeaderHeight);
+window.addEventListener('resize', updateHeaderHeight);
 </script>
 	
 </body>
