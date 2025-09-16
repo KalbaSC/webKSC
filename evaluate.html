@@ -323,7 +323,7 @@
       background-color: #ddd;
     }
     
-    .content {
+    #chat-box .content {
       background-color: #f4e733;
       padding: 10px;
       border-radius: 10px;
@@ -331,7 +331,7 @@
       font-size: 16px;
     }
     
-    .message-wrapper.bot .content {
+    #chat-box .message-wrapper {
       background-color: #eee;
       color: #000;
     }
@@ -344,7 +344,7 @@
       margin-top: 20px;
     }
     
-    .chat-btn {
+    #chat-box .chat-btn {
       background-color: #f4e733;
       color: #000;
       border: none;
@@ -356,7 +356,7 @@
       transition: background-color 0.3s;
     }
     
-    .chat-btn:hover {
+    #chat-box .chat-btn:hover {
       background-color: #d8cf2e;
     }
     
@@ -1102,18 +1102,18 @@ body.no-scroll { overflow: hidden; }
       border-radius: 12px;
     }
     
-    .message-wrapper {
+    #chat-box .message-wrapper {
       display: flex;
       align-items: flex-start;
       gap: 10px;
       margin: 10px;
     }
     
-    .message-wrapper.user {
+    #chat-box .message-wrapper.user {
       flex-direction: row-reverse;
     }
     
-    .avatar {
+    #chat-box .avatar {
       width: 36px;
       height: 36px;
       background-size: cover;
@@ -1122,7 +1122,7 @@ body.no-scroll { overflow: hidden; }
       background-color: #ddd;
     }
     
-    .content {
+    #chat-box .content {
       background-color: #f4e733;
       padding: 10px;
       border-radius: 10px;
@@ -1130,12 +1130,12 @@ body.no-scroll { overflow: hidden; }
       font-size: 16px;
     }
     
-    .message-wrapper.bot .content {
+    #chat-box .message-wrapper {
       background-color: #eee;
       color: #000;
     }
     
-    .button-container {
+    #chat-box .button-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -1143,7 +1143,7 @@ body.no-scroll { overflow: hidden; }
       margin-top: 20px;
     }
     
-    .chat-btn {
+    #chat-box .chat-btn {
       background-color: #f4e733;
       color: #000;
       border: none;
@@ -1155,22 +1155,22 @@ body.no-scroll { overflow: hidden; }
       transition: background-color 0.3s;
     }
     
-    .chat-btn:hover {
+    #chat-box .chat-btn:hover {
       background-color: #d8cf2e;
     }
     
-    .typing-dots span {
+    #chat-box .typing-dots span {
       animation: blink 1s infinite;
       font-weight: bold;
       font-size: 24px;
       margin: 0 1px;
     }
     
-    .typing-dots span:nth-child(2) {
+    #chat-box .typing-dots span:nth-child(2) {
       animation-delay: 0.2s;
     }
     
-    .typing-dots span:nth-child(3) {
+    #chat-box .typing-dots span:nth-child(3) {
       animation-delay: 0.4s;
     }
     
@@ -1338,16 +1338,16 @@ body.with-top-nav {
     height: 34px !important;
   }
 
-  .chat-btn {
+  #chat-box .chat-btn {
     font-size: 14px !important;
     padding: 10px 14px !important;
   }
 
-  .content {
+  #chat-box .content {
     font-size: 15px !important;
   }
 
-  .message-wrapper {
+  #chat-box .message-wrapper {
     margin: 6px !important;
     gap: 8px !important;
   }
@@ -2305,7 +2305,7 @@ footer button {
 #chat-box,
 #chat-toggle,
 #chat-box *,
-.chat-btn,
+#chat-box .chat-btn,
 input,
 textarea,
 button {
@@ -2354,10 +2354,6 @@ button {
       src: url('NotoKufiArabic.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
-    }
-
-    body, .content, .chat-btn {
-      font-family: 'NotoKufiArabic', 'Cairo', sans-serif;
     }
 
 #chat-box {
@@ -2448,18 +2444,18 @@ gap: 10px;
   border-radius: 12px;
 }
 
-.message-wrapper {
+#chat-box .message-wrapper {
   display: flex;
   align-items: flex-start;
   gap: 10px;
   margin: 10px;
 }
 
-.message-wrapper.user {
+#chat-box .message-wrapper.user {
   flex-direction: row-reverse;
 }
 
-.avatar {
+#chat-box .avatar {
   width: 36px;
   height: 36px;
   background-size: cover;
@@ -2467,7 +2463,7 @@ gap: 10px;
   border-radius: 50%;
 }
 
-.content {
+#chat-box .content {
   background-color: #f4e733;
   padding: 10px;
   border-radius: 10px;
@@ -2475,11 +2471,11 @@ gap: 10px;
   font-size: 18px;
 }
 
-    .message-wrapper.bot .content {
+ #chat-box .message-wrapper {
       background-color: #eee;
     }
 
-    .button-container {
+    #chat-box .button-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -2487,7 +2483,7 @@ gap: 10px;
       margin-top: 20px;
     }
 
-    .chat-btn {
+    #chat-box .chat-btn {
       background-color: #f4e733;
       color: #000;
       border: none;
@@ -2498,17 +2494,17 @@ gap: 10px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-.chat-header {
+#chat-box .chat-header {
   display: flex !important;
   flex-shrink: 0 !important;
 }
 
-.chat-body {
+#chat-box .chat-body {
   flex: 1 !important;
   overflow-y: auto !important;
 }
 
-.chat-footer {
+#chat-box .chat-footer {
   flex-shrink: 0 !important;
 }
 
@@ -2589,16 +2585,16 @@ html { scroll-behavior:smooth; }
     height: 34px !important;
   }
 
-  .chat-btn {
+  #chat-box .chat-btn {
     font-size: 14px !important;
     padding: 10px 14px !important;
   }
 
-  .content {
+  #chat-box .content {
     font-size: 15px !important;
   }
 
-  .message-wrapper {
+  #chat-box .message-wrapper {
     margin: 6px !important;
     gap: 8px !important;
   }
@@ -3338,18 +3334,18 @@ header {
       border-radius: 12px;
     }
     
-    .message-wrapper {
+    #chat-box .message-wrapper {
       display: flex;
       align-items: flex-start;
       gap: 10px;
       margin: 10px;
     }
     
-    .message-wrapper.user {
+    #chat-box .message-wrapper.user {
       flex-direction: row-reverse;
     }
     
-    .avatar {
+   #chat-box .avatar {
       width: 36px;
       height: 36px;
       background-size: cover;
@@ -3358,7 +3354,7 @@ header {
       background-color: #ddd;
     }
     
-    .content {
+    #chat-box .content {
       background-color: #f4e733;
       padding: 10px;
       border-radius: 10px;
@@ -3366,12 +3362,12 @@ header {
       font-size: 16px;
     }
     
-    .message-wrapper.bot .content {
+    #chat-box .message-wrapper.bot .content {
       background-color: #eee;
       color: #000;
     }
     
-    .button-container {
+    #chat-box .button-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -3379,7 +3375,7 @@ header {
       margin-top: 20px;
     }
     
-    .chat-btn {
+   #chat-box .chat-btn {
       background-color: #f4e733;
       color: #000;
       border: none;
@@ -3391,22 +3387,22 @@ header {
       transition: background-color 0.3s;
     }
     
-    .chat-btn:hover {
+    #chat-box .chat-btn:hover {
       background-color: #d8cf2e;
     }
     
-    .typing-dots span {
+    #chat-box .typing-dots span {
       animation: blink 1s infinite;
       font-weight: bold;
       font-size: 24px;
       margin: 0 1px;
     }
     
-    .typing-dots span:nth-child(2) {
+   #chat-box .typing-dots span:nth-child(2) {
       animation-delay: 0.2s;
     }
     
-    .typing-dots span:nth-child(3) {
+    #chat-box .typing-dots span:nth-child(3) {
       animation-delay: 0.4s;
     }
     
@@ -3501,16 +3497,16 @@ header {
     height: 34px !important;
   }
 
-  .chat-btn {
+  #chat-box .chat-btn {
     font-size: 14px !important;
     padding: 10px 14px !important;
   }
 
-  .content {
+  #chat-box .content {
     font-size: 15px !important;
   }
 
-  .message-wrapper {
+  #chat-box .message-wrapper {
     margin: 6px !important;
     gap: 8px !important;
   }
@@ -4426,18 +4422,18 @@ body.no-scroll { overflow: hidden; }
       border-radius: 12px;
     }
     
-    .message-wrapper {
+    #chat-box .message-wrapper {
       display: flex;
       align-items: flex-start;
       gap: 10px;
       margin: 10px;
     }
     
-    .message-wrapper.user {
+    #chat-box .message-wrapper.user {
       flex-direction: row-reverse;
     }
     
-    .avatar {
+    #chat-box .avatar {
       width: 36px;
       height: 36px;
       background-size: cover;
@@ -4446,7 +4442,7 @@ body.no-scroll { overflow: hidden; }
       background-color: #ddd;
     }
     
-    .content {
+   #chat-box .content {
       background-color: #f4e733;
       padding: 10px;
       border-radius: 10px;
@@ -4454,12 +4450,7 @@ body.no-scroll { overflow: hidden; }
       font-size: 16px;
     }
     
-    .message-wrapper.bot .content {
-      background-color: #eee;
-      color: #000;
-    }
-    
-    .button-container {
+    #chat-box .button-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -4467,7 +4458,7 @@ body.no-scroll { overflow: hidden; }
       margin-top: 20px;
     }
     
-    .chat-btn {
+    #chat-box .chat-btn {
       background-color: #f4e733;
       color: #000;
       border: none;
@@ -4479,22 +4470,22 @@ body.no-scroll { overflow: hidden; }
       transition: background-color 0.3s;
     }
     
-    .chat-btn:hover {
+    #chat-box .chat-btn:hover {
       background-color: #d8cf2e;
     }
     
-    .typing-dots span {
+    #chat-box .typing-dots span {
       animation: blink 1s infinite;
       font-weight: bold;
       font-size: 24px;
       margin: 0 1px;
     }
     
-    .typing-dots span:nth-child(2) {
+   #chat-box .typing-dots span:nth-child(2) {
       animation-delay: 0.2s;
     }
     
-    .typing-dots span:nth-child(3) {
+    #chat-box .typing-dots span:nth-child(3) {
       animation-delay: 0.4s;
     }
     
@@ -4663,16 +4654,16 @@ body.with-top-nav {
     height: 34px !important;
   }
 
-  .chat-btn {
+  #chat-box .chat-btn {
     font-size: 14px !important;
     padding: 10px 14px !important;
   }
 
-  .content {
+ #chat-box .content {
     font-size: 15px !important;
   }
 
-  .message-wrapper {
+  #chat-box .message-wrapper {
     margin: 6px !important;
     gap: 8px !important;
   }
@@ -6721,45 +6712,38 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	    <div>
     <h3 style="color:#f4e733; font-size:14px; font-weight:700;">أرسل ملاحظاتك أو اقتراحاتك</h3>
-<form action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
-  <textarea name="message" placeholder="اكتب رسالتك هنا ..." required style="width: 100%; height: 150px; background: #222; color: white; padding: 10px; border-radius: 10px;"></textarea>
+<form id="feedbackForm"
+      action="https://script.google.com/macros/s/AKfycbzj46wOU-WNhW2K8YkP23tygl7JUwEeK_fe55mcCADU1w-UK_Rg9apia1sHKRoW1KOJTA/exec"
+      method="POST" target="hidden_iframe">
+  <textarea name="message" placeholder="اكتب رسالتك هنا ..." required
+            style="width:100%;height:150px;background:#222;color:#fff;padding:10px;border-radius:10px;"></textarea>
   <br><br>
- <button type="submit" style="background-color: yellow; padding: 10px 20px; border: none; border-radius: 10px; cursor:pointer;">إرسال</button>
+  <button type="submit" style="background-color:#f4e733;padding:10px 20px;border:none;border-radius:10px;cursor:pointer;">
+    إرسال
+  </button>
 </form>
 <iframe name="hidden_iframe" style="display:none;"></iframe>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("feedbackForm");
+  if (!form) return;
 
- <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form");
-    const confirmationMessage = document.createElement("div");
-    confirmationMessage.style.marginTop = "15px";
-    confirmationMessage.style.color = "#00ff88";
-    confirmationMessage.style.fontWeight = "bold";
-    form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
+  const confirmationMessage = document.createElement("div");
+  confirmationMessage.style.marginTop = "15px";
+  confirmationMessage.style.color = "#00ff88";
+  confirmationMessage.style.fontWeight = "bold";
+  form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
 
-    let submitted = false;
-
-    form.addEventListener("submit", function () {
-      submitted = true;
-      confirmationMessage.textContent = "جارٍ الإرسال...";
-      
-      setTimeout(function () {
-        if (submitted) {
-          confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
-          form.reset();
-          submitted = false;
-        }
-      }, 2000); 
-    });
-
-    window.addEventListener("error", function () {
-      if (submitted) {
-        confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
-        submitted = false;
-      }
-    });
+  form.addEventListener("submit", function () {
+    confirmationMessage.textContent = "Sending...";
+    setTimeout(function () {
+      confirmationMessage.textContent = "✅ Thank you! Your message was sent.";
+      form.reset();
+    }, 2000);
   });
+});
 </script>
+
   </div>
 	  
   </div>
