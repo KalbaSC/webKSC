@@ -2522,9 +2522,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const choiceGrid     = document.querySelector(".choice-grid");
   const tabsContainer  = document.querySelector(".tabs-container");
   const backOption     = document.getElementById("backOption");
+
   const tabCamp        = document.getElementById("tab-camp");
+  const tabScan        = document.getElementById("tab-scan");
+  const tabReports     = document.getElementById("tab-reports");
 
   if (!choiceGrid || !tabsContainer || !backOption || !tabCamp) return;
+
+  let currentMode = null;
 
   function showTabs(){
     tabsContainer.classList.add("show");
@@ -2533,37 +2538,91 @@ document.addEventListener("DOMContentLoaded", () => {
     tabsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-function backToChoices(){
-  tabsContainer.classList.remove("show");
-  choiceGrid.style.display = "flex";
-  backOption.style.display = "none";
-  tabCamp.removeAttribute('src');
-  delete tabCamp.dataset.loaded;
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+  function backToChoices(){
+    currentMode = null;
+    tabsContainer.classList.remove("show", "single-general");
+    restoreTabsNav();
+
+    [tabCamp, tabScan, tabReports].forEach(f => f?.removeAttribute('src'));
+
+    choiceGrid.style.display = "flex";
+    backOption.style.display = "none";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function applyGeneralSingleMode(){
+    tabsContainer.classList.add("single-general");
+    document.querySelectorAll(
+      ".tabs-container .tabs-nav, .tabs-container .main-nav, .tabs-container .tab-links"
+    ).forEach(el => { el.dataset._origDisplay = el.style.display; el.style.display = "none"; });
+
+    tabsContainer.addEventListener("click", blockOtherTabs, true);
+  }
+
+  function restoreTabsNav(){
+    tabsContainer.removeEventListener("click", blockOtherTabs, true);
+    document.querySelectorAll(
+      ".tabs-container .tabs-nav, .tabs-container .main-nav, .tabs-container .tab-links"
+    ).forEach(el => { el.style.display = el.dataset._origDisplay || ""; delete el.dataset._origDisplay; });
+  }
+
+  function blockOtherTabs(e){
+    if (currentMode !== 'general') return;
+    const a = e.target.closest('a[href], button[data-tab], [data-tab-target]");
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    const dataTab = a.getAttribute('data-tab') || a.getAttribute('data-tab-target') || '';
+    const targetId = (href.startsWith('#') ? href.slice(1) : '') || dataTab;
+
+    if (targetId && targetId !== 'tab-camp') {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+  }
 
   choiceGrid.querySelectorAll(".choice-card").forEach(card => {
     card.addEventListener("click", () => {
       const type = card.dataset.type;
 
-if (type === "general") {
-  tabCamp.src = 'general-register.html';
-  tabCamp.dataset.loaded = "1";
-  showTabs();
-} else if (type === "summer") {
-  tabCamp.src = 'camp.html';
-  tabCamp.dataset.loaded = "1";
-  showTabs();
-} else {
-  tabsContainer.classList.remove("show");
-}
+      if (type === "general") {
+        currentMode = 'general';
 
+        tabCamp.src = 'general-register.html';
+
+        [tabScan, tabReports].forEach(f => f?.removeAttribute('src'));
+
+        showTabs();
+        applyGeneralSingleMode();
+
+      } else if (type === "summer") {
+        currentMode = 'summer';
+
+        tabsContainer.classList.remove("single-general");
+        restoreTabsNav();
+
+        tabCamp.src = 'camp.html';
+
+        showTabs();
+
+      } else {
+        tabsContainer.classList.remove("show");
+      }
     });
   });
 
   backOption.addEventListener("click", backToChoices);
+
+  if (typeof window.show === 'function') {
+    const originalShow = window.show;
+    window.show = function(tabId){
+      if (currentMode === 'general' && tabId !== 'tab-camp') {
+        return;
+      }
+      return originalShow(tabId);
+    };
+  }
 });
 </script>
-
 </body>
 </html>
