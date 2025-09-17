@@ -2446,7 +2446,7 @@ function toggleChat() {
 <script>
 
 const FRAME_SRC = {
-  "tab-camp":    "camp.html",
+  "tab-camp":    "",
   "tab-scan":    "AttendanceScan.html",
   "tab-reports": "reports.html"
 };
@@ -2481,9 +2481,13 @@ function initRegisterTabs(){
     btn.addEventListener('click', ()=> show(btn.dataset.target));
   });
 
-  show('tab-camp');
+  const container = document.querySelector('.tabs-container');
+    if (container?.classList.contains('show')) {
+    show('tab-camp');
+  }
 }
 window.addEventListener('DOMContentLoaded', initRegisterTabs);
+
 </script>
 
 <script>
@@ -2529,31 +2533,31 @@ document.addEventListener("DOMContentLoaded", () => {
     tabsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  function backToChoices(){
-    tabsContainer.classList.remove("show");
-    choiceGrid.style.display = "flex";
-    backOption.style.display = "none";
-    tabCamp.innerHTML = "";
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+function backToChoices(){
+  tabsContainer.classList.remove("show");
+  choiceGrid.style.display = "flex";
+  backOption.style.display = "none";
+  tabCamp.removeAttribute('src');
+  delete tabCamp.dataset.loaded;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
   choiceGrid.querySelectorAll(".choice-card").forEach(card => {
     card.addEventListener("click", () => {
       const type = card.dataset.type;
 
-      if (type === "general") {
-        tabCamp.innerHTML =
-          '<iframe src="general-register.html" frameborder="0" ' +
-          'style="width:100%;height:680px;border:0;border-radius:14px;"></iframe>';
-        showTabs();
+if (type === "general") {
+  tabCamp.src = 'general-register.html';
+  tabCamp.dataset.loaded = "1";
+  showTabs();
+} else if (type === "summer") {
+  tabCamp.src = 'camp.html';
+  tabCamp.dataset.loaded = "1";
+  showTabs();
+} else {
+  tabsContainer.classList.remove("show");
+}
 
-      } else if (type === "summer") {
-
-        showTabs();
-
-      } else {
-        tabsContainer.classList.remove("show");
-      }
     });
   });
 
