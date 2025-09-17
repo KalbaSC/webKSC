@@ -2,29 +2,39 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>التسجيل العام</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>التسجيل العام – تعبئة تلقائية من الهوية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Camera decoder (QR + common barcodes if supported) -->
   <script src="https://unpkg.com/html5-qrcode"></script>
+
   <style>
     :root { --brand:#f4e733; --bg:#000; --panel:#111; --text:#fff; }
     *{box-sizing:border-box}
-    body{font-family:"NotoKufiArabic",sans-serif;background:#111;color:#fff;margin:0;padding:20px}
-    .box{max-width:760px;margin:auto;background:var(--bg);border:2px solid var(--brand);border-radius:14px;padding:22px}
+    body{font-family:"NotoKufiArabic",system-ui,Segoe UI,Arial;background:#111;color:#fff;margin:0;padding:20px}
+    .box{max-width:820px;margin:auto;background:var(--bg);border:2px solid var(--brand);border-radius:14px;padding:22px}
     h2{margin:0 0 16px;color:var(--brand);text-align:center}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     .full{grid-column:1 / -1}
     label{display:block;font-weight:800;color:var(--brand);margin:0 0 6px}
-    input{width:100%;background:var(--panel);color:var(--text);border:1px solid #444;border-radius:10px;padding:10px}
+    input{
+      width:100%;background:var(--panel);color:var(--text);
+      border:1px solid #444;border-radius:10px;padding:10px
+    }
     input[readonly]{opacity:.85}
     .actions{display:flex;gap:10px;margin-top:6px}
-    .btn{background:var(--brand);color:#000;border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer}
+    .btn{
+      background:var(--brand);color:#000;border:0;border-radius:10px;
+      padding:12px 16px;font-weight:800;cursor:pointer
+    }
     .btn.secondary{background:#222;color:#fff;border:1px solid #444}
     .hint{font-size:12px;color:#bdbdbd;margin-top:6px}
     .status{margin-top:12px;display:none}
     .ok{color:#8be28b}.err{color:#ff9a9a}.info{color:#c9d7ff}
     .hr{height:1px;background:#222;margin:14px 0}
+    /* Scanner modal */
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:9999}
-    .modal .inner{width:min(95vw,720px);background:#000;border:2px solid var(--brand);border-radius:14px;padding:12px}
+    .modal .inner{width:min(95vw,760px);background:#000;border:2px solid var(--brand);border-radius:14px;padding:12px}
     .modal header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
     .modal h3{margin:0;color:var(--brand)}
     .close-x{background:transparent;border:0;color:#fff;font-size:22px;cursor:pointer}
@@ -34,26 +44,28 @@
 </head>
 <body>
   <div class="box">
-    <h2>استمارة التسجيل</h2>
+    <h2>استمارة التسجيل العام (تعبئة تلقائية من الهوية)</h2>
 
     <form id="generalForm" autocomplete="off">
+      <!-- ID -->
       <div class="row full">
         <div class="full">
           <label for="id">الرقم التعريفي (ID)</label>
           <div class="actions">
-            <input id="id" name="id" inputmode="numeric" placeholder="اسحب البطاقة أو امسح الـ QR/Barcode" required style="flex:1" />
+            <input id="id" name="id" inputmode="numeric" placeholder="اسحب القارئ أو امسح بـ الكاميرا" required style="flex:1" />
             <button class="btn secondary" type="button" id="scanBtn">مسح الهوية</button>
           </div>
-          <div class="hint">اضغط مسح الهوية</div>
+          <div class="hint">يدعم قارئات USB التي تعمل كلوحة مفاتيح. أو استخدم زر "مسح الهوية" لفتح الكاميرا وقراءة QR/Barcode.</div>
         </div>
       </div>
 
       <div class="hr"></div>
 
+      <!-- Name + Birthdate + Age -->
       <div class="row">
         <div>
           <label for="fullname">الاسم الكامل</label>
-          <input id="fullname" name="fullname" required />
+          <input id="fullname" name="fullname" placeholder="سيتم تعبئته تلقائيًا" required />
         </div>
 
         <div>
@@ -62,7 +74,7 @@
         </div>
 
         <div>
-          <label for="age">العمر</label>
+          <label for="age">العمر (يُحسب تلقائيًا)</label>
           <input id="age" name="age" type="number" readonly />
         </div>
       </div>
@@ -72,12 +84,13 @@
         <button class="btn secondary" type="reset" id="resetBtn">مسح الحقول</button>
       </div>
 
-      <div id="s-info" class="status info">ابحث بالهوية…</div>
+      <div id="s-info" class="status info">جاري البحث عن الهوية…</div>
       <div id="s-ok"   class="status ok">تم جلب البيانات وتعبئتها.</div>
       <div id="s-err"  class="status err">تعذر العثور على الهوية أو حدث خطأ.</div>
     </form>
   </div>
 
+  <!-- Scanner Modal -->
   <div class="modal" id="scanModal" role="dialog" aria-modal="true">
     <div class="inner">
       <header>
@@ -89,10 +102,13 @@
   </div>
 
   <script>
-  const LOOKUP_URL = "https://script.google.com/macros/s/AKfycbw6Efui13sVxFmFuzesazRBdZjBJP-wSMpgLkeFGBwva2gFVVLjQy0qHjgSdWKg9F9E/exec";
-  const USE_JSONP  = true;
+  /************ CONFIG – set this ************/
+  // Publish your Google Apps Script as Web App (Anyone with link), then paste URL here:
+  const LOOKUP_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+  const USE_JSONP  = true;  // keep true to avoid CORS issues in iframe
+  /*******************************************/
 
-
+  // ---------- DOM ----------
   const idInput    = document.getElementById('id');
   const nameInput  = document.getElementById('fullname');
   const birthInput = document.getElementById('birthdate');
@@ -103,9 +119,10 @@
   const sOk   = document.getElementById('s-ok');
   const sErr  = document.getElementById('s-err');
 
+  // ---------- Helpers ----------
   function setStatus(which){ [sInfo,sOk,sErr].forEach(x=>x.style.display='none'); if(which) which.style.display='block'; }
   function pad2(n){return String(n).padStart(2,'0');}
-  function toISODate(d){ 
+  function toISODate(d){
     if(!d) return '';
     if(/^\d{4}-\d{2}-\d{2}$/.test(d)) return d;
     const m = d.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
@@ -124,18 +141,26 @@
   const updateAge = ()=> { ageInput.value = calcAge(birthInput.value) || '' };
   birthInput.addEventListener('change', updateAge);
   birthInput.addEventListener('input',  updateAge);
+  window.addEventListener('load', ()=> {
+    idInput.focus();
+    birthInput.max = new Date().toISOString().slice(0,10);
+  });
 
+  // extract ID from scanned text
   function parseScannedId(text){
     if(!text) return '';
-    const pipe = text.split('|')[0] || text;
-    const kalba = pipe.match(/KalbaSC-(\d+)/i);
-    if(kalba) return kalba[1];
-    const m = text.match(/(\d{5,})/);
-    return m ? m[1] : text.trim();
+    // e.g., "KalbaSC-12345|..." → 12345
+    const head = text.split('|')[0] || text;
+    const mKalba = head.match(/KalbaSC-(\d+)/i);
+    if (mKalba) return mKalba[1];
+    // otherwise take longest 5+ digit run
+    const mNum = text.match(/(\d{5,})/);
+    return mNum ? mNum[1] : text.trim();
   }
 
+  // ---------- Lookup ----------
   function fillFromResult(r){
-    if(!r || !r.ok) { setStatus(sErr); return; }
+    if(!r || !r.ok){ setStatus(sErr); return; }
     if(r.fullname)  nameInput.value  = r.fullname;
     if(r.birthdate){
       const iso = toISODate(r.birthdate);
@@ -147,10 +172,10 @@
 
   function lookupByIdJSONP(id){
     const cb = "__cb" + Math.random().toString(36).slice(2);
-    window[cb] = (data)=>{ try{ fillFromResult(data); } finally{
-      delete window[cb]; s.remove(); } };
-    const url = `${LOOKUP_URL}?fn=lookup&id=${encodeURIComponent(id)}&callback=${cb}`;
-    const s = document.createElement('script'); s.src = url; s.onerror = ()=>{ setStatus(sErr); };
+    window[cb] = data => { try { fillFromResult(data); } finally { delete window[cb]; s.remove(); } };
+    const s = document.createElement('script');
+    s.src = `${LOOKUP_URL}?fn=lookup&id=${encodeURIComponent(id)}&callback=${cb}`;
+    s.onerror = ()=> setStatus(sErr);
     document.head.appendChild(s);
   }
 
@@ -173,20 +198,22 @@
     if(id) lookupById(id);
   }
 
-  window.addEventListener('load', ()=> idInput.focus());
-  idInput.addEventListener('keydown', (e)=>{
+  // USB scanners usually send Enter after the code
+  idInput.addEventListener('keydown', e=>{
     if(e.key === 'Enter'){ e.preventDefault(); triggerLookup(); }
   });
   idInput.addEventListener('change', triggerLookup);
   idInput.addEventListener('blur',   triggerLookup);
 
-let html5Qrcode, isScanning = false;
+  // ---------- Camera Scanner (single copy, no duplicates) ----------
+  var html5Qrcode;  // use var to avoid "already declared" if page is reloaded inside iframe
+  var isScanning = false;
+
   const scanBtn   = document.getElementById('scanBtn');
   const scanModal = document.getElementById('scanModal');
   const closeScan = document.getElementById('closeScan');
 
   function supportedFormats(){
-    // If the library exposes Html5QrcodeSupportedFormats, use it; otherwise fall back to QR only
     if (window.Html5QrcodeSupportedFormats) {
       return [
         Html5QrcodeSupportedFormats.QR_CODE,
@@ -196,18 +223,7 @@ let html5Qrcode, isScanning = false;
         Html5QrcodeSupportedFormats.PDF_417
       ];
     }
-    return undefined; // QR only (older versions)
-  }
-
-  function parseScannedId(text){
-    if(!text) return '';
-    // If your QR text is like "KalbaSC-12345|...":
-    const head = text.split('|')[0] || text;
-    const mKalba = head.match(/KalbaSC-(\d+)/i);
-    if (mKalba) return mKalba[1];
-    // Otherwise, take the longest 5+ digit run (barcode numeric)
-    const mNum = text.match(/(\d{5,})/);
-    return mNum ? mNum[1] : text.trim();
+    return undefined; // QR only on older builds
   }
 
   function openScanner(){
@@ -215,28 +231,26 @@ let html5Qrcode, isScanning = false;
     if(isScanning) return;
     isScanning = true;
 
-    // ensure the modal container is present
     html5Qrcode = new Html5Qrcode("reader");
     const config = {
       fps: 10,
       qrbox: { width: 320, height: 200 },
       aspectRatio: 1.7778,
-      formatsToSupport: supportedFormats() // may be undefined (QR-only)
+      formatsToSupport: supportedFormats()
     };
 
     html5Qrcode.start(
       { facingMode: "environment" },
       config,
-      (decodedText/*, decodedResult*/) => {
-        // 🔥 fill ID, close camera, and lookup
+      (decodedText/*, result*/) => {
         const id = parseScannedId(decodedText);
         if (id) {
           idInput.value = id;
           closeScanner();
-          triggerLookup(); // fill name + birthdate + age
+          triggerLookup(); // auto-fill
         }
       },
-      () => {} // ignore continuous decode errors
+      ()=>{} // ignore scan failures
     ).catch(err => {
       isScanning = false;
       alert("تعذر فتح الكاميرا داخل الإطار: " + err);
@@ -258,9 +272,10 @@ let html5Qrcode, isScanning = false;
   closeScan.addEventListener('click', closeScanner);
   scanModal.addEventListener('click', (e)=>{ if(e.target === scanModal) closeScanner(); });
 
-  form.addEventListener('submit', (e)=>{
+  // ---------- Submit (optional placeholder) ----------
+  form.addEventListener('submit', e=>{
     e.preventDefault();
-    alert('سيتم الحفظ هنا (اربطه بالـ Apps Script لاحقًا)');
+    alert('تمت التعبئة تلقائيًا. اربط الحفظ بـ Apps Script لاحقًا إذا رغبت.');
   });
 
   document.getElementById('resetBtn').addEventListener('click', ()=>{
