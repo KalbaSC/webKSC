@@ -301,7 +301,7 @@
       background-color: rgba(0, 0, 0, 0.3);
       border-radius: 12px;
     }
-    
+
     .message-wrapper {
       display: flex;
       align-items: flex-start;
@@ -330,7 +330,7 @@
       font-size: 16px;
     }
     
-    #chat-box .message-wrapper {
+    .message-wrapper.bot .content {
       background-color: #eee;
       color: #000;
     }
@@ -1099,17 +1099,6 @@ body.no-scroll { overflow: hidden; }
     #chat-box::-webkit-scrollbar-thumb {
       background-color: rgba(0, 0, 0, 0.3);
       border-radius: 12px;
-    }
-    
-    #chat-box .message-wrapper {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin: 10px;
-    }
-    
-    #chat-box .message-wrapper.user {
-      flex-direction: row-reverse;
     }
     
     #chat-box .avatar {
