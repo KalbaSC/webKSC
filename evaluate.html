@@ -14,6 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     @font-face {
       font-family: 'NotoKufiArabic';
@@ -4964,6 +4965,39 @@ header {
   .side-menu .sm-indicator{ display: none !important; }
   body.with-top-nav {padding-top: 0 !important;}
 }
+
+  #chat-wrapper{position:fixed;right:24px;bottom:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  #chat-tooltip{background:#111;color:#fff;padding:10px 12px;border:1px solid #f4e733;border-radius:10px;font-size:13px;box-shadow:0 6px 14px rgba(0,0,0,.25);display:none}
+  #chat-wrapper.show-tip #chat-tooltip{display:block}
+
+  #chat-toggle{width:58px;height:58px;border-radius:50%;border:2px solid #f4e733;background:#000;color:#f4e733;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;box-shadow:0 6px 14px rgba(0,0,0,.25);transition:transform .15s ease,opacity .2s ease}
+  #chat-toggle:hover{transform:translateY(-1px)}
+
+  #chat-box{position:fixed;right:24px;bottom:92px;width:360px;max-width:94vw;height:560px;max-height:75vh;background:#0b0b0b;border:1px solid #222;border-radius:14px;
+    box-shadow:0 10px 26px rgba(0,0,0,.35);display:none;flex-direction:column;overflow:hidden;z-index:10000}
+  #chat-box.open{display:flex}
+
+  #chat-box .chat-header{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#111;border-bottom:2px solid #f4e733;padding:10px 14px}
+  #chat-box .chat-header .title{display:flex;align-items:center;gap:8px;font-weight:800;color:#f4e733}
+  #chat-box .chat-header .close{cursor:pointer;font-size:18px;color:#fff}
+
+  #chat-box .chat-body{padding:12px 12px 8px 12px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin}
+  #chat-box .msg{display:flex;gap:8px}
+  #chat-box .msg.you{justify-content:flex-end}
+  #chat-box .bubble{max-width:82%;padding:10px 12px;border-radius:12px;font-size:14px;line-height:1.45;border:1px solid #222;background:#161616;color:#eee}
+  #chat-box .you .bubble{background:#f4e733;color:#000;border-color:#f4e733}
+
+  #chat-box .chat-footer{display:flex;gap:8px;border-top:1px solid #222;padding:10px;background:#0f0f0f}
+  #chat-box .chat-footer input{flex:1;background:#131313;color:#fff;border:1px solid #333;border-radius:10px;padding:10px 12px;font-size:14px;outline:none}
+  #chat-box .chat-footer button{min-width:44px;height:40px;border-radius:10px;border:1px solid #f4e733;background:#000;color:#f4e733;cursor:pointer}
+
+  @media (max-width: 768px){
+    #chat-box{right:3%;width:94%;height:460px;max-height:70vh}
+    #chat-box .chat-header{padding:8px 10px}
+    #chat-tooltip{font-size:12px}
+    #chat-toggle{width:56px;height:56px}
+  }
   </style>
 
 </head>
@@ -6135,46 +6169,50 @@ window.addEventListener('resize', function() {
 
 let tooltipDismissed = false;
 
-function toggleChat() {
-  console.log("toggleChat called");
-
-  const chatBox  = document.getElementById('chat-box');
-  const badge    = document.getElementById('chat-badge');
-  const tooltip  = document.getElementById('chat-tooltip');
-
-  if (!chatBox) return;
-
-  if (typeof dismissTooltip === 'function') dismissTooltip();
-  const alreadyStarted = chatBox.querySelector('.message-wrapper') !== null;
-  const isHidden = getComputedStyle(chatBox).display === 'none';
-
-  if (isHidden) {
-    chatBox.style.display = 'flex';    
-    chatBox.classList.add('open');     
-    if (badge)   badge.style.display = 'none';
-    if (tooltip) tooltip.style.display = 'none';
-
-    requestAnimationFrame(() => {
-      chatBox.style.opacity   = '1';
-      chatBox.style.transform = 'translateY(0)';
-    });
-
-    if (!alreadyStarted) {
-      startChat();
+function toggleChat(){
+    const box = document.getElementById('chat-box');
+    const wrap = document.getElementById('chat-wrapper');
+    const open = box.classList.toggle('open');
+    if (open){
+      wrap.classList.remove('show-tip');
+      setTimeout(()=> document.getElementById('user-input')?.focus(), 50);
     }
-
-  } else {
-    chatBox.style.opacity   = '0';
-    chatBox.style.transform = 'translateY(30px)';
-
-    setTimeout(() => {
-      chatBox.classList.remove('open'); 
-      chatBox.style.display = 'none';
-      if (badge) badge.style.display = 'flex';
-    }, 500);
   }
-}
 
+  // optional: show tooltip once on first load
+  (function(){
+    const wrap = document.getElementById('chat-wrapper');
+    if (!localStorage.getItem('chat_tip_seen')){
+      wrap.classList.add('show-tip');
+      setTimeout(()=>{ wrap.classList.remove('show-tip'); localStorage.setItem('chat_tip_seen','1'); }, 3500);
+    }
+  })();
+
+  function sendMessage(){
+    const input = document.getElementById('user-input');
+    const body  = document.getElementById('chat-body');
+    const txt = (input.value || '').trim();
+    if (!txt) return;
+    // render my message
+    const row = document.createElement('div');
+    row.className = 'msg you';
+    row.innerHTML = `<div class="bubble">${txt}</div>`;
+    body.appendChild(row);
+    input.value = '';
+    body.scrollTop = body.scrollHeight;
+
+    // TODO: call your existing handler to get a reply
+    // addReply("..."); // keep your existing logic here
+  }
+
+  function addReply(text){
+    const body  = document.getElementById('chat-body');
+    const row = document.createElement('div');
+    row.className = 'msg bot';
+    row.innerHTML = `<div class="bubble">${text}</div>`;
+    body.appendChild(row);
+    body.scrollTop = body.scrollHeight;
+  }
 
   function dismissTooltip() {
     const tooltip = document.getElementById('chat-tooltip');
