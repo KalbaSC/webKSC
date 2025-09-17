@@ -6169,50 +6169,45 @@ window.addEventListener('resize', function() {
 
 let tooltipDismissed = false;
 
-function toggleChat(){
-    const box = document.getElementById('chat-box');
-    const wrap = document.getElementById('chat-wrapper');
-    const open = box.classList.toggle('open');
-    if (open){
-      wrap.classList.remove('show-tip');
-      setTimeout(()=> document.getElementById('user-input')?.focus(), 50);
+function toggleChat() {
+  console.log("toggleChat called");
+
+  const chatBox  = document.getElementById('chat-box');
+  const badge    = document.getElementById('chat-badge');
+  const tooltip  = document.getElementById('chat-tooltip');
+
+  if (!chatBox) return;
+
+  if (typeof dismissTooltip === 'function') dismissTooltip();
+  const alreadyStarted = chatBox.querySelector('.message-wrapper') !== null;
+  const isHidden = getComputedStyle(chatBox).display === 'none';
+
+  if (isHidden) {
+    chatBox.style.display = 'flex';    
+    chatBox.classList.add('open');     
+    if (badge)   badge.style.display = 'none';
+    if (tooltip) tooltip.style.display = 'none';
+
+    requestAnimationFrame(() => {
+      chatBox.style.opacity   = '1';
+      chatBox.style.transform = 'translateY(0)';
+    });
+
+    if (!alreadyStarted) {
+      startChat();
     }
-  }
 
-  // optional: show tooltip once on first load
-  (function(){
-    const wrap = document.getElementById('chat-wrapper');
-    if (!localStorage.getItem('chat_tip_seen')){
-      wrap.classList.add('show-tip');
-      setTimeout(()=>{ wrap.classList.remove('show-tip'); localStorage.setItem('chat_tip_seen','1'); }, 3500);
-    }
-  })();
+  } else {
+    chatBox.style.opacity   = '0';
+    chatBox.style.transform = 'translateY(30px)';
 
-  function sendMessage(){
-    const input = document.getElementById('user-input');
-    const body  = document.getElementById('chat-body');
-    const txt = (input.value || '').trim();
-    if (!txt) return;
-    // render my message
-    const row = document.createElement('div');
-    row.className = 'msg you';
-    row.innerHTML = `<div class="bubble">${txt}</div>`;
-    body.appendChild(row);
-    input.value = '';
-    body.scrollTop = body.scrollHeight;
-
-    // TODO: call your existing handler to get a reply
-    // addReply("..."); // keep your existing logic here
-  }
-
-  function addReply(text){
-    const body  = document.getElementById('chat-body');
-    const row = document.createElement('div');
-    row.className = 'msg bot';
-    row.innerHTML = `<div class="bubble">${text}</div>`;
-    body.appendChild(row);
-    body.scrollTop = body.scrollHeight;
-  }
+    setTimeout(() => {
+      chatBox.classList.remove('open'); 
+      chatBox.style.display = 'none';
+      if (badge) badge.style.display = 'flex';
+    }, 500);
+}
+});
 
   function dismissTooltip() {
     const tooltip = document.getElementById('chat-tooltip');
