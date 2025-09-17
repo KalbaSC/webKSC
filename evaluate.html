@@ -6737,10 +6737,16 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function () {
     confirmationMessage.textContent = "Sending...";
     setTimeout(function () {
-      confirmationMessage.textContent = "✅ Thank you! Your message was sent.";
+      confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
       form.reset();
     }, 2000);
   });
+    window.addEventListener("error", function () {
+      if (submitted) {
+        confirmationMessage.textContent = "❌ لم يتم التسليم، حاول مرة أخرى.";
+        submitted = false;
+      }
+    });
 });
 </script>
 
