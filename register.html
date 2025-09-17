@@ -1812,7 +1812,9 @@ header {
       </div>
 
       <div class="reg-frames-wrap">
-        <iframe id="tab-camp" class="reg-frame visible" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+        <iframe id="tab-camp" class="reg-frame" loading="lazy"
+        sandbox="allow-forms allow-scripts allow-same-origin"
+        allow="camera; microphone; clipboard-read; clipboard-write"></iframe>
         <iframe id="tab-scan" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
         <iframe id="tab-reports" class="reg-frame" loading="lazy" sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
       </div>
@@ -2552,6 +2554,7 @@ const FRAME_SRC = {
       if (type === 'general') {
         currentMode = 'general';
         tabCamp.src = 'general-register.html';
+		tabCamp.setAttribute('allow','camera; microphone; clipboard-read; clipboard-write');
         tabCamp.dataset.loaded = '1';
         showTabsPanel();
         showTab('tab-camp');
