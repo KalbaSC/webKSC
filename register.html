@@ -2499,15 +2499,19 @@ document.addEventListener("DOMContentLoaded", () => {
     tabsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+function clearFrame(f){
+  if (!f) return;
+  f.removeAttribute('src');
+  delete f.dataset.loaded;
+}
+
   function backToChoices(){
     currentMode = null;
     tabsContainer.classList.remove("show", "single-general");
     restoreTabsNav();
 
-    // clear iframes so nothing (camera, etc.) keeps running
-    [tabCamp, tabScan, tabReports].forEach(f => f?.removeAttribute('src'));
+   [tabCamp, tabScan, tabReports].forEach(clearFrame);
 
-    // reset UI
     document.querySelectorAll('.reg-frame').forEach(f=>f.classList.remove('visible'));
     choiceGrid.style.display = "flex";
     backOption.style.display = "none";
@@ -2517,13 +2521,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function applyGeneralSingleMode(){
     tabsContainer.classList.add("single-general");
 
-    // hide the real tabs bar you use
     document.querySelectorAll(".reg-tabs").forEach(el => {
       el.dataset._origDisplay = el.style.display;
       el.style.display = "none";
     });
 
-    // block any attempt to switch away from tab-camp
     tabsContainer.addEventListener("click", blockOtherTabs, true);
   }
 
@@ -2551,20 +2553,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // --- wire the choice cards ---
   choiceGrid.querySelectorAll(".choice-card").forEach(card => {
     card.addEventListener("click", () => {
-      const type = card.dataset.type;   // general | summer
+      const type = card.dataset.type;
 
       if (type === "general") {
         currentMode = 'general';
 
-        // load ONLY the general form
         tabCamp.src = 'general-register.html';
         tabCamp.dataset.loaded = "1";
+		clearFrame(tabScan);
+		clearFrame(tabReports);
         makeCampVisible();
 
-        // ensure other panes are empty
         [tabScan, tabReports].forEach(f => f?.removeAttribute('src'));
 
         showTabs();
@@ -2573,11 +2574,10 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (type === "summer") {
         currentMode = 'summer';
 
-        // restore full tabs and load your summer main page
         tabsContainer.classList.remove("single-general");
         restoreTabsNav();
 
-        tabCamp.src = 'camp.html';  // change if your summer form has a different file
+        tabCamp.src = 'camp.html';
         tabCamp.dataset.loaded = "1";
         makeCampVisible();
 
