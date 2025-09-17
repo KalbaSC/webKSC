@@ -180,30 +180,6 @@
   idInput.addEventListener('change', triggerLookup);
   idInput.addEventListener('blur',   triggerLookup);
 
-  let html5Qrcode, isScanning = false;
-  const scanBtn   = document.getElementById('scanBtn');
-  const scanModal = document.getElementById('scanModal');
-  const closeScan = document.getElementById('closeScan');
-
-  function openScanner(){
-    scanModal.style.display = 'flex';
-    if(isScanning) return;
-    isScanning = true;
-    html5Qrcode = new Html5Qrcode("reader");
-    const config = { fps: 10, qrbox: { width: 320, height: 200 }, aspectRatio: 1.7778 };
-    html5Qrcode.start(
-      { facingMode: "environment" },
-      config,
-      (decodedText) => {
-        const id = parseScannedId(decodedText);
-        idInput.value = id;
-        closeScanner();
-        triggerLookup();
-      },
-      () => {}
-    ).catch(()=>{ setStatus(sErr); isScanning=false; });
-  }
-
 let html5Qrcode, isScanning = false;
   const scanBtn   = document.getElementById('scanBtn');
   const scanModal = document.getElementById('scanModal');
