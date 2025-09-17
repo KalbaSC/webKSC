@@ -204,6 +204,69 @@
     ).catch(()=>{ setStatus(sErr); isScanning=false; });
   }
 
+let html5Qrcode, isScanning = false;
+  const scanBtn   = document.getElementById('scanBtn');
+  const scanModal = document.getElementById('scanModal');
+  const closeScan = document.getElementById('closeScan');
+
+  function supportedFormats(){
+    // If the library exposes Html5QrcodeSupportedFormats, use it; otherwise fall back to QR only
+    if (window.Html5QrcodeSupportedFormats) {
+      return [
+        Html5QrcodeSupportedFormats.QR_CODE,
+        Html5QrcodeSupportedFormats.CODE_128,
+        Html5QrcodeSupportedFormats.EAN_13,
+        Html5QrcodeSupportedFormats.CODE_39,
+        Html5QrcodeSupportedFormats.PDF_417
+      ];
+    }
+    return undefined; // QR only (older versions)
+  }
+
+  function parseScannedId(text){
+    if(!text) return '';
+    // If your QR text is like "KalbaSC-12345|...":
+    const head = text.split('|')[0] || text;
+    const mKalba = head.match(/KalbaSC-(\d+)/i);
+    if (mKalba) return mKalba[1];
+    // Otherwise, take the longest 5+ digit run (barcode numeric)
+    const mNum = text.match(/(\d{5,})/);
+    return mNum ? mNum[1] : text.trim();
+  }
+
+  function openScanner(){
+    scanModal.style.display = 'flex';
+    if(isScanning) return;
+    isScanning = true;
+
+    // ensure the modal container is present
+    html5Qrcode = new Html5Qrcode("reader");
+    const config = {
+      fps: 10,
+      qrbox: { width: 320, height: 200 },
+      aspectRatio: 1.7778,
+      formatsToSupport: supportedFormats() // may be undefined (QR-only)
+    };
+
+    html5Qrcode.start(
+      { facingMode: "environment" },
+      config,
+      (decodedText/*, decodedResult*/) => {
+        // 🔥 fill ID, close camera, and lookup
+        const id = parseScannedId(decodedText);
+        if (id) {
+          idInput.value = id;
+          closeScanner();
+          triggerLookup(); // fill name + birthdate + age
+        }
+      },
+      () => {} // ignore continuous decode errors
+    ).catch(err => {
+      isScanning = false;
+      alert("تعذر فتح الكاميرا داخل الإطار: " + err);
+    });
+  }
+
   function closeScanner(){
     if(html5Qrcode){
       html5Qrcode.stop().then(()=>{
