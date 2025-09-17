@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>تسجيل عام – قارئ الهوية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Camera QR/Barcode (works on desktop/mobile with camera permission) -->
+  <script src="https://unpkg.com/html5-qrcode"></script>
+
+  <style>
+    :root { --brand:#f4e733; --bg:#000; --panel:#111; --text:#fff; }
+    *{box-sizing:border-box}
+    body{font-family:"NotoKufiArabic",sans-serif;background:#111;color:#fff;margin:0;padding:20px}
+    .box{max-width:760px;margin:auto;background:var(--bg);border:2px solid var(--brand);border-radius:14px;padding:22px}
+    h2{margin:0 0 16px;color:var(--brand);text-align:center}
+
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .full{grid-column:1 / -1}
+
+    label{display:block;font-weight:800;color:var(--brand);margin:0 0 6px}
+    input{
+      width:100%;background:var(--panel);color:var(--text);
+      border:1px solid #444;border-radius:10px;padding:10px
+    }
+    input[readonly]{opacity:.85}
+
+    .actions{display:flex;gap:10px;margin-top:6px}
+    .btn{
+      background:var(--brand);color:#000;border:0;border-radius:10px;
+      padding:12px 16px;font-weight:800;cursor:pointer
+    }
+    .btn.secondary{background:#222;color:#fff;border:1px solid #444}
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+
+    .status{margin-top:12px;display:none}
+    .status.ok{color:#8be28b}.status.err{color:#ff9a9a}
+
+    .hint{font-size:12px;color:#bdbdbd;margin-top:6px}
+    .hr{height:1px;background:#222;margin:14px 0}
+
+    /* Modal for camera scanner */
+    .modal{
+      position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;
+      align-items:center;justify-content:center;z-index:9999
+    }
+    .modal .inner{
+      width:min(95vw,720px);background:#000;border:2px solid var(--brand);
+      border-radius:14px;padding:12px
+    }
+    .modal header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .modal h3{margin:0;color:var(--brand)}
+    .close-x{background:transparent;border:0;color:#fff;font-size:22px;cursor:pointer}
+    #reader{width:100%}
+
+    @media (max-width:768px){ .row{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>استمارة التسجيل العام (قارئ هوية)</h2>
+
+    <form id="generalForm" autocomplete="off">
+      <!-- ID -->
+      <div class="row full">
+        <div class="full">
+          <label for="id">الرقم التعريفي (ID)</label>
+          <div class="actions">
+            <input id="id" name="id" inputmode="numeric" placeholder="اسحب البطاقة أو امسح الـ QR/Barcode" required style="flex:1" />
+            <button class="btn secondary" type="button" id="scanBtn" title="فتح الماسح بالكاميرا">مسح الهوية</button>
+          </div>
+          <div class="hint">يدعم قارئات USB (Keyboard Wedge). أو اضغط “مسح الهوية” لاستخدام الكاميرا.</div>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <!-- Name + Birthdate + Age -->
+      <div class="row">
+        <div>
+          <label for="fullname">الاسم الكامل</label>
+          <input id="fullname" name="fullname" placeholder="مثال: أحمد خالد محمد" required />
+        </div>
+
+        <div>
+          <label for="birthdate">تاريخ الميلاد</label>
+          <input id="birthdate" name="birthdate" type="date" required />
+        </div>
+
+        <div>
+          <label for="age">العمر (يُحسب تلقائيًا)</label>
+          <input id="age" name="age" type="number" readonly />
+        </div>
+      </div>
+
+      <div class="actions" style="margin-top:16px">
+        <button class="btn" type="submit">إرسال</button>
+        <button class="btn secondary" type="reset" id="resetBtn">مسح الحقول</button>
+      </div>
+
+      <div id="ok"  class="status ok">تم الحفظ بنجاح.</div>
+      <div id="err" class="status err">حدث خطأ أثناء الإرسال.</div>
+    </form>
+  </div>
+
+  <!-- Scanner Modal -->
+  <div class="modal" id="scanModal" role="dialog" aria-modal="true">
+    <div class="inner">
+      <header>
+        <h3>مسح الهوية (QR/Barcode)</h3>
+        <button class="close-x" id="closeScan" title="إغلاق">×</button>
+      </header>
+      <div id="reader"></div>
+    </div>
+  </div>
+
+  <script>
+    // ===== Utilities =====
+    const idInput      = document.getElementById('id');
+    const nameInput    = document.getElementById('fullname');
+    const birthInput   = document.getElementById('birthdate');
+    const ageInput     = document.getElementById('age');
+    const form         = document.getElementById('generalForm');
+    const okEl         = document.getElementById('ok');
+    const errEl        = document.getElementById('err');
+
+    // Keep focus in ID field for USB scanners
+    window.addEventListener('load', () => {
+      idInput.focus();
+      // limit birthdate max to today
+      const today = new Date();
+      birthInput.max = today.toISOString().slice(0,10);
+    });
+
+    // Auto-submit on Enter from USB scanner if desired
+    idInput.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        // Uncomment to auto-submit directly after scan:
+        // form.requestSubmit();
+      }
+    });
+
+    // ===== Age auto-calc from birthdate =====
+    function calcAge(isoDate){
+      if(!isoDate) return '';
+      const b = new Date(isoDate);
+      if(isNaN(b)) return '';
+      const t = new Date();
+      let age = t.getFullYear() - b.getFullYear();
+      const m  = t.getMonth() - b.getMonth();
+      if (m < 0 || (m === 0 && t.getDate() < b.getDate())) age--;
+      return Math.max(0, age);
+    }
+    const updateAge = () => { ageInput.value = calcAge(birthInput.value) ?? '' };
+    birthInput.addEventListener('change', updateAge);
+    birthInput.addEventListener('input',  updateAge);
+
+    // ===== Camera QR/Barcode =====
+    let html5Qrcode, isScanning = false;
+    const scanBtn   = document.getElementById('scanBtn');
+    const scanModal = document.getElementById('scanModal');
+    const closeScan = document.getElementById('closeScan');
+
+    function openScanner(){
+      scanModal.style.display = 'flex';
+      if(isScanning) return;
+      isScanning = true;
+
+      html5Qrcode = new Html5Qrcode("reader");
+      const config = { fps: 10, qrbox: { width: 320, height: 200 }, aspectRatio: 1.7778 };
+
+      html5Qrcode.start(
+        { facingMode: "environment" },
+        config,
+        (decodedText) => {
+          idInput.value = (decodedText || '').trim();
+          closeScanner();
+          idInput.focus();
+          // Optional: form.requestSubmit();
+        },
+        () => {} // ignore scan failure callbacks
+      ).catch(e=>{
+        isScanning = false;
+        errEl.textContent = "تعذر فتح الكاميرا: " + e;
+        errEl.style.display = 'block';
+      });
+    }
+
+    function closeScanner(){
+      if(html5Qrcode){
+        html5Qrcode.stop().then(()=>{
+          html5Qrcode.clear();
+          html5Qrcode = null;
+          isScanning = false;
+        }).catch(()=>{});
+      }
+      scanModal.style.display = 'none';
+    }
+
+    scanBtn.addEventListener('click', openScanner);
+    closeScan.addEventListener('click', closeScanner);
+    scanModal.addEventListener('click', (e)=>{ if(e.target === scanModal) closeScanner(); });
+
+    // ===== Submit (replace with your Apps Script endpoint) =====
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      okEl.style.display = 'none';
+      errEl.style.display = 'none';
+
+      updateAge();
+
+      const payload = Object.fromEntries(new FormData(form).entries());
+
+      try {
+        // TODO: replace with YOUR endpoint
+        // const resp = await fetch("YOUR_APPS_SCRIPT_URL", {
+        //   method: "POST", headers: { "Content-Type": "application/json" },
+        //   body: JSON.stringify({ sheet: "general", payload })
+        // });
+        // if(!resp.ok) throw new Error(await resp.text());
+
+        await new Promise(r=>setTimeout(r,300));
+        okEl.style.display = 'block';
+        form.reset();
+        idInput.focus();
+      } catch (err) {
+        errEl.textContent = "فشل الإرسال: " + (err?.message || err);
+        errEl.style.display = 'block';
+      }
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', ()=>{
+      okEl.style.display = 'none';
+      errEl.style.display = 'none';
+      setTimeout(()=>idInput.focus(), 0);
+    });
+  </script>
+</body>
+</html>
