@@ -2446,149 +2446,132 @@ function toggleChat() {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <script>
-function toggleMenu(){
-  const nav   = document.getElementById('navLinks');
-  const open  = !nav?.classList.contains('show');
 
-  nav?.classList.toggle('show', open);
-  document.body.classList.toggle('no-scroll', open);
-
-  document.getElementById('chat-wrapper')?.classList.toggle('hidden-by-menu', open);
-  document.getElementById('chat-box')?.classList.toggle('hidden-by-menu', open);
-}
+const FRAME_SRC = {
+  "tab-camp":    "camp.html",
+  "tab-scan":    "AttendanceScan.html",
+  "tab-reports": "reports.html"
+};
 
 (function(){
-  const header = document.querySelector('header');
-  const nav = document.getElementById('navLinks');
+  let currentMode = null;
 
-  function setHeaderH(){
-    const h = Math.ceil(header?.getBoundingClientRect().height || 72);
-    document.documentElement.style.setProperty('--headerH', h + 'px');
-  }
-  window.addEventListener('load', setHeaderH);
-  window.addEventListener('resize', setHeaderH);
+  const tabsContainer = document.querySelector('.tabs-container');
+  const backOption    = document.getElementById('backOption');
+  const choiceGrid    = document.querySelector('.choice-grid');
 
-  nav?.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => nav.classList.remove('show'))
-  );
-})();
+  const buttons = document.querySelectorAll('.reg-tab-btn');
+  const frames  = document.querySelectorAll('.reg-frame');
 
-document.addEventListener("DOMContentLoaded", () => {
-  const choiceGrid     = document.querySelector(".choice-grid");
-  const tabsContainer  = document.querySelector(".tabs-container");
-  const backOption     = document.getElementById("backOption");
+  const tabCamp    = document.getElementById('tab-camp');
+  const tabScan    = document.getElementById('tab-scan');
+  const tabReports = document.getElementById('tab-reports');
 
-  const tabCamp        = document.getElementById("tab-camp");    // <iframe>
-  const tabScan        = document.getElementById("tab-scan");    // <iframe> (optional)
-  const tabReports     = document.getElementById("tab-reports"); // <iframe> (optional)
+  if (!tabsContainer || !backOption || !choiceGrid || !tabCamp) return;
 
-  if (!choiceGrid || !tabsContainer || !backOption || !tabCamp) return;
-
-  let currentMode = null; // 'general' | 'summer' | null
-
-  function makeCampVisible(){
-    document.querySelectorAll('.reg-frame').forEach(f=>{
-      f.classList.toggle('visible', f.id === 'tab-camp');
+  function showTab(id){
+    buttons.forEach(b => {
+      const active = b.dataset.target === id;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
     });
+
+    frames.forEach(f => f.classList.toggle('visible', f.id === id));
+
+    const f = document.getElementById(id);
+    if (f && !f.dataset.loaded) {
+      const url = FRAME_SRC[id];
+      if (url) {
+        f.src = url;
+        f.dataset.loaded = '1';
+      }
+    }
   }
 
-  function showTabs(){
-    tabsContainer.classList.add("show");
-    choiceGrid.style.display = "none";
-    backOption.style.display = "block";
-    tabsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+  function clearFrame(f){
+    if (!f) return;
+    f.removeAttribute('src');
+    delete f.dataset.loaded;
+    f.classList.remove('visible');
   }
 
-function clearFrame(f){
-  if (!f) return;
-  f.removeAttribute('src');
-  delete f.dataset.loaded;
-}
+  function showTabsPanel(){
+    tabsContainer.classList.add('show');
+    choiceGrid.style.display = 'none';
+    backOption.style.display = 'block';
+    tabsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   function backToChoices(){
     currentMode = null;
-    tabsContainer.classList.remove("show", "single-general");
-    restoreTabsNav();
 
-   [tabCamp, tabScan, tabReports].forEach(clearFrame);
+    [tabCamp, tabScan, tabReports].forEach(clearFrame);
 
-    document.querySelectorAll('.reg-frame').forEach(f=>f.classList.remove('visible'));
-    choiceGrid.style.display = "flex";
-    backOption.style.display = "none";
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    tabsContainer.classList.remove('show', 'single-general');
+    enableAllTabs();
+    choiceGrid.style.display = 'flex';
+    backOption.style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function applyGeneralSingleMode(){
-    tabsContainer.classList.add("single-general");
-
-    document.querySelectorAll(".reg-tabs").forEach(el => {
-      el.dataset._origDisplay = el.style.display;
-      el.style.display = "none";
-    });
-
-    tabsContainer.addEventListener("click", blockOtherTabs, true);
-  }
-
-  function restoreTabsNav(){
-    tabsContainer.removeEventListener("click", blockOtherTabs, true);
-    document.querySelectorAll(".reg-tabs").forEach(el => {
-      el.style.display = el.dataset._origDisplay || "";
-      delete el.dataset._origDisplay;
-    });
-  }
-
-  function blockOtherTabs(e){
+  function disableOtherTabs(evt){
     if (currentMode !== 'general') return;
-
-    const el = e.target.closest('.reg-tab-btn, a[href], button[data-tab], [data-tab-target]');
+    const el = evt.target.closest('.reg-tab-btn, a[href], button[data-tab], [data-tab-target]');
     if (!el) return;
 
-    const href    = (el.getAttribute('href') || '').replace(/^#/, '');
-    const target  = el.dataset.target || el.getAttribute('data-tab') || el.getAttribute('data-tab-target') || href;
+    const href   = (el.getAttribute('href') || '').replace(/^#/, '');
+    const target = el.dataset.target || el.getAttribute('data-tab') || el.getAttribute('data-tab-target') || href;
 
     if (target && target !== 'tab-camp') {
-      e.preventDefault();
-      e.stopPropagation();
+      evt.preventDefault();
+      evt.stopPropagation();
       return false;
     }
   }
 
-  choiceGrid.querySelectorAll(".choice-card").forEach(card => {
-    card.addEventListener("click", () => {
+  function enableOnlyCamp(){
+    tabsContainer.classList.add('single-general');
+    tabsContainer.addEventListener('click', disableOtherTabs, true);
+  }
+
+  function enableAllTabs(){
+    tabsContainer.classList.remove('single-general');
+    tabsContainer.removeEventListener('click', disableOtherTabs, true);
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => showTab(btn.dataset.target));
+  });
+
+  backOption.addEventListener('click', backToChoices);
+
+  choiceGrid.querySelectorAll('.choice-card').forEach(card => {
+    card.addEventListener('click', () => {
       const type = card.dataset.type;
 
-      if (type === "general") {
+      if (type === 'general') {
         currentMode = 'general';
-
         tabCamp.src = 'general-register.html';
-        tabCamp.dataset.loaded = "1";
-		clearFrame(tabScan);
-		clearFrame(tabReports);
-        makeCampVisible();
+        tabCamp.dataset.loaded = '1';
+        showTabsPanel();
+        showTab('tab-camp');
+        enableOnlyCamp();
 
-        [tabScan, tabReports].forEach(f => f?.removeAttribute('src'));
+        clearFrame(tabScan);
+        clearFrame(tabReports);
 
-        showTabs();
-        applyGeneralSingleMode();
-
-      } else if (type === "summer") {
+      } else if (type === 'summer') {
         currentMode = 'summer';
-
-        tabsContainer.classList.remove("single-general");
-        restoreTabsNav();
-
+        enableAllTabs();
         tabCamp.src = 'camp.html';
-        tabCamp.dataset.loaded = "1";
-        makeCampVisible();
+        tabCamp.dataset.loaded = '1';
 
-        showTabs();
+        showTabsPanel();
+        showTab('tab-camp');
       }
     });
   });
-
-  // back button
-  backOption.addEventListener("click", backToChoices);
-});
+})();
 </script>
 
 </body>
