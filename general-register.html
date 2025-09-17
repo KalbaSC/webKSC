@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>تسجيل عام – قارئ الهوية (تعبئة تلقائية)</title>
+  <title>التسجيل العام</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://unpkg.com/html5-qrcode"></script>
   <style>
@@ -34,10 +34,9 @@
 </head>
 <body>
   <div class="box">
-    <h2>استمارة التسجيل العام (تعبئة تلقائية من الهوية)</h2>
+    <h2>استمارة التسجيل</h2>
 
     <form id="generalForm" autocomplete="off">
-      <!-- ID -->
       <div class="row full">
         <div class="full">
           <label for="id">الرقم التعريفي (ID)</label>
@@ -45,17 +44,16 @@
             <input id="id" name="id" inputmode="numeric" placeholder="اسحب البطاقة أو امسح الـ QR/Barcode" required style="flex:1" />
             <button class="btn secondary" type="button" id="scanBtn">مسح الهوية</button>
           </div>
-          <div class="hint">يدعم قارئات USB (Keyboard Wedge). أو اضغط “مسح الهوية” لاستخدام الكاميرا.</div>
+          <div class="hint">اضغط مسح الهوية</div>
         </div>
       </div>
 
       <div class="hr"></div>
 
-      <!-- Name + Birthdate + Age -->
       <div class="row">
         <div>
           <label for="fullname">الاسم الكامل</label>
-          <input id="fullname" name="fullname" placeholder="سيتم تعبئته تلقائيًا" required />
+          <input id="fullname" name="fullname" required />
         </div>
 
         <div>
@@ -64,7 +62,7 @@
         </div>
 
         <div>
-          <label for="age">العمر (يُحسب تلقائيًا)</label>
+          <label for="age">العمر</label>
           <input id="age" name="age" type="number" readonly />
         </div>
       </div>
@@ -80,7 +78,6 @@
     </form>
   </div>
 
-  <!-- Scanner Modal -->
   <div class="modal" id="scanModal" role="dialog" aria-modal="true">
     <div class="inner">
       <header>
@@ -92,11 +89,9 @@
   </div>
 
   <script>
-  /************ CONFIGURE THIS ************/
-  // Your Google Apps Script Web App (Deploy → New deployment → Web app → Anyone with link)
-  const LOOKUP_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
-  const USE_JSONP  = true;  // keep true (avoids CORS)
-  /***************************************/
+  const LOOKUP_URL = "https://script.google.com/macros/s/AKfycbw6Efui13sVxFmFuzesazRBdZjBJP-wSMpgLkeFGBwva2gFVVLjQy0qHjgSdWKg9F9E/exec";
+  const USE_JSONP  = true;
+
 
   const idInput    = document.getElementById('id');
   const nameInput  = document.getElementById('fullname');
@@ -108,10 +103,9 @@
   const sOk   = document.getElementById('s-ok');
   const sErr  = document.getElementById('s-err');
 
-  // ---------- Utilities ----------
   function setStatus(which){ [sInfo,sOk,sErr].forEach(x=>x.style.display='none'); if(which) which.style.display='block'; }
   function pad2(n){return String(n).padStart(2,'0');}
-  function toISODate(d){ // accepts "dd/mm/yyyy" or "yyyy-mm-dd"
+  function toISODate(d){ 
     if(!d) return '';
     if(/^\d{4}-\d{2}-\d{2}$/.test(d)) return d;
     const m = d.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
@@ -131,19 +125,15 @@
   birthInput.addEventListener('change', updateAge);
   birthInput.addEventListener('input',  updateAge);
 
-  // Extract ID from scanner string (supports "KalbaSC-123|…" or plain digits)
   function parseScannedId(text){
     if(!text) return '';
-    // case 1: KalbaSC-<id>|...
     const pipe = text.split('|')[0] || text;
     const kalba = pipe.match(/KalbaSC-(\d+)/i);
     if(kalba) return kalba[1];
-    // case 2: first 5+ digits sequence
     const m = text.match(/(\d{5,})/);
     return m ? m[1] : text.trim();
   }
 
-  // ---------- Lookup by ID ----------
   function fillFromResult(r){
     if(!r || !r.ok) { setStatus(sErr); return; }
     if(r.fullname)  nameInput.value  = r.fullname;
@@ -155,7 +145,6 @@
     setStatus(sOk);
   }
 
-  // JSONP call:  LOOKUP_URL?fn=lookup&id=123&callback=__cb123
   function lookupByIdJSONP(id){
     const cb = "__cb" + Math.random().toString(36).slice(2);
     window[cb] = (data)=>{ try{ fillFromResult(data); } finally{
@@ -179,13 +168,11 @@
     (USE_JSONP ? lookupByIdJSONP : lookupByIdFetch)(id);
   }
 
-  // Trigger lookup when ID is entered/scanned
   function triggerLookup(){
     const id = (idInput.value || '').trim();
     if(id) lookupById(id);
   }
 
-  // USB scanner focuses ID input and often sends Enter
   window.addEventListener('load', ()=> idInput.focus());
   idInput.addEventListener('keydown', (e)=>{
     if(e.key === 'Enter'){ e.preventDefault(); triggerLookup(); }
@@ -193,7 +180,6 @@
   idInput.addEventListener('change', triggerLookup);
   idInput.addEventListener('blur',   triggerLookup);
 
-  // ---------- Camera scanner ----------
   let html5Qrcode, isScanning = false;
   const scanBtn   = document.getElementById('scanBtn');
   const scanModal = document.getElementById('scanModal');
@@ -233,13 +219,11 @@
   closeScan.addEventListener('click', closeScanner);
   scanModal.addEventListener('click', (e)=>{ if(e.target === scanModal) closeScanner(); });
 
-  // ---------- Submit (optional demo) ----------
   form.addEventListener('submit', (e)=>{
     e.preventDefault();
     alert('سيتم الحفظ هنا (اربطه بالـ Apps Script لاحقًا)');
   });
 
-  // Reset UI
   document.getElementById('resetBtn').addEventListener('click', ()=>{
     setStatus(); setTimeout(()=>idInput.focus(),0);
   });
