@@ -2489,9 +2489,9 @@ window.addEventListener('DOMContentLoaded', initRegisterTabs);
 <script>
 function toggleMenu(){
   const nav   = document.getElementById('navLinks');
-  const open  = !nav.classList.contains('show');
+  const open  = !nav?.classList.contains('show');
 
-  nav.classList.toggle('show', open);
+  nav?.classList.toggle('show', open);
   document.body.classList.toggle('no-scroll', open);
 
   document.getElementById('chat-wrapper')?.classList.toggle('hidden-by-menu', open);
@@ -2501,41 +2501,63 @@ function toggleMenu(){
 (function(){
   const header = document.querySelector('header');
   const nav = document.getElementById('navLinks');
+
   function setHeaderH(){
     const h = Math.ceil(header?.getBoundingClientRect().height || 72);
     document.documentElement.style.setProperty('--headerH', h + 'px');
   }
   window.addEventListener('load', setHeaderH);
   window.addEventListener('resize', setHeaderH);
-  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('show')));
+
+  nav?.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => nav.classList.remove('show'))
+  );
 })();
 
 document.addEventListener("DOMContentLoaded", () => {
   const choiceGrid     = document.querySelector(".choice-grid");
   const tabsContainer  = document.querySelector(".tabs-container");
   const backOption     = document.getElementById("backOption");
+  const tabCamp        = document.getElementById("tab-camp");
 
-  if (!choiceGrid || !tabsContainer) return;
+  if (!choiceGrid || !tabsContainer || !backOption || !tabCamp) return;
+
+  function showTabs(){
+    tabsContainer.classList.add("show");
+    choiceGrid.style.display = "none";
+    backOption.style.display = "block";
+    tabsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function backToChoices(){
+    tabsContainer.classList.remove("show");
+    choiceGrid.style.display = "flex";
+    backOption.style.display = "none";
+    tabCamp.innerHTML = "";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   choiceGrid.querySelectorAll(".choice-card").forEach(card => {
     card.addEventListener("click", () => {
-      if (card.dataset.type === "summer") {
-        tabsContainer.classList.add("show");
-        choiceGrid.style.display = "none";
-        backOption.style.display = "block";
-        tabsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+      const type = card.dataset.type;
+
+      if (type === "general") {
+        tabCamp.innerHTML =
+          '<iframe src="general-register.html" frameborder="0" ' +
+          'style="width:100%;height:680px;border:0;border-radius:14px;"></iframe>';
+        showTabs();
+
+      } else if (type === "summer") {
+
+        showTabs();
+
       } else {
         tabsContainer.classList.remove("show");
       }
     });
   });
 
-  backOption.addEventListener("click", () => {
-    tabsContainer.classList.remove("show");
-    choiceGrid.style.display = "flex";
-    backOption.style.display = "none";
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+  backOption.addEventListener("click", backToChoices);
 });
 </script>
 
