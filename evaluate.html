@@ -6744,7 +6744,7 @@ document.addEventListener("DOMContentLoaded", function () {
   form.parentNode.insertBefore(confirmationMessage, form.nextSibling);
 
   form.addEventListener("submit", function () {
-    confirmationMessage.textContent = "Sending...";
+    confirmationMessage.textContent = "جارٍ الإرسال...";
     setTimeout(function () {
       confirmationMessage.textContent = "✅ شكراً لك، تم إرسال رسالتك بنجاح!";
       form.reset();
