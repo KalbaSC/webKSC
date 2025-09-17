@@ -2446,53 +2446,6 @@ function toggleChat() {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <script>
-
-const FRAME_SRC = {
-  "tab-camp":    "",
-  "tab-scan":    "AttendanceScan.html",
-  "tab-reports": "reports.html"
-};
-
-function initRegisterTabs(){
-  const buttons = document.querySelectorAll('.reg-tab-btn');
-  const frames  = document.querySelectorAll('.reg-frame');
-
-  function show(id){
-    buttons.forEach(b=>{
-      const active = b.dataset.target === id;
-      b.classList.toggle('active', active);
-      b.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
-
-    frames.forEach(f=>{
-      const visible = f.id === id;
-      f.classList.toggle('visible', visible);
-    });
-
-    const f = document.getElementById(id);
-    if (f && !f.dataset.loaded){
-      const url = FRAME_SRC[id];
-      if (url){
-        f.src = url;
-        f.dataset.loaded = "1";
-      }
-    }
-  }
-
-  buttons.forEach(btn=>{
-    btn.addEventListener('click', ()=> show(btn.dataset.target));
-  });
-
-  const container = document.querySelector('.tabs-container');
-    if (container?.classList.contains('show')) {
-    show('tab-camp');
-  }
-}
-window.addEventListener('DOMContentLoaded', initRegisterTabs);
-
-</script>
-
-<script>
 function toggleMenu(){
   const nav   = document.getElementById('navLinks');
   const open  = !nav?.classList.contains('show');
@@ -2525,13 +2478,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabsContainer  = document.querySelector(".tabs-container");
   const backOption     = document.getElementById("backOption");
 
-  const tabCamp        = document.getElementById("tab-camp");
-  const tabScan        = document.getElementById("tab-scan");
-  const tabReports     = document.getElementById("tab-reports");
+  const tabCamp        = document.getElementById("tab-camp");    // <iframe>
+  const tabScan        = document.getElementById("tab-scan");    // <iframe> (optional)
+  const tabReports     = document.getElementById("tab-reports"); // <iframe> (optional)
 
   if (!choiceGrid || !tabsContainer || !backOption || !tabCamp) return;
 
-  let currentMode = null;
+  let currentMode = null; // 'general' | 'summer' | null
+
+  function makeCampVisible(){
+    document.querySelectorAll('.reg-frame').forEach(f=>{
+      f.classList.toggle('visible', f.id === 'tab-camp');
+    });
+  }
 
   function showTabs(){
     tabsContainer.classList.add("show");
@@ -2545,48 +2504,92 @@ document.addEventListener("DOMContentLoaded", () => {
     tabsContainer.classList.remove("show", "single-general");
     restoreTabsNav();
 
+    // clear iframes so nothing (camera, etc.) keeps running
     [tabCamp, tabScan, tabReports].forEach(f => f?.removeAttribute('src'));
 
+    // reset UI
+    document.querySelectorAll('.reg-frame').forEach(f=>f.classList.remove('visible'));
     choiceGrid.style.display = "flex";
     backOption.style.display = "none";
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-function applyGeneralSingleMode(){
-  tabsContainer.classList.add("single-general");
+  function applyGeneralSingleMode(){
+    tabsContainer.classList.add("single-general");
 
-  document.querySelectorAll(".reg-tabs").forEach(el => {
-    el.dataset._origDisplay = el.style.display;
-    el.style.display = "none";
-  });
+    // hide the real tabs bar you use
+    document.querySelectorAll(".reg-tabs").forEach(el => {
+      el.dataset._origDisplay = el.style.display;
+      el.style.display = "none";
+    });
 
-  tabsContainer.addEventListener("click", blockOtherTabs, true);
-}
-
-function restoreTabsNav(){
-  tabsContainer.removeEventListener("click", blockOtherTabs, true);
-  document.querySelectorAll(".reg-tabs").forEach(el => {
-    el.style.display = el.dataset._origDisplay || "";
-    delete el.dataset._origDisplay;
-  });
-}
-
-function blockOtherTabs(e){
-  if (currentMode !== 'general') return;
-
-  const el = e.target.closest('.reg-tab-btn, a[href], button[data-tab], [data-tab-target]');
-  if (!el) return;
-
-  const href    = (el.getAttribute('href') || '').replace(/^#/, '');
-  const target  = el.dataset.target || el.getAttribute('data-tab') || el.getAttribute('data-tab-target') || href;
-
-  if (target && target !== 'tab-camp') {
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
+    // block any attempt to switch away from tab-camp
+    tabsContainer.addEventListener("click", blockOtherTabs, true);
   }
-}
 
+  function restoreTabsNav(){
+    tabsContainer.removeEventListener("click", blockOtherTabs, true);
+    document.querySelectorAll(".reg-tabs").forEach(el => {
+      el.style.display = el.dataset._origDisplay || "";
+      delete el.dataset._origDisplay;
+    });
+  }
+
+  function blockOtherTabs(e){
+    if (currentMode !== 'general') return;
+
+    const el = e.target.closest('.reg-tab-btn, a[href], button[data-tab], [data-tab-target]');
+    if (!el) return;
+
+    const href    = (el.getAttribute('href') || '').replace(/^#/, '');
+    const target  = el.dataset.target || el.getAttribute('data-tab') || el.getAttribute('data-tab-target') || href;
+
+    if (target && target !== 'tab-camp') {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+  }
+
+  // --- wire the choice cards ---
+  choiceGrid.querySelectorAll(".choice-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const type = card.dataset.type;   // general | summer
+
+      if (type === "general") {
+        currentMode = 'general';
+
+        // load ONLY the general form
+        tabCamp.src = 'general-register.html';
+        tabCamp.dataset.loaded = "1";
+        makeCampVisible();
+
+        // ensure other panes are empty
+        [tabScan, tabReports].forEach(f => f?.removeAttribute('src'));
+
+        showTabs();
+        applyGeneralSingleMode();
+
+      } else if (type === "summer") {
+        currentMode = 'summer';
+
+        // restore full tabs and load your summer main page
+        tabsContainer.classList.remove("single-general");
+        restoreTabsNav();
+
+        tabCamp.src = 'camp.html';  // change if your summer form has a different file
+        tabCamp.dataset.loaded = "1";
+        makeCampVisible();
+
+        showTabs();
+      }
+    });
+  });
+
+  // back button
+  backOption.addEventListener("click", backToChoices);
+});
 </script>
+
 </body>
 </html>
