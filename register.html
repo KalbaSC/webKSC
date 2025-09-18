@@ -1891,7 +1891,6 @@ header {
       </div>
     </section>
 
-    <div class="sp-16"></div>
   <div class="popup-overlay" id="summerPopup">
     <div class="popup-content">
       <div class="popup-title">إشعار</div>
@@ -1902,6 +1901,9 @@ header {
       </div>
     </div>
   </div>
+
+    <div class="sp-16"></div>
+
   </main>
 
 <div id="chat-box">
@@ -2662,16 +2664,20 @@ const FRAME_SRC = {
       const seeOnlyBtn = document.getElementById('seeOnlyBtn');
       const backBtn = document.getElementById('backBtn');
       
+      // Function to show the popup
       function showSummerPopup() {
         summerPopup.style.display = 'flex';
       }
       
+      // Function to hide the popup
       function hideSummerPopup() {
         summerPopup.style.display = 'none';
       }
       
+      // Handle "See Only" button click
       seeOnlyBtn.addEventListener('click', function() {
         hideSummerPopup();
+        // Continue with the summer registration process
         currentMode = 'summer';
         enableAllTabs();
         tabCamp.src = 'camp.html';
@@ -2681,31 +2687,40 @@ const FRAME_SRC = {
         showTab('tab-camp');
       });
       
+      // Handle "Back" button click
       backBtn.addEventListener('click', function() {
         hideSummerPopup();
+        // Return to the choice selection
         backToChoices();
       });
       
-      choiceGrid.querySelectorAll('.choice-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const type = card.dataset.type;
+      // Store the original choice card click handler
+      const originalChoiceHandler = function() {
+        const type = this.dataset.type;
+        
+        if (type === 'general') {
+          currentMode = 'general';
+          tabCamp.src = 'general-register.html';
+          tabCamp.setAttribute('allow','camera; microphone; clipboard-read; clipboard-write');
+          tabCamp.dataset.loaded = '1';
+          showTabsPanel();
+          showTab('tab-camp');
+          enableOnlyCamp();
           
-          if (type === 'general') {
-            currentMode = 'general';
-            tabCamp.src = 'general-register.html';
-            tabCamp.setAttribute('allow','camera; microphone; clipboard-read; clipboard-write');
-            tabCamp.dataset.loaded = '1';
-            showTabsPanel();
-            showTab('tab-camp');
-            enableOnlyCamp();
-            
-            clearFrame(tabScan);
-            clearFrame(tabReports);
-            
-          } else if (type === 'summer') {
-            showSummerPopup();
-          }
-        });
+          clearFrame(tabScan);
+          clearFrame(tabReports);
+          
+        } else if (type === 'summer') {
+          // Show the popup instead of immediately showing tabs
+          showSummerPopup();
+        }
+      };
+      
+      // Reapply the click handlers to choice cards
+      const choiceCards = document.querySelectorAll('.choice-card');
+      choiceCards.forEach(card => {
+        card.removeEventListener('click', null); // Remove any existing listeners
+        card.addEventListener('click', originalChoiceHandler);
       });
     });
 </script>
