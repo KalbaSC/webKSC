@@ -1804,6 +1804,19 @@ header {
   <div class="back-option" id="backOption">⬅ العودة</div>
 </div>
 
+<div id="summerPopup" style="
+  position:fixed; inset:0; display:none; z-index:10000;
+  align-items:center; justify-content:center; background:rgba(0,0,0,.75);">
+  <div style="background:#111; border:2px solid #f4e733; border-radius:16px; padding:22px; width:min(420px,90%); text-align:center;">
+    <h3 style="margin:0 0 12px; color:#f4e733; font-weight:800;">الدخول إلى تسجيل الصيفي</h3>
+    <p style="margin:0 0 18px; color:#eee;">اختر ما تريد فعله.</p>
+    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <button id="backBtn"  class="btn" style="min-width:140px;">رجوع</button>
+      <button id="seeOnlyBtn" class="btn" style="min-width:140px;">مشاهدة فقط</button>
+    </div>
+  </div>
+</div>
+
 	<section class="register-panel tabs-container" id="tabs">
       <div class="reg-tabs" role="tablist">
         <button class="reg-tab-btn active" data-target="tab-camp" role="tab" aria-selected="true">نموذج التسجيل</button>
@@ -2449,7 +2462,6 @@ function toggleChat() {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <script>
-
 const FRAME_SRC = {
   "tab-camp":    "camp.html",
   "tab-scan":    "AttendanceScan.html",
@@ -2469,6 +2481,10 @@ const FRAME_SRC = {
   const tabCamp    = document.getElementById('tab-camp');
   const tabScan    = document.getElementById('tab-scan');
   const tabReports = document.getElementById('tab-reports');
+
+  const summerPopup = document.getElementById('summerPopup');
+  const seeOnlyBtn  = document.getElementById('seeOnlyBtn');
+  const backBtn     = document.getElementById('backBtn');
 
   if (!tabsContainer || !backOption || !choiceGrid || !tabCamp) return;
 
@@ -2507,9 +2523,7 @@ const FRAME_SRC = {
 
   function backToChoices(){
     currentMode = null;
-
     [tabCamp, tabScan, tabReports].forEach(clearFrame);
-
     tabsContainer.classList.remove('show', 'single-general');
     enableAllTabs();
     choiceGrid.style.display = 'flex';
@@ -2521,10 +2535,8 @@ const FRAME_SRC = {
     if (currentMode !== 'general') return;
     const el = evt.target.closest('.reg-tab-btn, a[href], button[data-tab], [data-tab-target]');
     if (!el) return;
-
     const href   = (el.getAttribute('href') || '').replace(/^#/, '');
     const target = el.dataset.target || el.getAttribute('data-tab') || el.getAttribute('data-tab-target') || href;
-
     if (target && target !== 'tab-camp') {
       evt.preventDefault();
       evt.stopPropagation();
@@ -2542,6 +2554,9 @@ const FRAME_SRC = {
     tabsContainer.removeEventListener('click', disableOtherTabs, true);
   }
 
+  function showSummerPopup(){ if (summerPopup) summerPopup.style.display = 'flex'; }
+  function hideSummerPopup(){ if (summerPopup) summerPopup.style.display = 'none'; }
+
   buttons.forEach(btn => {
     btn.addEventListener('click', () => showTab(btn.dataset.target));
   });
@@ -2555,29 +2570,34 @@ const FRAME_SRC = {
       if (type === 'general') {
         currentMode = 'general';
         tabCamp.src = 'general-register.html';
-		tabCamp.setAttribute('allow','camera; microphone; clipboard-read; clipboard-write');
+        tabCamp.setAttribute('allow','camera; microphone; clipboard-read; clipboard-write');
         tabCamp.dataset.loaded = '1';
         showTabsPanel();
         showTab('tab-camp');
         enableOnlyCamp();
-
         clearFrame(tabScan);
         clearFrame(tabReports);
 
       } else if (type === 'summer') {
         currentMode = 'summer';
-        enableAllTabs();
-        tabCamp.src = 'camp.html';
-        tabCamp.dataset.loaded = '1';
-
-        showTabsPanel();
-        showTab('tab-camp');
+        showSummerPopup();
       }
     });
   });
+
+  backBtn?.addEventListener('click', () => {
+    hideSummerPopup();
+  });
+
+  seeOnlyBtn?.addEventListener('click', () => {
+    hideSummerPopup();
+    enableAllTabs();
+    tabCamp.src = 'camp.html';
+    tabCamp.dataset.loaded = '1';
+    showTabsPanel();
+    showTab('tab-camp');
+  });
 })();
-
-
 </script>
 
 </body>
