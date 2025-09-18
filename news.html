@@ -1929,6 +1929,17 @@ header {
   .side-menu .sm-indicator{ display: none !important; }
   body.with-top-nav {padding-top: 0 !important;}
 }
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1;
+}
   </style>
 
 </head>
