@@ -2659,74 +2659,16 @@ const FRAME_SRC = {
   });
 })();
 
-    document.addEventListener('DOMContentLoaded', function() {
-      const summerPopup = document.getElementById('summerPopup');
-      const seeOnlyBtn = document.getElementById('seeOnlyBtn');
-      const backBtn = document.getElementById('backBtn');
-      
-      function showSummerPopup() {
-        summerPopup.style.display = 'flex';
-      }
-      
-      function hideSummerPopup() {
-        summerPopup.style.display = 'none';
-      }
-      
-      seeOnlyBtn.addEventListener('click', function() {
-        hideSummerPopup();
-        currentMode = 'summer';
-        enableAllTabs();
-        tabCamp.src = 'camp.html';
-        tabCamp.dataset.loaded = '1';
-        
-        showTabsPanel();
-        showTab('tab-camp');
-      });
-      
-      backBtn.addEventListener('click', function() {
-        hideSummerPopup();
-        backToChoices();
-      });
-      
-      const originalChoiceHandler = function() {
-        const type = this.dataset.type;
-        
-        if (type === 'general') {
-          currentMode = 'general';
-          tabCamp.src = 'general-register.html';
-          tabCamp.setAttribute('allow','camera; microphone; clipboard-read; clipboard-write');
-          tabCamp.dataset.loaded = '1';
-          showTabsPanel();
-          showTab('tab-camp');
-          enableOnlyCamp();
-          
-          clearFrame(tabScan);
-          clearFrame(tabReports);
-          
-        } else if (type === 'summer') {
-          showSummerPopup();
-        }
-      };
-      
-      const choiceCards = document.querySelectorAll('.choice-card');
-      choiceCards.forEach(card => {
-        card.removeEventListener('click', null);
-        card.addEventListener('click', originalChoiceHandler);
-      });
-    });
-
 document.addEventListener('DOMContentLoaded', function () {
   const popup   = document.getElementById('summerPopup');
   const page    = document.getElementById('registerPage');
   const seeOnly = document.getElementById('seeOnlyBtn');
   const backBtn = document.getElementById('backBtn');
 
-  // 1) قبل عرض أي شيء: اخفِ الصفحة وأظهر النافذة
   if (page) page.style.display = 'none';
   if (popup) popup.style.display = 'flex';
-  document.body.classList.add('no-scroll'); // يمنع التمرير والخلفية
+  document.body.classList.add('no-scroll');
 
-  // 2) "عرض فقط": أغلق النافذة وأظهر الصفحة
   if (seeOnly) {
     seeOnly.addEventListener('click', function () {
       popup.style.display = 'none';
@@ -2735,10 +2677,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 3) "رجوع": لا تُظهر الصفحة — ارجِع للموقع الرئيسي (أو السابق)
   if (backBtn) {
     backBtn.addEventListener('click', function () {
-      // خيار 1: ارجاع للصفحة الرئيسية مباشرة
       window.location.replace('register.html');
     });
   }
