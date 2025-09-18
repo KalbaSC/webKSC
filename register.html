@@ -1762,6 +1762,77 @@ header {
   color: #fff;
 }
 
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      display: none;
+    }
+    
+    .popup-content {
+      background: #000;
+      border: 2px solid #f4e733;
+      border-radius: 16px;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,.3);
+    }
+    
+    .popup-title {
+      color: #f4e733;
+      font-size: 22px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+    
+    .popup-message {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    
+    .popup-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .popup-btn {
+      background: #f4e733;
+      color: #000;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 120px;
+    }
+    
+    .popup-btn:hover {
+      background: #e6d429;
+      transform: translateY(-2px);
+    }
+    
+    .popup-btn.back {
+      background: #333;
+      color: #fff;
+    }
+    
+    .popup-btn.back:hover {
+      background: #444;
+    }
   </style>
 </head>
 <body>
@@ -1821,6 +1892,16 @@ header {
     </section>
 
     <div class="sp-16"></div>
+  <div class="popup-overlay" id="summerPopup">
+    <div class="popup-content">
+      <div class="popup-title">إشعار</div>
+      <div class="popup-message">تم الانتهاء من صيف الشارقة الرياضي</div>
+      <div class="popup-buttons">
+        <button class="popup-btn" id="seeOnlyBtn">عرض فقط</button>
+        <button class="popup-btn back" id="backBtn">رجوع</button>
+      </div>
+    </div>
+  </div>
   </main>
 
 <div id="chat-box">
@@ -2575,6 +2656,58 @@ const FRAME_SRC = {
     });
   });
 })();
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const summerPopup = document.getElementById('summerPopup');
+      const seeOnlyBtn = document.getElementById('seeOnlyBtn');
+      const backBtn = document.getElementById('backBtn');
+      
+      function showSummerPopup() {
+        summerPopup.style.display = 'flex';
+      }
+      
+      function hideSummerPopup() {
+        summerPopup.style.display = 'none';
+      }
+      
+      seeOnlyBtn.addEventListener('click', function() {
+        hideSummerPopup();
+        currentMode = 'summer';
+        enableAllTabs();
+        tabCamp.src = 'camp.html';
+        tabCamp.dataset.loaded = '1';
+        
+        showTabsPanel();
+        showTab('tab-camp');
+      });
+      
+      backBtn.addEventListener('click', function() {
+        hideSummerPopup();
+        backToChoices();
+      });
+      
+      choiceGrid.querySelectorAll('.choice-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const type = card.dataset.type;
+          
+          if (type === 'general') {
+            currentMode = 'general';
+            tabCamp.src = 'general-register.html';
+            tabCamp.setAttribute('allow','camera; microphone; clipboard-read; clipboard-write');
+            tabCamp.dataset.loaded = '1';
+            showTabsPanel();
+            showTab('tab-camp');
+            enableOnlyCamp();
+            
+            clearFrame(tabScan);
+            clearFrame(tabReports);
+            
+          } else if (type === 'summer') {
+            showSummerPopup();
+          }
+        });
+      });
+    });
 </script>
 
 </body>
