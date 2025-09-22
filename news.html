@@ -1940,6 +1940,15 @@ body {
 main {
   flex: 1;
 }
+
+.ksc-cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.ksc-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.ksc-card img{width:100%;display:block;object-fit:cover;aspect-ratio:16/9}
+.ksc-card .body{padding:12px;color:#111}
+.ksc-card .body p{margin:0 0 8px;white-space:pre-wrap}
+.ksc-card .body small{color:#666}
+.ksc-btn{display:block;margin:20px auto;padding:10px 16px;border-radius:10px;border:1px solid #ddd;background:#fff;cursor:pointer}
+
   </style>
 
 </head>
@@ -1967,10 +1976,8 @@ main {
   </nav>
 </header>
 <main>	
-<section style="padding: 30px;">
-  <h2 style="color: white;">📢 آخر الأخبار</h2>
-  <p style="color: white;">تغطية آخر المباريات والأنشطة الرياضية للنادي.</p>
-</section>
+<section id="ksc-feed" class="ksc-cards" style="padding:20px;"></section>
+<button id="ksc-more" class="ksc-btn" hidden>تحميل المزيد</button>
 </main>
 <script>
 (function(){
@@ -2682,5 +2689,48 @@ window.addEventListener('load', updateHeaderHeight);
 window.addEventListener('resize', updateHeaderHeight);
 </script>
 	
+<script>
+const KSC_URL = "https://script.google.com/macros/s/AKfycbyd9lrR993wcCtZrPZ6S3B-ZfFj8EmUwyUCZtZIM0TOOZ0cHXD59OfQ-Szg3LZnx4WP/exec";
+let kscNext = null, kscLoading = false;
+
+function kscCard({ text, img, link, time }) {
+  return `
+    <article class="ksc-card">
+      ${img ? `<img src="${img}" alt="" loading="lazy">` : ""}
+      <div class="body">
+        ${text ? `<p>${text}</p>` : ""}
+        ${time ? `<small>${new Date(time).toLocaleString()}</small>` : ""}
+        ${link ? `<div><a href="${link}" target="_blank" rel="noopener">فتح</a></div>` : ""}
+      </div>
+    </article>`;
+}
+
+async function kscLoad(after=""){
+  if (kscLoading) return; kscLoading = true;
+  const url = `${KSC_URL}?route=fb-feed&limit=6${after?`&after=${encodeURIComponent(after)}`:""}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  const posts = data.data || [];
+  document.getElementById("ksc-feed").insertAdjacentHTML(
+    "beforeend",
+    posts.map(p => kscCard({
+      text: p.message,
+      img: p.full_picture,
+      link: p.permalink_url,
+      time: p.created_time
+    })).join("") || "<p>لا توجد منشورات.</p>"
+  );
+  kscNext = data?.paging?.cursors?.after || null;
+  document.getElementById("ksc-more").hidden = !kscNext;
+  kscLoading = false;
+}
+
+document.getElementById("ksc-more").addEventListener("click", () => {
+  if (kscNext) kscLoad(kscNext);
+});
+
+kscLoad();
+</script>
+
 </body>
 </html>
