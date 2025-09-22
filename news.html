@@ -2718,7 +2718,7 @@ async function kscLoad(after=""){
       img: p.full_picture,
       link: p.permalink_url,
       time: p.created_time
-    })).join("") || "<p>لا توجد منشورات.</p>"
+    })).join("") || "<p style="color: white;">لا توجد منشورات.</p>"
   );
   kscNext = data?.paging?.cursors?.after || null;
   document.getElementById("ksc-more").hidden = !kscNext;
