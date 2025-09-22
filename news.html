@@ -2705,12 +2705,15 @@ function kscCard({ text, img, link, time }) {
     </article>`;
 }
 
-async function kscLoad(after=""){
-  if (kscLoading) return; kscLoading = true;
-  const url = `${KSC_URL}?route=fb-feed&limit=6${after?`&after=${encodeURIComponent(after)}`:""}`;
+async function kscLoad(after = "") {
+  if (kscLoading) return;
+  kscLoading = true;
+
+  const url = `${KSC_URL}?route=fb-feed&limit=6${after ? `&after=${encodeURIComponent(after)}` : ""}`;
   const res = await fetch(url);
   const data = await res.json();
   const posts = data.data || [];
+
   document.getElementById("ksc-feed").insertAdjacentHTML(
     "beforeend",
     posts.map(p => kscCard({
@@ -2718,8 +2721,9 @@ async function kscLoad(after=""){
       img: p.full_picture,
       link: p.permalink_url,
       time: p.created_time
-    })).join("") || "<p style="color: white;">لا توجد منشورات.</p>"
+    })).join("") || '<p style="color: white;">لا توجد منشورات.</p>'
   );
+
   kscNext = data?.paging?.cursors?.after || null;
   document.getElementById("ksc-more").hidden = !kscNext;
   kscLoading = false;
