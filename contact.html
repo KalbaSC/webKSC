@@ -1929,8 +1929,124 @@ header {
   .side-menu .sm-indicator{ display: none !important; }
   body.with-top-nav {padding-top: 0 !important;}
 }
-  </style>
 
+/* === Contact Page (scoped) === */
+.contact-page {
+  --brand:#f4e733;
+  --bgCard: rgba(0,0,0,.78);
+  --bgInput: rgba(255,255,255,.08);
+  --bd: rgba(244,231,51,.28);
+  --txt:#fff;
+  --muted:#cfcfcf;
+
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto 60px;
+  color: var(--txt);
+}
+
+.contact-page .cp-hero {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.contact-page .cp-hero h1{
+  color: var(--brand);
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+.contact-page .cp-hero p{ color: var(--muted); }
+
+.contact-page .cp-grid{
+  display: grid;
+  grid-template-columns: 1.1fr 1fr; /* يمين معلومات، يسار نموذج في RTL */
+  gap: 24px;
+  margin-top: 20px;
+}
+
+/* كرت عام */
+.contact-page .cp-card{
+  background: var(--bgCard);
+  border: 1.5px solid var(--bd);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+}
+.contact-page .cp-card h2{
+  margin: 0 0 14px;
+  color: var(--brand);
+  font-size: 22px;
+}
+.contact-page .cp-sub{ 
+  margin: 18px 0 10px; 
+  color: var(--brand); 
+  font-size: 18px;
+}
+.contact-page .cp-muted{ color: var(--muted); }
+
+/* عناصر المعلومات */
+.contact-page .cp-item{
+  display:flex; gap:12px; align-items:flex-start;
+  padding:12px 0; border-bottom:1px dashed rgba(255,255,255,.12);
+}
+.contact-page .cp-item:last-child{ border-bottom:0; }
+.contact-page .cp-item i{ color:var(--brand); margin-top:3px; }
+
+.contact-page .cp-label{ font-weight:700; color:var(--brand); margin-bottom:2px; }
+.contact-page .cp-link{ color:#fff; text-decoration:none; }
+.contact-page .cp-link:hover{ color:var(--brand); }
+
+/* سوشيال */
+.contact-page .cp-social{
+  display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px;
+}
+.contact-page .cp-social a{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.06);
+  color:#fff; text-decoration:none; transition:.2s;
+}
+.contact-page .cp-social a:hover{ transform: translateY(-2px); background:rgba(255,255,255,.1); }
+
+/* نموذج */
+.contact-page .cp-form label{ display:block; font-weight:700; color:var(--brand); margin:10px 0 6px; }
+.contact-page .cp-form input,
+.contact-page .cp-form textarea{
+  width:100%; background:var(--bgInput); color:#fff; border:1px solid rgba(255,255,255,.25);
+  border-radius:10px; padding:12px 14px; font-size:16px; outline:none; transition:.2s;
+}
+.contact-page .cp-form input:focus,
+.contact-page .cp-form textarea:focus{ border-color: var(--brand); background: rgba(255,255,255,.12); }
+
+.contact-page .cp-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.contact-page .cp-btn{
+  width:100%; margin-top:14px; background:var(--brand); color:#000; border:0;
+  border-radius:10px; padding:14px; font-weight:800; cursor:pointer; transition:.15s;
+}
+.contact-page .cp-btn:hover{ filter:brightness(0.92); transform: translateY(-1px); }
+
+/* خريطة */
+.contact-page .cp-map h2{ margin-bottom:6px; }
+.contact-page .cp-map-wrap{
+  border:2px solid var(--brand); border-radius:14px; overflow:hidden; margin-top:10px;
+}
+.contact-page .cp-map-wrap iframe{ width:100%; height:420px; border:0; display:block; }
+.contact-page .cp-map-actions{ margin-top:12px; display:flex; gap:10px; }
+.contact-page .cp-outline{
+  display:inline-block; padding:10px 14px; border-radius:10px; border:2px solid var(--brand);
+  color:#fff; text-decoration:none; font-weight:700;
+}
+.contact-page .cp-outline:hover{ background: rgba(244,231,51,.15); }
+
+/* استجابة */
+@media (max-width: 992px){
+  .contact-page .cp-grid{ grid-template-columns:1fr; }
+}
+@media (max-width: 600px){
+  .contact-page{ width:94%; margin:24px auto 50px; }
+  .contact-page .cp-map-wrap iframe{ height:320px; }
+  .contact-page .cp-row{ grid-template-columns:1fr; }
+}
+	  
+  </style>	
 </head>
 <body>
 <header>
@@ -1955,572 +2071,96 @@ header {
     <a href="contact.html">اتصل بنا</a>
   </nav>
 </header>
-	
-<!-- Add this section after your existing contact sections -->
-<section class="contact-form-section">
-  <div class="contact-form-container">
-    <div class="contact-form-wrapper">
-      <div class="form-header">
-        <h2>تواصل معنا</h2>
-        <p>نحن هنا للإجابة على استفساراتك وتلقي ملاحظاتك</p>
-      </div>
-      
-      <form class="contact-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fullName">الاسم الكامل</label>
-            <input type="text" id="fullName" name="fullName" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="email">البريد الإلكتروني</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="subject">الموضوع</label>
-          <input type="text" id="subject" name="subject" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="message">الرسالة</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-        
-        <button type="submit" class="submit-btn">إرسال الرسالة</button>
-      </form>
-    </div>
-    
-    <div class="contact-info-wrapper">
-      <div class="contact-info">
-        <h3>معلومات التواصل</h3>
-        
-        <div class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <div>
-            <span class="label">البريد الإلكتروني:</span>
-            <span class="value">info@ksc.shj.ae</span>
-          </div>
-        </div>
-        
-        <div class="contact-item">
-          <i class="fas fa-phone"></i>
-          <div>
-            <span class="label">الهاتف:</span>
-            <span class="value">092777873</span>
-          </div>
-        </div>
-        
-        <div class="contact-item">
-          <i class="fas fa-clock"></i>
-          <div>
-            <span class="label">ساعات العمل:</span>
-            <span class="value">من الأحد إلى الخميس من الساعة 7:30 صباحاً حتى 3:30 مساءً</span>
-          </div>
-        </div>
-        
-        <div class="contact-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <div>
-            <span class="label">العنوان:</span>
-            <span class="value">نادي كلباء الرياضي الثقافي - الشارقة</span>
-          </div>
-        </div>
-      </div>
-      
-      <div class="social-media">
-        <h3>وسائل التواصل الاجتماعي</h3>
-        <p>يمكنك التواصل معنا أيضاً عبر هذه القنوات:</p>
-        
-        <div class="social-icons">
-          <a href="https://www.facebook.com/Kalbasc1" target="_blank" class="social-icon facebook">
-            <i class="fab fa-facebook-f"></i>
-            <span>فيسبوك</span>
-          </a>
-          <a href="https://x.com/Kalba_sc?mx=2" target="_blank" class="social-icon twitter">
-            <i class="fab fa-twitter"></i>
-            <span>منصة X</span>
-          </a>
-          <a href="https://www.instagram.com/kalbasc/" target="_blank" class="social-icon instagram">
-            <i class="fab fa-instagram"></i>
-            <span>انستغرام</span>
-          </a>
-          <a href="https://www.youtube.com/@kalbasc" target="_blank" class="social-icon youtube">
-            <i class="fab fa-youtube"></i>
-            <span>يوتيوب</span>
-          </a>
-          <a href="https://www.tiktok.com/@kalbasc" target="_blank" class="social-icon tiktok">
-            <i class="fab fa-tiktok"></i>
-            <span>تيك توك</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<main class="contact-page" dir="rtl">
+  <!-- عنوان بسيط -->
+  <section class="cp-hero">
+    <h1>اتصل بنا</h1>
+    <p>يسعدنا استقبال استفساراتكم وملاحظاتكم.</p>
+  </section>
 
-<style>
-.contact-form-section {
-  padding: 40px 0;
-  background: rgba(0, 0, 0, 0.7);
-  margin-top: 40px;
-}
+  <!-- شبكية منظمة: معلومات + نموذج -->
+  <section class="cp-grid">
+    <!-- معلومات التواصل + السوشيال -->
+    <div class="cp-card">
+      <h2>معلومات التواصل</h2>
 
-.contact-form-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  padding: 0 20px;
-}
-
-.contact-form-wrapper {
-  flex: 1;
-  min-width: 300px;
-}
-
-.form-header {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.form-header h2 {
-  color: #f4e733;
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.form-header p {
-  color: #ccc;
-  font-size: 16px;
-}
-
-.contact-form {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid rgba(244, 231, 51, 0.3);
-}
-
-.form-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  flex: 1;
-  margin-bottom: 20px;
-}
-
-.contact-form-section .form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: #f4e733;
-  font-weight: bold;
-}
-
-.contact-form-section .form-group input,
-.contact-form-section .form-group textarea {
-  width: 100%;
-  padding: 12px 15px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: white;
-  font-size: 16px;
-  transition: all 0.3s;
-}
-
-.contact-form-section .form-group input:focus,
-.contact-form-section .form-group textarea:focus {
-  outline: none;
-  border-color: #f4e733;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.contact-form-section .submit-btn {
-  width: 100%;
-  padding: 15px;
-  background: #f4e733;
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.contact-form-section .submit-btn:hover {
-  background: #d8cf2e;
-  transform: translateY(-2px);
-}
-
-.contact-info-wrapper {
-  flex: 1;
-  min-width: 300px;
-}
-
-.contact-info {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid rgba(244, 231, 51, 0.3);
-  margin-bottom: 30px;
-}
-
-.contact-info h3 {
-  color: #f4e733;
-  margin-bottom: 25px;
-  font-size: 24px;
-  text-align: center;
-  border-bottom: 2px solid #f4e733;
-  padding-bottom: 10px;
-}
-
-.contact-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.contact-item i {
-  color: #f4e733;
-  font-size: 18px;
-  margin-top: 3px;
-  width: 20px;
-  text-align: center;
-}
-
-.contact-item .label {
-  display: block;
-  color: #f4e733;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.contact-item .value {
-  color: #ccc;
-  display: block;
-}
-
-.social-media {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid rgba(244, 231, 51, 0.3);
-}
-
-.social-media h3 {
-  color: #f4e733;
-  margin-bottom: 15px;
-  font-size: 24px;
-  text-align: center;
-  border-bottom: 2px solid #f4e733;
-  padding-bottom: 10px;
-}
-
-.social-media > p {
-  color: #ccc;
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.contact-form-section .social-icons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-bottom: 30px;
-}
-
-.contact-form-section .social-icon {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 15px;
-  border-radius: 8px;
-  color: white;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-
-.contact-form-section .social-icon:hover {
-  transform: translateY(-3px);
-}
-
-.contact-form-section .social-icon.facebook {
-  background: #3b5998;
-}
-
-.contact-form-section .social-icon.twitter {
-  background: #1da1f2;
-}
-
-.contact-form-section .social-icon.instagram {
-  background: #e1306c;
-}
-
-.contact-form-section .social-icon.youtube {
-  background: #ff0000;
-}
-
-.contact-form-section .social-icon.tiktok {
-  background: #000000;
-}
-
-/* Ensure footer styles are not affected */
-footer .social-icons,
-footer .footer-column,
-footer form,
-footer textarea,
-footer button[type="submit"] {
-  all: revert !important;
-}
-
-footer .social-icons a {
-  color: white !important;
-  font-size: 20px !important;
-}
-
-footer .social-icons a:hover {
-  color: #f4e733 !important;
-}
-
-footer textarea {
-  width: 100% !important;
-  height: 150px !important;
-  background: #222 !important;
-  color: white !important;
-  padding: 10px !important;
-  border-radius: 10px !important;
-  border: 1px solid #444 !important;
-}
-
-footer button[type="submit"] {
-  background-color: #f4e733 !important;
-  padding: 10px 20px !important;
-  border: none !important;
-  border-radius: 10px !important;
-  color: #000 !important;
-}
-
-footer button[type="submit"]:hover {
-  background-color: #d8cf2e !important;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .contact-form-section .form-row {
-    flex-direction: column;
-    gap: 0;
-  }
-  
-  .contact-form-section .social-icons {
-    grid-template-columns: 1fr;
-  }
-  
-  .contact-form-container {
-    padding: 0 15px;
-  }
-}
-
-@media (max-width: 600px) {
-  .contact-form-section {
-    padding: 20px 0;
-  }
-  
-  .contact-form {
-    padding: 20px;
-  }
-  
-  .contact-info,
-  .social-media {
-    padding: 20px;
-  }
-}
-</style>
-
-<script>
-document.querySelector('.contact-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const fullName = document.getElementById('fullName').value;
-  const email = document.getElementById('email').value;
-  const subject = document.getElementById('subject').value;
-  const message = document.getElementById('message').value;
-  
-  if (!fullName || !email || !subject || !message) {
-    alert('يرجى ملء جميع الحقول المطلوبة');
-    return;
-  }
-  
-  alert('شكراً لك! تم إرسال رسالتك بنجاح. سنقوم بالرد عليك في أقرب وقت ممكن.');
-  this.reset();
-});
-</script>
-
-
-<!-- Add this section after the contact form section -->
-<section class="map-section">
-  <div class="map-container">
-    <div class="section-header">
-      <h2>📍 موقع النادي</h2>
-      <p>يمكنك العثور علينا على الخريطة أدناه</p>
-    </div>
-    
-    <div class="map-wrapper">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.1481892677397!2d56.344520915!3d25.0599489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef4fb551ebd5dd3%3A0x3bb0cb4211fd38db!2sIttihad%20Kalba%20Sports%20and%20Cultural%20Club!5e0!3m2!1sar!2sae!4v169 xyz…!5m2!1sar!2sae"
-        width="100%"
-        height="400"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-    
-    <div class="location-info">
-      <div class="info-item">
-        <i class="fas fa-map-marker-alt"></i>
+      <div class="cp-item">
+        <i class="fas fa-envelope"></i>
         <div>
-          <h3>العنوان</h3>
-          <p>Al Layyah government building, ground floor - Sharjah</p>
+          <div class="cp-label">البريد الإلكتروني</div>
+          <a href="mailto:info@ksc.shj.ae" class="cp-link">info@ksc.shj.ae</a>
         </div>
       </div>
-      
-      <div class="info-item">
-        <i class="fas fa-clock"></i>
-        <div>
-          <h3>ساعات العمل</h3>
-          <p>من الأحد إلى الخميس: 7:30 صباحاً - 3:30 مساءً</p>
-        </div>
-      </div>
-      
-      <div class="info-item">
+
+      <div class="cp-item">
         <i class="fas fa-phone"></i>
         <div>
-          <h3>الهاتف</h3>
-          <p>092777873</p>
+          <div class="cp-label">الهاتف</div>
+          <a href="tel:+97192777873" class="cp-link">092777873</a>
         </div>
       </div>
+
+      <div class="cp-item">
+        <i class="fas fa-clock"></i>
+        <div>
+          <div class="cp-label">ساعات العمل</div>
+          <div class="cp-muted">الأحد – الخميس: 7:30 ص – 3:30 م</div>
+        </div>
+      </div>
+
+      <h3 class="cp-sub">تابعنا</h3>
+      <div class="cp-social">
+        <a href="https://www.facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i><span>فيسبوك</span></a>
+        <a href="https://x.com/Kalba_sc?mx=2" target="_blank"><i class="fab fa-twitter"></i><span>منصة X</span></a>
+        <a href="https://www.instagram.com/kalbasc/" target="_blank"><i class="fab fa-instagram"></i><span>إنستغرام</span></a>
+        <a href="https://www.youtube.com/@kalbasc" target="_blank"><i class="fab fa-youtube"></i><span>يوتيوب</span></a>
+        <a href="https://www.tiktok.com/@kalbasc" target="_blank"><i class="fab fa-tiktok"></i><span>تيك توك</span></a>
+      </div>
     </div>
-  </div>
-</section>
 
-<style>
-.map-section {
-  padding: 40px 0;
-  background: rgba(0, 0, 0, 0.7);
-}
+    <!-- نموذج المراسلة -->
+    <div class="cp-card">
+      <h2>أرسل رسالة</h2>
+      <form class="cp-form" onsubmit="event.preventDefault(); alert('شكراً لك! تم الإرسال.'); this.reset();">
+        <div class="cp-row">
+          <label>الاسم الكامل
+            <input type="text" required>
+          </label>
+          <label>البريد الإلكتروني
+            <input type="email" required>
+          </label>
+        </div>
 
-.map-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+        <label>الموضوع
+          <input type="text" required>
+        </label>
 
-.section-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
+        <label>الرسالة
+          <textarea rows="6" required></textarea>
+        </label>
 
-.section-header h2 {
-  color: #f4e733;
-  font-size: 28px;
-  margin-bottom: 10px;
-}
+        <button type="submit" class="cp-btn">إرسال</button>
+      </form>
+    </div>
+  </section>
 
-.section-header p {
-  color: #ccc;
-  font-size: 16px;
-}
+  <!-- الخريطة -->
+  <section class="cp-card cp-map">
+    <h2>📍 موقع النادي</h2>
+    <p class="cp-muted">Ittihad Kalba Sports & Cultural Club</p>
+    <div class="cp-map-wrap">
+      <!-- استخدمت الإحداثيات الخاصة بموقعك لتفادي مشاكل الـ embed المعقدة -->
+      <iframe
+        src="https://www.google.com/maps?q=25.0599489,56.3467097&hl=ar&z=15&output=embed"
+        loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 
-.map-wrapper {
-  border: 2px solid #f4e733;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 30px;
-  box-shadow: 0 6px 20px rgba(0,0,0,.3);
-}
+    <div class="cp-map-actions">
+      <a class="cp-outline" href="https://maps.app.goo.gl/Q8yWHR2PtPhnnkSr8" target="_blank" rel="noopener">افتح في خرائط جوجل</a>
+    </div>
+  </section>
+</main>
 
-.location-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid rgba(244, 231, 51, 0.3);
-  transition: all 0.3s ease;
-}
-
-.info-item:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.info-item i {
-  color: #f4e733;
-  font-size: 24px;
-  margin-top: 5px;
-}
-
-.info-item h3 {
-  color: #f4e733;
-  margin-bottom: 8px;
-  font-size: 18px;
-}
-
-.info-item p {
-  color: #ccc;
-  margin: 0;
-  line-height: 1.6;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .map-section {
-    padding: 30px 0;
-  }
-  
-  .map-container {
-    padding: 0 15px;
-  }
-  
-  .location-info {
-    grid-template-columns: 1fr;
-  }
-  
-  .section-header h2 {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 600px) {
-  .map-wrapper iframe {
-    height: 300px;
-  }
-  
-  .info-item {
-    padding: 15px;
-  }
-}
-</style>
-
-	
 <script>
 (function(){
   let tooltipDismissed = false;
