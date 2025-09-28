@@ -2364,6 +2364,162 @@ document.querySelector('.contact-form').addEventListener('submit', function(e) {
   this.reset();
 });
 </script>
+
+
+<!-- Add this section after the contact form section -->
+<section class="map-section">
+  <div class="map-container">
+    <div class="section-header">
+      <h2>📍 موقع النادي</h2>
+      <p>يمكنك العثور علينا على الخريطة أدناه</p>
+    </div>
+    
+    <div class="map-wrapper">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.1481892677397!2d56.344520915!3d25.0599489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef4fb551ebd5dd3%3A0x3bb0cb4211fd38db!2sIttihad%20Kalba%20Sports%20and%20Cultural%20Club!5e0!3m2!1sar!2sae!4v169 xyz…!5m2!1sar!2sae"
+        width="100%"
+        height="400"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    
+    <div class="location-info">
+      <div class="info-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <div>
+          <h3>العنوان</h3>
+          <p>Al Layyah government building, ground floor - Sharjah</p>
+        </div>
+      </div>
+      
+      <div class="info-item">
+        <i class="fas fa-clock"></i>
+        <div>
+          <h3>ساعات العمل</h3>
+          <p>من الأحد إلى الخميس: 7:30 صباحاً - 3:30 مساءً</p>
+        </div>
+      </div>
+      
+      <div class="info-item">
+        <i class="fas fa-phone"></i>
+        <div>
+          <h3>الهاتف</h3>
+          <p>092777873</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.map-section {
+  padding: 40px 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.map-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-header h2 {
+  color: #f4e733;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.section-header p {
+  color: #ccc;
+  font-size: 16px;
+}
+
+.map-wrapper {
+  border: 2px solid #f4e733;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
+}
+
+.location-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(244, 231, 51, 0.3);
+  transition: all 0.3s ease;
+}
+
+.info-item:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.info-item i {
+  color: #f4e733;
+  font-size: 24px;
+  margin-top: 5px;
+}
+
+.info-item h3 {
+  color: #f4e733;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.info-item p {
+  color: #ccc;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .map-section {
+    padding: 30px 0;
+  }
+  
+  .map-container {
+    padding: 0 15px;
+  }
+  
+  .location-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-header h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .map-wrapper iframe {
+    height: 300px;
+  }
+  
+  .info-item {
+    padding: 15px;
+  }
+}
+</style>
+
 	
 <script>
 (function(){
