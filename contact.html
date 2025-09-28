@@ -1931,6 +1931,121 @@ header {
 }
   </style>
 
+	  <style>
+    /* Enhanced contact sections styling */
+    .contact-sections-container {
+      width: 88%;
+      max-width: 1170px;
+      margin: 40px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    .contact-section {
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #f4e733;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.3);
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .contact-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(244, 231, 51, 0.2);
+    }
+    
+    .contact-section h2 {
+      color: #f4e733;
+      margin: 0 0 20px;
+      font-size: 24px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f4e733;
+      display: inline-block;
+    }
+    
+    .contact-section p {
+      color: #eee;
+      line-height: 1.8;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+    
+    .contact-section a {
+      color: #f4e733;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .contact-section a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px 18px;
+      border-radius: 8px;
+      border: 1px solid rgba(244, 231, 51, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .contact-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+    }
+    
+    .contact-icon {
+      font-size: 20px;
+      color: #f4e733;
+    }
+    
+    .map-container {
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Responsive adjustments for contact sections */
+    @media (max-width: 768px) {
+      .contact-sections-container {
+        width: 94%;
+        margin: 30px auto;
+      }
+      
+      .contact-section {
+        padding: 20px;
+      }
+      
+      .contact-section h2 {
+        font-size: 20px;
+      }
+      
+      .contact-info {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .contact-item {
+        width: 100%;
+      }
+    }
+  </style>
+
 </head>
 <body>
 <header>
@@ -1956,28 +2071,55 @@ header {
   </nav>
 </header>
 	
-<section style="padding: 30px; color: white;">
-  <h2>📞 تواصل معنا</h2>
-  <p>📧 البريد الإلكتروني: info@ittihadkalbafc.ae</p>
-  <p>📱 الهاتف: +971 9 277 7245</p>
-  <p>📸 إنستغرام: <a href='https://instagram.com/kalbasc' target='_blank'>@kalbasc</a></p>
-</section>
-	
-<section style="padding: 30px; color: white;">
-  <h2>📍 موقع النادي</h2>
-  <p>يمكنك العثور علينا على الخريطة أدناه:</p>
-  <div style="border: 2px solid #f4e733; border-radius: 12px; overflow: hidden; margin-top: 15px;">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.1481892677397!2d56.344520915!3d25.0599489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef4fb551ebd5dd3%3A0x3bb0cb4211fd38db!2sIttihad%20Kalba%20Sports%20and%20Cultural%20Club!5e0!3m2!1sar!2sae!4v169 xyz…!5m2!1sar!2sae"
-      width="100%"
-      height="400"
-      style="border:0;"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-  </div>
-</section>
+<div class="contact-sections-container">
+  <section class="contact-section">
+    <h2>📞 تواصل معنا</h2>
+    <p>نحن هنا للإجابة على استفساراتك وتلقي ملاحظاتك. لا تتردد في التواصل معنا عبر أي من الوسائل التالية:</p>
+    
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-icon">📧</span>
+        <div>
+          <strong>البريد الإلكتروني:</strong><br>
+          <a href="mailto:info@ittihadkalbafc.ae">info@ittihadkalbafc.ae</a>
+        </div>
+      </div>
+      
+      <div class="contact-item">
+        <span class="contact-icon">📱</span>
+        <div>
+          <strong>الهاتف:</strong><br>
+          <a href="tel:+97192777245">+971 9 277 7245</a>
+        </div>
+      </div>
+      
+      <div class="contact-item">
+        <span class="contact-icon">📸</span>
+        <div>
+          <strong>إنستغرام:</strong><br>
+          <a href='https://instagram.com/kalbasc' target='_blank'>@kalbasc</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="contact-section">
+    <h2>📍 موقع النادي</h2>
+    <p>يمكنك العثور علينا على الخريطة أدناه. نحن نتطلع لاستقبالكم في نادي كلباء الرياضي الثقافي:</p>
+    
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.1481892677397!2d56.344520915!3d25.0599489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef4fb551ebd5dd3%3A0x3bb0cb4211fd38db!2sIttihad%20Kalba%20Sports%20and%20Cultural%20Club!5e0!3m2!1sar!2sae!4v169 xyz…!5m2!1sar!2sae"
+        width="100%"
+        height="400"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+</div>
 	
 <script>
 (function(){
