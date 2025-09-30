@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>قالب صفحة — نادي كلباء الرياضي الثقافي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand:#f4e733; /* KSC yellow */
+      --bg:#0b0b0b;
+      --text:#f5f5f5;
+      --muted:#bbbbbb;
+      --card:#151515;
+      --accent:#111;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:linear-gradient(180deg,#000 0%, #0a0a0a 60%, #111 100%);
+      color:var(--text); font-family:"Noto Kufi Arabic", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+      letter-spacing:.1px;
+      display:flex; flex-direction:column;
+    }
+    a{color:var(--text); text-decoration:none}
+    img{max-width:100%; height:auto; display:block}
+
+    /* Header */
+    .topbar{position:sticky; top:0; z-index:1000; box-shadow:0 10px 30px rgba(0,0,0,.45)}
+    .header{
+      background:#000;
+      background-image:radial-gradient(ellipse at 20% 0%, rgba(244,231,51,.15), transparent 60%),
+                        radial-gradient(ellipse at 80% 0%, rgba(244,231,51,.1), transparent 60%);
+      border-bottom:2px solid var(--brand);
+    }
+    .header-inner{max-width:1200px; margin:0 auto; padding:14px 18px; display:flex; align-items:center; gap:14px}
+    .logo-wrap{display:flex; align-items:center; gap:12px}
+    .logo{width:56px; height:56px; border:2px solid var(--brand); border-radius:12px; padding:6px; background:#0a0a0a}
+    .brand{display:flex; flex-direction:column; line-height:1.15}
+    .brand b{font-weight:700; font-size:18px}
+    .brand small{color:var(--muted)}
+
+    /* Nav */
+    .nav{background:#0a0a0a; border-top:1px solid #191919; border-bottom:1px solid #191919}
+    .nav-inner{max-width:1200px; margin:0 auto; display:flex; align-items:center; gap:10px; padding:8px 18px}
+    .nav a{padding:10px 14px; border-radius:10px; transition:all .2s ease; font-weight:600; color:#ddd}
+    .nav a.active, .nav a:hover{background:linear-gradient(180deg,#191919, #111); color:var(--brand); box-shadow:inset 0 0 0 1px #222}
+
+    /* Hero */
+    .hero{position:relative; overflow:hidden; border-bottom:1px solid #1b1b1b}
+    .hero-inner{max-width:1200px; margin:0 auto; padding:28px 18px 22px}
+    .hero-grid{display:grid; grid-template-columns:1.3fr .7fr; gap:18px}
+    .badge{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:#0f0f0f; color:var(--brand); border:1px solid #242424; font-weight:700}
+    .hero h1{margin:14px 0 10px; font-size:28px}
+    .hero p{color:#d8d8d8; margin:0}
+    .hero-card{background:linear-gradient(180deg,#141414, #0e0e0e); border:1px solid #222; border-radius:18px; padding:18px}
+
+    /* Main */
+    main{flex:1}
+    .container{max-width:1200px; margin:0 auto; padding:22px 18px}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    .col-8{grid-column:span 8}
+    .col-4{grid-column:span 4}
+    .card{background:var(--card); border:1px solid #222; border-radius:16px; padding:18px}
+    .card h3{margin:0 0 8px}
+    .muted{color:var(--muted)}
+
+    /* Footer */
+    footer{margin-top:auto; background:#000; border-top:2px solid var(--brand)}
+    .footer-inner{max-width:1200px; margin:0 auto; padding:18px; display:flex; gap:20px; align-items:center; justify-content:space-between}
+    .footer-inner small{color:#bdbdbd}
+
+    /* Pills + buttons */
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border-radius:12px; background:linear-gradient(180deg,#1c1c1c, #141414); border:1px solid #242424; color:#eee; font-weight:700}
+    .btn:hover{filter:brightness(1.1)}
+    .btn-brand{background:linear-gradient(180deg,#2a2a2a, #161616); border-color:#2b2b2b; color:var(--brand)}
+
+    /* Responsive */
+    @media (max-width: 980px){ .hero-grid{grid-template-columns:1fr} .col-8,.col-4{grid-column:span 12} }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <div class="topbar">
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <div class="logo-wrap">
+          <!-- Replace src with your logo paths -->
+          <img class="logo" src="https://dummyimage.com/256x256/000/fff.png&text=KSC" alt="شعار نادي كلباء" />
+          <div class="brand">
+            <b>نادي كلباء الرياضي الثقافي</b>
+            <small>Kalba Sports & Cultural Club</small>
+          </div>
+        </div>
+        <div style="margin-inline-start:auto; display:flex; gap:10px; align-items:center">
+          <a class="btn btn-brand" href="#">تسجيل الدخول</a>
+          <a class="btn" href="#">إنشاء حساب</a>
+        </div>
+      </div>
+    </header>
+    <nav class="nav" role="navigation" aria-label="التنقل الرئيسي">
+      <div class="nav-inner">
+        <a class="active" href="#">الصفحة الرئيسية</a>
+        <a href="#">الأخبار</a>
+        <a href="#">التقييم</a>
+        <a href="#">التقارير</a>
+        <a href="#">اتصل بنا</a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="badge">⚽ منصة النادي — نفس ستايل contact.html</span>
+      <div class="hero-grid">
+        <div>
+          <h1>عنوان رئيسي للصفحة</h1>
+          <p>ضع هنا وصفًا مختصرًا للصفحة يوضح الغرض منها (يمكنك تغيير النص لاحقًا). التصميم يحافظ على الألوان الأسود/الأصفر وخط Noto Kufi Arabic مع RTL.</p>
+          <div style="margin-top:16px; display:flex; gap:10px">
+            <a class="btn btn-brand" href="#">زر أساسي</a>
+            <a class="btn" href="#">زر ثانوي</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <b style="display:block; margin-bottom:8px">بطاقة جانبية</b>
+          <p class="muted" style="margin:0">يمكن استخدامها لعرض إشعارات سريعة أو روابط مهمة.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <div class="container">
+      <div class="grid">
+        <div class="col-8">
+          <div class="card">
+            <h3>قسم المحتوى</h3>
+            <p class="muted">انسخ محتوى صفحاتك هنا (نصوص، جداول، نماذج…). تم تصميم هذا القالب ليكون متوافقًا مع أسلوب contact.html مع الحفاظ على الفوتر وعدم تأثره بستيلات الأقسام.</p>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card">
+            <h3>الشريط الجانبي</h3>
+            <ul class="muted" style="margin:6px 0 0 0; padding:0 18px; line-height:1.9">
+              <li>رابط سريع 1</li>
+              <li>رابط سريع 2</li>
+              <li>رابط سريع 3</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <small>© <span id="y"></span> نادي كلباء الرياضي الثقافي — جميع الحقوق محفوظة</small>
+      <small>تصميم وتنفيذ: فريق تقنية المعلومات</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
