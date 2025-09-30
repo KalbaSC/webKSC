@@ -22,7 +22,6 @@
   </header>
 
   <main class="max-w-6xl mx-auto px-4 py-6">
-    <!-- Add Player Card -->
     <section id="add" class="bg-white rounded-2xl shadow p-5 mb-6">
       <h2 class="text-lg font-semibold mb-4">إضافة لاعب</h2>
       <form id="playerForm" class="grid sm:grid-cols-2 gap-4">
@@ -36,7 +35,6 @@
       <p id="saveMsg" class="text-sm text-green-600 mt-3 hidden">تم الحفظ ✅</p>
     </section>
 
-    <!-- List Card -->
     <section id="list" class="bg-white rounded-2xl shadow p-5">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <h2 class="text-lg font-semibold">قائمة اللاعبين</h2>
@@ -61,7 +59,7 @@
   </main>
 
   <script>
-    const API = "YOUR_APPS_SCRIPT_URL"; // <-- paste your Apps Script deployment URL
+    const API = "https://script.google.com/macros/s/AKfycbwP4Q4XoRYvtSwFWDmY5YnUQ-lCl64hfAZLmaQXYmMq5FOi4KqFLodL025zTciLYRcx/exec";
 
     async function load() {
       const res = await fetch(API);
