@@ -24,27 +24,76 @@
     
     body {
       font-family: 'NotoKufiArabic', sans-serif;
-      background:
-  repeating-linear-gradient(
-    -25deg,
-    #222222 0 160px,
-    #f4e733 160px 200px
-  ),
-  repeating-linear-gradient(
-    -25deg,
-    #222222 0 340px,
-    #f4e733 340px 356px
-  );
-background-attachment: fixed;
-background-size: cover;
-background-color: #222222;
-color: #fff;
-      background-size: cover;
-      color: black;
-      margin: 0;
-      padding: 0;
-      direction: rtl;
-    }
+      :root{
+  --ink:#222222;    /* الأسود */
+  --accent:#f4e733; /* الأصفر */
+}
+
+/* أساس الخلفية */
+html, body{
+  height:100%;
+  margin:0;
+}
+
+body{
+  background-color: var(--ink);
+  color:#fff;
+  /* مهم للموبايل: تجنّب jank من background-attachment:fixed */
+  background-attachment: scroll;
+  position: relative;
+  overflow-x:hidden;
+}
+
+/* طبقة الخطوط الصفراء عند الحواف فقط */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-10% -5%;           /* تمديد بسيط خارج الشاشة لزوايا نظيفة */
+  pointer-events:none;
+  z-index:-1;
+
+  /* خطّان مكرّران بزوايا متقاربة لإحساس “فرشاة” */
+  background:
+    repeating-linear-gradient(
+      -26deg,
+      transparent 0 180px,
+      var(--accent) 180px 196px,
+      transparent 196px 330px
+    ),
+    repeating-linear-gradient(
+      -26deg,
+      transparent 0 320px,
+      var(--accent) 320px 336px,
+      transparent 336px 560px
+    );
+
+  opacity:.95;
+
+  /* إخفاء الخطوط في منتصف الصفحة — تظهر أكثر على الحواف */
+  /* مدعوم على كروم/إيدج/سفاري */
+  -webkit-mask-image: radial-gradient(120% 85% at 50% 50%, transparent 0 42%, #000 58%);
+          mask-image: radial-gradient(120% 85% at 50% 50%, transparent 0 42%, #000 58%);
+  -webkit-mask-repeat:no-repeat;
+          mask-repeat:no-repeat;
+}
+
+/* خامة خفيفة جدًا (Noise) لتعميق الخلفية */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.06;
+  background-image:
+    url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0.9'/></feComponentTransfer></filter>\
+<rect width='100%' height='100%' filter='url(#n)'/>\
+</svg>");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;   /* تعطي إحساس خامة بدون تغيير الألوان */
+}
     
 header {
   background-color: #222222;
