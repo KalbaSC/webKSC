@@ -36,22 +36,18 @@ background:
     #f4e733 340px 356px
   ),
   linear-gradient(
-    120deg,
-    rgba(244, 231, 51, 0.1),
-    rgba(34, 34, 34, 0.2),
-    rgba(244, 231, 51, 0.1)
+    rgba(0, 0, 0, 0.2) 1px,
+    transparent 1px
+  ),
+  linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.2) 1px,
+    transparent 1px
   );
 background-attachment: fixed;
-background-size: cover, cover, 400% 400%;
+background-size: cover, cover, 20px 20px, 20px 20px;
 background-color: #222222;
 color: #fff;
-animation: gradientShift 8s ease infinite;
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
 }
     
 header {
