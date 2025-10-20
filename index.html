@@ -7,85 +7,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
-<style>
-@font-face {
-  font-family: 'NotoKufiArabic';
-  src: url('NotoKufiArabic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+   <style>  
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
-@font-face {
-  font-family: 'NotoKufiArabic';
-  src: url('NotoKufiArabic-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
+    @font-face {
+      font-family: 'NotoKufiArabic';
+      src: url('NotoKufiArabic-Light.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'NotoKufiArabic', sans-serif;
-  background: 
-    /* Base stripes */
-    repeating-linear-gradient(
-      -25deg,
-      #222222 0 160px,
-      #f4e733 160px 200px
-    ),
-    /* Accent stripes */
-    repeating-linear-gradient(
-      -25deg,
-      #222222 0 340px,
-      #f4e733 340px 356px
-    ),
-    /* Subtle overlay */
-    radial-gradient(
-      circle at 20% 80%,
-      rgba(244, 231, 51, 0.1) 0%,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(34, 34, 34, 0.8) 0%,
-      transparent 40%
-    );
-  background-attachment: fixed;
-  background-size: cover;
-  background-color: #222222;
-  color: #fff;
-  min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
-}
-
-/* Enhanced background with interactive effect */
-.enhanced-bg {
-  position: relative;
-  min-height: 100vh;
-  transition: all 0.5s ease;
-}
-
-.enhanced-bg::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(244, 231, 51, 0.15) 0%,
-    transparent 40%
-  );
-  pointer-events: none;
-  transition: background 0.3s ease;
-  z-index: 1;
-}
+    body {
+      font-family: 'NotoKufiArabic', sans-serif;
+      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+	  background-size: cover;
+      color: black;
+      margin: 0;
+	  padding: 0;
+      direction: rtl;
+    }
 
 header {
   background-color: #222222;
@@ -2326,20 +2271,6 @@ window.addEventListener('DOMContentLoaded', () => {
 </footer>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script>
-// JavaScript for interactive background effect
-document.addEventListener('DOMContentLoaded', function() {
-  const enhancedBg = document.querySelector('.enhanced-bg');
-  
-  if (enhancedBg) {
-    enhancedBg.addEventListener('mousemove', function(e) {
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-      this.style.setProperty('--mouse-x', `${x}%`);
-      this.style.setProperty('--mouse-y', `${y}%`);
-    });
-  }
-});
-</script>
+
 </body>
 </html>
