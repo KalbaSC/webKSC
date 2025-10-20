@@ -2176,22 +2176,49 @@ th {
 }
 body {
   font-family: 'NotoKufiArabic', sans-serif;
-  background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  margin: 0;
-  padding: 0;
-  direction: rtl;
+  background-color: #222222;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      rgba(244, 231, 51, 0.08) 0px,
+      rgba(244, 231, 51, 0.08) 2px,
+      transparent 2px,
+      transparent 14px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(244, 231, 51, 0.06) 0px,
+      rgba(244, 231, 51, 0.06) 1px,
+      transparent 1px,
+      transparent 16px
+    ),
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(244, 231, 51, 0.05) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(244, 231, 51, 0.04) 0%,
+      transparent 40%
+    );
+  color: #fff;
+  min-height: 100vh;
 }
+
 header {
-  background-color: #111;
-  padding: 16px 90px;
-  margin: 0 auto;	
-  width: 88%;
+  background-color: #222222;
+  padding: 16px 5%;
+  margin: 0 auto;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 3px solid #f4e733;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+  flex-wrap: wrap;
 }
 .header-right {
   display: flex;
@@ -2251,11 +2278,11 @@ header {
 }
 
     footer {
-      background-color: #000;
+      background-color: #222222;
       color: white;
-      padding: 16px 90px;
-	  margin: 0 auto;	
-	  width: 88%;
+      padding: 30px 5%;
+      margin: 0 auto;	
+      width: 90%;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
