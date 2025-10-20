@@ -24,7 +24,21 @@
     
     body {
       font-family: 'NotoKufiArabic', sans-serif;
-      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
+      background:
+  repeating-linear-gradient(
+    -25deg,
+    #222222 0 160px,
+    #f4e733 160px 200px
+  ),
+  repeating-linear-gradient(
+    -25deg,
+    #222222 0 340px,
+    #f4e733 340px 356px
+  );
+background-attachment: fixed;
+background-size: cover;
+background-color: #222222;
+color: #fff;
       background-size: cover;
       color: black;
       margin: 0;
