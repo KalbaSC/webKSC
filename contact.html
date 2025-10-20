@@ -756,18 +756,40 @@ header {
       font-style: normal;
     }
     
-    body {
-      font-family: 'NotoKufiArabic', sans-serif;
-      background: url('black_and_yellow_grunge_background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: black;
-      margin: 0;
-      padding: 0;
-      direction: rtl;
-    }
-    
+body {
+  font-family: 'NotoKufiArabic', sans-serif;
+  background-color: #222222;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      rgba(244, 231, 51, 0.08) 0px,
+      rgba(244, 231, 51, 0.08) 2px,
+      transparent 2px,
+      transparent 14px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(244, 231, 51, 0.06) 0px,
+      rgba(244, 231, 51, 0.06) 1px,
+      transparent 1px,
+      transparent 16px
+    ),
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(244, 231, 51, 0.05) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(244, 231, 51, 0.04) 0%,
+      transparent 40%
+    );
+  color: #fff;
+  min-height: 100vh;
+}
+
 header {
-  background-color: #111;
+  background-color: #222222;
   padding: 16px 5%;
   margin: 0 auto;
   width: 90%;
@@ -1224,7 +1246,7 @@ body.no-scroll { overflow: hidden; }
     }
     
     footer {
-      background-color: #000;
+      background-color: #222222;
       color: white;
       padding: 30px 5%;
       margin: 0 auto;	
