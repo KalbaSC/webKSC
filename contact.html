@@ -1973,7 +1973,6 @@ header {
   body.with-top-nav {padding-top: 0 !important;}
 }
 
-/* === Contact Page (scoped) === */
 .contact-page {
   --brand:#f4e733;
   --bgCard: rgba(0,0,0,.78);
@@ -2001,12 +2000,11 @@ header {
 
 .contact-page .cp-grid{
   display: grid;
-  grid-template-columns: 1.1fr 1fr; /* يمين معلومات، يسار نموذج في RTL */
+  grid-template-columns: 1.1fr 1fr;
   gap: 24px;
   margin-top: 20px;
 }
 
-/* كرت عام */
 .contact-page .cp-card{
   background: var(--bgCard);
   border: 1.5px solid var(--bd);
@@ -2026,7 +2024,6 @@ header {
 }
 .contact-page .cp-muted{ color: var(--muted); }
 
-/* عناصر المعلومات */
 .contact-page .cp-item{
   display:flex; gap:12px; align-items:flex-start;
   padding:12px 0; border-bottom:1px dashed rgba(255,255,255,.12);
@@ -2038,7 +2035,6 @@ header {
 .contact-page .cp-link{ color:#fff; text-decoration:none; }
 .contact-page .cp-link:hover{ color:var(--brand); }
 
-/* سوشيال */
 .contact-page .cp-social{
   display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px;
 }
@@ -2049,7 +2045,6 @@ header {
 }
 .contact-page .cp-social a:hover{ transform: translateY(-2px); background:rgba(255,255,255,.1); }
 
-/* نموذج */
 .contact-page .cp-form label{ display:block; font-weight:700; color:var(--brand); margin:10px 0 6px; }
 .contact-page .cp-form input,
 .contact-page .cp-form textarea{
@@ -2066,7 +2061,6 @@ header {
 }
 .contact-page .cp-btn:hover{ filter:brightness(0.92); transform: translateY(-1px); }
 
-/* خريطة */
 .contact-page .cp-map h2{ margin-bottom:6px; }
 .contact-page .cp-map-wrap{
   border:2px solid var(--brand); border-radius:14px; overflow:hidden; margin-top:10px;
@@ -2079,7 +2073,6 @@ header {
 }
 .contact-page .cp-outline:hover{ background: rgba(244,231,51,.15); }
 
-/* استجابة */
 @media (max-width: 992px){
   .contact-page .cp-grid{ grid-template-columns:1fr; }
 }
@@ -2088,8 +2081,27 @@ header {
   .contact-page .cp-map-wrap iframe{ height:320px; }
   .contact-page .cp-row{ grid-template-columns:1fr; }
 }
-	  
+
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+input::-ms-clear,
+input::-ms-reveal,
+input[type="search"]::-webkit-search-cancel-button {
+  display: none !important;
+}
+
+.cp-form input[type="email"] {
+  direction: ltr;
+  text-align: left;
+  padding-inline-end: 14px;
+}	  
   </style>	
+	
 </head>
 <body>
 <header>
@@ -2121,9 +2133,7 @@ header {
     <p>نسعد بتواصلك معنا لتقديم أي استفسار أو اقتراح.</p>
   </section>
 
-  <!-- معلومات + نموذج -->
   <section class="cp-grid">
-    <!-- معلومات التواصل -->
     <div class="cp-card cp-info" data-animate>
       <h2><i class="fas fa-address-card"></i> معلومات التواصل</h2>
 
@@ -2161,7 +2171,6 @@ header {
       </div>
     </div>
 
-    <!-- نموذج المراسلة -->
     <div class="cp-card cp-form" data-animate>
       <h2><i class="fas fa-paper-plane"></i> أرسل رسالة</h2>
       <form onsubmit="event.preventDefault(); alert('تم إرسال الرسالة بنجاح!'); this.reset();">
@@ -2170,7 +2179,7 @@ header {
             <input type="text" placeholder="اكتب اسمك الكامل" required>
           </label>
           <label>البريد الإلكتروني
-            <input type="email" placeholder="example@email.com" required>
+            <input type="email" dir="ltr" autocomplete="email" placeholder="example@email.com" required>
           </label>
         </div>
 
@@ -2187,7 +2196,6 @@ header {
     </div>
   </section>
 
-  <!-- الخريطة -->
   <section class="cp-card cp-map" data-animate>
     <h2><i class="fas fa-map-marker-alt"></i> موقع النادي</h2>
     <p class="cp-muted">Ittihad Kalba Sports & Cultural Club</p>
