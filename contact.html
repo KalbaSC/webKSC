@@ -2115,17 +2115,17 @@ header {
   </nav>
 </header>
 <main class="contact-page" dir="rtl">
-  <!-- عنوان بسيط -->
+  <!-- عنوان -->
   <section class="cp-hero">
     <h1>اتصل بنا</h1>
-    <p>يسعدنا استقبال استفساراتكم وملاحظاتكم.</p>
+    <p>نسعد بتواصلك معنا لتقديم أي استفسار أو اقتراح.</p>
   </section>
 
-  <!-- شبكية منظمة: معلومات + نموذج -->
+  <!-- معلومات + نموذج -->
   <section class="cp-grid">
-    <!-- معلومات التواصل + السوشيال -->
-    <div class="cp-card">
-      <h2>معلومات التواصل</h2>
+    <!-- معلومات التواصل -->
+    <div class="cp-card cp-info" data-animate>
+      <h2><i class="fas fa-address-card"></i> معلومات التواصل</h2>
 
       <div class="cp-item">
         <i class="fas fa-envelope"></i>
@@ -2151,7 +2151,7 @@ header {
         </div>
       </div>
 
-      <h3 class="cp-sub">تابعنا</h3>
+      <h3 class="cp-sub"><i class="fas fa-share-alt"></i> تابعنا</h3>
       <div class="cp-social">
         <a href="https://www.facebook.com/Kalbasc1" target="_blank"><i class="fab fa-facebook-f"></i><span>فيسبوك</span></a>
         <a href="https://x.com/Kalba_sc?mx=2" target="_blank"><i class="fab fa-twitter"></i><span>منصة X</span></a>
@@ -2162,44 +2162,43 @@ header {
     </div>
 
     <!-- نموذج المراسلة -->
-    <div class="cp-card">
-      <h2>أرسل رسالة</h2>
-      <form class="cp-form" onsubmit="event.preventDefault(); alert('شكراً لك! تم الإرسال.'); this.reset();">
+    <div class="cp-card cp-form" data-animate>
+      <h2><i class="fas fa-paper-plane"></i> أرسل رسالة</h2>
+      <form onsubmit="event.preventDefault(); alert('تم إرسال الرسالة بنجاح!'); this.reset();">
         <div class="cp-row">
           <label>الاسم الكامل
-            <input type="text" required>
+            <input type="text" placeholder="اكتب اسمك الكامل" required>
           </label>
           <label>البريد الإلكتروني
-            <input type="email" required>
+            <input type="email" placeholder="example@email.com" required>
           </label>
         </div>
 
         <label>الموضوع
-          <input type="text" required>
+          <input type="text" placeholder="موضوع الرسالة" required>
         </label>
 
         <label>الرسالة
-          <textarea rows="6" required></textarea>
+          <textarea rows="6" placeholder="اكتب رسالتك هنا..." required></textarea>
         </label>
 
-        <button type="submit" class="cp-btn">إرسال</button>
+        <button type="submit" class="cp-btn"><i class="fas fa-paper-plane"></i> إرسال</button>
       </form>
     </div>
   </section>
 
   <!-- الخريطة -->
-  <section class="cp-card cp-map">
-    <h2>📍 موقع النادي</h2>
+  <section class="cp-card cp-map" data-animate>
+    <h2><i class="fas fa-map-marker-alt"></i> موقع النادي</h2>
     <p class="cp-muted">Ittihad Kalba Sports & Cultural Club</p>
     <div class="cp-map-wrap">
-      <!-- استخدمت الإحداثيات الخاصة بموقعك لتفادي مشاكل الـ embed المعقدة -->
       <iframe
         src="https://www.google.com/maps?q=25.0599489,56.3467097&hl=ar&z=15&output=embed"
-        loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+        loading="lazy" allowfullscreen></iframe>
     </div>
 
     <div class="cp-map-actions">
-      <a class="cp-outline" href="https://maps.app.goo.gl/Q8yWHR2PtPhnnkSr8" target="_blank" rel="noopener">افتح في خرائط جوجل</a>
+      <a class="cp-outline" href="https://maps.app.goo.gl/Q8yWHR2PtPhnnkSr8" target="_blank"><i class="fas fa-location-arrow"></i> افتح في خرائط جوجل</a>
     </div>
   </section>
 </main>
@@ -2905,6 +2904,21 @@ function updateHeaderHeight() {
 window.addEventListener('load', updateHeaderHeight);
 window.addEventListener('resize', updateHeaderHeight);
 </script>
-	
+<script>
+document.addEventListener('scroll', () => {
+  document.querySelectorAll('[data-animate]').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }
+  });
+});
+document.querySelectorAll('[data-animate]').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(40px)';
+  el.style.transition = 'all .7s ease';
+});
+</script>	
 </body>
 </html>
