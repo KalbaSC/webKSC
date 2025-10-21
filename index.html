@@ -1236,7 +1236,11 @@ header {
   .side-menu .sm-indicator{ display: none !important; }
   body.with-top-nav {padding-top: 0 !important;}
 }
-
+[data-animate] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all .8s ease;
+}
   </style>
 </head>
 <body>
@@ -2293,24 +2297,13 @@ window.addEventListener('DOMContentLoaded', () => {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script>
 window.addEventListener('load', () => {
-  // select all elements marked for animation
-  const els = document.querySelectorAll('[data-animate]');
-  // set them hidden at first
-  els.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(40px)';
-    el.style.transition = 'all .8s ease';
-  });
-
-  // after short delay, fade & slide them in
   setTimeout(() => {
-    els.forEach(el => {
+    document.querySelectorAll('[data-animate]').forEach(el => {
       el.style.opacity = '1';
       el.style.transform = 'translateY(0)';
     });
-  }, 800); // delay before animation starts (0.8s)
+  }, 800);
 });
 </script>
-
 </body>
 </html>
