@@ -2292,20 +2292,25 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script>
-document.addEventListener('scroll', () => {
-  document.querySelectorAll('[data-animate]').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
+window.addEventListener('load', () => {
+  // select all elements marked for animation
+  const els = document.querySelectorAll('[data-animate]');
+  // set them hidden at first
+  els.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(40px)';
+    el.style.transition = 'all .8s ease';
+  });
+
+  // after short delay, fade & slide them in
+  setTimeout(() => {
+    els.forEach(el => {
       el.style.opacity = '1';
       el.style.transform = 'translateY(0)';
-    }
-  });
-});
-document.querySelectorAll('[data-animate]').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(40px)';
-  el.style.transition = 'all .7s ease';
+    });
+  }, 800); // delay before animation starts (0.8s)
 });
 </script>
+
 </body>
 </html>
