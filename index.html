@@ -2036,6 +2036,53 @@ header {
 
 /* ensure lines/arrows are visible (overrides any previous hide rules) */
 #orgstructure .org-connector-line{ display:block !important; }
+/* عمود مكدّس: يجعل العنوان بالأعلى والصناديق الثلاثة تحته */
+#orgstructure .org-col{
+  flex: 1 1 820px;              /* اضبط العرض إذا احتجت (700–900px) */
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 0 auto;
+}
+
+/* صف صغير للصناديق الثلاثة أسفل العنوان */
+#orgstructure .mini-row{
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: nowrap;            /* غيّرها إلى wrap لو أردت التفافًا على الشاشات الصغيرة */
+}
+
+/* أظهر الخطوط/الأسهم (بعض القواعد كانت تخفيها) */
+#orgstructure .org-connector-line{ display: block !important; }
+
+/* تحسين موضع الخطوط */
+#orgstructure .org-col .connector-vertical{
+  position: relative;
+  top: -6px;
+  width: 2px;
+  height: 26px;
+  margin: 0 auto;
+  display: block;
+  background: var(--line-color,#ffda00);
+}
+#orgstructure .org-col .mini-row::before{
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  top: -10px;
+  background: var(--line-color,#ffda00);
+}
+#orgstructure .org-col .mini-row{ position: relative; }
+
+/* على الشاشات الصغيرة، اسمح بالالتفاف */
+@media (max-width: 768px){
+  #orgstructure .mini-row{ flex-wrap: wrap; }
+}
 
   </style>
 </head>
@@ -2180,34 +2227,33 @@ header {
   <h3 class="org-title">أمين السر العام</h3>
 
   <div class="org-row">
-    <!-- الوحدة الطبية (wider parent so the 3 children can sit in one row below) -->
-    <div class="org-item wide-parent">
-      <div class="org-item-content">
-        <div class="org-item-title">الوحدة الطبية</div>
+    <!-- عمود مكوّن: عنوان الوحدة + أسفله ثلاثة صناديق -->
+    <div class="org-col">
+      <!-- العنوان (الصندوق الكبير في الأعلى) -->
+      <div class="org-item">
+        <div class="org-item-content">
+          <div class="org-item-title">الوحدة الطبية</div>
+        </div>
       </div>
 
-      <!-- connector from main box to children -->
-      <div class="org-connector-line connector-vertical"></div>
+      <!-- خط رأسي يصل بين العنوان والصف السفلي -->
+      <span class="org-connector-line connector-vertical"></span>
 
-      <!-- children row (sits INSIDE this card, but wide enough to hold three) -->
-      <div class="org-row centered children-row" style="margin-top:50px; position:relative;">
-        <div class="org-connector-line connector-horizontal" style="top:-25px;"></div>
-
-        <div class="org-item" style="width:220px;">
+      <!-- الصف السفلي بثلاثة صناديق -->
+      <div class="mini-row">
+        <div class="org-item">
           <div class="org-item-content"><div class="org-item-title">طبيب الوحدة</div></div>
         </div>
-
-        <div class="org-item" style="width:220px;">
+        <div class="org-item">
           <div class="org-item-content"><div class="org-item-title">منسق صحي</div></div>
         </div>
-
-        <div class="org-item" style="width:220px;">
+        <div class="org-item">
           <div class="org-item-content"><div class="org-item-title">مسعف</div></div>
         </div>
       </div>
     </div>
 
-    <!-- السكرتير التنفيذي (remains to the side on the same row) -->
+    <!-- الصندوق الآخر على نفس المستوى -->
     <div class="org-item">
       <div class="org-connector-line connector-vertical"></div>
       <div class="org-item-content">
