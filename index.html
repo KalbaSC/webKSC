@@ -2000,6 +2000,17 @@ header {
   top: -18px !important;
   height: 2px !important;
   background: var(--line-color, #ffda00) !important;
+}
+#orgstructure .org-level + .org-level::before {
+  content: "";
+  position: absolute;
+  top: -35px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--line-color, #ffda00);
+  opacity: 0.9;
+  z-index: 2;
 }	   
   </style>
 </head>
