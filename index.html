@@ -2021,7 +2021,22 @@ header {
   font-size: 18px;
   font-weight: bold;
 }
-	   
+
+	   /* Make the medical unit block wide enough so its children can sit in one row */
+#orgstructure .wide-parent{
+  flex: 0 1 720px !important;   /* try 680–760px if you need to tune */
+  max-width: 720px !important;
+}
+
+/* children row: center nicely with some gap */
+#orgstructure .wide-parent .children-row{
+  justify-content: center !important;
+  gap: 16px !important;
+}
+
+/* ensure lines/arrows are visible (overrides any previous hide rules) */
+#orgstructure .org-connector-line{ display:block !important; }
+
   </style>
 </head>
 <body>
@@ -2158,46 +2173,41 @@ header {
         </div>
       </div>
       
+
 <!-- ===== أمين السر العام ===== -->
 <div class="org-level" data-animate>
   <div class="org-connector-line connector-horizontal"></div>
   <h3 class="org-title">أمين السر العام</h3>
 
   <div class="org-row">
-    <!-- الوحدة الطبية -->
-    <div class="org-item">
+    <!-- الوحدة الطبية (wider parent so the 3 children can sit in one row below) -->
+    <div class="org-item wide-parent">
       <div class="org-item-content">
         <div class="org-item-title">الوحدة الطبية</div>
       </div>
 
-      <!-- vertical connector from main box to the row below -->
+      <!-- connector from main box to children -->
       <div class="org-connector-line connector-vertical"></div>
 
-      <!-- row of three sub-boxes below -->
-      <div class="org-row centered" style="margin-top:50px; position:relative;">
+      <!-- children row (sits INSIDE this card, but wide enough to hold three) -->
+      <div class="org-row centered children-row" style="margin-top:50px; position:relative;">
         <div class="org-connector-line connector-horizontal" style="top:-25px;"></div>
 
         <div class="org-item" style="width:220px;">
-          <div class="org-item-content">
-            <div class="org-item-title">طبيب الوحدة</div>
-          </div>
+          <div class="org-item-content"><div class="org-item-title">طبيب الوحدة</div></div>
         </div>
 
         <div class="org-item" style="width:220px;">
-          <div class="org-item-content">
-            <div class="org-item-title">منسق صحي</div>
-          </div>
+          <div class="org-item-content"><div class="org-item-title">منسق صحي</div></div>
         </div>
 
         <div class="org-item" style="width:220px;">
-          <div class="org-item-content">
-            <div class="org-item-title">مسعف</div>
-          </div>
+          <div class="org-item-content"><div class="org-item-title">مسعف</div></div>
         </div>
       </div>
     </div>
 
-    <!-- السكرتير التنفيذي -->
+    <!-- السكرتير التنفيذي (remains to the side on the same row) -->
     <div class="org-item">
       <div class="org-connector-line connector-vertical"></div>
       <div class="org-item-content">
@@ -2206,7 +2216,6 @@ header {
     </div>
   </div>
 </div>
-
       
       <div class="org-level" data-animate>
         <div class="org-connector-line connector-horizontal"></div>
