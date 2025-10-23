@@ -1329,6 +1329,50 @@ header {
   outline: 2px solid #f4e733;
   outline-offset: 3px;
 }
+.org-controls{
+  display:flex; gap:8px; margin:8px 0 18px; justify-content:flex-start; flex-wrap:wrap;
+}
+.org-btn{
+  background:linear-gradient(180deg,#f4e733,#c9b812);
+  color:#0a0a0a; font-weight:800; border:1px solid #000; border-radius:999px;
+  padding:8px 14px; cursor:pointer; box-shadow:0 6px 16px rgba(244,231,51,.18), 0 0 0 1px rgba(0,0,0,.55) inset;
+}
+.org-btn:active{ transform: translateY(1px); }
+
+.org-title.as-toggle{
+  all:unset;
+  display:inline-flex; align-items:center; gap:10px; cursor:pointer;
+  margin:0 0 18px; padding:10px 18px; font-weight:900; font-size:20px; line-height:1;
+  color:#0a0a0a; background:linear-gradient(180deg,#f4e733,#c9b812);
+  border:1px solid #000; border-radius:999px; box-shadow:0 6px 16px rgba(244,231,51,.18), 0 0 0 1px rgba(0,0,0,.55) inset;
+  position:relative;
+}
+.org-title.as-toggle::after{
+  content:"⌄"; font-weight:900; transform: rotate(0deg); transition: transform .25s ease;
+}
+.org-level[aria-expanded="false"] > .org-title.as-toggle::after{ transform: rotate(180deg); }
+
+.org-chip{
+  display:inline-block; padding:6px 10px; border-radius:999px;
+  background:rgba(244,231,51,.12); border:1px solid rgba(244,231,51,.45); font-weight:700;
+}
+
+.org-level [role="group"]{
+  overflow:hidden; transition: grid-template-rows .35s ease, opacity .25s ease, margin .25s ease;
+}
+.org-level[aria-expanded="false"] [role="group"]{
+  display:grid; grid-template-rows: 0fr; opacity:.0; margin:0 !important;
+}
+.org-level[aria-expanded="true"]  [role="group"]{
+  display:grid; grid-template-rows: 1fr; opacity:1;
+}
+
+@media print{
+  header, .side-menu, .hero-wrapper, #chat-wrapper { display:none !important; }
+  .info-container{ box-shadow:none !important; background:#fff !important; color:#000 !important; border-color:#000 !important; }
+  .org-title.as-toggle, .org-btn{ box-shadow:none !important; background:#fff !important; border-color:#000 !important; color:#000 !important; }
+  body{ background:#fff !important; }
+}
 	   
   </style>
 </head>
@@ -1433,128 +1477,91 @@ header {
   </div>
 </section>
 
-<section id="orgstructure" class="section">
+<section id="orgstructure" class="section" aria-labelledby="orgstructure-title">
   <div class="info-container">
-    <h2>الهيكل التنظيمي</h2>
-    
-    <div class="org-structure">
+    <h2 id="orgstructure-title">الهيكل التنظيمي</h2>
 
-	  <div class="org-level" data-animate>
-        <h3 class="org-title">رئيس مجلس الإدارة</h3>
-        <div class="org-row">
-          <div class="org-item">
+    <div class="org-controls" dir="rtl">
+      <button class="org-btn" data-action="expand">توسيع الكل</button>
+      <button class="org-btn" data-action="collapse">طيّ الكل</button>
+    </div>
+
+    <div class="org-structure" role="tree">
+
+      <div class="org-level" data-animate role="treeitem" aria-expanded="true">
+        <button class="org-title as-toggle" aria-controls="org-1">رئيس مجلس الإدارة</button>
+        <div class="org-row" id="org-1" role="group">
+          <div class="org-item" tabindex="0"> 
             <div class="connector-arrow">↓</div>
             <div class="org-connector-line connector-vertical"></div>
-            مكتب الرئيس
+            <span class="org-chip">مكتب الرئيس</span>
           </div>
-          <div class="org-item">
+          <div class="org-item" tabindex="0">
             <div class="connector-arrow">↓</div>
             <div class="org-connector-line connector-vertical"></div>
-            مكتب التدقيق الداخلي
+            <span class="org-chip">مكتب التدقيق الداخلي</span>
           </div>
         </div>
       </div>
-      
-      <div class="org-level" data-animate>
+
+      <div class="org-level" data-animate role="treeitem" aria-expanded="true">
         <div class="org-connector-line connector-horizontal"></div>
-        <h3 class="org-title">مجلس الإدارة</h3>
-        <div class="org-row">
-          <div class="org-item">
-            <div class="connector-arrow">↓</div>
-            إدارة الاتصال الحكومي
-          </div>
-          <div class="org-item">
-            <div class="connector-arrow">↓</div>
-            مكتب الشؤون القانونية
-          </div>
-          <div class="org-item">
-            <div class="connector-arrow">↓</div>
-            مستشارون
-          </div>
-          <div class="org-item">
-            <div class="connector-arrow">↓</div>
-            المدير العام
-          </div>
-          <div class="org-item">
-            <div class="connector-arrow">↓</div>
-            مكتب الأداء العام
-          </div>
+        <button class="org-title as-toggle" aria-controls="org-2">مجلس الإدارة</button>
+        <div class="org-row" id="org-2" role="group">
+          <div class="org-item" tabindex="0"><div class="connector-arrow">↓</div>إدارة الاتصال الحكومي</div>
+          <div class="org-item" tabindex="0"><div class="connector-arrow">↓</div>مكتب الشؤون القانونية</div>
+          <div class="org-item" tabindex="0"><div class="connector-arrow">↓</div>مستشارون</div>
+          <div class="org-item" tabindex="0"><div class="connector-arrow">↓</div>المدير العام</div>
+          <div class="org-item" tabindex="0"><div class="connector-arrow">↓</div>مكتب الأداء العام</div>
         </div>
       </div>
-      
-      <div class="org-level" data-animate>
+
+      <div class="org-level" data-animate role="treeitem" aria-expanded="true">
         <div class="org-connector-line connector-horizontal"></div>
-        <h3 class="org-title">المدير العام</h3>
-        <div class="org-row">
-          <div class="org-item">
-            <div class="connector-arrow">↓</div>
-            مكتب المدير العام
-          </div>
+        <button class="org-title as-toggle" aria-controls="org-3">المدير العام</button>
+        <div class="org-row" id="org-3" role="group">
+          <div class="org-item" tabindex="0"><div class="connector-arrow">↓</div>مكتب المدير العام</div>
         </div>
-        
-        <div class="org-row">
-          <div class="org-item">
-            إدارة النتائج المالية
-          </div>
-          <div class="org-item">
-            إدارة الإدارة
-          </div>
+        <div class="org-row" role="group">
+          <div class="org-item" tabindex="0">إدارة النتائج المالية</div>
+          <div class="org-item" tabindex="0">إدارة الإدارة</div>
         </div>
       </div>
-      
-      <div class="org-level" data-animate>
+
+      <div class="org-level" data-animate role="treeitem" aria-expanded="true">
         <div class="org-connector-line connector-horizontal"></div>
-        <h3 class="org-title">القطاعات</h3>
-        <div class="org-row">
-          <div class="org-item">
-            <div class="connector-arrow">↓</div>
-            قطاع الخدمات المساندة
-          </div>
-          <div class="org-item">
-            <div class="connector-arrow">↓</div>
-            قطاع الخدمات الإعلامية
-          </div>
-          <div class="org-item">
-            <div class="connector-arrow">↓</div>
-            المشاريع
-          </div>
+        <button class="org-title as-toggle" aria-controls="org-4">القطاعات</button>
+        <div class="org-row" id="org-4" role="group">
+          <div class="org-item" tabindex="0"><div class="connector-arrow">↓</div>قطاع الخدمات المساندة</div>
+          <div class="org-item" tabindex="0"><div class="connector-arrow">↓</div>قطاع الخدمات الإعلامية</div>
+          <div class="org-item" tabindex="0"><div class="connector-arrow">↓</div>المشاريع</div>
         </div>
       </div>
-      
-      <div class="org-level" data-animate>
+
+      <div class="org-level" data-animate role="treeitem" aria-expanded="true">
         <div class="org-connector-line connector-horizontal"></div>
-        <h3 class="org-title">قطاع الخدمات المساندة</h3>
-        <div class="org-row">
-          <div class="org-item">
-            إدارة الموارد البشرية والخدمات الإدارية
-          </div>
-          <div class="org-item">
-            إدارة المالية والمشتريات
-          </div>
-          <div class="org-item">
-            إدارة تقنية المعلومات والأمن السيبراني
-          </div>
+        <button class="org-title as-toggle" aria-controls="org-5">قطاع الخدمات المساندة</button>
+        <div class="org-row" id="org-5" role="group">
+          <div class="org-item" tabindex="0">إدارة الموارد البشرية والخدمات الإدارية</div>
+          <div class="org-item" tabindex="0">إدارة المالية والمشتريات</div>
+          <div class="org-item" tabindex="0">إدارة تقنية المعلومات والأمن السيبراني</div>
         </div>
       </div>
-      
-      <div class="org-level" data-animate>
+
+      <div class="org-level" data-animate role="treeitem" aria-expanded="true">
         <div class="org-connector-line connector-horizontal"></div>
-        <h3 class="org-title">قطاع الخدمات الإعلامية</h3>
-        <div class="org-row">
-          <div class="org-item">
-            إدارة الإنتاج الإعلامي
-          </div>
-          <div class="org-item">
-            إدارة الرصد وخدمات المحتوى
-          </div>
-          <div class="org-item">
-            إدارة المتابعة والتفتيش
-          </div>
+        <button class="org-title as-toggle" aria-controls="org-6">قطاع الخدمات الإعلامية</button>
+        <div class="org-row" id="org-6" role="group">
+          <div class="org-item" tabindex="0">إدارة الإنتاج الإعلامي</div>
+          <div class="org-item" tabindex="0">إدارة الرصد وخدمات المحتوى</div>
+          <div class="org-item" tabindex="0">إدارة المتابعة والتفتيش</div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
+
 </div>	
 </main>	
 <script>
@@ -2394,5 +2401,29 @@ window.addEventListener('load', () => {
   }, 800);
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('#orgstructure .org-title.as-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const level = btn.closest('.org-level');
+      const state = level.getAttribute('aria-expanded') === 'true';
+      level.setAttribute('aria-expanded', state ? 'false' : 'true');
+    });
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+    });
+  });
+
+  const wrap = document.querySelector('#orgstructure');
+  wrap?.querySelectorAll('.org-controls .org-btn').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const expand = b.dataset.action === 'expand';
+      wrap.querySelectorAll('.org-level[role="treeitem"]').forEach(l=> l.setAttribute('aria-expanded', expand ? 'true' : 'false'));
+    });
+  });
+});
+</script>
+
 </body>
 </html>
