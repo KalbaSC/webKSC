@@ -1105,7 +1105,6 @@ header {
   transition: all .8s ease;
 }
 
-/* ========== ORG STRUCTURE – ENHANCED ========== */
 .org-structure{
   padding: 8px 10px 22px;
   text-align: center;
@@ -1219,27 +1218,22 @@ header {
 #orgstructure .info-container > h2{
   text-align:center !important;
 }
-/* ===== ORG FIX: rows, boxes, connectors ===== */
 
-/* كل مستوى */
 .org-level{
   position: relative !important;
   margin: 40px 0 70px !important;
   padding-top: 24px !important;
 }
 
-/* صفوف الصناديق */
 .org-row{
   display: grid !important;
-  /* ثبّت عدد الأعمدة كي لا تتداخل الأحجام */
   grid-template-columns: repeat(4, minmax(260px, 1fr)) !important;
   gap: 24px !important;
   align-items: stretch !important;
   justify-items: stretch !important;
-  grid-auto-rows: minmax(110px, auto) !important; /* ارتفاع أدنى موحّد */
+  grid-auto-rows: minmax(110px, auto) !important;
 }
 
-/* استجابي */
 @media (max-width: 1200px){
   .org-row{ grid-template-columns: repeat(2, minmax(260px,1fr)) !important; }
 }
@@ -1247,18 +1241,14 @@ header {
   .org-row{ grid-template-columns: 1fr !important; }
 }
 
-/* الصندوق نفسه */
 .org-item{
-  /* ألغِ أي عرض/هوامش/تحويلات سابقة تسبب التزاحم */
   width: auto !important;
   margin: 0 !important;
   transform: none !important;
 
-  /* امنع الظلال من تغطية الجار */
   overflow: hidden !important;
   z-index: 0 !important;
 
-  /* احرص أنه يتمدد لارتفاع الصف */
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -1266,10 +1256,8 @@ header {
   box-sizing: border-box !important;
 }
 
-/* لو عندك تأثير hover يرفع الصندوق فوق جيرانه */
 .org-item:hover{ z-index: 2 !important; }
 
-/* الخطوط الواصلة لا تؤثر على التدفق */
 .org-connector-line{
   position: absolute !important;
   left: 10% !important; right: 10% !important;
@@ -1284,7 +1272,6 @@ header {
   height: 32px !important;
 }
 
-/* عنوان القسم بالمنتصف */
 #orgstructure .info-container > h2{ text-align: center !important; }
 .org-structure {
   padding: 20px 0;
@@ -1382,7 +1369,6 @@ header {
   height: 2px;
 }
 
-/* تحسينات للاستجابة على الأجهزة المحمولة */
 @media (max-width: 768px) {
   .org-row {
     grid-template-columns: 1fr;
@@ -1413,13 +1399,11 @@ header {
   }
 }
 
-/* تحسينات للشاشات الكبيرة */
 @media (min-width: 1200px) {
   .org-row {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 }
-/* تحسينات إضافية للهيكل التنظيمي */
 .org-structure {
   padding: 20px 0;
   position: relative;
@@ -1527,7 +1511,6 @@ header {
   height: 2px;
 }
 
-/* تحسينات للاستجابة على الأجهزة المحمولة */
 @media (max-width: 768px) {
   .org-row {
     flex-direction: column;
@@ -1561,14 +1544,12 @@ header {
   }
 }
 
-/* تحسينات للشاشات الكبيرة */
 @media (min-width: 1200px) {
   .org-item {
     width: 300px;
   }
 }
 
-/* تحسينات خاصة للصفوف ذات العناصر الفردية */
 .org-row:has(.org-item:only-child) {
   justify-content: center;
 }
@@ -1576,7 +1557,6 @@ header {
 .org-row:has(.org-item:only-child) .org-item {
   width: 300px;
 }	
-/* إعادة تعيين وتصحيح محاذاة الهيكل التنظيمي */
 .org-structure {
   padding: 20px 0;
   position: relative;
@@ -1685,7 +1665,6 @@ header {
   height: 2px;
 }
 
-/* تحسينات للاستجابة على الأجهزة المحمولة */
 @media (max-width: 768px) {
   .org-row {
     flex-direction: column;
@@ -1732,14 +1711,12 @@ header {
   }
 }
 
-/* تحسينات للشاشات الكبيرة */
 @media (min-width: 1200px) {
   .org-item {
     width: 280px;
   }
 }
 
-/* تحسينات خاصة للصفوف ذات العناصر الفردية */
 .org-row:has(.org-item:only-child) {
   justify-content: center;
 }
@@ -1748,24 +1725,20 @@ header {
   width: 300px;
 }
 
-/* ضمان أن جميع العناصر تبدأ من المركز */
 .org-structure > * {
   margin-right: auto;
   margin-left: auto;
 }
 
-/* إصلاح محاذاة النص داخل الصناديق */
 .org-item-content {
   text-align: center;
   width: 100%;
 }
 
-/* تحسين المسافات بين المستويات */
 .org-level:not(:first-child) {
   margin-top: 50px;
 }
 	   
-/* إصلاح كامل لمحاذاة الهيكل التنظيمي */
 .org-structure {
   padding: 20px 0;
   position: relative;
@@ -1876,7 +1849,6 @@ header {
   height: 2px;
 }
 
-/* إصلاح محاذاة الصفوف الفردية */
 .org-row:has(.org-item:only-child) {
   justify-content: center !important;
 }
@@ -1886,7 +1858,6 @@ header {
   margin: 0 auto;
 }
 
-/* تحسينات للاستجابة على الأجهزة المحمولة */
 @media (max-width: 768px) {
   .org-row {
     flex-direction: column;
@@ -1923,7 +1894,6 @@ header {
   }
 }
 
-/* تحسينات للشاشات المتوسطة */
 @media (min-width: 769px) and (max-width: 1024px) {
   .org-item {
     width: 250px;
@@ -1934,14 +1904,12 @@ header {
   }
 }
 
-/* تحسينات للشاشات الكبيرة */
 @media (min-width: 1200px) {
   .org-item {
     width: 280px;
   }
 }
 
-/* إصلاح إضافي لضمان المحاذاة المركزية */
 .org-structure > * {
   margin-right: auto;
   margin-left: auto;
@@ -1956,7 +1924,6 @@ header {
   margin-top: 50px;
 }
 
-/* إصلاح نهائي للمحاذاة - إعادة تعيين أي اتجاه قد يؤثر على المحاذاة */
 .org-structure,
 .org-level,
 .org-row,
@@ -1966,8 +1933,7 @@ header {
   text-align: center;
 }
 
-/* ===== ORG FIX – center boxes & keep lines inside ===== */
-#orgstructure .info-container { overflow: hidden; }                 /* يمنع الخطوط من الخروج */
+#orgstructure .info-container { overflow: hidden; }
 
 #orgstructure .org-structure { width: 100%; }
 
@@ -1983,7 +1949,7 @@ header {
 #orgstructure .org-row{
   display: flex !important;
   flex-wrap: wrap !important;
-  justify-content: center !important;   /* توسيط الصناديق */
+  justify-content: center !important;
   align-items: stretch !important;
   gap: 22px !important;
   margin: 0 auto 24px !important;
@@ -2028,7 +1994,13 @@ header {
   #orgstructure .connector-horizontal,
   #orgstructure .connector-vertical{ display:none !important; }
 }
-	   
+#orgstructure .connector-horizontal {
+  left: 2% !important;
+  right: 2% !important;
+  top: -18px !important;
+  height: 2px !important;
+  background: var(--line-color, #ffda00) !important;
+}	   
   </style>
 </head>
 <body>
