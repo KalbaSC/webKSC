@@ -1329,6 +1329,33 @@ header {
   outline: 2px solid #f4e733;
   outline-offset: 3px;
 }
+
+.org-level{
+  display:block !important;
+  position:relative;
+  margin:36px 0 64px !important;
+  padding-top:24px !important;
+}
+
+.org-row{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit, minmax(240px,1fr)) !important;
+  gap:18px !important;
+  justify-items:center !important;
+}
+
+.org-item{
+  min-height:68px;
+  z-index:2;
+}
+
+.org-connector-line{ z-index:1; }
+.connector-vertical{ top:-36px; height:32px; }
+.connector-horizontal{ top:-22px; }
+
+#orgstructure .info-container > h2{
+  text-align:center !important;
+}
 	   
   </style>
 </head>
