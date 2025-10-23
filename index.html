@@ -1964,7 +1964,71 @@ header {
 .org-item-content {
   direction: rtl;
   text-align: center;
-}	   
+}
+
+/* ===== ORG FIX – center boxes & keep lines inside ===== */
+#orgstructure .info-container { overflow: hidden; }                 /* يمنع الخطوط من الخروج */
+
+#orgstructure .org-structure { width: 100%; }
+
+#orgstructure .org-level {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0 60px;
+}
+
+#orgstructure .org-row{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;   /* توسيط الصناديق */
+  align-items: stretch !important;
+  gap: 22px !important;
+  margin: 0 auto 24px !important;
+  max-width: 1200px !important;
+  width: 100% !important;
+}
+
+#orgstructure .org-item{
+  flex: 1 1 280px !important;
+  max-width: 320px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#orgstructure .org-connector-line{ pointer-events:none; z-index:1; }
+
+#orgstructure .connector-vertical{
+  top: -32px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 2px !important;
+  height: 30px !important;
+}
+
+#orgstructure .connector-horizontal{
+  top: -18px !important;
+  left: 6% !important;
+  right: 6% !important;
+  height: 2px !important;
+}
+
+#orgstructure .org-level + .org-level::before{
+  left: 6% !important;
+  right: 6% !important;
+}
+
+@media (max-width: 768px){
+  #orgstructure .org-row{ flex-direction: column; align-items: center; gap: 16px; }
+  #orgstructure .org-item{ width: 92%; max-width: 340px; }
+  #orgstructure .connector-horizontal,
+  #orgstructure .connector-vertical{ display:none !important; }
+}
+	   
   </style>
 </head>
 <body>
