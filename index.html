@@ -2089,6 +2089,68 @@ header {
 @media (max-width: 768px){
   #orgstructure .mini-row{ flex-wrap: wrap; }
 }
+/* ==== Fix layout just for the medical unit column inside "أمين السر العام" ==== */
+
+/* Make the medical column wide enough and centered */
+#orgstructure .org-col{
+  flex: 0 1 860px;
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Top title card width */
+#orgstructure .org-col > .org-item{
+  width: 320px;
+  max-width: 100%;
+}
+
+/* Children row: three small boxes centered and even */
+#orgstructure .org-col .mini-row{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 26px;
+}
+#orgstructure .org-col .mini-row .org-item{
+  width: 240px;       /* same width for all three */
+  min-width: 220px;
+}
+
+/* Centered vertical tick under the title */
+#orgstructure .org-col .connector-vertical{
+  position: relative !important;
+  top: 8px !important;
+  margin: 0 auto !important;
+  width: 2px !important;
+  height: 22px !important;
+  background: #f4e733 !important;
+}
+
+/* Centered horizontal line above the three boxes */
+#orgstructure .org-col .mini-row::before{
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, 84%);
+  height: 2px;
+  background: #f4e733;
+}
+
+/* Hide stray global level lines that were bleeding into this level */
+#orgstructure .org-level > .connector-horizontal,
+#orgstructure .org-level > .connector-vertical{
+  display: none !important;
+}
+
+/* Keep connectors visible only where we explicitly draw them */
+#orgstructure .org-connector-line{ display: block !important; }
 
   </style>
 </head>
