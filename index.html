@@ -1983,11 +1983,6 @@ header {
   height: 2px !important;
 }
 
-#orgstructure .org-level + .org-level::before{
-  left: 6% !important;
-  right: 6% !important;
-}
-
 @media (max-width: 768px){
   #orgstructure .org-row{ flex-direction: column; align-items: center; gap: 16px; }
   #orgstructure .org-item{ width: 92%; max-width: 340px; }
@@ -2004,13 +1999,17 @@ header {
 #orgstructure .org-level + .org-level::before {
   content: "";
   position: absolute;
-  top: -35px;
+  top: -28px;
   left: 0;
   right: 0;
   height: 2px;
   background: var(--line-color, #ffda00);
   opacity: 0.9;
   z-index: 2;
+}	   
+#orgstructure .org-connector-line,
+#orgstructure hr {
+  display: none !important;
 }	   
   </style>
 </head>
