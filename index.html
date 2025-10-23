@@ -1242,119 +1242,94 @@ header {
   transition: all .8s ease;
 }
 
-.org-structure {
-  padding: 20px;
-  font-family: 'NotoKufiArabic', sans-serif;
+/* ========== ORG STRUCTURE – ENHANCED ========== */
+.org-structure{
+  padding: 8px 10px 22px;
   text-align: center;
 }
 
-.org-level {
-  margin-bottom: 40px;
+.org-level{
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 26px 0 42px;
+  padding-top: 8px;
 }
 
-.org-title {
-  color: #f4e733;
-  font-size: 24px;
-  margin-bottom: 30px;
-  padding-bottom: 10px;
-  border-bottom: 3px solid #f4e733;
-  display: inline-block;
-  font-weight: bold;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-  background: #000;
-  padding: 10px 20px;
-  border-radius: 8px;
-}
-
-.org-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 25px;
-  position: relative;
-  justify-content: center;
-  width: 100%;
-}
-
-.org-item {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 10px;
-  border: 2px solid #f4e733;
-  min-width: 220px;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.org-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(244, 231, 51, 0.3);
-  background: rgba(244, 231, 51, 0.1);
-}
-
-.org-icon {
-  font-size: 28px;
-  margin-bottom: 5px;
-}
-
-.org-name {
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 1.4;
-}
-
-.org-connector-line {
+.org-level + .org-level::before{
+  content:"";
   position: absolute;
-  background: #f4e733;
-  z-index: 1;
+  inset-inline: 12%;
+  top: -14px;
+  height: 1px;
+  background: linear-gradient(90deg,transparent,#f4e73366,transparent);
 }
 
-.connector-vertical {
-  width: 3px;
-  height: 40px;
-  bottom: -40px;
-  left: 50%;
-  transform: translateX(-50%);
+.org-title{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin:0 0 18px;
+  padding:10px 18px;
+  font-weight:900;
+  font-size:20px;
+  line-height:1;
+  color:#0a0a0a;
+  background: linear-gradient(180deg,#f4e733,#c9b812);
+  border:1px solid #000;
+  border-radius:999px;
+  box-shadow: 0 6px 16px rgba(244,231,51,.18), 0 0 0 1px rgba(0,0,0,.55) inset;
 }
 
-.connector-horizontal {
-  height: 3px;
-  width: 80%;
-  top: -20px;
-  left: 10%;
+.org-row{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px,1fr));
+  gap:14px;
+  margin:0 auto;
+  width:100%;
+  max-width:1100px;
+  justify-items:center;
 }
 
-@media (max-width: 768px) {
-  .org-row {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .org-item {
-    min-width: 200px;
-    width: 90%;
-  }
-  
-  .org-title {
-    font-size: 20px;
-  }
-  
-  .connector-horizontal {
-    width: 90%;
-  }
-}	   
+.org-item{
+  position:relative;
+  width:100%;
+  padding:16px 14px;
+  text-align:center;
+  background: radial-gradient(120% 120% at 50% 0%, rgba(255,255,255,.06), rgba(0,0,0,.18));
+  border:1px solid rgba(244,231,51,.45);
+  border-radius:14px;
+  backdrop-filter: blur(2px);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+}
+.org-item:hover{
+  transform: translateY(-3px);
+  border-color:#f4e733;
+  box-shadow: 0 10px 26px rgba(244,231,51,.18);
+}
+
+.connector-arrow{
+  position:absolute;
+  top:-20px; inset-inline:0;
+  margin:auto; width:max-content;
+  color:#f4e733; font-weight:900; font-size:18px;
+}
+.org-connector-line{ display:block; background:#f4e733; opacity:.9; }
+.connector-vertical{ position:absolute; top:-32px; inset-inline:0; margin:auto; width:2px; height:30px; }
+.connector-horizontal{ position:absolute; left:10%; right:10%; top:-18px; height:2px; }
+
+@media (max-width: 640px){
+  .connector-arrow,
+  .org-connector-line{ display:none !important; }
+  .org-title{ font-size:18px; padding:8px 14px; }
+  .org-item{ padding:14px 12px; }
+}
+
+.org-item:focus-within,
+.org-item:focus{
+  outline: 2px solid #f4e733;
+  outline-offset: 3px;
+}
+	   
   </style>
 </head>
 <body>
@@ -1463,133 +1438,117 @@ header {
     <h2>الهيكل التنظيمي</h2>
     
     <div class="org-structure">
-      <div class="org-level">
+
+	  <div class="org-level" data-animate>
         <h3 class="org-title">رئيس مجلس الإدارة</h3>
         <div class="org-row">
           <div class="org-item">
-            <div class="org-icon">🏢</div>
-            <div class="org-name">مكتب الرئيس</div>
+            <div class="connector-arrow">↓</div>
             <div class="org-connector-line connector-vertical"></div>
+            مكتب الرئيس
           </div>
           <div class="org-item">
-            <div class="org-icon">🔍</div>
-            <div class="org-name">مكتب التدقيق الداخلي</div>
+            <div class="connector-arrow">↓</div>
             <div class="org-connector-line connector-vertical"></div>
+            مكتب التدقيق الداخلي
           </div>
         </div>
       </div>
       
-      <div class="org-level">
+      <div class="org-level" data-animate>
         <div class="org-connector-line connector-horizontal"></div>
         <h3 class="org-title">مجلس الإدارة</h3>
         <div class="org-row">
           <div class="org-item">
-            <div class="org-icon">📞</div>
-            <div class="org-name">إدارة الاتصال الحكومي</div>
-            <div class="org-connector-line connector-vertical"></div>
+            <div class="connector-arrow">↓</div>
+            إدارة الاتصال الحكومي
           </div>
           <div class="org-item">
-            <div class="org-icon">⚖️</div>
-            <div class="org-name">مكتب الشؤون القانونية</div>
-            <div class="org-connector-line connector-vertical"></div>
+            <div class="connector-arrow">↓</div>
+            مكتب الشؤون القانونية
           </div>
           <div class="org-item">
-            <div class="org-icon">💼</div>
-            <div class="org-name">مستشارون</div>
-            <div class="org-connector-line connector-vertical"></div>
+            <div class="connector-arrow">↓</div>
+            مستشارون
           </div>
           <div class="org-item">
-            <div class="org-icon">👨‍💼</div>
-            <div class="org-name">المدير العام</div>
-            <div class="org-connector-line connector-vertical"></div>
+            <div class="connector-arrow">↓</div>
+            المدير العام
           </div>
           <div class="org-item">
-            <div class="org-icon">📊</div>
-            <div class="org-name">مكتب الأداء العام</div>
-            <div class="org-connector-line connector-vertical"></div>
+            <div class="connector-arrow">↓</div>
+            مكتب الأداء العام
           </div>
         </div>
       </div>
       
-      <div class="org-level">
+      <div class="org-level" data-animate>
         <div class="org-connector-line connector-horizontal"></div>
         <h3 class="org-title">المدير العام</h3>
         <div class="org-row">
           <div class="org-item">
-            <div class="org-icon">🏢</div>
-            <div class="org-name">مكتب المدير العام</div>
-            <div class="org-connector-line connector-vertical"></div>
+            <div class="connector-arrow">↓</div>
+            مكتب المدير العام
           </div>
         </div>
         
         <div class="org-row">
           <div class="org-item">
-            <div class="org-icon">💰</div>
-            <div class="org-name">إدارة النتائج المالية</div>
+            إدارة النتائج المالية
           </div>
           <div class="org-item">
-            <div class="org-icon">⚙️</div>
-            <div class="org-name">إدارة الإدارة</div>
+            إدارة الإدارة
           </div>
         </div>
       </div>
       
-      <div class="org-level">
+      <div class="org-level" data-animate>
         <div class="org-connector-line connector-horizontal"></div>
         <h3 class="org-title">القطاعات</h3>
         <div class="org-row">
           <div class="org-item">
-            <div class="org-icon">🛠️</div>
-            <div class="org-name">قطاع الخدمات المساندة</div>
-            <div class="org-connector-line connector-vertical"></div>
+            <div class="connector-arrow">↓</div>
+            قطاع الخدمات المساندة
           </div>
           <div class="org-item">
-            <div class="org-icon">📰</div>
-            <div class="org-name">قطاع الخدمات الإعلامية</div>
-            <div class="org-connector-line connector-vertical"></div>
+            <div class="connector-arrow">↓</div>
+            قطاع الخدمات الإعلامية
           </div>
           <div class="org-item">
-            <div class="org-icon">📋</div>
-            <div class="org-name">المشاريع</div>
-            <div class="org-connector-line connector-vertical"></div>
+            <div class="connector-arrow">↓</div>
+            المشاريع
           </div>
         </div>
       </div>
       
-      <div class="org-level">
+      <div class="org-level" data-animate>
         <div class="org-connector-line connector-horizontal"></div>
         <h3 class="org-title">قطاع الخدمات المساندة</h3>
         <div class="org-row">
           <div class="org-item">
-            <div class="org-icon">👥</div>
-            <div class="org-name">إدارة الموارد البشرية والخدمات الإدارية</div>
+            إدارة الموارد البشرية والخدمات الإدارية
           </div>
           <div class="org-item">
-            <div class="org-icon">💳</div>
-            <div class="org-name">إدارة المالية والمشتريات</div>
+            إدارة المالية والمشتريات
           </div>
           <div class="org-item">
-            <div class="org-icon">💻</div>
-            <div class="org-name">إدارة تقنية المعلومات والأمن السيبراني</div>
+            إدارة تقنية المعلومات والأمن السيبراني
           </div>
         </div>
       </div>
       
-      <div class="org-level">
+      <div class="org-level" data-animate>
         <div class="org-connector-line connector-horizontal"></div>
         <h3 class="org-title">قطاع الخدمات الإعلامية</h3>
         <div class="org-row">
           <div class="org-item">
-            <div class="org-icon">🎬</div>
-            <div class="org-name">إدارة الإنتاج الإعلامي</div>
+            إدارة الإنتاج الإعلامي
           </div>
           <div class="org-item">
-            <div class="org-icon">📡</div>
-            <div class="org-name">إدارة الرصد وخدمات المحتوى</div>
+            إدارة الرصد وخدمات المحتوى
           </div>
           <div class="org-item">
-            <div class="org-icon">🔎</div>
-            <div class="org-name">إدارة المتابعة والتفتيش</div>
+            إدارة المتابعة والتفتيش
           </div>
         </div>
       </div>
