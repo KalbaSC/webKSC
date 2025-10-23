@@ -1763,6 +1763,207 @@ header {
 /* تحسين المسافات بين المستويات */
 .org-level:not(:first-child) {
   margin-top: 50px;
+}
+	   
+/* إصلاح كامل لمحاذاة الهيكل التنظيمي */
+.org-structure {
+  padding: 20px 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.org-level {
+  margin: 40px 0 60px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.org-title {
+  background: linear-gradient(180deg, #f4e733, #c9b812);
+  color: #0a0a0a;
+  padding: 12px 24px;
+  border-radius: 30px;
+  display: inline-block;
+  font-weight: 900;
+  font-size: 20px;
+  margin: 0 auto 30px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(244, 231, 51, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.55) inset;
+  border: 1px solid #000;
+}
+
+.org-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin: 0 auto 25px;
+  width: 100%;
+  max-width: 1200px;
+  flex-wrap: wrap;
+}
+
+.org-item {
+  position: relative;
+  width: 280px;
+  padding: 20px 15px;
+  text-align: center;
+  background: radial-gradient(120% 120% at 50% 0%, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.18));
+  border: 1px solid rgba(244, 231, 51, 0.45);
+  border-radius: 14px;
+  backdrop-filter: blur(2px);
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.org-item:hover {
+  transform: translateY(-5px);
+  border-color: #f4e733;
+  box-shadow: 0 10px 26px rgba(244, 231, 51, 0.18);
+}
+
+.org-item-content {
+  width: 100%;
+  text-align: center;
+}
+
+.org-item-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: #f4e733;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.org-item-desc {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+.org-connector-line {
+  display: block;
+  background: #f4e733;
+  opacity: 0.9;
+  position: absolute;
+}
+
+.connector-vertical {
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 30px;
+}
+
+.connector-horizontal {
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+}
+
+/* إصلاح محاذاة الصفوف الفردية */
+.org-row:has(.org-item:only-child) {
+  justify-content: center !important;
+}
+
+.org-row:has(.org-item:only-child) .org-item {
+  width: 300px;
+  margin: 0 auto;
+}
+
+/* تحسينات للاستجابة على الأجهزة المحمولة */
+@media (max-width: 768px) {
+  .org-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .org-item {
+    width: 90%;
+    max-width: 320px;
+    padding: 18px 15px;
+    min-height: 110px;
+    margin: 0 auto;
+  }
+  
+  .org-title {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin-bottom: 25px;
+  }
+  
+  .org-item-title {
+    font-size: 15px;
+  }
+  
+  .org-item-desc {
+    font-size: 13px;
+  }
+  
+  .connector-vertical,
+  .connector-horizontal {
+    display: none;
+  }
+}
+
+/* تحسينات للشاشات المتوسطة */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .org-item {
+    width: 250px;
+  }
+  
+  .org-row {
+    gap: 20px;
+  }
+}
+
+/* تحسينات للشاشات الكبيرة */
+@media (min-width: 1200px) {
+  .org-item {
+    width: 280px;
+  }
+}
+
+/* إصلاح إضافي لضمان المحاذاة المركزية */
+.org-structure > * {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.org-item-content {
+  text-align: center;
+  width: 100%;
+}
+
+.org-level:not(:first-child) {
+  margin-top: 50px;
+}
+
+/* إصلاح نهائي للمحاذاة - إعادة تعيين أي اتجاه قد يؤثر على المحاذاة */
+.org-structure,
+.org-level,
+.org-row,
+.org-item,
+.org-item-content {
+  direction: rtl;
+  text-align: center;
 }	   
   </style>
 </head>
