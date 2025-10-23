@@ -1968,19 +1968,25 @@ header {
 
 #orgstructure .org-connector-line{ pointer-events:none; z-index:1; }
 
-#orgstructure .connector-vertical{
-  top: -32px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 2px !important;
-  height: 30px !important;
+#orgstructure .org-col .connector-vertical {
+  position: relative !important;
+  top: 0 !important;
+  height: 25px !important;
+  background: var(--line-color,#ffda00);
 }
 
-#orgstructure .connector-horizontal{
-  top: -18px !important;
-  left: 6% !important;
-  right: 6% !important;
-  height: 2px !important;
+#orgstructure .org-col .mini-row::before {
+  content: "";
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  top: -12px;
+  background: var(--line-color,#ffda00);
+}
+
+#orgstructure .org-level > .org-connector-line {
+  display: none !important;
 }
 
 @media (max-width: 768px){
