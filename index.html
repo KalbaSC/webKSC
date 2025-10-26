@@ -2228,7 +2228,75 @@ header {
   #orgstructure .children-row{ flex-wrap: wrap; row-gap: 14px; }
   #orgstructure .children-row::before{ left: 12%; right: 12%; }
 }
-	
+.simple-org {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px auto;
+  position: relative;
+}
+
+.simple-org .parent-node {
+  background: #f4e733;
+  color: #000;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  min-width: 220px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.simple-org .org-connector {
+  width: 2px;
+  height: 25px;
+  background: #f4e733;
+  margin: 10px 0;
+}
+
+.simple-children {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.simple-children::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: #f4e733;
+}
+
+.simple-children .child-node {
+  background: #fff;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  min-width: 180px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.simple-children .child-node::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 14px;
+  background: #f4e733;
+}	
   </style>
 </head>
 <body>
@@ -2368,33 +2436,17 @@ header {
 <div class="org-level" data-animate>
   <h3 class="org-title">أمين السر العام</h3>
 <div class="org-row">
-  <!-- Branch: Medical Unit -->
-  <div class="org-branch">
-    <!-- Parent -->
-    <div class="parent-node">
-      <div class="org-item-content">
-        <div class="org-item-title">الوحدة الطبية</div>
-      </div>
-    </div>
-
-    <!-- small vertical connector -->
-    <span class="v-line"></span>
-
-    <!-- Children row (white cards) -->
-    <div class="children-row">
-      <div class="child-node">
-        <div class="org-item-content"><div class="org-item-title">مسعف</div></div>
-      </div>
-      <div class="child-node">
-        <div class="org-item-content"><div class="org-item-title">منسق صحي</div></div>
-      </div>
-      <div class="child-node">
-        <div class="org-item-content"><div class="org-item-title">طبيب الوحدة</div></div>
-      </div>
-    </div>
+<div class="org-branch simple-org">
+  <div class="parent-node">
+    <div class="org-item-title">الوحدة الطبية</div>
   </div>
-
-  <!-- السكرتير التنفيذي (يبقى صندوق منفصل في نفس الصف) -->
+  <div class="org-connector"></div>
+  <div class="children-row simple-children">
+    <div class="child-node"><div class="org-item-title">مسعف</div></div>
+    <div class="child-node"><div class="org-item-title">منسق صحي</div></div>
+    <div class="child-node"><div class="org-item-title">طبيب الوحدة</div></div>
+  </div>
+</div>
   <div class="org-item">
     <div class="org-connector-line connector-vertical"></div>
     <div class="org-item-content">
@@ -2402,7 +2454,6 @@ header {
     </div>
   </div>
 </div>
-
 </div>
  
       <div class="org-level" data-animate>
