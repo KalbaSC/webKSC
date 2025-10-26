@@ -2105,7 +2105,21 @@ header {
   #orgstructure .org-item.med-unit .children-row > .connector-horizontal{ width:80% !important; }
   #orgstructure .org-item.med-unit .children-row .org-item{ width:220px; }
 }
+#orgstructure .child-item {
+  background: #ffffff !important;
+  border: 1px solid #e5e5e5 !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15) !important;
+}
 
+#orgstructure .child-item .org-item-title {
+  color: #111 !important;
+}
+
+#orgstructure .children-row {
+  justify-content: center; 
+  gap: 18px;
+  margin-top: 14px;
+}
   </style>
 </head>
 <body>
@@ -2243,26 +2257,36 @@ header {
       </div>
       
 <div class="org-level" data-animate>
-  <div class="org-connector-line connector-horizontal"></div>
   <h3 class="org-title">أمين السر العام</h3>
 
   <div class="org-row">
-<div class="org-item">
-  <div class="org-item-content">
-    <div class="org-item-title">الوحدة الطبية</div>
-  </div>
-</div>
+    <div class="org-col wide-parent">
+      <div class="org-item">
+        <div class="org-item-content">
+          <div class="org-item-title">الوحدة الطبية</div>
+        </div>
+      </div>
 
-<span class="org-connector-line connector-vertical" style="height:25px;"></span>
-	  
-<div class="org-row centered" style="margin-top: 25px;">
-  <div class="org-item"><div class="org-item-content"><div class="org-item-title">مسعف</div></div></div>
-  <div class="org-item"><div class="org-item-content"><div class="org-item-title">منسق صحي</div></div></div>
-  <div class="org-item"><div class="org-item-content"><div class="org-item-title">طبيب الوحدة</div></div></div>
-</div>
+      <span class="org-connector-line connector-vertical"></span>
+
+      <div class="mini-row children-row">
+        <span class="org-connector-line connector-horizontal"></span>
+
+        <div class="org-item child-item">
+          <div class="org-item-content"><div class="org-item-title">مسعف</div></div>
+        </div>
+
+        <div class="org-item child-item">
+          <div class="org-item-content"><div class="org-item-title">منسق صحي</div></div>
+        </div>
+
+        <div class="org-item child-item">
+          <div class="org-item-content"><div class="org-item-title">طبيب الوحدة</div></div>
+        </div>
+      </div>
+    </div>
 
     <div class="org-item">
-      <div class="org-connector-line connector-vertical"></div>
       <div class="org-item-content">
         <div class="org-item-title">السكرتير التنفيذي</div>
       </div>
