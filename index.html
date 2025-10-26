@@ -2100,26 +2100,82 @@ header {
 }
 #orgstructure .org-item.med-unit .children-row .org-item{ width:260px; max-width:30%; }
 
-@media (max-width: 900px){
-  #orgstructure .org-item.med-unit .children-row{ flex-wrap:wrap; }
-  #orgstructure .org-item.med-unit .children-row > .connector-horizontal{ width:80% !important; }
-  #orgstructure .org-item.med-unit .children-row .org-item{ width:220px; }
-}
-#orgstructure .child-item {
-  background: #ffffff !important;
-  border: 1px solid #e5e5e5 !important;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15) !important;
-}
-
-#orgstructure .child-item .org-item-title {
-  color: #111 !important;
+#orgstructure .org-branch{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 0 auto 24px;
+  max-width: 900px;
 }
 
-#orgstructure .children-row {
-  justify-content: center; 
+#orgstructure .parent-node{
+  min-width: 280px;
+  background: radial-gradient(120% 120% at 50% 0%, rgba(255,255,255,.06), rgba(0,0,0,.18));
+  border: 1px solid rgba(244,231,51,.45);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  padding: 18px 20px;
+  text-align: center;
+}
+
+#orgstructure .org-branch .v-line{
+  width: 2px; height: 22px; background: #f4e733; margin: 8px 0 0 0;
+}
+
+#orgstructure .children-row{
+  position: relative;
+  display: flex;
+  justify-content: center;
   gap: 18px;
-  margin-top: 14px;
+  margin-top: 20px;
+  padding-top: 16px;
+  flex-wrap: nowrap;
 }
+
+#orgstructure .children-row::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: #f4e733;
+}
+
+#orgstructure .child-node{
+  position: relative;
+  min-width: 220px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  padding: 14px 16px;
+  text-align: center;
+}
+
+#orgstructure .child-node::before{
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px; height: 16px; background: #f4e733;
+}
+
+#orgstructure .child-node .org-item-title{ color:#111 !important; }
+
+@media (max-width: 700px){
+  #orgstructure .children-row{
+    flex-wrap: wrap;
+    row-gap: 14px;
+  }
+  #orgstructure .children-row::before{
+    left: 12%; right: 12%;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -2260,27 +2316,24 @@ header {
   <h3 class="org-title">أمين السر العام</h3>
 
   <div class="org-row">
-    <div class="org-col wide-parent">
-      <div class="org-item">
+    <div class="org-branch">
+      <!-- Parent -->
+      <div class="parent-node">
         <div class="org-item-content">
           <div class="org-item-title">الوحدة الطبية</div>
         </div>
       </div>
 
-      <span class="org-connector-line connector-vertical"></span>
+      <span class="v-line"></span>
 
-      <div class="mini-row children-row">
-        <span class="org-connector-line connector-horizontal"></span>
-
-        <div class="org-item child-item">
+      <div class="children-row">
+        <div class="child-node">
           <div class="org-item-content"><div class="org-item-title">مسعف</div></div>
         </div>
-
-        <div class="org-item child-item">
+        <div class="child-node">
           <div class="org-item-content"><div class="org-item-title">منسق صحي</div></div>
         </div>
-
-        <div class="org-item child-item">
+        <div class="child-node">
           <div class="org-item-content"><div class="org-item-title">طبيب الوحدة</div></div>
         </div>
       </div>
