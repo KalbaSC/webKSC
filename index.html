@@ -2298,6 +2298,83 @@ header {
   background: #f4e733;
 }	
   </style>
+  <style>	
+#orgstructure .info-container { padding: 40px 20px !important; }
+
+#orgstructure .tree {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 40px auto !important;
+}
+
+#orgstructure .node {
+  background: #fff !important;
+  color: #111 !important;
+  border: 1px solid #e6e6e6 !important;
+  border-radius: 12px !important;
+  padding: 12px 18px !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  min-width: 200px !important;
+  text-align: center !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,.2) !important;
+}
+
+#orgstructure .node.parent {
+  background: linear-gradient(180deg,#f4e733,#c9b812) !important;
+  color: #000 !important;
+  border-color: #000 !important;
+  min-width: 240px !important;
+}
+
+#orgstructure .vline {
+  width: 2px !important;
+  height: 24px !important;
+  background: #f4e733 !important;
+}
+
+#orgstructure .children {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: 20px !important;
+  flex-wrap: nowrap !important;
+  position: relative !important;
+  margin-top: 8px !important;
+  padding-top: 12px !important;
+}
+
+#orgstructure .children::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 10% !important;
+  right: 10% !important;
+  height: 2px !important;
+  background: #f4e733 !important;
+}
+
+#orgstructure .children .node {
+  position: relative !important;
+}
+
+#orgstructure .children .node::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 2px !important;
+  height: 12px !important;
+  background: #f4e733 !important;
+}
+
+@media (max-width: 700px){
+  #orgstructure .children { flex-wrap: wrap !important; row-gap: 14px !important; }
+}
+  </style>	
 </head>
 <body>
 <header>
@@ -2436,17 +2513,17 @@ header {
 <div class="org-level" data-animate>
   <h3 class="org-title">أمين السر العام</h3>
 <div class="org-row">
-<div class="org-branch simple-org">
-  <div class="parent-node">
-    <div class="org-item-title">الوحدة الطبية</div>
-  </div>
-  <div class="org-connector"></div>
-  <div class="children-row simple-children">
-    <div class="child-node"><div class="org-item-title">مسعف</div></div>
-    <div class="child-node"><div class="org-item-title">منسق صحي</div></div>
-    <div class="child-node"><div class="org-item-title">طبيب الوحدة</div></div>
+
+<div class="tree" id="medical-tree">
+  <div class="node parent">الوحدة الطبية</div>
+  <div class="vline"></div>
+  <div class="children">
+    <div class="node">مسعف</div>
+    <div class="node">منسق صحي</div>
+    <div class="node">طبيب الوحدة</div>
   </div>
 </div>
+
   <div class="org-item">
     <div class="org-connector-line connector-vertical"></div>
     <div class="org-item-content">
